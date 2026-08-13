@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="h-full">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>FLE A2 - Passé récent, Présent progressif, Futur proche</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -23,13 +23,24 @@
     </script>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         body {
             font-family: 'Outfit', sans-serif;
             background-color: #F8FAFC;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* Perspective pour les cartes mémoires */
+        /* Hide scrollbars for slick tab navigation on mobile */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Perspective 3D pour les cartes mémoires */
         .perspective-1000 {
             perspective: 1000px;
         }
@@ -38,21 +49,29 @@
         }
         .backface-hidden {
             backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
         }
         .rotate-y-180 {
             transform: rotateY(180deg);
         }
 
-        /* Transitions fluides */
+        /* Transitions fluides tactiles */
         .tab-btn {
             transition: all 0.2s ease-in-out;
+            touch-action: manipulation;
         }
         .tab-btn.active {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* Custom focus rings for touch feedback */
+        button:focus-visible, input:focus-visible {
+            outline: 2px solid #005FA3;
+            outline-offset: 2px;
         }
     </style>
 </head>
-<body class="text-slate-800 min-h-screen flex flex-col">
+<body class="text-slate-800 min-h-full flex flex-col antialiased selection:bg-blue-100 selection:text-oifBlue">
 
     <!-- En-tête aux couleurs de l'OIF -->
     <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
@@ -63,18 +82,27 @@
             <div class="w-1/5 bg-oifGreen"></div>
             <div class="w-1/5 bg-oifViolet"></div>
         </div>
-        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
-                <div class="p-2.5 bg-slate-100 rounded-xl text-oifBlue font-bold text-xl flex items-center justify-center shadow-inner">
-                    🇫🇷 A2
+        <div class="max-w-6xl mx-auto px-3 sm:px-4 py-3 sm:py-4 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
+            <div class="flex items-center gap-2.5 sm:gap-3 w-full sm:w-auto justify-between sm:justify-start">
+                <div class="flex items-center gap-2.5">
+                    <div class="p-2 sm:p-2.5 bg-slate-100 rounded-xl text-oifBlue font-bold text-lg sm:text-xl flex items-center justify-center shadow-inner">
+                        🇫🇷 A2
+                    </div>
+                    <div>
+                        <h1 class="text-lg sm:text-2xl font-bold text-slate-900 leading-tight">Grammaire Interactive FLE</h1>
+                        <p class="text-xs sm:text-sm text-slate-500 font-medium">Les nuances du présent et le futur proche</p>
+                    </div>
                 </div>
-                <div>
-                    <h1 class="text-xl sm:text-2xl font-bold text-slate-900 leading-tight">Grammaire Interactive FLE</h1>
-                    <p class="text-xs sm:text-sm text-slate-500 font-medium">Les nuances du présent et le futur proche</p>
+
+                <!-- Score badge visible on top right for mobile -->
+                <div class="sm:hidden flex items-center bg-blue-50 px-2.5 py-1 rounded-lg border border-blue-200">
+                    <span id="global-score-badge-mobile" class="text-oifBlue font-bold text-xs">
+                        0 / 44 pts
+                    </span>
                 </div>
             </div>
             
-            <div class="flex items-center gap-2 bg-slate-100 p-1.5 rounded-xl border border-slate-200">
+            <div class="hidden sm:flex items-center gap-2 bg-slate-100 p-1.5 rounded-xl border border-slate-200">
                 <span class="text-xs font-semibold px-2 text-slate-600">Progression globale :</span>
                 <span id="global-score-badge" class="bg-white text-oifBlue font-bold text-sm px-3 py-1 rounded-lg shadow-sm border border-slate-200">
                     0 / 44 pts
@@ -82,23 +110,23 @@
             </div>
         </div>
 
-        <!-- Navigation par Onglets -->
-        <div class="max-w-6xl mx-auto px-4 mt-2 overflow-x-auto">
-            <nav class="flex space-x-2 pb-2 min-w-max" id="tabs-container">
-                <button onclick="switchTab('tab-passe-recent')" id="btn-tab-passe-recent" class="tab-btn active px-4 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-2 bg-oifBlue text-white">
-                    <span class="w-2.5 h-2.5 rounded-full bg-white inline-block"></span>
+        <!-- Navigation par Onglets (Optimisée Tactile / Défilement doux) -->
+        <div class="max-w-6xl mx-auto px-2 sm:px-4 mt-1 sm:mt-2 overflow-x-auto no-scrollbar scroll-smooth">
+            <nav class="flex space-x-1.5 sm:space-x-2 pb-2 min-w-max px-1" id="tabs-container">
+                <button onclick="switchTab('tab-passe-recent')" id="btn-tab-passe-recent" class="tab-btn active px-3.5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2 bg-oifBlue text-white active:scale-95">
+                    <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-white inline-block"></span>
                     1. Le passé récent
                 </button>
-                <button onclick="switchTab('tab-present-progressif')" id="btn-tab-present-progressif" class="tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-2 bg-slate-100 text-slate-600 hover:bg-slate-200">
-                    <span class="w-2.5 h-2.5 rounded-full bg-oifGreen inline-block"></span>
+                <button onclick="switchTab('tab-present-progressif')" id="btn-tab-present-progressif" class="tab-btn px-3.5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2 bg-slate-100 text-slate-600 hover:bg-slate-200 active:scale-95">
+                    <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-oifGreen inline-block"></span>
                     2. Le présent progressif
                 </button>
-                <button onclick="switchTab('tab-futur-proche')" id="btn-tab-futur-proche" class="tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-2 bg-slate-100 text-slate-600 hover:bg-slate-200">
-                    <span class="w-2.5 h-2.5 rounded-full bg-oifYellow inline-block"></span>
+                <button onclick="switchTab('tab-futur-proche')" id="btn-tab-futur-proche" class="tab-btn px-3.5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2 bg-slate-100 text-slate-600 hover:bg-slate-200 active:scale-95">
+                    <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-oifYellow inline-block"></span>
                     3. Le futur proche
                 </button>
-                <button onclick="switchTab('tab-synthese')" id="btn-tab-synthese" class="tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-2 bg-slate-100 text-slate-600 hover:bg-slate-200">
-                    <span class="w-2.5 h-2.5 rounded-full bg-oifViolet inline-block"></span>
+                <button onclick="switchTab('tab-synthese')" id="btn-tab-synthese" class="tab-btn px-3.5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2 bg-slate-100 text-slate-600 hover:bg-slate-200 active:scale-95">
+                    <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-oifViolet inline-block"></span>
                     4. Synthèse & Évaluation
                 </button>
             </nav>
@@ -106,72 +134,67 @@
     </header>
 
     <!-- Contenu Principal -->
-    <main class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full">
+    <main class="max-w-6xl mx-auto px-3 sm:px-4 py-4 sm:py-8 flex-grow w-full">
 
         <!-- ========================================== -->
         <!-- ONGLET 1 : LE PASSÉ RÉCENT                -->
         <!-- ========================================== -->
-        <section id="tab-passe-recent" class="tab-content space-y-8">
+        <section id="tab-passe-recent" class="tab-content space-y-5 sm:space-y-8">
             <!-- En-tête de section -->
-            <div class="bg-gradient-to-r from-oifBlue to-blue-700 rounded-2xl p-6 text-white shadow-md">
-                <div class="inline-block px-3 py-1 bg-white/20 rounded-full text-xs font-semibold mb-2">Grammaire & Pratique</div>
-                <h2 class="text-2xl sm:text-3xl font-bold">1. Le passé récent</h2>
-                <p class="text-blue-100 text-sm mt-1">Exprimer une action accomplie juste avant le moment où l'on parle.</p>
+            <div class="bg-gradient-to-r from-oifBlue to-blue-700 rounded-2xl p-4 sm:p-6 text-white shadow-md">
+                <div class="inline-block px-2.5 py-0.5 sm:px-3 sm:py-1 bg-white/20 rounded-full text-[11px] sm:text-xs font-semibold mb-2">Grammaire & Pratique</div>
+                <h2 class="text-xl sm:text-3xl font-bold">1. Le passé récent</h2>
+                <p class="text-blue-100 text-xs sm:text-sm mt-1">Exprimer une action accomplie juste avant le moment où l'on parle.</p>
             </div>
 
-            <!-- Fiche Explicative : Formation, Exemples & Expressions -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Fiche Explicative -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
                 <!-- a) Formation -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-oifBlue/40 transition-all">
-                    <div class="flex items-center gap-3 mb-3 text-oifBlue font-bold text-lg">
-                        <span class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-sm">A</span>
+                <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3 text-oifBlue font-bold text-base sm:text-lg">
+                        <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-blue-50 flex items-center justify-center text-xs sm:text-sm">A</span>
                         <h3>Formation</h3>
                     </div>
-                    <p class="text-slate-600 text-sm mb-4">Pour former le passé récent, on utilise le verbe <strong>venir</strong> au présent + <strong>de / d'</strong> + <strong>infinitif</strong> du verbe principal.</p>
-                    <div class="bg-blue-50/80 p-3.5 rounded-xl font-mono text-xs sm:text-sm text-oifBlue border border-blue-100 font-semibold text-center">
+                    <p class="text-slate-600 text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed">Utiliser <strong>venir</strong> au présent + <strong>de / d'</strong> + <strong>infinitif</strong>.</p>
+                    <div class="bg-blue-50/80 p-3 rounded-xl font-mono text-xs sm:text-sm text-oifBlue border border-blue-100 font-semibold text-center">
                         Venir (au présent) + de / d' + Infinitif
                     </div>
                 </div>
 
                 <!-- b) Exemples -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-oifBlue/40 transition-all">
-                    <div class="flex items-center gap-3 mb-3 text-oifBlue font-bold text-lg">
-                        <span class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-sm">B</span>
-                        <h3>4 exemples en contexte</h3>
+                <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3 text-oifBlue font-bold text-base sm:text-lg">
+                        <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-blue-50 flex items-center justify-center text-xs sm:text-sm">B</span>
+                        <h3>Exemples en contexte</h3>
                     </div>
                     <ul class="space-y-2 text-xs sm:text-sm text-slate-700">
                         <li class="flex items-start gap-2">
-                            <span class="text-oifBlue font-bold">1.</span>
-                            <span>Je <strong>viens de manger</strong> une pomme délicieuse.</span>
+                            <span class="text-oifBlue font-bold">•</span>
+                            <span>Je <strong>viens de manger</strong> une pomme.</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span class="text-oifBlue font-bold">2.</span>
-                            <span>Le train <strong>vient d'arriver</strong> en gare à l'instant.</span>
+                            <span class="text-oifBlue font-bold">•</span>
+                            <span>Le train <strong>vient d'arriver</strong> à l'instant.</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span class="text-oifBlue font-bold">3.</span>
-                            <span>Nous <strong>venons de finir</strong> notre exercice de français.</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-oifBlue font-bold">4.</span>
-                            <span>Est-ce que tu <strong>viens de téléphoner</strong> à Marie ?</span>
+                            <span class="text-oifBlue font-bold">•</span>
+                            <span>Nous <strong>venons de finir</strong> notre travail.</span>
                         </li>
                     </ul>
                 </div>
 
                 <!-- c) Expressions temporelles -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-oifBlue/40 transition-all">
-                    <div class="flex items-center gap-3 mb-3 text-oifBlue font-bold text-lg">
-                        <span class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-sm">C</span>
-                        <h3>Expressions accompagnatrices</h3>
+                <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3 text-oifBlue font-bold text-base sm:text-lg">
+                        <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-blue-50 flex items-center justify-center text-xs sm:text-sm">C</span>
+                        <h3>Expressions clés</h3>
                     </div>
-                    <p class="text-slate-600 text-xs sm:text-sm mb-3">On retrouve souvent le passé récent avec ces marqueurs de temps :</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-2.5 py-1 bg-slate-100 rounded-lg text-xs font-semibold text-slate-700 border border-slate-200">à l'instant</span>
-                        <span class="px-2.5 py-1 bg-slate-100 rounded-lg text-xs font-semibold text-slate-700 border border-slate-200">il y a une minute</span>
-                        <span class="px-2.5 py-1 bg-slate-100 rounded-lg text-xs font-semibold text-slate-700 border border-slate-200">juste</span>
-                        <span class="px-2.5 py-1 bg-slate-100 rounded-lg text-xs font-semibold text-slate-700 border border-slate-200">il y a un instant</span>
-                        <span class="px-2.5 py-1 bg-slate-100 rounded-lg text-xs font-semibold text-slate-700 border border-slate-200">tout de suite</span>
+                    <p class="text-slate-600 text-xs sm:text-sm mb-2.5">Marqueurs fréquents :</p>
+                    <div class="flex flex-wrap gap-1.5 sm:gap-2">
+                        <span class="px-2 py-1 bg-slate-100 rounded-lg text-xs font-semibold text-slate-700 border border-slate-200">à l'instant</span>
+                        <span class="px-2 py-1 bg-slate-100 rounded-lg text-xs font-semibold text-slate-700 border border-slate-200">il y a une minute</span>
+                        <span class="px-2 py-1 bg-slate-100 rounded-lg text-xs font-semibold text-slate-700 border border-slate-200">juste</span>
+                        <span class="px-2 py-1 bg-slate-100 rounded-lg text-xs font-semibold text-slate-700 border border-slate-200">tout de suite</span>
                     </div>
                 </div>
             </div>
@@ -179,80 +202,80 @@
             <!-- d) Activités interactives -->
             <div class="space-y-6">
                 <!-- Exercice 1 : 12 phrases à trous -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
+                <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-slate-100">
                         <div>
-                            <h3 class="text-lg font-bold text-slate-900">Activité 1.1 : Phrases à trous (12 questions)</h3>
-                            <p class="text-xs sm:text-sm text-slate-500">Conjuguez le verbe entre parenthèses au passé récent.</p>
+                            <h3 class="text-base sm:text-lg font-bold text-slate-900">Activité 1.1 : Phrases à trous (12 questions)</h3>
+                            <p class="text-xs sm:text-sm text-slate-500">Conjuguez au passé récent (formes abrégées ou phrases complètes acceptées).</p>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <span id="score-pr-1" class="text-sm font-bold text-oifBlue bg-blue-50 px-3 py-1.5 rounded-lg border border-blue-100">Score: 0 / 12</span>
+                        <div class="flex items-center gap-2 self-start sm:self-auto">
+                            <span id="score-pr-1" class="text-xs sm:text-sm font-bold text-oifBlue bg-blue-50 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg border border-blue-100">Score: 0 / 12</span>
                         </div>
                     </div>
 
-                    <form id="form-pr-1" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <form id="form-pr-1" class="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4">
                         <!-- Généré dynamiquement en JS -->
                     </form>
 
-                    <div class="flex flex-wrap items-center justify-between gap-4 mt-6 pt-4 border-t border-slate-100">
-                        <button type="button" onclick="checkPasseRecent1()" class="px-6 py-2.5 bg-oifBlue hover:bg-blue-700 text-white rounded-xl font-semibold shadow-sm text-sm transition-all flex items-center gap-2">
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-3 mt-6 pt-4 border-t border-slate-100">
+                        <button type="button" onclick="checkPasseRecent1()" class="w-full sm:w-auto px-6 py-3 bg-oifBlue hover:bg-blue-700 text-white rounded-xl font-semibold shadow-sm text-sm transition-all flex items-center justify-center gap-2 active:scale-98">
                             ✓ Vérifier mes réponses
                         </button>
-                        <button type="button" onclick="resetPasseRecent1()" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold text-sm transition-all">
+                        <button type="button" onclick="resetPasseRecent1()" class="w-full sm:w-auto px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold text-sm transition-all text-center">
                             🔄 Répéter l'activité
                         </button>
                     </div>
                 </div>
 
-                <!-- Exercice 2 : 10 Fiches de conversation interactives (Recto / Verso) -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                    <div class="mb-6">
-                        <h3 class="text-lg font-bold text-slate-900">Activité 1.2 : Fiches de conversation (Passé récent)</h3>
-                        <p class="text-xs sm:text-sm text-slate-500">Consigne : Comment répondre à ces questions quotidiennes en utilisant le passé récent ? Cliquez sur la carte pour découvrir la réponse !</p>
+                <!-- Exercice 2 : 10 Fiches de conversation interactives avec support tactile Swipe -->
+                <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="mb-4 sm:mb-6">
+                        <h3 class="text-base sm:text-lg font-bold text-slate-900">Activité 1.2 : Fiches de conversation</h3>
+                        <p class="text-xs sm:text-sm text-slate-500">Comment répondre avec le passé récent ? Appuyez pour retourner la carte ou balayez (swipe) à gauche/droite !</p>
                     </div>
 
                     <!-- Flashcard Carousel / Grid -->
-                    <div class="flex flex-col items-center">
-                        <div class="w-full max-w-lg h-64 perspective-1000 cursor-pointer group" onclick="flipCard()">
+                    <div class="flex flex-col items-center select-none">
+                        <div id="flashcard-touch-zone" class="w-full max-w-lg h-72 sm:h-64 perspective-1000 cursor-pointer group" onclick="flipCard()">
                             <div id="flashcard-inner" class="w-full h-full relative transform-style-3d transition-transform duration-500 rounded-2xl border-2 border-oifBlue/20 shadow-md bg-white">
                                 <!-- Recto (Question) -->
-                                <div class="absolute inset-0 backface-hidden p-6 flex flex-col justify-between items-center text-center bg-gradient-to-b from-white to-blue-50/50 rounded-2xl">
+                                <div class="absolute inset-0 backface-hidden p-5 sm:p-6 flex flex-col justify-between items-center text-center bg-gradient-to-b from-white to-blue-50/50 rounded-2xl">
                                     <div class="flex items-center justify-between w-full">
-                                        <span id="card-num-badge" class="px-3 py-1 bg-oifBlue text-white text-xs font-bold rounded-full">Fiche 1 / 10</span>
-                                        <span class="text-xs font-semibold text-slate-400">RECTO (Question)</span>
+                                        <span id="card-num-badge" class="px-2.5 py-0.5 bg-oifBlue text-white text-[11px] sm:text-xs font-bold rounded-full">Fiche 1 / 10</span>
+                                        <span class="text-[11px] font-semibold text-slate-400">RECTO (Question)</span>
                                     </div>
-                                    <div class="my-auto px-4">
-                                        <p class="text-xs text-slate-400 uppercase font-semibold tracking-wider mb-2">Question posée :</p>
-                                        <p id="card-question" class="text-xl font-bold text-slate-800">"Tu veux un café ?"</p>
+                                    <div class="my-auto px-2 sm:px-4">
+                                        <p class="text-[11px] text-slate-400 uppercase font-semibold tracking-wider mb-1.5 sm:mb-2">Question posée :</p>
+                                        <p id="card-question" class="text-lg sm:text-xl font-bold text-slate-800">"Tu veux un café ?"</p>
                                     </div>
                                     <div class="text-xs text-oifBlue font-semibold flex items-center gap-1">
-                                        <span>🔄 Cliquez pour tourner la fiche</span>
+                                        <span>👆 Touchez pour voir la réponse</span>
                                     </div>
                                 </div>
                                 <!-- Verso (Réponse) -->
-                                <div class="absolute inset-0 backface-hidden rotate-y-180 p-6 flex flex-col justify-between items-center text-center bg-gradient-to-b from-oifBlue to-blue-800 text-white rounded-2xl">
+                                <div class="absolute inset-0 backface-hidden rotate-y-180 p-5 sm:p-6 flex flex-col justify-between items-center text-center bg-gradient-to-b from-oifBlue to-blue-800 text-white rounded-2xl">
                                     <div class="flex items-center justify-between w-full">
-                                        <span class="px-3 py-1 bg-white/20 text-white text-xs font-bold rounded-full">Exemple de réponse</span>
-                                        <span class="text-xs font-semibold text-blue-200">VERSO (Réponse au passé récent)</span>
+                                        <span class="px-2.5 py-0.5 bg-white/20 text-white text-[11px] sm:text-xs font-bold rounded-full">Exemple de réponse</span>
+                                        <span class="text-[11px] font-semibold text-blue-200">VERSO (Réponse)</span>
                                     </div>
-                                    <div class="my-auto px-4">
-                                        <p class="text-xs text-blue-200 uppercase font-semibold tracking-wider mb-2">Réponse au passé récent :</p>
-                                        <p id="card-answer" class="text-lg font-bold text-white">"Non merci, je viens de boire un thé."</p>
+                                    <div class="my-auto px-2 sm:px-4">
+                                        <p class="text-[11px] text-blue-200 uppercase font-semibold tracking-wider mb-1.5 sm:mb-2">Réponse au passé récent :</p>
+                                        <p id="card-answer" class="text-base sm:text-lg font-bold text-white leading-snug">"Non merci, je viens de boire un thé."</p>
                                     </div>
                                     <div class="text-xs text-blue-200 font-semibold">
-                                        <span>✓ Réponse enregistrée !</span>
+                                        <span>✓ Réponse recommandée</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Navigation Flashcards -->
-                        <div class="flex items-center gap-4 mt-6">
-                            <button onclick="prevCard()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold text-sm transition-all flex items-center gap-1">
+                        <div class="flex items-center justify-between w-full max-w-lg gap-2 mt-4 sm:mt-6">
+                            <button onclick="prevCard()" class="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 rounded-xl font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-1">
                                 ⬅️ Précédente
                             </button>
-                            <span id="card-indicator" class="text-sm font-semibold text-slate-600">1 sur 10</span>
-                            <button onclick="nextCard()" class="px-4 py-2 bg-oifBlue hover:bg-blue-700 text-white rounded-xl font-semibold text-sm transition-all flex items-center gap-1">
+                            <span id="card-indicator" class="text-xs sm:text-sm font-semibold text-slate-600 px-2 min-w-[70px] text-center">1 sur 10</span>
+                            <button onclick="nextCard()" class="flex-1 py-2.5 bg-oifBlue hover:bg-blue-700 active:bg-blue-800 text-white rounded-xl font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-1">
                                 Suivante ➡️
                             </button>
                         </div>
@@ -264,102 +287,98 @@
         <!-- ========================================== -->
         <!-- ONGLET 2 : LE PRÉSENT PROGRESSIF           -->
         <!-- ========================================== -->
-        <section id="tab-present-progressif" class="tab-content space-y-8 hidden">
+        <section id="tab-present-progressif" class="tab-content space-y-5 sm:space-y-8 hidden">
             <!-- En-tête de section -->
-            <div class="bg-gradient-to-r from-oifGreen to-emerald-700 rounded-2xl p-6 text-white shadow-md">
-                <div class="inline-block px-3 py-1 bg-white/20 rounded-full text-xs font-semibold mb-2">Grammaire & Pratique</div>
-                <h2 class="text-2xl sm:text-3xl font-bold">2. Le présent progressif</h2>
-                <p class="text-emerald-100 text-sm mt-1">Exprimer une action qui est en train de se dérouler au moment même où l'on parle.</p>
+            <div class="bg-gradient-to-r from-oifGreen to-emerald-700 rounded-2xl p-4 sm:p-6 text-white shadow-md">
+                <div class="inline-block px-2.5 py-0.5 sm:px-3 sm:py-1 bg-white/20 rounded-full text-[11px] sm:text-xs font-semibold mb-2">Grammaire & Pratique</div>
+                <h2 class="text-xl sm:text-3xl font-bold">2. Le présent progressif</h2>
+                <p class="text-emerald-100 text-xs sm:text-sm mt-1">Exprimer une action qui est en train de se dérouler actuellement.</p>
             </div>
 
             <!-- Fiche Explicative -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 <!-- a) Formation -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-oifGreen/40 transition-all">
-                    <div class="flex items-center gap-3 mb-3 text-oifGreen font-bold text-lg">
-                        <span class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-sm">A</span>
+                <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3 text-oifGreen font-bold text-base sm:text-lg">
+                        <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-xs sm:text-sm">A</span>
                         <h3>Formation</h3>
                     </div>
-                    <p class="text-slate-600 text-sm mb-4">On utilise le verbe <strong>être</strong> au présent + <strong>en train de / d'</strong> + <strong>infinitif</strong> du verbe principal.</p>
-                    <div class="bg-emerald-50/80 p-3.5 rounded-xl font-mono text-xs sm:text-sm text-oifGreen border border-emerald-100 font-semibold text-center">
+                    <p class="text-slate-600 text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed">Utiliser <strong>être</strong> au présent + <strong>en train de / d'</strong> + <strong>infinitif</strong>.</p>
+                    <div class="bg-emerald-50/80 p-3 rounded-xl font-mono text-xs sm:text-sm text-oifGreen border border-emerald-100 font-semibold text-center">
                         Être (au présent) + en train de / d' + Infinitif
                     </div>
                 </div>
 
                 <!-- b) Exemples -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-oifGreen/40 transition-all">
-                    <div class="flex items-center gap-3 mb-3 text-oifGreen font-bold text-lg">
-                        <span class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-sm">B</span>
-                        <h3>4 exemples en contexte</h3>
+                <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3 text-oifGreen font-bold text-base sm:text-lg">
+                        <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-xs sm:text-sm">B</span>
+                        <h3>Exemples en contexte</h3>
                     </div>
                     <ul class="space-y-2 text-xs sm:text-sm text-slate-700">
                         <li class="flex items-start gap-2">
-                            <span class="text-oifGreen font-bold">1.</span>
-                            <span>Ne fais pas de bruit ! Le bébé <strong>est en train de dormir</strong>.</span>
+                            <span class="text-oifGreen font-bold">•</span>
+                            <span>Le bébé <strong>est en train de dormir</strong>.</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span class="text-oifGreen font-bold">2.</span>
-                            <span>Nous <strong>sommes en train d'étudier</strong> la grammaire française.</span>
+                            <span class="text-oifGreen font-bold">•</span>
+                            <span>Nous <strong>sommes en train d'étudier</strong>.</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span class="text-oifGreen font-bold">3.</span>
-                            <span>Qu'est-ce que tu <strong>es en train de faire</strong> dans la cuisine ?</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-oifGreen font-bold">4.</span>
-                            <span>Ils <strong>sont en train de regarder</strong> un bon film au salon.</span>
+                            <span class="text-oifGreen font-bold">•</span>
+                            <span>Ils <strong>sont en train de regarder</strong> la TV.</span>
                         </li>
                     </ul>
                 </div>
             </div>
 
             <!-- c) Activité interactive 10 phrases à trous -->
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
+            <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-slate-100">
                     <div>
-                        <h3 class="text-lg font-bold text-slate-900">Activité 2.1 : Phrases à trous (10 questions)</h3>
-                        <p class="text-xs sm:text-sm text-slate-500">Conjuguez au présent progressif (être en train de + infinitif).</p>
+                        <h3 class="text-base sm:text-lg font-bold text-slate-900">Activité 2.1 : Phrases à trous (10 questions)</h3>
+                        <p class="text-xs sm:text-sm text-slate-500">Conjuguez au présent progressif (ex: est en train de + infinitif).</p>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <span id="score-pp-1" class="text-sm font-bold text-oifGreen bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-100">Score: 0 / 10</span>
+                    <div class="flex items-center gap-2 self-start sm:self-auto">
+                        <span id="score-pp-1" class="text-xs sm:text-sm font-bold text-oifGreen bg-emerald-50 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg border border-emerald-100">Score: 0 / 10</span>
                     </div>
                 </div>
 
-                <form id="form-pp-1" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <form id="form-pp-1" class="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4">
                     <!-- Généré dynamiquement en JS -->
                 </form>
 
-                <div class="flex flex-wrap items-center justify-between gap-4 mt-6 pt-4 border-t border-slate-100">
-                    <button type="button" onclick="checkPresentProgressif1()" class="px-6 py-2.5 bg-oifGreen hover:bg-emerald-700 text-white rounded-xl font-semibold shadow-sm text-sm transition-all flex items-center gap-2">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-3 mt-6 pt-4 border-t border-slate-100">
+                    <button type="button" onclick="checkPresentProgressif1()" class="w-full sm:w-auto px-6 py-3 bg-oifGreen hover:bg-emerald-700 text-white rounded-xl font-semibold shadow-sm text-sm transition-all flex items-center justify-center gap-2 active:scale-98">
                         ✓ Vérifier mes réponses
                     </button>
-                    <button type="button" onclick="resetPresentProgressif1()" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold text-sm transition-all">
+                    <button type="button" onclick="resetPresentProgressif1()" class="w-full sm:w-auto px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold text-sm transition-all text-center">
                         🔄 Répéter l'activité
                     </button>
                 </div>
             </div>
 
             <!-- d) Activité d'opposition Passé Récent vs Présent Progressif -->
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
+            <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-slate-100">
                     <div>
-                        <h3 class="text-lg font-bold text-slate-900">Activité 2.2 : Opposition Passé récent vs Présent progressif (10 questions)</h3>
-                        <p class="text-xs sm:text-sm text-slate-500">Consigne : Lis les phrases et choisis la formule correcte selon la situation logique.</p>
+                        <h3 class="text-base sm:text-lg font-bold text-slate-900">Activité 2.2 : Passé récent vs Présent progressif</h3>
+                        <p class="text-xs sm:text-sm text-slate-500">Choisissez l'option la plus logique pour compléter la situation.</p>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <span id="score-opp-1" class="text-sm font-bold text-oifGreen bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-100">Score: 0 / 10</span>
+                    <div class="flex items-center gap-2 self-start sm:self-auto">
+                        <span id="score-opp-1" class="text-xs sm:text-sm font-bold text-oifGreen bg-emerald-50 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg border border-emerald-100">Score: 0 / 10</span>
                     </div>
                 </div>
 
-                <form id="form-opp-1" class="space-y-6">
+                <form id="form-opp-1" class="space-y-4 sm:space-y-6">
                     <!-- Généré dynamiquement en JS -->
                 </form>
 
-                <div class="flex flex-wrap items-center justify-between gap-4 mt-6 pt-4 border-t border-slate-100">
-                    <button type="button" onclick="checkOpposition()" class="px-6 py-2.5 bg-oifGreen hover:bg-emerald-700 text-white rounded-xl font-semibold shadow-sm text-sm transition-all flex items-center gap-2">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-3 mt-6 pt-4 border-t border-slate-100">
+                    <button type="button" onclick="checkOpposition()" class="w-full sm:w-auto px-6 py-3 bg-oifGreen hover:bg-emerald-700 text-white rounded-xl font-semibold shadow-sm text-sm transition-all flex items-center justify-center gap-2 active:scale-98">
                         ✓ Vérifier mes réponses
                     </button>
-                    <button type="button" onclick="resetOpposition()" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold text-sm transition-all">
+                    <button type="button" onclick="resetOpposition()" class="w-full sm:w-auto px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold text-sm transition-all text-center">
                         🔄 Répéter l'activité
                     </button>
                 </div>
@@ -369,92 +388,87 @@
         <!-- ========================================== -->
         <!-- ONGLET 3 : LE FUTUR PROCHE                 -->
         <!-- ========================================== -->
-        <section id="tab-futur-proche" class="tab-content space-y-8 hidden">
+        <section id="tab-futur-proche" class="tab-content space-y-5 sm:space-y-8 hidden">
             <!-- En-tête de section -->
-            <div class="bg-gradient-to-r from-amber-500 to-oifYellow text-slate-900 rounded-2xl p-6 shadow-md">
-                <div class="inline-block px-3 py-1 bg-slate-900/10 rounded-full text-xs font-bold mb-2">Grammaire & Pratique</div>
-                <h2 class="text-2xl sm:text-3xl font-bold">3. Le futur proche</h2>
-                <p class="text-slate-800 text-sm mt-1">Exprimer une action imminente ou un projet prévu dans un avenir proche.</p>
+            <div class="bg-gradient-to-r from-amber-500 to-oifYellow text-slate-900 rounded-2xl p-4 sm:p-6 shadow-md">
+                <div class="inline-block px-2.5 py-0.5 sm:px-3 sm:py-1 bg-slate-900/10 rounded-full text-[11px] sm:text-xs font-bold mb-2">Grammaire & Pratique</div>
+                <h2 class="text-xl sm:text-3xl font-bold">3. Le futur proche</h2>
+                <p class="text-slate-800 text-xs sm:text-sm mt-1">Exprimer une action imminente ou un projet d'avenir proche.</p>
             </div>
 
-            <!-- Fiche Explicative : Formation, Expressions, Exemples -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Fiche Explicative -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
                 <!-- a) Formation -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-oifYellow transition-all">
-                    <div class="flex items-center gap-3 mb-3 text-amber-600 font-bold text-lg">
-                        <span class="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center text-sm">A</span>
+                <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3 text-amber-600 font-bold text-base sm:text-lg">
+                        <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-amber-50 flex items-center justify-center text-xs sm:text-sm">A</span>
                         <h3>Formation</h3>
                     </div>
-                    <p class="text-slate-600 text-sm mb-4">Pour former le futur proche, on utilise le verbe <strong>aller</strong> au présent + <strong>infinitif</strong> du verbe principal.</p>
-                    <div class="bg-amber-50/80 p-3.5 rounded-xl font-mono text-xs sm:text-sm text-amber-700 border border-amber-200 font-semibold text-center">
-                        Aller (au présent) + Infinitif
+                    <p class="text-slate-600 text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed">Utiliser <strong>aller</strong> au présent + <strong>infinitif</strong> (ou <strong>ne + aller + pas + infinitif</strong> à la forme négative).</p>
+                    <div class="bg-amber-50/80 p-3 rounded-xl font-mono text-xs sm:text-sm text-amber-700 border border-amber-200 font-semibold text-center">
+                        Aller (présent) + Infinitif
                     </div>
                 </div>
 
                 <!-- a bis) Expressions temporelles -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-oifYellow transition-all">
-                    <div class="flex items-center gap-3 mb-3 text-amber-600 font-bold text-lg">
-                        <span class="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center text-sm">A bis</span>
-                        <h3>Expressions temporelles</h3>
+                <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3 text-amber-600 font-bold text-base sm:text-lg">
+                        <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-amber-50 flex items-center justify-center text-xs sm:text-sm">A bis</span>
+                        <h3>Expressions clés</h3>
                     </div>
-                    <p class="text-slate-600 text-xs sm:text-sm mb-3">Indicateurs de temps fréquents :</p>
+                    <p class="text-slate-600 text-xs sm:text-sm mb-2.5">Marqueurs fréquents :</p>
                     <div class="flex flex-wrap gap-1.5">
-                        <span class="px-2.5 py-1 bg-slate-100 rounded-lg text-xs font-semibold text-slate-700 border border-slate-200">demain</span>
-                        <span class="px-2.5 py-1 bg-slate-100 rounded-lg text-xs font-semibold text-slate-700 border border-slate-200">bientôt</span>
-                        <span class="px-2.5 py-1 bg-slate-100 rounded-lg text-xs font-semibold text-slate-700 border border-slate-200">ce soir</span>
-                        <span class="px-2.5 py-1 bg-slate-100 rounded-lg text-xs font-semibold text-slate-700 border border-slate-200">dans 5 minutes</span>
-                        <span class="px-2.5 py-1 bg-slate-100 rounded-lg text-xs font-semibold text-slate-700 border border-slate-200">le week-end prochain</span>
+                        <span class="px-2 py-1 bg-slate-100 rounded-lg text-xs font-semibold text-slate-700 border border-slate-200">demain</span>
+                        <span class="px-2 py-1 bg-slate-100 rounded-lg text-xs font-semibold text-slate-700 border border-slate-200">bientôt</span>
+                        <span class="px-2 py-1 bg-slate-100 rounded-lg text-xs font-semibold text-slate-700 border border-slate-200">ce soir</span>
+                        <span class="px-2 py-1 bg-slate-100 rounded-lg text-xs font-semibold text-slate-700 border border-slate-200">dans 5 min</span>
                     </div>
                 </div>
 
                 <!-- b) Exemples -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-oifYellow transition-all">
-                    <div class="flex items-center gap-3 mb-3 text-amber-600 font-bold text-lg">
-                        <span class="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center text-sm">B</span>
-                        <h3>4 exemples en contexte</h3>
+                <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3 text-amber-600 font-bold text-base sm:text-lg">
+                        <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-amber-50 flex items-center justify-center text-xs sm:text-sm">B</span>
+                        <h3>Exemples en contexte</h3>
                     </div>
                     <ul class="space-y-2 text-xs sm:text-sm text-slate-700">
                         <li class="flex items-start gap-2">
-                            <span class="text-amber-600 font-bold">1.</span>
-                            <span>Ce soir, nous <strong>allons regarder</strong> une comédie au cinéma.</span>
+                            <span class="text-amber-600 font-bold">•</span>
+                            <span>Nous <strong>allons regarder</strong> un film.</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span class="text-amber-600 font-bold">2.</span>
-                            <span>Demain matin, je <strong>vais passer</strong> un entretien important.</span>
+                            <span class="text-amber-600 font-bold">•</span>
+                            <span>Ils <strong>ne vont pas acheter</strong> de voiture.</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span class="text-amber-600 font-bold">3.</span>
-                            <span>Attention ! Le train <strong>va partir</strong> dans deux minutes.</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-amber-600 font-bold">4.</span>
-                            <span>Cet été, ils <strong>vont visiter</strong> le Sud de la France.</span>
+                            <span class="text-amber-600 font-bold">•</span>
+                            <span>Le train <strong>va partir</strong> sous peu.</span>
                         </li>
                     </ul>
                 </div>
             </div>
 
             <!-- c) Activité interactive -->
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
+            <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-slate-100">
                     <div>
-                        <h3 class="text-lg font-bold text-slate-900">Activité 3.1 : Phrases à trous (10 questions)</h3>
-                        <p class="text-xs sm:text-sm text-slate-500">Conjuguez les verbes au futur proche (aller + infinitif).</p>
+                        <h3 class="text-base sm:text-lg font-bold text-slate-900">Activité 3.1 : Phrases à trous (10 questions)</h3>
+                        <p class="text-xs sm:text-sm text-slate-500">Conjuguez les verbes au futur proche (attention : 4 verbes sont à la forme négative !).</p>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <span id="score-fp-1" class="text-sm font-bold text-amber-700 bg-amber-50 px-3 py-1.5 rounded-lg border border-amber-200">Score: 0 / 10</span>
+                    <div class="flex items-center gap-2 self-start sm:self-auto">
+                        <span id="score-fp-1" class="text-xs sm:text-sm font-bold text-amber-700 bg-amber-50 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg border border-amber-200">Score: 0 / 10</span>
                     </div>
                 </div>
 
-                <form id="form-fp-1" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <form id="form-fp-1" class="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4">
                     <!-- Généré dynamiquement en JS -->
                 </form>
 
-                <div class="flex flex-wrap items-center justify-between gap-4 mt-6 pt-4 border-t border-slate-100">
-                    <button type="button" onclick="checkFuturProche1()" class="px-6 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold rounded-xl shadow-sm text-sm transition-all flex items-center gap-2">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-3 mt-6 pt-4 border-t border-slate-100">
+                    <button type="button" onclick="checkFuturProche1()" class="w-full sm:w-auto px-6 py-3 bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold rounded-xl shadow-sm text-sm transition-all flex items-center justify-center gap-2 active:scale-98">
                         ✓ Vérifier mes réponses
                     </button>
-                    <button type="button" onclick="resetFuturProche1()" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold text-sm transition-all">
+                    <button type="button" onclick="resetFuturProche1()" class="w-full sm:w-auto px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold text-sm transition-all text-center">
                         🔄 Répéter l'activité
                     </button>
                 </div>
@@ -464,35 +478,35 @@
         <!-- ========================================== -->
         <!-- ONGLET 4 : SYNTHÈSE & ÉVALUATION          -->
         <!-- ========================================== -->
-        <section id="tab-synthese" class="tab-content space-y-8 hidden">
+        <section id="tab-synthese" class="tab-content space-y-5 sm:space-y-8 hidden">
             <!-- En-tête de section -->
-            <div class="bg-gradient-to-r from-oifViolet to-purple-800 rounded-2xl p-6 text-white shadow-md">
-                <div class="inline-block px-3 py-1 bg-white/20 rounded-full text-xs font-semibold mb-2">Évaluation globale</div>
-                <h2 class="text-2xl sm:text-3xl font-bold">4. Synthèse : Choisir le bon temps</h2>
-                <p class="text-purple-100 text-sm mt-1">Conjuguez au passé récent, au présent progressif ou au futur proche selon le contexte fourni !</p>
+            <div class="bg-gradient-to-r from-oifViolet to-purple-800 rounded-2xl p-4 sm:p-6 text-white shadow-md">
+                <div class="inline-block px-2.5 py-0.5 sm:px-3 sm:py-1 bg-white/20 rounded-full text-[11px] sm:text-xs font-semibold mb-2">Évaluation globale</div>
+                <h2 class="text-xl sm:text-3xl font-bold">4. Synthèse : Choisir le bon temps</h2>
+                <p class="text-purple-100 text-xs sm:text-sm mt-1">Conjuguez au passé récent, au présent progressif ou au futur proche selon le contexte.</p>
             </div>
 
             <!-- Activité globale de 12 questions -->
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
+            <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-slate-100">
                     <div>
-                        <h3 class="text-lg font-bold text-slate-900">Activité globale de contextualisation (12 questions)</h3>
+                        <h3 class="text-base sm:text-lg font-bold text-slate-900">Activité globale de contextualisation (12 questions)</h3>
                         <p class="text-xs sm:text-sm text-slate-500">Exemple : Jean ne veut pas manger de gâteau parce qu'il <em>[faire un régime / présent progressif]</em> ➔ <strong>est en train de faire un régime</strong>.</p>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <span id="score-synth-1" class="text-sm font-bold text-oifViolet bg-purple-50 px-3 py-1.5 rounded-lg border border-purple-100">Score: 0 / 12</span>
+                    <div class="flex items-center gap-2 self-start sm:self-auto">
+                        <span id="score-synth-1" class="text-xs sm:text-sm font-bold text-oifViolet bg-purple-50 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg border border-purple-100">Score: 0 / 12</span>
                     </div>
                 </div>
 
-                <form id="form-synth-1" class="space-y-4">
+                <form id="form-synth-1" class="space-y-3.5 sm:space-y-4">
                     <!-- Généré dynamiquement en JS -->
                 </form>
 
-                <div class="flex flex-wrap items-center justify-between gap-4 mt-6 pt-4 border-t border-slate-100">
-                    <button type="button" onclick="checkSynthese()" class="px-6 py-2.5 bg-oifViolet hover:bg-purple-800 text-white rounded-xl font-semibold shadow-sm text-sm transition-all flex items-center gap-2">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-3 mt-6 pt-4 border-t border-slate-100">
+                    <button type="button" onclick="checkSynthese()" class="w-full sm:w-auto px-6 py-3 bg-oifViolet hover:bg-purple-800 text-white rounded-xl font-semibold shadow-sm text-sm transition-all flex items-center justify-center gap-2 active:scale-98">
                         ✓ Vérifier mes réponses
                     </button>
-                    <button type="button" onclick="resetSynthese()" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold text-sm transition-all">
+                    <button type="button" onclick="resetSynthese()" class="w-full sm:w-auto px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold text-sm transition-all text-center">
                         🔄 Répéter l'activité
                     </button>
                 </div>
@@ -502,11 +516,13 @@
     </main>
 
     <!-- Pied de page -->
-    <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-center text-xs text-slate-500">
+    <footer class="bg-white border-t border-slate-200 py-5 sm:py-6 mt-8 sm:mt-12 text-center text-xs text-slate-500">
         <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <p>Activités pédagogiques FLE Niveau A2 - OIF (Organisation Internationale de la Francophonie)</p>
-            <div class="flex items-center gap-2 font-medium text-slate-600">
-                <span>Total points :</span>
+            <p class="font-medium text-slate-700 text-center sm:text-left leading-relaxed">
+                Activités pédagogiques FLE Niveau A2 - Nadia Aguilar Neri via Gemini
+            </p>
+            <div class="flex items-center gap-2 font-semibold text-slate-700 bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">
+                <span>Score total :</span>
                 <span id="footer-total-score" class="font-bold text-oifBlue">0 / 44</span>
             </div>
         </div>
@@ -520,22 +536,55 @@
 
         // 1. Passé récent - Fill in the blank (12 questions)
         const dataPasseRecent1 = [
-            { id: 'pr1_1', prefix: "1. Je", verb: "manger", suffix: "une pomme à l'instant.", answer: "viens de manger", hint: "venir (je = viens) + de + infinitif" },
-            { id: 'pr1_2', prefix: "2. Nous", verb: "arriver", suffix: "à la gare.", answer: "venons d'arriver", hint: "attention à l'élision (d'arriver)" },
-            { id: 'pr1_3', prefix: "3. Tu", verb: "finir", suffix: "tes devoirs de français ?", answer: "viens de finir", hint: "venir (tu = viens) + de + infinitif" },
-            { id: 'pr1_4', prefix: "4. Paul et Marie", verb: "sortir", suffix: "de la classe.", answer: "viennent de sortir", hint: "ils/elles = viennent" },
-            { id: 'pr1_5', prefix: "5. Vous", verb: "téléphoner", suffix: "à votre médecin ?", answer: "venez de téléphoner", hint: "vous = venez" },
-            { id: 'pr1_6', prefix: "6. Elle", verb: "perdre", suffix: "ses clés dans la rue.", answer: "vient de perdre", hint: "il/elle/on = vient" },
-            { id: 'pr1_7', prefix: "7. Les enfants", verb: "se réveiller", suffix: "à l'instant.", answer: "viennent de se réveiller", hint: "attention au verbe pronominal (viennent de se...)" },
-            { id: 'pr1_8', prefix: "8. On", verb: "recevoir", suffix: "un message important.", answer: "vient de recevoir", hint: "on = vient" },
-            { id: 'pr1_9', prefix: "9. Ils", verb: "prendre", suffix: "une décision difficile.", answer: "viennent de prendre", hint: "ils = viennent" },
-            { id: 'pr1_10', prefix: "10. Je", verb: "croiser", suffix: "le directeur dans le couloir.", answer: "viens de croiser", hint: "je = viens" },
-            { id: 'pr1_11', prefix: "11. Tu", verb: "rentrer", suffix: "de vacances ?", answer: "viens de rentre", answerAlt: "viens de rentrer", hint: "tu = viens de + infinitif" },
-            { id: 'pr1_12', prefix: "12. Nous", verb: "boire", suffix: "un grand verre d'eau fraîche.", answer: "venons de boire", hint: "nous = venons" }
+            { 
+                id: 'pr1_1', prefix: "1. Je", verb: "manger", suffix: "une pomme à l'instant.", answer: "viens de manger", hint: "venir (je = viens) + de + infinitif",
+                explicitAccepted: ["je viens de manger", "je viens de manger une pomme", "je viens de manger une pomme à l'instant", "viens de manger une pomme", "viens de manger une pomme à l'instant"] 
+            },
+            { 
+                id: 'pr1_2', prefix: "2. Nous", verb: "arriver", suffix: "à la gare.", answer: "venons d'arriver", hint: "attention à l'élision (d'arriver)",
+                explicitAccepted: ["nous venons d'arriver", "nous venons d'arriver à la gare", "venons d'arriver à la gare"] 
+            },
+            { 
+                id: 'pr1_3', prefix: "3. Tu", verb: "finir", suffix: "tes devoirs de français ?", answer: "viens de finir", hint: "venir (tu = viens) + de + infinitif",
+                explicitAccepted: ["tu viens de finir", "tu viens de finir tes devoirs", "tu viens de finir tes devoirs de français", "viens de finir tes devoirs"] 
+            },
+            { 
+                id: 'pr1_4', prefix: "4. Paul et Marie", verb: "sortir", suffix: "de la classe.", answer: "viennent de sortir", hint: "ils/elles = viennent",
+                explicitAccepted: ["paul et marie viennent de sortir", "paul et marie viennent de sortir de la classe", "viennent de sortir de la classe", "ils viennent de sortir", "ils viennent de sortir de la classe"] 
+            },
+            { 
+                id: 'pr1_5', prefix: "5. Vous", verb: "téléphoner", suffix: "à votre médecin ?", answer: "venez de téléphoner", hint: "vous = venez",
+                explicitAccepted: ["vous venez de téléphoner", "vous venez de téléphoner à votre médecin", "venez de téléphoner à votre médecin"] 
+            },
+            { 
+                id: 'pr1_6', prefix: "6. Elle", verb: "perdre", suffix: "ses clés dans la rue.", answer: "vient de perdre", hint: "il/elle/on = vient",
+                explicitAccepted: ["elle vient de perdre", "elle vient de perdre ses clés", "elle vient de perdre ses clés dans la rue", "vient de perdre ses clés", "vient de perdre ses clés dans la rue"] 
+            },
+            { 
+                id: 'pr1_7', prefix: "7. Les enfants", verb: "se réveiller", suffix: "à l'instant.", answer: "viennent de se réveiller", hint: "attention au verbe pronominal (viennent de se...)",
+                explicitAccepted: ["les enfants viennent de se réveiller", "les enfants viennent de se réveiller à l'instant", "viennent de se réveiller à l'instant", "ils viennent de se réveiller"] 
+            },
+            { 
+                id: 'pr1_8', prefix: "8. On", verb: "recevoir", suffix: "un message important.", answer: "vient de recevoir", hint: "on = vient",
+                explicitAccepted: ["on vient de recevoir", "on vient de recevoir un message", "on vient de recevoir un message important", "vient de recevoir un message"] 
+            },
+            { 
+                id: 'pr1_9', prefix: "9. Ils", verb: "prendre", suffix: "une décision difficile.", answer: "viennent de prendre", hint: "ils = viennent",
+                explicitAccepted: ["ils viennent de prendre", "ils viennent de prendre une décision", "ils viennent de prendre une décision difficile", "viennent de prendre une décision"] 
+            },
+            { 
+                id: 'pr1_10', prefix: "10. Je", verb: "croiser", suffix: "le directeur dans le couloir.", answer: "viens de croiser", hint: "je = viens",
+                explicitAccepted: ["je viens de croiser", "je viens de croiser le directeur", "je viens de croiser le directeur dans le couloir", "viens de croiser le directeur"] 
+            },
+            { 
+                id: 'pr1_11', prefix: "11. Tu", verb: "rentrer", suffix: "de vacances ?", answer: "viens de rentrer", hint: "tu = viens de + infinitif",
+                explicitAccepted: ["tu viens de rentrer", "tu viens de rentrer de vacances", "viens de rentrer de vacances"] 
+            },
+            { 
+                id: 'pr1_12', prefix: "12. Nous", verb: "boire", suffix: "un grand verre d'eau fraîche.", answer: "venons de boire", hint: "nous = venons",
+                explicitAccepted: ["nous venons de boire", "nous venons de boire un grand verre d'eau", "nous venons de boire un grand verre d'eau fraîche", "venons de boire un grand verre d'eau"] 
+            }
         ];
-
-        // Correcting answer 11
-        dataPasseRecent1[10].answer = "viens de rentrer";
 
         // Passé récent - Flashcards (10 items)
         const flashcardsData = [
@@ -553,16 +602,46 @@
 
         // 2. Présent progressif - Fill in the blank (10 questions)
         const dataPresentProgressif1 = [
-            { id: 'pp1_1', prefix: "1. Ne fais pas de bruit, le bébé", verb: "dormir", suffix: ".", answer: "est en train de dormir", hint: "le bébé (il) = est en train de..." },
-            { id: 'pp1_2', prefix: "2. Nous", verb: "préparer", suffix: "le dîner dans la cuisine.", answer: "sommes en train de préparer", hint: "nous = sommes en train de..." },
-            { id: 'pp1_3', prefix: "3. Tu", verb: "regarder", suffix: "la télévision ?", answer: "es en train de regarder", hint: "tu = es en train de..." },
-            { id: 'pp1_4', prefix: "4. Les étudiants", verb: "passer", suffix: "un examen difficile.", answer: "sont en train de passer", hint: "les étudiants (ils) = sont en train de..." },
-            { id: 'pp1_5', prefix: "5. Je", verb: "chercher", suffix: "mes clés partout.", answer: "suis en train de chercher", hint: "je = suis en train de..." },
-            { id: 'pp1_6', prefix: "6. Vous", verb: "écouter", suffix: "de la musique ?", answer: "êtes en train d'écouter", hint: "attention à l'élision : d'écouter" },
-            { id: 'pp1_7', prefix: "7. Sophie", verb: "écrire", suffix: "une lettre de motivation.", answer: "est en train d'écrire", hint: "élision : d'écrire" },
-            { id: 'pp1_8', prefix: "8. On", verb: "repeindre", suffix: "le salon en bleu.", answer: "est en train de repeindre", hint: "on = est en train de..." },
-            { id: 'pp1_9', prefix: "9. Qu'est-ce que tu", verb: "faire", suffix: "en ce moment ?", answer: "es en train de faire", hint: "tu = es en train de..." },
-            { id: 'pp1_10', prefix: "10. Mes parents", verb: "voyager", suffix: "en Italie actuellement.", answer: "sont en train de voyager", hint: "mes parents (ils) = sont en train de..." }
+            { 
+                id: 'pp1_1', prefix: "1. Ne fais pas de bruit, le bébé", verb: "dormir", suffix: ".", answer: "est en train de dormir", hint: "le bébé (il) = est en train de...",
+                explicitAccepted: ["le bébé est en train de dormir", "ne fais pas de bruit le bébé est en train de dormir", "ne fais pas de bruit, le bébé est en train de dormir"]
+            },
+            { 
+                id: 'pp1_2', prefix: "2. Nous", verb: "préparer", suffix: "le dîner dans la cuisine.", answer: "sommes en train de préparer", hint: "nous = sommes en train de...",
+                explicitAccepted: ["nous sommes en train de préparer", "nous sommes en train de préparer le dîner", "nous sommes en train de préparer le dîner dans la cuisine"]
+            },
+            { 
+                id: 'pp1_3', prefix: "3. Tu", verb: "regarder", suffix: "la télévision ?", answer: "es en train de regarder", hint: "tu = es en train de...",
+                explicitAccepted: ["tu es en train de regarder", "tu es en train de regarder la télévision"]
+            },
+            { 
+                id: 'pp1_4', prefix: "4. Les étudiants", verb: "passer", suffix: "un examen difficile.", answer: "sont en train de passer", hint: "les étudiants (ils) = sont en train de...",
+                explicitAccepted: ["les étudiants sont en train de passer", "les étudiants sont en train de passer un examen", "les étudiants sont en train de passer un examen difficile", "ils sont en train de passer"]
+            },
+            { 
+                id: 'pp1_5', prefix: "5. Je", verb: "chercher", suffix: "mes clés partout.", answer: "suis en train de chercher", hint: "je = suis en train de...",
+                explicitAccepted: ["je suis en train de chercher", "je suis en train de chercher mes clés", "je suis en train de chercher mes clés partout"]
+            },
+            { 
+                id: 'pp1_6', prefix: "6. Vous", verb: "écouter", suffix: "de la musique ?", answer: "êtes en train d'écouter", hint: "attention à l'élision : d'écouter",
+                explicitAccepted: ["vous êtes en train d'écouter", "vous êtes en train d'écouter de la musique"]
+            },
+            { 
+                id: 'pp1_7', prefix: "7. Sophie", verb: "écrire", suffix: "une lettre de motivation.", answer: "est en train d'écrire", hint: "élision : d'écrire",
+                explicitAccepted: ["sophie est en train d'écrire", "sophie est en train d'écrire une lettre", "sophie est en train d'écrire une lettre de motivation", "elle est en train d'écrire"]
+            },
+            { 
+                id: 'pp1_8', prefix: "8. On", verb: "repeindre", suffix: "le salon en bleu.", answer: "est en train de repeindre", hint: "on = est en train de...",
+                explicitAccepted: ["on est en train de repeindre", "on est en train de repeindre le salon", "on est en train de repeindre le salon en bleu"]
+            },
+            { 
+                id: 'pp1_9', prefix: "9. Qu'est-ce que tu", verb: "faire", suffix: "en ce moment ?", answer: "es en train de faire", hint: "tu = es en train de...",
+                explicitAccepted: ["tu es en train de faire", "qu'est-ce que tu es en train de faire", "qu'est-ce que tu es en train de faire en ce moment"]
+            },
+            { 
+                id: 'pp1_10', prefix: "10. Mes parents", verb: "voyager", suffix: "en Italie actuellement.", answer: "sont en train de voyager", hint: "mes parents (ils) = sont en train de...",
+                explicitAccepted: ["mes parents sont en train de voyager", "mes parents sont en train de voyager en italie", "mes parents sont en train de voyager en italie actuellement"]
+            }
         ];
 
         // Présent progressif vs Passé récent - Opposition (10 questions A/B)
@@ -573,7 +652,7 @@
                 optA: "a) vient de finir sa journée.",
                 optB: "b) est en train de danser.",
                 correct: "a",
-                feedback: "Correct ! Elle s'est couchée car son travail est déjà accompli (passé récent)."
+                feedback: "Correct ! Elle s'est couchée car son travail est accompli (passé récent)."
             },
             {
                 id: 'opp_2',
@@ -581,7 +660,7 @@
                 optA: "a) vient de partir en voyage.",
                 optB: "b) est en train de couper l'herbe.",
                 correct: "b",
-                feedback: "Correct ! Tu peux l'observer faire l'action actuellement (présent progressif)."
+                feedback: "Correct ! L'action se déroule en ce moment (présent progressif)."
             },
             {
                 id: 'opp_3',
@@ -589,7 +668,7 @@
                 optA: "a) viens de manger une pizza entière.",
                 optB: "b) suis en train de préparer le repas.",
                 correct: "a",
-                feedback: "Correct ! L'action de manger est terminée à l'instant (passé récent)."
+                feedback: "Correct ! L'action de manger s'est terminée à l'instant (passé récent)."
             },
             {
                 id: 'opp_4',
@@ -597,7 +676,7 @@
                 optA: "a) viennent d'arriver hier.",
                 optB: "b) sont en train de chanter une chanson.",
                 correct: "b",
-                feedback: "Correct ! Si tu les entends maintenant, l'action est en cours (présent progressif)."
+                feedback: "Correct ! Tu les entends en ce moment même (présent progressif)."
             },
             {
                 id: 'opp_5',
@@ -605,7 +684,7 @@
                 optA: "a) vient de pleuvoir abondamment.",
                 optB: "b) est en train d'ensoleiller la pièce.",
                 correct: "a",
-                feedback: "Correct ! La pluie vient de s'arrêter mais le sol reste mouillé (passé récent)."
+                feedback: "Correct ! La pluie s'est arrêtée juste à l'instant (passé récent)."
             },
             {
                 id: 'opp_6',
@@ -613,7 +692,7 @@
                 optA: "a) vient de déménager le mois dernier.",
                 optB: "b) est en train d'étudier pour son contrôle.",
                 correct: "b",
-                feedback: "Correct ! L'action d'étudier se déroule en ce moment même (présent progressif)."
+                feedback: "Correct ! L'action a lieu maintenant (présent progressif)."
             },
             {
                 id: 'opp_7',
@@ -621,7 +700,7 @@
                 optA: "a) vient de recevoir un message très gentil.",
                 optB: "b) est en train d'éteindre son portable.",
                 correct: "a",
-                feedback: "Correct ! Le message est arrivé juste avant sa réaction (passé récent)."
+                feedback: "Correct ! Le message est arrivé juste avant (passé récent)."
             },
             {
                 id: 'opp_8',
@@ -637,7 +716,7 @@
                 optA: "a) viens d'arriver à l'hôtel.",
                 optB: "b) suis en train de voyager l'année prochaine.",
                 correct: "a",
-                feedback: "Correct ! L'arrivée à l'hôtel est l'action récente qui explique la valise."
+                feedback: "Correct ! L'arrivée récente explique le sac (passé récent)."
             },
             {
                 id: 'opp_10',
@@ -645,38 +724,104 @@
                 optA: "a) viennent d'acheter un appartement.",
                 optB: "b) sont en train de jouer au ballon.",
                 correct: "b",
-                feedback: "Correct ! Le jeu a lieu simultanément avec le rire des enfants (présent progressif)."
+                feedback: "Correct ! Le jeu se déroule en même temps que les rires (présent progressif)."
             }
         ];
 
-        // 3. Futur proche - Fill in the blank (10 questions)
+        // 3. Futur proche - Fill in the blank (10 questions dont 4 forme négative)
         const dataFuturProche1 = [
-            { id: 'fp1_1', prefix: "1. Demain, je", verb: "visiter", suffix: "le musée du Louvre.", answer: "vais visiter", hint: "aller (je = vais) + infinitif" },
-            { id: 'fp1_2', prefix: "2. Dans deux minutes, le cours", verb: "commencer", suffix: ".", answer: "va commencer", hint: "le cours (il) = va" },
-            { id: 'fp1_3', prefix: "3. Ce soir, nous", verb: "dîner", suffix: "au restaurant.", answer: "allons dîner", hint: "nous = allons" },
-            { id: 'fp1_4', prefix: "4. Tu", verb: "partir", suffix: "en vacances la semaine prochaine ?", answer: "vas partir", hint: "tu = vas" },
-            { id: 'fp1_5', prefix: "5. Ils", verb: "acheter", suffix: "une nouvelle voiture bientôt.", answer: "vont acheter", hint: "ils = vont" },
-            { id: 'fp1_6', prefix: "6. Vous", verb: "apprendre", suffix: "beaucoup durant ce stage.", answer: "allez apprendre", hint: "vous = allez" },
-            { id: 'fp1_7', prefix: "7. Elle", verb: "inviter", suffix: "tous ses amis à sa fête.", answer: "va inviter", hint: "elle = va" },
-            { id: 'fp1_8', prefix: "8. Attention ! Tu", verb: "tomber", suffix: "si tu cours trop vite !", answer: "vas tomber", hint: "tu = vas" },
-            { id: 'fp1_9', prefix: "9. Bientôt, on", verb: "déménager", suffix: "dans un bel appartement.", answer: "va déménager", hint: "on = va" },
-            { id: 'fp1_10', prefix: "10. Le ciel est très noir, il", verb: "pleuvoir", suffix: "dans quelques instants.", answer: "va pleuvoir", hint: "il = va" }
+            { 
+                id: 'fp1_1', prefix: "1. Demain, je", verb: "visiter", suffix: "le musée du Louvre.", answer: "vais visiter", hint: "aller (je = vais) + infinitif",
+                explicitAccepted: ["je vais visiter", "je vais visiter le musée du louvre", "vais visiter le musée du louvre"] 
+            },
+            { 
+                id: 'fp1_2', prefix: "2. Dans deux minutes, le cours", verb: "ne pas commencer", suffix: "tout de suite !", answer: "ne va pas commencer", hint: "forme négative : ne + va + pas + infinitif",
+                explicitAccepted: ["le cours ne va pas commencer", "ne va pas commencer tout de suite", "le cours ne va pas commencer tout de suite"] 
+            },
+            { 
+                id: 'fp1_3', prefix: "3. Ce soir, nous", verb: "dîner", suffix: "au restaurant.", answer: "allons dîner", hint: "nous = allons",
+                explicitAccepted: ["nous allons dîner", "nous allons dîner au restaurant", "allons dîner au restaurant"] 
+            },
+            { 
+                id: 'fp1_4', prefix: "4. Tu", verb: "partir", suffix: "en vacances la semaine prochaine ?", answer: "vas partir", hint: "tu = vas",
+                explicitAccepted: ["tu vas partir", "tu vas partir en vacances", "tu vas partir en vacances la semaine prochaine"] 
+            },
+            { 
+                id: 'fp1_5', prefix: "5. Ils", verb: "ne pas acheter", suffix: "une voiture bientôt.", answer: "ne vont pas acheter", hint: "forme négative : ils + ne + vont + pas + infinitif",
+                explicitAccepted: ["ils ne vont pas acheter", "ils ne vont pas acheter une voiture", "ils ne vont pas acheter une voiture bientôt", "ne vont pas acheter une voiture", "ne vont pas acheter une voiture bientôt"] 
+            },
+            { 
+                id: 'fp1_6', prefix: "6. Vous", verb: "apprendre", suffix: "beaucoup durant ce stage.", answer: "allez apprendre", hint: "vous = allez",
+                explicitAccepted: ["vous allez apprendre", "vous allez apprendre beaucoup durant ce stage"] 
+            },
+            { 
+                id: 'fp1_7', prefix: "7. Elle", verb: "inviter", suffix: "tous ses amis à sa fête.", answer: "va inviter", hint: "elle = va",
+                explicitAccepted: ["elle va inviter", "elle va inviter tous ses amis à sa fête"] 
+            },
+            { 
+                id: 'fp1_8', prefix: "8. Attention ! Tu", verb: "ne pas tomber", suffix: "si tu fais attention.", answer: "ne vas pas tomber", hint: "forme négative : ne + vas + pas + infinitif",
+                explicitAccepted: ["tu ne vas pas tomber", "tu ne vas pas tomber si tu fais attention"] 
+            },
+            { 
+                id: 'fp1_9', prefix: "9. Bientôt, on", verb: "déménager", suffix: "dans un bel appartement.", answer: "va déménager", hint: "on = va",
+                explicitAccepted: ["on va déménager", "on va déménager dans un bel appartement", "bientôt on va déménager"] 
+            },
+            { 
+                id: 'fp1_10', prefix: "10. Le ciel est très clair, il", verb: "ne pas pleuvoir", suffix: "aujourd'hui.", answer: "ne va pas pleuvoir", hint: "forme négative : il + ne + va + pas + infinitif",
+                explicitAccepted: ["il ne va pas pleuvoir", "il ne va pas pleuvoir aujourd'hui", "ne va pas pleuvoir aujourd'hui"] 
+            }
         ];
 
         // 4. Synthèse - 12 questions mixtes
         const dataSynthese = [
-            { id: 'syn_1', prompt: "1. Jean ne veut pas manger de gâteau parce qu'il", spec: "faire un régime / présent progressif", suffix: ".", answer: "est en train de faire un régime", hint: "Forme du présent progressif : être + en train de + infinitif" },
-            { id: 'syn_2', prompt: "2. Attention sur la route ! Il", spec: "neiger / présent progressif", suffix: "en ce moment.", answer: "est en train de neiger", hint: "Verbe impersonnel il : est en train de neiger" },
-            { id: 'syn_3', prompt: "3. Prends ton parapluie ! Il", spec: "pleuvoir / futur proche", suffix: "dans dix minutes.", answer: "va pleuvoir", hint: "Action future imminente : aller + infinitif (il va pleuvoir)" },
-            { id: 'syn_4', prompt: "4. Je n'ai pas faim, je", spec: "manger / passé récent", suffix: "un sandwich à la boulangerie.", answer: "viens de manger", hint: "Action accomplie à l'instant : venir de + infinitif" },
-            { id: 'syn_5', prompt: "5. Demain matin, nous", spec: "prendre / futur proche", suffix: "le train pour Lyon.", answer: "allons prendre", hint: "Projet futur : nous allons + infinitif" },
-            { id: 'syn_6', prompt: "6. Ne téléphone pas à Clara maintenant, elle", spec: "dormir / présent progressif", suffix: ".", answer: "est en train de dormir", hint: "Action en cours : elle est en train de..." },
-            { id: 'syn_7', prompt: "7. Oh, l'avion", spec: "atterrir / passé récent", suffix: "! Les passagers vont descendre.", answer: "vient d'atterrir", hint: "Élision obligatoire : vient d'atterrir" },
-            { id: 'syn_8', prompt: "8. Dans un mois, ils", spec: "déménager / futur proche", suffix: "dans une grande maison.", answer: "vont déménager", hint: "Futur proche : ils vont + infinitif" },
-            { id: 'syn_9', prompt: "9. Excusez-moi pour le retard, je", spec: "manquer / passé récent", suffix: "mon bus.", answer: "viens de manquer", hint: "Je viens de + infinitif" },
-            { id: 'syn_10', prompt: "10. Chut ! Le professeur", spec: "expliquer / présent progressif", suffix: "la règle de grammaire.", answer: "est en train d'expliquer", hint: "Élision : est en train d'expliquer" },
-            { id: 'syn_11', prompt: "11. Ce soir, est-ce que tu", spec: "regarder / futur proche", suffix: "le match de football à la télé ?", answer: "vas regarder", hint: "Tu vas + infinitif" },
-            { id: 'syn_12', prompt: "12. Nous ne pouvons pas sortir, nous", spec: "nettoyer / présent progressif", suffix: "toute la cuisine.", answer: "sommes en train de nettoyer", hint: "Nous sommes en train de..." }
+            { 
+                id: 'syn_1', prompt: "1. Jean ne veut pas manger de gâteau parce qu'il", spec: "faire un régime / présent progressif", suffix: ".", answer: "est en train de faire un régime", hint: "Présent progressif : être + en train de + infinitif",
+                explicitAccepted: ["faire un régime / présent progressif", "il est en train de faire un régime", "jean ne veut pas manger de gâteau parce qu'il est en train de faire un régime"] 
+            },
+            { 
+                id: 'syn_2', prompt: "2. Attention sur la route ! Il", spec: "neiger / présent progressif", suffix: "en ce moment.", answer: "est en train de neiger", hint: "Verbe impersonnel : est en train de neiger",
+                explicitAccepted: ["neiger / présent progressif", "il est en train de neiger", "attention sur la route il est en train de neiger en ce moment"] 
+            },
+            { 
+                id: 'syn_3', prompt: "3. Prends ton parapluie ! Il", spec: "pleuvoir / futur proche", suffix: "dans dix minutes.", answer: "va pleuvoir", hint: "Futur proche : aller + infinitif (il va pleuvoir)",
+                explicitAccepted: ["pleuvoir / futur proche", "il va pleuvoir", "prends ton parapluie il va pleuvoir dans dix minutes"] 
+            },
+            { 
+                id: 'syn_4', prompt: "4. Je n'ai pas faim, je", spec: "manger / passé récent", suffix: "un sandwich à la boulangerie.", answer: "viens de manger", hint: "Passé récent : venir de + infinitif",
+                explicitAccepted: ["manger / passé récent", "je viens de manger", "je n'ai pas faim je viens de manger un sandwich à la boulangerie", "viens de manger un sandwich"] 
+            },
+            { 
+                id: 'syn_5', prompt: "5. Demain matin, nous", spec: "prendre / futur proche", suffix: "le train pour Lyon.", answer: "allons prendre", hint: "Projet futur : nous allons + infinitif",
+                explicitAccepted: ["prendre / futur proche", "nous allons prendre", "demain matin nous allons prendre le train pour lyon"] 
+            },
+            { 
+                id: 'syn_6', prompt: "6. Ne téléphone pas à Clara maintenant, elle", spec: "dormir / présent progressif", suffix: ".", answer: "est en train de dormir", hint: "Action en cours : elle est en train de...",
+                explicitAccepted: ["dormir / présent progressif", "elle est en train de dormir", "ne téléphone pas à clara maintenant elle est en train de dormir"] 
+            },
+            { 
+                id: 'syn_7', prompt: "7. Oh, l'avion", spec: "atterrir / passé récent", suffix: "! Les passagers vont descendre.", answer: "vient d'atterrir", hint: "Élision obligatoire : vient d'atterrir",
+                explicitAccepted: ["atterrir / passé récent", "l'avion vient d'atterrir", "oh l'avion vient d'atterrir"] 
+            },
+            { 
+                id: 'syn_8', prompt: "8. Dans un mois, ils", spec: "déménager / futur proche", suffix: "dans une grande maison.", answer: "vont déménager", hint: "Futur proche : ils vont + infinitif",
+                explicitAccepted: ["déménager / futur proche", "ils vont déménager", "dans un mois ils vont déménager dans une grande maison"] 
+            },
+            { 
+                id: 'syn_9', prompt: "9. Excusez-moi pour le retard, je", spec: "manquer / passé récent", suffix: "mon bus.", answer: "viens de manquer", hint: "Je viens de + infinitif",
+                explicitAccepted: ["manquer / passé récent", "je viens de manquer", "excusez-moi pour le retard je viens de manquer mon bus"] 
+            },
+            { 
+                id: 'syn_10', prompt: "10. Chut ! Le professeur", spec: "expliquer / présent progressif", suffix: "la règle de grammaire.", answer: "est en train d'expliquer", hint: "Élision : est en train d'expliquer",
+                explicitAccepted: ["expliquer / présent progressif", "le professeur est en train d'expliquer", "chut le professeur est en train d'expliquer la règle de grammaire"] 
+            },
+            { 
+                id: 'syn_11', prompt: "11. Ce soir, est-ce que tu", spec: "regarder / futur proche", suffix: "le match de football à la télé ?", answer: "vas regarder", hint: "Tu vas + infinitif",
+                explicitAccepted: ["regarder / futur proche", "tu vas regarder", "ce soir est-ce que tu vas regarder le match de football à la télé"] 
+            },
+            { 
+                id: 'syn_12', prompt: "12. Nous ne pouvons pas sortir, nous", spec: "nettoyer / présent progressif", suffix: "toute la cuisine.", answer: "sommes en train de nettoyer", hint: "Nous sommes en train de...",
+                explicitAccepted: ["nettoyer / présent progressif", "nous sommes en train de nettoyer", "nous ne pouvons pas sortir nous sommes en train de nettoyer toute la cuisine"] 
+            }
         ];
 
 
@@ -704,42 +849,83 @@
 
         // Nettoyer les chaînes de caractères pour comparaison souple
         function cleanString(str) {
+            if (!str) return "";
             return str
-                .trim()
                 .toLowerCase()
                 .replace(/’/g, "'")
-                .replace(/\s+/g, ' ');
+                .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g, "")
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
+
+        // Générer la liste de toutes les réponses candidates acceptées
+        function getValidCandidates(item) {
+            const candidates = new Set();
+            const coreList = [item.answer, ...(item.altAnswers || [])];
+
+            let rawPrefix = (item.prefix || item.prompt || "").replace(/^\d+[\.\)]\s*/, "").trim();
+            let rawSuffix = (item.suffix || "").trim();
+
+            coreList.forEach(core => {
+                candidates.add(cleanString(core));
+
+                if (rawPrefix) {
+                    candidates.add(cleanString(`${rawPrefix} ${core}`));
+                    const words = rawPrefix.split(/\s+/);
+                    const lastWord = words[words.length - 1];
+                    candidates.add(cleanString(`${lastWord} ${core}`));
+                    if (rawSuffix) {
+                        candidates.add(cleanString(`${lastWord} ${core} ${rawSuffix}`));
+                    }
+                }
+
+                if (rawSuffix) {
+                    candidates.add(cleanString(`${core} ${rawSuffix}`));
+                }
+
+                if (rawPrefix && rawSuffix) {
+                    candidates.add(cleanString(`${rawPrefix} ${core} ${rawSuffix}`));
+                }
+            });
+
+            if (item.explicitAccepted && Array.isArray(item.explicitAccepted)) {
+                item.explicitAccepted.forEach(acc => candidates.add(cleanString(acc)));
+            }
+
+            return Array.from(candidates);
         }
 
         // Mise à jour de l'affichage du score total
         function updateGlobalScoreDisplay() {
             const currentTotal = Object.values(globalScores).reduce((a, b) => a + b, 0);
             const maxTotal = Object.values(maxScores).reduce((a, b) => a + b, 0);
-            document.getElementById('global-score-badge').innerText = `${currentTotal} / ${maxTotal} pts`;
-            document.getElementById('footer-total-score').innerText = `${currentTotal} / ${maxTotal}`;
+            
+            const badgeDesktop = document.getElementById('global-score-badge');
+            const badgeMobile = document.getElementById('global-score-badge-mobile');
+            const badgeFooter = document.getElementById('footer-total-score');
+
+            if (badgeDesktop) badgeDesktop.innerText = `${currentTotal} / ${maxTotal} pts`;
+            if (badgeMobile) badgeMobile.innerText = `${currentTotal} / ${maxTotal} pts`;
+            if (badgeFooter) badgeFooter.innerText = `${currentTotal} / ${maxTotal}`;
         }
 
 
         // Navigation par Onglets
         function switchTab(tabId) {
-            // Masquer toutes les sections
             document.querySelectorAll('.tab-content').forEach(section => {
                 section.classList.add('hidden');
             });
 
-            // Réinitialiser les boutons d'onglet
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('active', 'bg-oifBlue', 'bg-oifGreen', 'bg-amber-500', 'bg-oifViolet', 'text-white', 'text-slate-900');
                 btn.classList.add('bg-slate-100', 'text-slate-600');
             });
 
-            // Afficher l'onglet sélectionné
             const activeSection = document.getElementById(tabId);
             if (activeSection) {
                 activeSection.classList.remove('hidden');
             }
 
-            // Styliser le bouton actif selon l'onglet
             const activeBtn = document.getElementById(`btn-${tabId}`);
             if (activeBtn) {
                 activeBtn.classList.remove('bg-slate-100', 'text-slate-600');
@@ -754,16 +940,18 @@
                 } else if (tabId === 'tab-synthese') {
                     activeBtn.classList.add('bg-oifViolet', 'text-white');
                 }
+
+                // Smooth scroll button into view on mobile
+                activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
             }
         }
 
 
         // ==========================================
-        // GESTION DES FLASHCARDS (ONGLET 1)
+        // GESTION DES FLASHCARDS & GESTES TACTILES
         // ==========================================
         function updateCardDisplay() {
             const cardInner = document.getElementById('flashcard-inner');
-            // Remettre la carte face recto
             cardInner.classList.remove('rotate-y-180');
             isCardFlipped = false;
 
@@ -796,30 +984,57 @@
             updateCardDisplay();
         }
 
+        // Configuration du Swipe Tactile sur la Zone des cartes
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        function initTouchSwipe() {
+            const zone = document.getElementById('flashcard-touch-zone');
+            if (!zone) return;
+
+            zone.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            zone.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipeGesture();
+            }, { passive: true });
+        }
+
+        function handleSwipeGesture() {
+            const swipeThreshold = 40;
+            if (touchEndX < touchStartX - swipeThreshold) {
+                nextCard(); // Swipe vers la gauche -> carte suivante
+            } else if (touchEndX > touchStartX + swipeThreshold) {
+                prevCard(); // Swipe vers la droite -> carte précédente
+            }
+        }
+
 
         // ==========================================
         // RENDU DYNAMIQUE DES EXERCICES
         // ==========================================
 
-        // Rendu Exercices type Fill-in-blank (Passé récent, Présent progressif, Futur proche)
         function renderFillInBlanks(containerId, items, colorTheme) {
             const container = document.getElementById(containerId);
             container.innerHTML = '';
 
-            items.forEach((item, index) => {
+            items.forEach((item) => {
                 const card = document.createElement('div');
-                card.className = "p-4 bg-slate-50/70 rounded-xl border border-slate-200 flex flex-col justify-between space-y-2";
+                card.className = "p-3.5 sm:p-4 bg-slate-50/80 rounded-xl border border-slate-200 flex flex-col justify-between space-y-2";
                 
                 card.innerHTML = `
-                    <div class="text-sm font-medium text-slate-800 leading-relaxed">
+                    <div class="text-xs sm:text-sm font-medium text-slate-800 leading-relaxed">
                         ${item.prefix}
-                        <span class="inline-block px-1.5 py-0.5 bg-slate-200/80 rounded text-xs font-semibold text-slate-700">(${item.verb})</span>
+                        <span class="inline-block px-1.5 py-0.5 bg-slate-200/80 rounded text-[11px] sm:text-xs font-semibold text-slate-700">(${item.verb})</span>
                         ${item.suffix}
                     </div>
                     <div class="space-y-1">
+                        <!-- text-base on mobile prevents automatic iOS Safari input zoom -->
                         <input type="text" id="input-${item.id}" autocomplete="off" autocorrect="off" spellcheck="false"
                             placeholder="Saisissez votre réponse..." 
-                            class="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-${colorTheme} transition-all">
+                            class="w-full px-3 py-2 text-base sm:text-sm bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-${colorTheme} transition-all">
                         <div id="feedback-${item.id}" class="text-xs hidden mt-1 p-2 rounded-lg font-medium"></div>
                     </div>
                 `;
@@ -827,25 +1042,24 @@
             });
         }
 
-        // Rendu Exercice Opposition
         function renderOpposition() {
             const container = document.getElementById('form-opp-1');
             container.innerHTML = '';
 
             dataOpposition.forEach((item) => {
                 const block = document.createElement('div');
-                block.className = "p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3";
+                block.className = "p-3.5 sm:p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2.5 sm:space-y-3";
 
                 block.innerHTML = `
-                    <p class="font-semibold text-slate-800 text-sm sm:text-base">${item.text}</p>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <label class="flex items-center gap-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:border-oifGreen transition-all">
-                            <input type="radio" name="rad-${item.id}" value="a" class="w-4 h-4 text-oifGreen focus:ring-oifGreen">
-                            <span class="text-sm text-slate-700 font-medium">${item.optA}</span>
+                    <p class="font-semibold text-slate-800 text-xs sm:text-base leading-snug">${item.text}</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+                        <label class="flex items-center gap-2.5 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:border-oifGreen transition-all active:bg-emerald-50/20">
+                            <input type="radio" name="rad-${item.id}" value="a" class="w-4 h-4 text-oifGreen focus:ring-oifGreen flex-shrink-0">
+                            <span class="text-xs sm:text-sm text-slate-700 font-medium">${item.optA}</span>
                         </label>
-                        <label class="flex items-center gap-3 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:border-oifGreen transition-all">
-                            <input type="radio" name="rad-${item.id}" value="b" class="w-4 h-4 text-oifGreen focus:ring-oifGreen">
-                            <span class="text-sm text-slate-700 font-medium">${item.optB}</span>
+                        <label class="flex items-center gap-2.5 p-3 bg-white rounded-lg border border-slate-200 cursor-pointer hover:border-oifGreen transition-all active:bg-emerald-50/20">
+                            <input type="radio" name="rad-${item.id}" value="b" class="w-4 h-4 text-oifGreen focus:ring-oifGreen flex-shrink-0">
+                            <span class="text-xs sm:text-sm text-slate-700 font-medium">${item.optB}</span>
                         </label>
                     </div>
                     <div id="feedback-${item.id}" class="text-xs hidden p-2.5 rounded-lg font-medium"></div>
@@ -854,19 +1068,18 @@
             });
         }
 
-        // Rendu Synthèse
         function renderSynthese() {
             const container = document.getElementById('form-synth-1');
             container.innerHTML = '';
 
             dataSynthese.forEach((item) => {
                 const card = document.createElement('div');
-                card.className = "p-4 bg-slate-50 rounded-xl border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3";
+                card.className = "p-3.5 sm:p-4 bg-slate-50 rounded-xl border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-2.5 sm:gap-3";
 
                 card.innerHTML = `
-                    <div class="text-sm text-slate-800 font-medium flex-grow">
+                    <div class="text-xs sm:text-sm text-slate-800 font-medium flex-grow leading-relaxed">
                         <span>${item.prompt}</span>
-                        <span class="inline-block px-2 py-0.5 bg-purple-100 text-oifViolet rounded text-xs font-bold my-1">
+                        <span class="inline-block px-1.5 py-0.5 bg-purple-100 text-oifViolet rounded text-[11px] sm:text-xs font-bold my-0.5">
                             [${item.spec}]
                         </span>
                         <span>${item.suffix}</span>
@@ -874,7 +1087,7 @@
                     <div class="w-full md:w-72 flex-shrink-0 space-y-1">
                         <input type="text" id="input-${item.id}" autocomplete="off" spellcheck="false"
                             placeholder="Forme correcte..." 
-                            class="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-oifViolet transition-all">
+                            class="w-full px-3 py-2 text-base sm:text-sm bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-oifViolet transition-all">
                         <div id="feedback-${item.id}" class="text-xs hidden p-2 rounded-lg font-medium"></div>
                     </div>
                 `;
@@ -887,7 +1100,6 @@
         // VÉRIFICATIONS ET FEEDBACKS
         // ==========================================
 
-        // Generic Fill-in-blank checker
         function checkFillInBlanks(items, key, scoreBadgeId) {
             let score = 0;
 
@@ -895,11 +1107,12 @@
                 const inputEl = document.getElementById(`input-${item.id}`);
                 const feedbackEl = document.getElementById(`feedback-${item.id}`);
                 const userVal = cleanString(inputEl.value);
-                const expectedVal = cleanString(item.answer);
+
+                const candidates = getValidCandidates(item);
 
                 feedbackEl.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-rose-100', 'text-rose-800', 'border-emerald-300', 'border-rose-300');
 
-                if (userVal === expectedVal) {
+                if (userVal !== "" && candidates.includes(userVal)) {
                     score++;
                     feedbackEl.classList.add('bg-emerald-100', 'text-emerald-800', 'border', 'border-emerald-300');
                     feedbackEl.innerHTML = `✓ Bravo ! Réponse exacte.`;
@@ -918,7 +1131,6 @@
             updateGlobalScoreDisplay();
         }
 
-        // Generic Fill-in-blank Reset
         function resetFillInBlanks(items, key, scoreBadgeId) {
             items.forEach(item => {
                 const inputEl = document.getElementById(`input-${item.id}`);
@@ -934,7 +1146,6 @@
             updateGlobalScoreDisplay();
         }
 
-        // Specific functions for each block
         function checkPasseRecent1() {
             checkFillInBlanks(dataPasseRecent1, 'pr1', 'score-pr-1');
         }
@@ -963,7 +1174,6 @@
             resetFillInBlanks(dataSynthese, 'synth', 'score-synth-1');
         }
 
-        // Check Opposition (Radio buttons)
         function checkOpposition() {
             let score = 0;
 
@@ -1012,17 +1222,14 @@
         // INITIALISATION AU CHARGEMENT DE LA PAGE
         // ==========================================
         window.onload = function() {
-            // Generer les formulaires d'exercices
             renderFillInBlanks('form-pr-1', dataPasseRecent1, 'oifBlue');
             renderFillInBlanks('form-pp-1', dataPresentProgressif1, 'oifGreen');
             renderOpposition();
             renderFillInBlanks('form-fp-1', dataFuturProche1, 'amber-500');
             renderSynthese();
 
-            // Initialiser les cartes memoires
             updateCardDisplay();
-
-            // Calcul du score initial
+            initTouchSwipe();
             updateGlobalScoreDisplay();
         };
     </script>
