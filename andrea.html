@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activité de Compréhension Orale - Niveau A2</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+        }
+        /* Custom Tooltip Styling */
+        .glossary-term {
+            position: relative;
+            text-decoration: underline dotted #4f46e5 2px;
+            text-underline-offset: 4px;
+            color: #4338ca;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .glossary-tooltip {
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            transform: translateY(6px);
+        }
+        .glossary-term:hover .glossary-tooltip,
+        .glossary-term:focus .glossary-tooltip,
+        .glossary-term.active .glossary-tooltip {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="text-slate-800 min-h-screen flex flex-col justify-between antialiased selection:bg-indigo-100 selection:text-indigo-700">
+
+    <!-- En-tête principal -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+        <div class="max-w-4xl mx-auto px-4 py-3 sm:px-6 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold text-lg shadow-md shadow-indigo-200">
+                    A2
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold text-slate-900 leading-tight sm:text-xl">Compréhension Orale</h1>
+                    <p class="text-xs text-slate-500">Entretien avec Andrea (15 points)</p>
+                </div>
+            </div>
+            <div id="scoreBadge" class="hidden sm:flex items-center space-x-2 bg-indigo-50 text-indigo-700 px-3 py-1.5 rounded-full border border-indigo-100 font-semibold text-sm">
+                <i class="fa-solid font-bold fa-trophy text-amber-500"></i>
+                <span id="headerScore">0 / 15 pts</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-6 sm:px-6 w-full space-y-6">
+
+        <!-- Video Player Card -->
+        <section class="bg-gradient-to-br from-indigo-900 via-indigo-800 to-slate-900 text-white rounded-3xl p-5 sm:p-6 shadow-xl relative overflow-hidden space-y-4">
+            <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none"></div>
+            
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
+                <div class="space-y-1">
+                    <span class="inline-block px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-500/30 text-indigo-200 border border-indigo-400/30">
+                        <i class="fa-solid fa-video mr-1"></i> Document Vidéo
+                    </span>
+                    <h2 class="text-xl font-bold">Entretien : Présentation d'Andrea</h2>
+                    <p class="text-sm text-indigo-200">Regardez et écoutez attentivement l'entretien vidéo avant de répondre aux questions.</p>
+                </div>
+            </div>
+
+            <!-- Lecteur HTML5 pour la vidéo andrea.mp4 -->
+            <div class="relative rounded-2xl overflow-hidden shadow-2xl bg-black border border-white/10 aspect-video">
+                <video id="interviewVideo" controls preload="metadata" class="w-full h-full object-cover">
+                    <source src="andrea.mp4" type="video/mp4">
+                    Votre navigateur ne prend pas en charge la lecture de vidéos HTML5. Veuillez télécharger <a href="andrea.mp4" class="underline text-indigo-300">le fichier vidéo andrea.mp4</a>.
+                </video>
+            </div>
+        </section>
+
+        <form id="quizForm" onsubmit="event.preventDefault();" class="space-y-6">
+
+            <!-- Section 1 -->
+            <div class="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-200 space-y-5">
+                <div class="flex items-center space-x-3 border-b border-slate-100 pb-3">
+                    <span class="w-7 h-7 rounded-lg bg-indigo-100 text-indigo-700 font-bold text-sm flex items-center justify-center">1</span>
+                    <h3 class="font-bold text-slate-900 text-base sm:text-lg">Partie 1 : Informations personnelles (4 points)</h3>
+                </div>
+
+                <!-- Q1 -->
+                <div class="space-y-2" id="group-q1">
+                    <label class="block font-medium text-slate-800 text-sm sm:text-base">1. Quel âge a Andrea ? <span class="text-indigo-600 font-semibold">(1 point)</span></label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                            <input type="radio" name="q1" value="A" class="w-4 h-4 text-indigo-600 focus:ring-indigo-500 border-slate-300">
+                            <span class="ml-3 text-sm text-slate-700">14 ans</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                            <input type="radio" name="q1" value="B" class="w-4 h-4 text-indigo-600 focus:ring-indigo-500 border-slate-300">
+                            <span class="ml-3 text-sm text-slate-700">23 ans</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                            <input type="radio" name="q1" value="C" class="w-4 h-4 text-indigo-600 focus:ring-indigo-500 border-slate-300">
+                            <span class="ml-3 text-sm text-slate-700">25 ans</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                            <input type="radio" name="q1" value="D" class="w-4 h-4 text-indigo-600 focus:ring-indigo-500 border-slate-300">
+                            <span class="ml-3 text-sm text-slate-700">20 ans</span>
+                        </label>
+                    </div>
+                    <div id="feedback-q1" class="hidden p-3 rounded-xl text-xs sm:text-sm font-medium mt-2"></div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="space-y-2 pt-2" id="group-q2">
+                    <label class="block font-medium text-slate-800 text-sm sm:text-base">2. Quelle est la nationalité d'Andrea ? <span class="text-indigo-600 font-semibold">(1 point)</span></label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                            <input type="radio" name="q2" value="A" class="w-4 h-4 text-indigo-600 border-slate-300">
+                            <span class="ml-3 text-sm text-slate-700">Française</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                            <input type="radio" name="q2" value="B" class="w-4 h-4 text-indigo-600 border-slate-300">
+                            <span class="ml-3 text-sm text-slate-700">Espagnole</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                            <input type="radio" name="q2" value="C" class="w-4 h-4 text-indigo-600 border-slate-300">
+                            <span class="ml-3 text-sm text-slate-700">Italienne</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                            <input type="radio" name="q2" value="D" class="w-4 h-4 text-indigo-600 border-slate-300">
+                            <span class="ml-3 text-sm text-slate-700">Mexicaine</span>
+                        </label>
+                    </div>
+                    <div id="feedback-q2" class="hidden p-3 rounded-xl text-xs sm:text-sm font-medium mt-2"></div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="space-y-2 pt-2" id="group-q3">
+                    <label class="block font-medium text-slate-800 text-sm sm:text-base">3. Où habitent ses parents ? <span class="text-indigo-600 font-semibold">(1 point)</span></label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                            <input type="radio" name="q3" value="A" class="w-4 h-4 text-indigo-600 border-slate-300">
+                            <span class="ml-3 text-sm text-slate-700">À Pau, en France</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                            <input type="radio" name="q3" value="B" class="w-4 h-4 text-indigo-600 border-slate-300">
+                            <span class="ml-3 text-sm text-slate-700">Dans une petite ville au nord de l'Espagne</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                            <input type="radio" name="q3" value="C" class="w-4 h-4 text-indigo-600 border-slate-300">
+                            <span class="ml-3 text-sm text-slate-700">À Madrid, la capitale d'Espagne</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                            <input type="radio" name="q3" value="D" class="w-4 h-4 text-indigo-600 border-slate-300">
+                            <span class="ml-3 text-sm text-slate-700">Au sud de la France</span>
+                        </label>
+                    </div>
+                    <div id="feedback-q3" class="hidden p-3 rounded-xl text-xs sm:text-sm font-medium mt-2"></div>
+                </div>
+
+                <!-- Q4 -->
+                <div class="space-y-2 pt-2" id="group-q4">
+                    <label class="block font-medium text-slate-800 text-sm sm:text-base">4. Quelle est la situation familiale d'Andrea ? <span class="text-indigo-600 font-semibold">(1 point)</span></label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                            <input type="radio" name="q4" value="A" class="w-4 h-4 text-indigo-600 border-slate-300">
+                            <span class="ml-3 text-sm text-slate-700">Elle a deux frères</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                            <input type="radio" name="q4" value="B" class="w-4 h-4 text-indigo-600 border-slate-300">
+                            <span class="ml-3 text-sm text-slate-700">Elle a une sœur jumelle</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                            <input type="radio" name="q4" value="C" class="w-4 h-4 text-indigo-600 border-slate-300">
+                            <span class="ml-3 text-sm text-slate-700">Elle est fille unique</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                            <input type="radio" name="q4" value="D" class="w-4 h-4 text-indigo-600 border-slate-300">
+                            <span class="ml-3 text-sm text-slate-700">Elle vit avec ses cousines</span>
+                        </label>
+                    </div>
+                    <div id="feedback-q4" class="hidden p-3 rounded-xl text-xs sm:text-sm font-medium mt-2"></div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-200 space-y-5">
+                <div class="flex items-center space-x-3 border-b border-slate-100 pb-3">
+                    <span class="w-7 h-7 rounded-lg bg-indigo-100 text-indigo-700 font-bold text-sm flex items-center justify-center">2</span>
+                    <h3 class="font-bold text-slate-900 text-base sm:text-lg">Partie 2 : Vrai ou Faux ? (4 points)</h3>
+                </div>
+
+                <!-- Q5 -->
+                <div class="space-y-2" id="group-q5">
+                    <p class="font-medium text-slate-800 text-sm sm:text-base">5. Andrea vit à Pau pour ses études de Master et elle est en alternance. <span class="text-indigo-600 font-semibold">(1 point)</span></p>
+                    <div class="flex gap-4">
+                        <label class="flex-1 flex items-center justify-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                            <input type="radio" name="q5" value="Vrai" class="w-4 h-4 text-indigo-600 border-slate-300">
+                            <span class="ml-2 font-medium text-slate-700">Vrai</span>
+                        </label>
+                        <label class="flex-1 flex items-center justify-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                            <input type="radio" name="q5" value="Faux" class="w-4 h-4 text-indigo-600 border-slate-300">
+                            <span class="ml-2 font-medium text-slate-700">Faux</span>
+                        </label>
+                    </div>
+                    <div id="feedback-q5" class="hidden p-3 rounded-xl text-xs sm:text-sm font-medium mt-2"></div>
+                </div>
+
+                <!-- Q6 -->
+                <div class="space-y-2 pt-2" id="group-q6">
+                    <p class="font-medium text-slate-800 text-sm sm:text-base">6. Elle apprend le français depuis l'année 2023 seulement. <span class="text-indigo-600 font-semibold">(1 point)</span></p>
+                    <div class="flex gap-4">
+                        <label class="flex-1 flex items-center justify-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                            <input type="radio" name="q6" value="Vrai" class="w-4 h-4 text-indigo-600 border-slate-300">
+                            <span class="ml-2 font-medium text-slate-700">Vrai</span>
+                        </label>
+                        <label class="flex-1 flex items-center justify-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                            <input type="radio" name="q6" value="Faux" class="w-4 h-4 text-indigo-600 border-slate-300">
+                            <span class="ml-2 font-medium text-slate-700">Faux</span>
+                        </label>
+                    </div>
+                    <div id="feedback-q6" class="hidden p-3 rounded-xl text-xs sm:text-sm font-medium mt-2"></div>
+                </div>
+
+                <!-- Q7 -->
+                <div class="space-y-2 pt-2" id="group-q7">
+                    <p class="font-medium text-slate-800 text-sm sm:text-base">7. Elle habite à Pau depuis le mois de septembre 2023. <span class="text-indigo-600 font-semibold">(1 point)</span></p>
+                    <div class="flex gap-4">
+                        <label class="flex-1 flex items-center justify-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                            <input type="radio" name="q7" value="Vrai" class="w-4 h-4 text-indigo-600 border-slate-300">
+                            <span class="ml-2 font-medium text-slate-700">Vrai</span>
+                        </label>
+                        <label class="flex-1 flex items-center justify-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                            <input type="radio" name="q7" value="Faux" class="w-4 h-4 text-indigo-600 border-slate-300">
+                            <span class="ml-2 font-medium text-slate-700">Faux</span>
+                        </label>
+                    </div>
+                    <div id="feedback-q7" class="hidden p-3 rounded-xl text-xs sm:text-sm font-medium mt-2"></div>
+                </div>
+
+                <!-- Q8 -->
+                <div class="space-y-2 pt-2" id="group-q8">
+                    <p class="font-medium text-slate-800 text-sm sm:text-base">8. Andrea n'aime pas sortir ni faire d'activités en ville. <span class="text-indigo-600 font-semibold">(1 point)</span></p>
+                    <div class="flex gap-4">
+                        <label class="flex-1 flex items-center justify-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                            <input type="radio" name="q8" value="Vrai" class="w-4 h-4 text-indigo-600 border-slate-300">
+                            <span class="ml-2 font-medium text-slate-700">Vrai</span>
+                        </label>
+                        <label class="flex-1 flex items-center justify-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                            <input type="radio" name="q8" value="Faux" class="w-4 h-4 text-indigo-600 border-slate-300">
+                            <span class="ml-2 font-medium text-slate-700">Faux</span>
+                        </label>
+                    </div>
+                    <div id="feedback-q8" class="hidden p-3 rounded-xl text-xs sm:text-sm font-medium mt-2"></div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-200 space-y-5">
+                <div class="flex items-center space-x-3 border-b border-slate-100 pb-3">
+                    <span class="w-7 h-7 rounded-lg bg-indigo-100 text-indigo-700 font-bold text-sm flex items-center justify-center">3</span>
+                    <h3 class="font-bold text-slate-900 text-base sm:text-lg">Partie 3 : Les loisirs d'Andrea (3 points)</h3>
+                </div>
+
+                <div class="space-y-2" id="group-q9">
+                    <p class="font-medium text-slate-800 text-sm sm:text-base">
+                        9. Cochez les <strong>3 activités</strong> qu'Andrea mentionne aimer faire à Pau : <span class="text-indigo-600 font-semibold">(3 points, 1pt par bonne réponse)</span>
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                        <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                            <input type="checkbox" name="q9" value="rando" class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
+                            <span class="ml-3 text-sm text-slate-700">Partir en rando (randonnée)</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                            <input type="checkbox" name="q9" value="guitare" class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
+                            <span class="ml-3 text-sm text-slate-700">Jouer de la guitare</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                            <input type="checkbox" name="q9" value="cinema" class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
+                            <span class="ml-3 text-sm text-slate-700">Aller au cinéma</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                            <input type="checkbox" name="q9" value="promener" class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
+                            <span class="ml-3 text-sm text-slate-700">Se promener au centre-ville & aller au bar</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                            <input type="checkbox" name="q9" value="natation" class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
+                            <span class="ml-3 text-sm text-slate-700">Faire de la natation en piscine</span>
+                        </label>
+                    </div>
+                    <div id="feedback-q9" class="hidden p-3 rounded-xl text-xs sm:text-sm font-medium mt-2"></div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-200 space-y-5">
+                <div class="flex items-center space-x-3 border-b border-slate-100 pb-3">
+                    <span class="w-7 h-7 rounded-lg bg-indigo-100 text-indigo-700 font-bold text-sm flex items-center justify-center">4</span>
+                    <h3 class="font-bold text-slate-900 text-base sm:text-lg">Partie 4 : Le weekend passé et le weekend prochain (4 points)</h3>
+                </div>
+
+                <p class="text-sm text-slate-600">Sélectionnez le bon mot dans le menu déroulant pour compléter chaque phrase (1 point par réponse correcte) :</p>
+
+                <div class="space-y-4">
+                    <!-- Q10_1 -->
+                    <div class="p-3 bg-slate-50 rounded-xl space-y-2" id="group-q10a">
+                        <div class="text-sm sm:text-base text-slate-800 leading-relaxed">
+                            a. Le weekend dernier, Andrea est allée en Espagne pour voir sa 
+                            <select id="q10a" class="mx-1 px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-indigo-700 font-semibold focus:ring-2 focus:ring-indigo-500 outline-none">
+                                <option value="">--- choisir ---</option>
+                                <option value="famille">famille</option>
+                                <option value="professeure">professeure</option>
+                                <option value="patronne">patronne</option>
+                            </select>.
+                        </div>
+                        <div id="feedback-q10a" class="hidden p-2 rounded-lg text-xs font-medium"></div>
+                    </div>
+
+                    <!-- Q10_2 -->
+                    <div class="p-3 bg-slate-50 rounded-xl space-y-2" id="group-q10b">
+                        <div class="text-sm sm:text-base text-slate-800 leading-relaxed">
+                            b. Andrea pense que cela fait du bien de 
+                            <select id="q10b" class="mx-1 px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-indigo-700 font-semibold focus:ring-2 focus:ring-indigo-500 outline-none">
+                                <option value="">--- choisir ---</option>
+                                <option value="travailler">travailler</option>
+                                <option value="changer">changer</option>
+                                <option value="demenager">déménager</option>
+                            </select> de ville de temps en temps.
+                        </div>
+                        <div id="feedback-q10b" class="hidden p-2 rounded-lg text-xs font-medium"></div>
+                    </div>
+
+                    <!-- Q10_3 -->
+                    <div class="p-3 bg-slate-50 rounded-xl space-y-2" id="group-q10c">
+                        <div class="text-sm sm:text-base text-slate-800 leading-relaxed">
+                            c. Le weekend prochain, s'il fait beau, elle souhaite réaliser une activité en 
+                            <select id="q10c" class="mx-1 px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-indigo-700 font-semibold focus:ring-2 focus:ring-indigo-500 outline-none">
+                                <option value="">--- choisir ---</option>
+                                <option value="interieur">intérieur</option>
+                                <option value="plein_air">plein air</option>
+                                <option value="salle">salle de sport</option>
+                            </select>.
+                        </div>
+                        <div id="feedback-q10c" class="hidden p-2 rounded-lg text-xs font-medium"></div>
+                    </div>
+
+                    <!-- Q10_4 -->
+                    <div class="p-3 bg-slate-50 rounded-xl space-y-2" id="group-q10d">
+                        <div class="text-sm sm:text-base text-slate-800 leading-relaxed">
+                            d. En revanche, s'il fait très chaud, elle ira peut-être à la 
+                            <select id="q10d" class="mx-1 px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-indigo-700 font-semibold focus:ring-2 focus:ring-indigo-500 outline-none">
+                                <option value="">--- choisir ---</option>
+                                <option value="piscine">piscine</option>
+                                <option value="foret">forêt</option>
+                                <option value="plage">plage</option>
+                            </select>.
+                        </div>
+                        <div id="feedback-q10d" class="hidden p-2 rounded-lg text-xs font-medium"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
+                <button type="button" onclick="checkAnswers()" class="w-full sm:w-auto px-6 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg shadow-indigo-200 transition active:scale-98 flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Vérifier mes réponses</span>
+                </button>
+
+                <button type="button" onclick="resetQuiz()" class="w-full sm:w-auto px-5 py-3.5 bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold rounded-xl transition flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-rotate-right"></i>
+                    <span>Répéter l'activité</span>
+                </button>
+            </div>
+
+            <div id="resultCard" class="hidden bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-2xl p-6 shadow-xl space-y-4">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-indigo-200">Résultat Final</span>
+                        <h3 id="resultTitle" class="text-2xl font-extrabold">Excellent travail !</h3>
+                        <p id="resultSubtitle" class="text-sm text-indigo-100 mt-1">Vous avez complété l'activité de compréhension orale.</p>
+                    </div>
+                    <div class="bg-white/20 backdrop-blur-md px-6 py-4 rounded-2xl text-center border border-white/30">
+                        <div class="text-xs text-indigo-100 font-medium">Votre Note</div>
+                        <div id="finalScoreDisplay" class="text-3xl font-black">15 / 15</div>
+                        <div id="scorePercentage" class="text-xs font-semibold text-amber-300">100%</div>
+                    </div>
+                </div>
+
+                <!-- Unlock Transcript Button -->
+                <div class="pt-3 border-t border-white/20 flex justify-center">
+                    <button id="showTranscriptBtn" type="button" onclick="toggleTranscriptModal(true)" class="w-full sm:w-auto px-6 py-3 bg-amber-400 hover:bg-amber-300 text-slate-900 font-extrabold rounded-xl shadow-md transition transform hover:-translate-y-0.5 flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-file-lines"></i>
+                        <span>Consulter la transcription enrichie</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <div id="transcriptModal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+            <div class="bg-white w-full max-w-3xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-fade-in">
+                
+                <!-- Modal Header -->
+                <div class="bg-indigo-700 text-white p-5 sm:p-6 flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center">
+                            <i class="fa-solid fa-book-open text-amber-300"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg">Transcription de l'Entretien</h3>
+                            <p class="text-xs text-indigo-200">Survolez ou appuyez sur les mots soulignés pour voir la définition A2</p>
+                        </div>
+                    </div>
+                    <button onclick="toggleTranscriptModal(false)" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <!-- Modal Body with Transcript & Interactive Tooltips -->
+                <div class="p-6 overflow-y-auto space-y-4 text-slate-700 text-sm sm:text-base leading-relaxed">
+                    <p class="p-3 bg-indigo-50/60 rounded-xl text-xs text-indigo-900 border border-indigo-100 flex items-center gap-2">
+                        <i class="fa-solid fa-circle-info text-indigo-600 text-base"></i>
+                        <span>Les expressions soulignées en bleu contiennent des définitions simplifiées adaptées au niveau A2.</span>
+                    </p>
+
+                    <div class="space-y-3 font-normal">
+                        <div class="p-3 rounded-xl bg-slate-50">
+                            <span class="font-bold text-indigo-700">Intervieweuse :</span>
+                            <span>Bonjour, est-ce que vous pouvez vous présenter ?</span>
+                        </div>
+
+                        <div class="p-3 rounded-xl bg-indigo-50/30 border border-indigo-50">
+                            <span class="font-bold text-slate-900">Andrea :</span>
+                            <span>
+                                Bonjour ! Je m'appelle Andrea, j'ai 25 ans. Je suis 
+                                <span class="glossary-term">fille unique
+                                    <span class="glossary-tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-xl z-50">
+                                        <strong class="block text-amber-300 mb-1">Définition A2 :</strong>
+                                        Un enfant qui n'a pas de frères ni de sœurs.
+                                    </span>
+                                </span>
+                                et je suis espagnole. Mes parents habitent en Espagne, dans une petite ville au nord de l'Espagne qui s'appelle Miranda de Ebro.
+                                Et moi, j'habite en France, à Pau, pour faire mes études de Master et je suis en 
+                                <span class="glossary-term">alternance
+                                    <span class="glossary-tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-xl z-50">
+                                        <strong class="block text-amber-300 mb-1">Définition A2 :</strong>
+                                        Système d'études où l'on étudie à l'université et travaille en entreprise en même temps.
+                                    </span>
+                                </span>
+                                aussi à l'université. Voilà !
+                            </span>
+                        </div>
+
+                        <div class="p-3 rounded-xl bg-slate-50">
+                            <span class="font-bold text-indigo-700">Intervieweuse :</span>
+                            <span>Ici à Pau, vous faites quelles activités ?</span>
+                        </div>
+
+                        <div class="p-3 rounded-xl bg-indigo-50/30 border border-indigo-50">
+                            <span class="font-bold text-slate-900">Andrea :</span>
+                            <span>
+                                Ici à Pau, je fais beaucoup d'activités. J'aime bien partir en 
+                                <span class="glossary-term">rando
+                                    <span class="glossary-tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-xl z-50">
+                                        <strong class="block text-amber-300 mb-1">Définition A2 :</strong>
+                                        Forme courte pour "randonnée". Marche à pied dans la nature ou en montagne.
+                                    </span>
+                                </span>, 
+                                j'aime bien me promener aussi au centre-ville, aller au cinéma, faire du shopping, aller aux bars... Voilà !
+                            </span>
+                        </div>
+
+                        <div class="p-3 rounded-xl bg-slate-50">
+                            <span class="font-bold text-indigo-700">Intervieweuse :</span>
+                            <span>Très bien. Vous êtes à Pau depuis quand ?</span>
+                        </div>
+
+                        <div class="p-3 rounded-xl bg-indigo-50/30 border border-indigo-50">
+                            <span class="font-bold text-slate-900">Andrea :</span>
+                            <span>Je suis à Pau depuis septembre 2023.</span>
+                        </div>
+
+                        <div class="p-3 rounded-xl bg-slate-50">
+                            <span class="font-bold text-indigo-700">Intervieweuse :</span>
+                            <span>D'accord. Et depuis quand vous apprenez le français ?</span>
+                        </div>
+
+                        <div class="p-3 rounded-xl bg-indigo-50/30 border border-indigo-50">
+                            <span class="font-bold text-slate-900">Andrea :</span>
+                            <span>J'apprends le français depuis que j'avais 14 ans.</span>
+                        </div>
+
+                        <div class="p-3 rounded-xl bg-slate-50">
+                            <span class="font-bold text-indigo-700">Intervieweuse :</span>
+                            <span>D'accord, donc ça fait longtemps ! Qu'est-ce que vous avez fait le weekend dernier ?</span>
+                        </div>
+
+                        <div class="p-3 rounded-xl bg-indigo-50/30 border border-indigo-50">
+                            <span class="font-bold text-slate-900">Andrea :</span>
+                            <span>
+                                Alors, le weekend dernier, je suis allée pour les vacances en Espagne voir ma famille et profiter aussi pour voir des amis.
+                                Donc rien de spécial, mais 
+                                <span class="glossary-term">ça fait du bien
+                                    <span class="glossary-tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-xl z-50">
+                                        <strong class="block text-amber-300 mb-1">Définition A2 :</strong>
+                                        Cela donne de la joie, du plaisir ou du repos.
+                                    </span>
+                                </span>
+                                aussi de changer de ville et de faire d'autres choses.
+                            </span>
+                        </div>
+
+                        <div class="p-3 rounded-xl bg-slate-50">
+                            <span class="font-bold text-indigo-700">Intervieweuse :</span>
+                            <span>OK. Et qu'est-ce que vous allez faire le weekend prochain ?</span>
+                        </div>
+
+                        <div class="p-3 rounded-xl bg-indigo-50/30 border border-indigo-50">
+                            <span class="font-bold text-slate-900">Andrea :</span>
+                            <span>
+                                Et le weekend prochain, ben s'il fait beau, peut-être faire une activité en 
+                                <span class="glossary-term">plein air
+                                    <span class="glossary-tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 p-3 bg-slate-900 text-white text-xs rounded-xl shadow-xl z-50">
+                                        <strong class="block text-amber-300 mb-1">Définition A2 :</strong>
+                                        Dehors, à l'extérieur, dans la nature.
+                                    </span>
+                                </span>, 
+                                peut-être partir à la montagne pour une petite randonnée, ou s'il fait chaud, peut-être aller à la plage.
+                            </span>
+                        </div>
+
+                        <div class="p-3 rounded-xl bg-slate-50">
+                            <span class="font-bold text-indigo-700">Intervieweuse :</span>
+                            <span>D'accord. Merci beaucoup !</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="bg-slate-100 p-4 border-t border-slate-200 flex justify-end">
+                    <button onclick="toggleTranscriptModal(false)" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition">
+                        Fermer la transcription
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 mt-10 py-6 text-center text-xs text-slate-500 space-y-2">
+        <div class="max-w-4xl mx-auto px-4">
+            <p class="font-medium text-slate-700">Activité de compréhension de l'oral — Niveau CECRL A2</p>
+            <p class="text-indigo-600 font-semibold">Idée pédagogique : Nadia Aguilar Neri via Gemini</p>
+            <p class="text-slate-400">Prêt pour le déploiement sur GitHub Pages</p>
+        </div>
+    </footer>
+
+    <script>
+        const answersKey = {
+            q1: "C",       // 25 ans
+            q2: "B",       // Espagnole
+            q3: "B",       // Petite ville au nord de l'Espagne
+            q4: "C",       // Fille unique
+            q5: "Vrai",    // Master + alternance
+            q6: "Faux",    // Apprend depuis 14 ans
+            q7: "Vrai",    // Depuis septembre 2023
+            q8: "Faux",    // Aime sortir
+            q9: ["rando", "cinema", "promener"], // 3 items
+            q10a: "famille",
+            q10b: "changer",
+            q10c: "plein_air",
+            q10d: "plage"
+        };
+
+        const feedbacks = {
+            q1: "Correct ! Andrea indique : « J'ai 25 ans. »",
+            q2: "Exact ! Elle précise : « Je suis espagnole. »",
+            q3: "Très bien ! Ses parents vivent à Miranda de Ebro, « une petite ville au nord de l'Espagne ».",
+            q4: "Bravo ! Elle dit qu'elle n'a ni frère ni sœur : « Je suis fille unique. »",
+            q5: "Correct ! Elle est à Pau pour son Master et travaille en alternance à l'université.",
+            q6: "Exact ! C'est Faux car elle apprend le français « depuis qu'elle avait 14 ans » (donc depuis longtemps).",
+            q7: "Bravo ! Elle est bien arrivée à Pau en « septembre 2023 ».",
+            q8: "Correct ! C'est Faux car elle dit aimer les randos, le cinéma, le shopping et les bars.",
+            q9: "Excellente mémoire ! Elle cite la randonnée, le cinéma, et se promener en ville / aller au bar.",
+            q10a: "Bien joué ! Elle est rentrée voir sa « famille ».",
+            q10b: "Exact ! « Ça fait du bien de changer de ville. »",
+            q10c: "Bravo ! S'il fait beau, elle souhaite faire une activité en « plein air » (dehors).",
+            q10d: "Très bien ! S'il fait très chaud, elle ira à la « plage »."
+        };
+
+        function checkAnswers() {
+            let score = 0;
+
+            // Helper to render feedback box
+            function showFeedback(elementId, isCorrect, text) {
+                const el = document.getElementById(elementId);
+                el.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-rose-100', 'text-rose-800', 'border-emerald-200', 'border-rose-200');
+                el.classList.add('border', 'border-l-4');
+                if (isCorrect) {
+                    el.classList.add('bg-emerald-50', 'text-emerald-800', 'border-emerald-500');
+                    el.innerHTML = `<i class="fa-solid fa-circle-check mr-1.5 text-emerald-600"></i> ` + text;
+                } else {
+                    el.classList.add('bg-rose-50', 'text-rose-800', 'border-rose-500');
+                    el.innerHTML = `<i class="fa-solid fa-circle-xmark mr-1.5 text-rose-600"></i> Incorrect. ` + text;
+                }
+            }
+
+            // Part 1: Q1 to Q4 (QCM)
+            ['q1', 'q2', 'q3', 'q4'].forEach(q => {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                const isCorrect = selected && selected.value === answersKey[q];
+                if (isCorrect) score += 1;
+                showFeedback(`feedback-${q}`, isCorrect, feedbacks[q]);
+            });
+
+            // Part 2: Q5 to Q8 (Vrai / Faux)
+            ['q5', 'q6', 'q7', 'q8'].forEach(q => {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                const isCorrect = selected && selected.value === answersKey[q];
+                if (isCorrect) score += 1;
+                showFeedback(`feedback-${q}`, isCorrect, feedbacks[q]);
+            });
+
+            // Part 3: Q9 (Checkboxes - 3 pts)
+            const selectedQ9 = Array.from(document.querySelectorAll('input[name="q9"]:checked')).map(el => el.value);
+            let q9Score = 0;
+            answersKey.q9.forEach(val => {
+                if (selectedQ9.includes(val)) q9Score += 1;
+            });
+            // subtract points for incorrect extra checkboxes checked
+            const incorrectQ9 = selectedQ9.filter(v => !answersKey.q9.includes(v)).length;
+            q9Score = Math.max(0, q9Score - incorrectQ9);
+            score += q9Score;
+            showFeedback('feedback-q9', q9Score === 3, feedbacks.q9 + ` (${q9Score}/3 pts)`);
+
+            // Part 4: Q10 Fill in blanks (4 pts)
+            ['q10a', 'q10b', 'q10c', 'q10d'].forEach(q => {
+                const val = document.getElementById(q).value;
+                const isCorrect = val === answersKey[q];
+                if (isCorrect) score += 1;
+                showFeedback(`feedback-${q}`, isCorrect, feedbacks[q]);
+            });
+
+            // Display Score Card
+            const resultCard = document.getElementById('resultCard');
+            resultCard.classList.remove('hidden');
+            document.getElementById('finalScoreDisplay').innerText = score + " / 15";
+            const percentage = Math.round((score / 15) * 100);
+            document.getElementById('scorePercentage').innerText = percentage + "% de réussite";
+
+            // Header Score Update
+            document.getElementById('scoreBadge').classList.remove('hidden');
+            document.getElementById('headerScore').innerText = score + " / 15 pts";
+
+            // Title feedback message
+            const titleEl = document.getElementById('resultTitle');
+            const subEl = document.getElementById('resultSubtitle');
+            if (score === 15) {
+                titleEl.innerText = "Bravo ! Score parfait ! 🎉";
+                subEl.innerText = "Excellente maîtrise de la compréhension orale A2 !";
+            } else if (score >= 10) {
+                titleEl.innerText = "Très bon travail ! 👍";
+                subEl.innerText = "Vous avez bien compris la majorité de l'entretien.";
+            } else {
+                titleEl.innerText = "Bonne tentative ! 💪";
+                subEl.innerText = "Revoir la vidéo ou consulter la transcription ci-dessous pour progresser.";
+            }
+
+            // Scroll smoothly to results
+            resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function resetQuiz() {
+            document.getElementById('quizForm').reset();
+            
+            // Hide all feedbacks
+            document.querySelectorAll('[id^="feedback-"]').forEach(el => {
+                el.classList.add('hidden');
+            });
+
+            // Hide result card
+            document.getElementById('resultCard').classList.add('hidden');
+            document.getElementById('scoreBadge').classList.add('hidden');
+
+            // Pause video on reset if playing
+            const video = document.getElementById('interviewVideo');
+            if (video) {
+                video.pause();
+                video.currentTime = 0;
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleTranscriptModal(show) {
+            const modal = document.getElementById('transcriptModal');
+            if (show) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            } else {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Support mobile touch for glossary tooltips
+        document.addEventListener('DOMContentLoaded', () => {
+            const terms = document.querySelectorAll('.glossary-term');
+            terms.forEach(term => {
+                term.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    terms.forEach(t => { if (t !== term) t.classList.remove('active'); });
+                    term.classList.toggle('active');
+                });
+            });
+            document.addEventListener('click', () => {
+                terms.forEach(t => t.classList.remove('active'));
+            });
+        });
+    </script>
+</body>
+</html>
