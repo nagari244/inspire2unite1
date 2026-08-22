@@ -67,18 +67,20 @@
 
     <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
         <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
+            <div class="flex flex-wrap sm:flex-nowrap items-center gap-3 w-full sm:w-auto">
+                
+                <!-- Bouton Retour à l'Index (Placé en haut à gauche avec style contrasté) -->
+                <a href="index.html" class="inline-flex items-center gap-1.5 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 rounded-xl font-bold text-xs transition shadow-sm shrink-0">
+                    <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    <span>Sommaire</span>
+                </a>
+
                 <div class="w-11 h-11 rounded-2xl bg-amber-500 text-slate-950 flex items-center justify-center font-black shadow-md flex-shrink-0">
                     <i data-lucide="radio" class="w-6 h-6"></i>
                 </div>
                 <div>
-                    <!-- Bouton Retour à l'Index -->
-<a href="index.html" class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-xl font-semibold text-xs transition backdrop-blur-md shadow-sm">
-    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-    </svg>
-    <span>Retour au sommaire</span>
-</a>
                     <span class="text-[10px] font-black tracking-widest text-amber-700 uppercase bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200">
                         Niveau A2 — FLE
                     </span>
@@ -86,7 +88,7 @@
                 </div>
             </div>
 
-            <div class="text-xs text-slate-600 font-semibold bg-slate-100 px-3.5 py-2 rounded-xl border border-slate-200 w-full sm:w-auto text-center sm:text-right">
+            <div class="text-xs text-slate-600 font-semibold bg-slate-100 px-3.5 py-2 rounded-xl border border-slate-200 w-full sm:w-auto text-center sm:text-right shrink-0">
                 <span class="text-slate-800 font-bold flex items-center justify-center sm:justify-end gap-1.5">
                     <i data-lucide="award" class="w-4 h-4 text-amber-500"></i>
                     Activité auditive niveau A2
@@ -111,7 +113,7 @@
                     </p>
                 </div>
 
-                <!-- AUDIO PLAYER & TTS SYNTHESIS FALLBACK -->
+                <!-- AUDIO PLAYER -->
                 <div class="w-full md:w-auto bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 flex-shrink-0">
                     <div class="flex items-center justify-between gap-3 text-xs font-bold text-slate-700">
                         <span class="flex items-center gap-1.5">
@@ -120,7 +122,6 @@
                         </span>
                         <span class="text-[10px] text-slate-500 bg-white px-2 py-0.5 rounded border border-slate-200">MP3 / Audio</span>
                     </div>
-
 
                     <audio id="audio-player" class="w-full max-w-xs h-10 rounded-lg hidden sm:block" controls>
                         <source src="profils_audio.mp3" type="audio/mpeg">
@@ -151,10 +152,7 @@
                 </button>
             </div>
 
-            <!-- SYSTEMATICALLY CATEGORIZED SECTIONS -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                
-                <!-- CATEGORY 1: NATIONALITÉS -->
                 <div class="bg-blue-50/60 p-4 rounded-2xl border border-blue-200 space-y-3">
                     <div class="flex items-center gap-2 text-xs font-black text-blue-900 border-b border-blue-200/80 pb-2">
                         <i data-lucide="globe" class="w-4 h-4 text-blue-600"></i>
@@ -163,7 +161,6 @@
                     <div id="bank-nat" class="flex flex-wrap gap-2 min-h-[60px] items-center"></div>
                 </div>
 
-                <!-- CATEGORY 2: ÂGES -->
                 <div class="bg-emerald-50/60 p-4 rounded-2xl border border-emerald-200 space-y-3">
                     <div class="flex items-center gap-2 text-xs font-black text-emerald-900 border-b border-emerald-200/80 pb-2">
                         <i data-lucide="calendar" class="w-4 h-4 text-emerald-600"></i>
@@ -172,7 +169,6 @@
                     <div id="bank-age" class="flex flex-wrap gap-2 min-h-[60px] items-center"></div>
                 </div>
 
-                <!-- CATEGORY 3: PROFESSIONS -->
                 <div class="bg-purple-50/60 p-4 rounded-2xl border border-purple-200 space-y-3">
                     <div class="flex items-center gap-2 text-xs font-black text-purple-900 border-b border-purple-200/80 pb-2">
                         <i data-lucide="briefcase" class="w-4 h-4 text-purple-600"></i>
@@ -181,7 +177,6 @@
                     <div id="bank-prof" class="flex flex-wrap gap-2 min-h-[60px] items-center"></div>
                 </div>
 
-                <!-- CATEGORY 4: VILLES -->
                 <div class="bg-amber-50/60 p-4 rounded-2xl border border-amber-200 space-y-3">
                     <div class="flex items-center gap-2 text-xs font-black text-amber-900 border-b border-amber-200/80 pb-2">
                         <i data-lucide="map-pin" class="w-4 h-4 text-amber-600"></i>
@@ -189,7 +184,6 @@
                     </div>
                     <div id="bank-ville" class="flex flex-wrap gap-2 min-h-[60px] items-center"></div>
                 </div>
-
             </div>
         </section>
 
@@ -379,7 +373,6 @@
                 </div>
             </div>
 
-            <!-- FEEDBACK DISPLAY BOX -->
             <div id="feedback-banner" class="hidden p-5 rounded-2xl border text-xs sm:text-sm font-bold leading-relaxed"></div>
         </section>
 
@@ -398,30 +391,25 @@
     </footer>
 
     <script>
-        // List of all 20 elements categorized
         const rawItems = [
-            // Nationalités
             { id: "nat-1", text: "italien", category: "nat" },
             { id: "nat-2", text: "anglaise", category: "nat" },
             { id: "nat-3", text: "belge", category: "nat" },
             { id: "nat-4", text: "russe", category: "nat" },
             { id: "nat-5", text: "japonaise", category: "nat" },
 
-            // Âges
             { id: "age-1", text: "34 ans", category: "age" },
             { id: "age-2", text: "32 ans", category: "age" },
             { id: "age-3", text: "50 ans", category: "age" },
             { id: "age-4", text: "38 ans", category: "age" },
             { id: "age-5", text: "22 ans", category: "age" },
 
-            // Professions
             { id: "prof-1", text: "Médecin", category: "prof" },
             { id: "prof-2", text: "Coiffeuse", category: "prof" },
             { id: "prof-3", text: "Électricien", category: "prof" },
             { id: "prof-4", text: "Professeur", category: "prof" },
             { id: "prof-5", text: "Étudiante", category: "prof" },
 
-            // Villes
             { id: "v-1", text: "Montpellier", category: "ville" },
             { id: "v-2", text: "Paris", category: "ville" },
             { id: "v-3", text: "Marseille", category: "ville" },
@@ -429,7 +417,7 @@
             { id: "v-5", text: "Lyon", category: "ville" }
         ];
 
-        let selectedElement = null; // For tap-to-place on mobile
+        let selectedElement = null;
         let currentAudioUtterance = null;
 
         window.addEventListener('DOMContentLoaded', () => {
@@ -438,7 +426,6 @@
             initDropSlots();
         });
 
-        // Utility to shuffle array elements randomly
         function shuffleArray(array) {
             const arr = [...array];
             for (let i = arr.length - 1; i > 0; i--) {
@@ -448,7 +435,6 @@
             return arr;
         }
 
-        // Systematized Bank Render with Random Shuffling
         function initBank() {
             const categories = ['nat', 'age', 'prof', 'ville'];
             
@@ -457,10 +443,8 @@
                 if (catContainer) catContainer.innerHTML = '';
             });
 
-            // Shuffle items so tags in each category appear in random order
             const shuffledItems = shuffleArray(rawItems);
 
-            // Populate categorized items
             shuffledItems.forEach(item => {
                 const targetContainer = document.getElementById(`bank-${item.category}`);
                 if (!targetContainer) return;
@@ -472,7 +456,6 @@
                 badge.dataset.text = item.text;
                 badge.dataset.category = item.category;
 
-                // Color styling by category
                 let bgClass = "bg-white border-slate-200 text-slate-800 hover:border-slate-300";
                 if (item.category === 'nat') bgClass = "bg-blue-100/80 border-blue-300 text-blue-900";
                 if (item.category === 'age') bgClass = "bg-emerald-100/80 border-emerald-300 text-emerald-900";
@@ -481,7 +464,6 @@
 
                 badge.className = `item-card px-3 py-1.5 rounded-xl border text-xs font-bold shadow-sm ${bgClass}`;
 
-                // Drag & Drop Desktop Events
                 badge.addEventListener('dragstart', (e) => {
                     e.dataTransfer.setData('text/plain', item.id);
                     badge.classList.add('opacity-50');
@@ -491,7 +473,6 @@
                     badge.classList.remove('opacity-50');
                 });
 
-                // Tap-to-select Mobile Events
                 badge.addEventListener('click', () => {
                     selectItemForMobile(badge);
                 });
@@ -502,7 +483,6 @@
             updateBankCount();
         }
 
-        // Tap-to-select logic for mobile usability
         function selectItemForMobile(badge) {
             if (selectedElement === badge) {
                 badge.classList.remove('selected-item');
@@ -523,12 +503,10 @@
             }
         }
 
-        // Drop slots handlers
         function initDropSlots() {
             const slots = document.querySelectorAll('.drop-slot');
 
             slots.forEach(slot => {
-                // Drag Over / Leave
                 slot.addEventListener('dragover', (e) => {
                     e.preventDefault();
                     slot.classList.add('drag-over');
@@ -538,7 +516,6 @@
                     slot.classList.remove('drag-over');
                 });
 
-                // Drop Desktop
                 slot.addEventListener('drop', (e) => {
                     e.preventDefault();
                     slot.classList.remove('drag-over');
@@ -549,14 +526,12 @@
                     }
                 });
 
-                // Tap-to-place Mobile
                 slot.addEventListener('click', () => {
                     if (selectedElement) {
                         placeItemInSlot(selectedElement, slot);
                         selectedElement.classList.remove('selected-item');
                         selectedElement = null;
                     } else if (slot.children.length > 0) {
-                        // Return item back to its specific category bank
                         const child = slot.children[0];
                         const cat = child.dataset.category;
                         const catContainer = document.getElementById(`bank-${cat}`);
@@ -569,9 +544,7 @@
             });
         }
 
-        // Helper to place item card in drop slot
         function placeItemInSlot(itemEl, slot) {
-            // If slot already has an item, return existing item back to category bank
             if (slot.children.length > 0) {
                 const existing = slot.children[0];
                 const cat = existing.dataset.category;
@@ -593,7 +566,6 @@
             document.getElementById('bank-count').innerText = totalInBank;
         }
 
-        // Check answers logic
         function checkAnswers() {
             const slots = document.querySelectorAll('.drop-slot');
             let correctCount = 0;
@@ -616,7 +588,6 @@
                 }
             });
 
-            // Update Score Banner
             document.getElementById('score-text').innerText = `${correctCount} / 20`;
 
             const banner = document.getElementById('feedback-banner');
@@ -636,7 +607,6 @@
             }
         }
 
-        // Reset entire activity
         function resetActivity() {
             const slots = document.querySelectorAll('.drop-slot');
             slots.forEach(slot => {
@@ -654,7 +624,6 @@
             resetBankSelection();
         }
 
-        // Audio TTS Fallback Dialogue
         function playAudioDialogue() {
             const audioPlayer = document.getElementById('audio-player');
             if (audioPlayer && !audioPlayer.paused) {
