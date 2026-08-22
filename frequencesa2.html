@@ -68,28 +68,30 @@
         </div>
         
         <div class="max-w-5xl mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div>
-                <!-- Bouton Retour à l'Index -->
-<a href="index.html" class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-xl font-semibold text-xs transition backdrop-blur-md shadow-sm">
-    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-    </svg>
-    <span>Retour au sommaire</span>
-</a>
-                <span class="inline-block bg-oifBlue text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider mb-2">
-                    Niveau A2 • Grammaire FLE
-                </span>
-                <h1 class="text-2xl md:text-3xl font-extrabold text-oifDark flex items-center gap-3">
-                    <i class="fa-solid fa-clock-rotate-left text-oifPurple"></i>
-                    Les adverbes de fréquence
-                </h1>
-                <p class="text-slate-600 text-sm mt-1">
-                    Exprimez la régularité et respectez la structure de la phrase française.
-                </p>
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full md:w-auto">
+                
+                <!-- Bouton Retour à l'Index (Placé en haut à gauche avec style contrasté) -->
+                <a href="index.html" class="inline-flex items-center gap-2 px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 border-2 border-oifDark rounded-xl font-bold text-xs transition solid-shadow-sm shrink-0">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Retour au sommaire</span>
+                </a>
+
+                <div>
+                    <span class="inline-block bg-oifBlue text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider mb-2">
+                        Niveau A2 • Grammaire FLE
+                    </span>
+                    <h1 class="text-2xl md:text-3xl font-extrabold text-oifDark flex items-center gap-3">
+                        <i class="fa-solid fa-clock-rotate-left text-oifPurple"></i>
+                        Les adverbes de fréquence
+                    </h1>
+                    <p class="text-slate-600 text-sm mt-1">
+                        Exprimez la régularité et respectez la structure de la phrase française.
+                    </p>
+                </div>
             </div>
 
             <!-- Score Summary Card -->
-            <div class="bg-slate-50 border-2 border-oifDark rounded-xl p-3 flex items-center gap-4 solid-shadow-sm min-w-[200px] justify-around">
+            <div class="bg-slate-50 border-2 border-oifDark rounded-xl p-3 flex items-center gap-4 solid-shadow-sm min-w-[200px] justify-around shrink-0">
                 <div class="text-center">
                     <span class="text-xs text-slate-500 font-bold block uppercase">Activité 1</span>
                     <span id="score-act1" class="text-xl font-black text-oifBlue">0 / 7</span>
@@ -172,10 +174,7 @@
                 </button>
             </div>
 
-            <!-- Activity 1 Exercises List -->
-            <div id="act1-container" class="space-y-6">
-                <!-- Javascript will insert questions dynamically -->
-            </div>
+            <div id="act1-container" class="space-y-6"></div>
         </section>
 
         <section class="bg-white border-2 border-oifDark rounded-2xl p-5 md:p-6 solid-shadow">
@@ -193,7 +192,6 @@
                 </button>
             </div>
 
-            <!-- Activity 2 Examples Box -->
             <div class="mb-6 p-3 bg-amber-50 border-2 border-oifYellow rounded-xl text-sm font-semibold text-amber-900 flex items-center gap-3">
                 <i class="fa-solid fa-star text-oifYellow text-xl"></i>
                 <div>
@@ -202,10 +200,7 @@
                 </div>
             </div>
 
-            <!-- Activity 2 Items Container -->
-            <div id="act2-container" class="space-y-6">
-                <!-- Javascript will insert scramble questions dynamically -->
-            </div>
+            <div id="act2-container" class="space-y-6"></div>
         </section>
 
     </main>
@@ -356,7 +351,6 @@
             }
         ];
 
-        // State storage for Activity 2 selections
         const act2State = act2Data.map(item => ({
             selectedIndices: [],
             availableIndices: item.words.map((_, idx) => idx)
@@ -376,7 +370,6 @@
                         </div>
                     </div>
 
-                    <!-- Input Box and Individual Check Button -->
                     <div class="mt-4 flex flex-col sm:flex-row gap-3">
                         <div class="relative flex-1">
                             <input 
@@ -396,7 +389,6 @@
                         </button>
                     </div>
 
-                    <!-- Feedback Box -->
                     <div id="act1-feedback-${item.id}" class="hidden mt-3 p-3 rounded-xl border-2 text-sm"></div>
                 </div>
             `).join('');
@@ -413,7 +405,6 @@
                         </button>
                     </div>
 
-                    <!-- Selection Display Area -->
                     <div 
                         id="act2-target-${item.id}" 
                         class="min-h-[56px] bg-white border-2 border-dashed border-slate-300 rounded-xl p-2.5 flex flex-wrap items-center gap-2 mb-3"
@@ -423,12 +414,8 @@
                         </span>
                     </div>
 
-                    <!-- Available Word Chips Pool -->
-                    <div id="act2-pool-${item.id}" class="flex flex-wrap items-center gap-2 mb-4">
-                        <!-- Chips inserted dynamically -->
-                    </div>
+                    <div id="act2-pool-${item.id}" class="flex flex-wrap items-center gap-2 mb-4"></div>
 
-                    <!-- Actions and Verification -->
                     <div class="flex items-center justify-between gap-3 pt-2 border-t border-slate-200">
                         <button 
                             onclick="checkActivity2Item(${item.id})" 
@@ -439,12 +426,10 @@
                         </button>
                     </div>
 
-                    <!-- Feedback Box -->
                     <div id="act2-feedback-${item.id}" class="hidden mt-3 p-3 rounded-xl border-2 text-sm"></div>
                 </div>
             `).join('');
 
-            // Render chips for each item
             act2Data.forEach(item => updateActivity2Pool(item.id));
         }
 
@@ -456,7 +441,6 @@
             const targetEl = document.getElementById(`act2-target-${itemId}`);
             const placeholderEl = document.getElementById(`act2-placeholder-${itemId}`);
 
-            // Render Target Area (Selected Words)
             targetEl.querySelectorAll('.chip-selected').forEach(el => el.remove());
             
             if (state.selectedIndices.length > 0) {
@@ -472,7 +456,6 @@
                 if (placeholderEl) placeholderEl.classList.remove('hidden');
             }
 
-            // Render Pool Area (Available Words)
             poolEl.innerHTML = '';
             data.words.forEach((word, wordIdx) => {
                 const isSelected = state.selectedIndices.includes(wordIdx);
@@ -532,7 +515,6 @@
                 return false;
             }
 
-            // Check against accepted strings (case insensitive comparison)
             const isCorrect = item.accepted.some(acc => cleanText(acc).toLowerCase() === userVal.toLowerCase());
 
             if (isCorrect) {
@@ -550,7 +532,6 @@
                 updateScoreDisplay();
                 return true;
             } else {
-                // Generate detailed specific feedback error messages
                 let errorHint = "Rappel de la structure : <b>SUJET + VERBE + ADVERBE + COMPLÉMENT</b>.";
                 const lowerVal = userVal.toLowerCase();
 
@@ -602,7 +583,6 @@
             }
 
             const constructedSentenceWords = state.selectedIndices.map(idx => item.words[idx]);
-            // Capitalize first letter for natural comparison
             let userSentence = constructedSentenceWords.join(' ');
             userSentence = userSentence.charAt(0).toUpperCase() + userSentence.slice(1);
 
@@ -651,7 +631,6 @@
         }
 
         function updateScoreDisplay() {
-            // Count Activity 1 correct
             let act1Correct = 0;
             act1Data.forEach(item => {
                 const inputEl = document.getElementById(`act1-input-${item.id}`);
@@ -663,7 +642,6 @@
                 }
             });
 
-            // Count Activity 2 correct
             let act2Correct = 0;
             act2Data.forEach(item => {
                 const state = act2State[item.id - 1];
