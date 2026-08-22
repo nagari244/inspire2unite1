@@ -90,14 +90,29 @@
 <body class="min-h-full flex flex-col">
 
   <header class="header-solid text-white shadow-md">
-    <div class="max-w-5xl mx-auto px-4 py-6 text-center">
-      <div class="flex items-center justify-center gap-2 mb-2">
-        <span class="text-xl">🇫🇷</span>
-        <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-semibold uppercase tracking-wider text-slate-100">Activité FLE • Niveau A2</span>
-        <span class="text-xl">🇨🇦</span>
+    <div class="max-w-5xl mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      
+      <!-- Bouton Retour à l'Index -->
+      <a href="index.html" class="inline-flex items-center gap-2 px-3.5 py-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-xl font-semibold text-xs transition backdrop-blur-md shadow-sm shrink-0 self-start md:self-auto">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        <span>Retour au sommaire</span>
+      </a>
+
+      <!-- Titre et drapeaux -->
+      <div class="text-center flex-1">
+        <div class="flex items-center justify-center gap-2 mb-1">
+          <span class="text-xl">🇫🇷</span>
+          <span class="px-3 py-0.5 bg-white/10 rounded-full text-xs font-semibold uppercase tracking-wider text-slate-100">Activité FLE • Niveau A2</span>
+          <span class="text-xl">🇨🇦</span>
+        </div>
+        <h1 class="text-2xl md:text-4xl font-extrabold tracking-tight">Le Futur Simple</h1>
+        <p class="text-xs md:text-sm text-slate-200 mt-1 max-w-xl mx-auto">Verbes réguliers, verbes irréguliers, compréhension écrite et compréhension orale.</p>
       </div>
-      <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight">Le Futur Simple</h1>
-      <p class="text-sm md:text-base text-slate-200 mt-1 max-w-xl mx-auto">Verbes réguliers, verbes irréguliers, compréhension écrite et compréhension orale.</p>
+
+      <!-- Espace vide pour équilibrer la mise en page sur grand écran -->
+      <div class="hidden md:block w-36"></div>
     </div>
   </header>
 
@@ -120,12 +135,9 @@
 
   <main class="flex-1 max-w-5xl w-full mx-auto px-3 sm:px-4 py-6 space-y-8">
 
-    <!-- ======================================================== -->
-    <!-- ONGLET 1 : VERBES RÉGULIERS                              -->
-    <!-- ======================================================== -->
+    <!-- ONGLET 1 : VERBES RÉGULIERS -->
     <div id="tab-reguliers" class="space-y-6">
       
-      <!-- Section A : Rule Explanation -->
       <section class="bg-white border-2 border-blue-900/20 rounded-2xl p-5 md:p-8 shadow-sm">
         <div class="flex items-center gap-3 border-b border-slate-200 pb-4 mb-5">
           <span class="p-3 bg-blue-100 text-[#002395] text-2xl rounded-xl">💡</span>
@@ -138,7 +150,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-slate-700">
           <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
             <h3 class="font-bold text-[#002395] text-base">1. Règle Générale (-ER et -IR)</h3>
-            <p>On conserve **l'infinitif complet** et on ajoute les terminaisons uniques du futur simple :</p>
+            <p>On conserve <strong>l'infinitif complet</strong> et on ajoute les terminaisons uniques du futur simple :</p>
             <div class="bg-white p-3 rounded-lg border border-slate-300 font-mono text-xs md:text-sm space-y-1">
               <div><strong>Je</strong> &rarr; -ai <span class="text-slate-500 font-sans">(Je parler<strong>ai</strong>, Je finir<strong>ai</strong>)</span></div>
               <div><strong>Tu</strong> &rarr; -as <span class="text-slate-500 font-sans">(Tu parler<strong>as</strong>, Tu finir<strong>as</strong>)</span></div>
@@ -167,7 +179,6 @@
         </div>
       </section>
 
-      <!-- Section B : 20 Regular Sentences -->
       <section class="bg-white border-2 border-blue-900/20 rounded-2xl p-5 md:p-8 shadow-sm">
         <div class="flex items-center justify-between border-b border-slate-200 pb-4 mb-6">
           <div class="flex items-center gap-3">
@@ -193,9 +204,7 @@
       </section>
     </div>
 
-    <!-- ======================================================== -->
-    <!-- ONGLET 2 : VERBES IRRÉGULIERS                            -->
-    <!-- ======================================================== -->
+    <!-- ONGLET 2 : VERBES IRRÉGULIERS -->
     <div id="tab-irreguliers" class="space-y-8 hidden">
       
       <section class="bg-white border-2 border-blue-900/20 rounded-2xl p-5 md:p-8 shadow-sm">
@@ -261,7 +270,6 @@
           </div>
         </div>
 
-        <!-- Zone d'affichage des couples trouvés -->
         <div class="mb-5 p-4 bg-slate-100 rounded-xl border border-slate-300">
           <div class="text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
             ✨ Couples formés (<span id="match-count">0</span>/16)
@@ -271,7 +279,6 @@
           </div>
         </div>
 
-        <!-- Colonnes interactives qui raccourcissent -->
         <div class="grid grid-cols-2 gap-3 sm:gap-4">
           <div>
             <h3 class="font-bold text-xs uppercase tracking-wider text-slate-500 mb-2">📚 Infinitifs (<span id="count-infs">16</span>)</h3>
@@ -343,9 +350,7 @@
       </section>
     </div>
 
-    <!-- ======================================================== -->
-    <!-- ONGLET 3 : COMPÉTENCES LECTURE (CE)                      -->
-    <!-- ======================================================== -->
+    <!-- ONGLET 3 : COMPÉTENCES LECTURE (CE) -->
     <div id="tab-lecture" class="space-y-6 hidden">
       <section class="bg-white border-2 border-blue-900/20 rounded-2xl p-5 md:p-8 shadow-sm">
         <div class="flex items-center gap-3 border-b border-slate-200 pb-4 mb-5">
@@ -356,7 +361,6 @@
           </div>
         </div>
 
-        <!-- Full Horoscope Document (12 Signs) -->
         <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 mb-6 text-sm text-slate-800 space-y-4">
           <div class="text-center font-bold text-sm uppercase tracking-wider text-[#002395] border-b border-slate-300 pb-2">
             HOROSCOPE PROFESSIONNEL • SEMAINE DU 15 AU 21 MARS
@@ -426,7 +430,6 @@
           </div>
         </div>
 
-        <!-- Questionnaire Vrai / Faux (12 questions) -->
         <h3 class="font-bold text-base text-slate-900 mb-3">Questionnaire Vrai / Faux (12 questions) :</h3>
         <div class="space-y-3 text-sm" id="ce-questions"></div>
 
@@ -444,9 +447,7 @@
       </section>
     </div>
 
-    <!-- ======================================================== -->
-    <!-- ONGLET 4 : COMPÉTENCES AUDIO (CO)                        -->
-    <!-- ======================================================== -->
+    <!-- ONGLET 4 : COMPÉTENCES AUDIO (CO) -->
     <div id="tab-audio" class="space-y-6 hidden">
       <section class="bg-white border-2 border-blue-900/20 rounded-2xl p-5 md:p-8 shadow-sm">
         <div class="flex items-center gap-3 border-b border-slate-200 pb-4 mb-5">
@@ -457,7 +458,6 @@
           </div>
         </div>
 
-        <!-- Audio Player -->
         <div class="bg-slate-100 p-4 rounded-xl border border-slate-300 mb-6">
           <label class="block text-xs font-bold uppercase text-[#002395] mb-2">Document Audio : <span class="font-mono">futur_simple_audio1.mp3</span></label>
           <audio controls class="w-full h-11 rounded-lg">
@@ -466,7 +466,6 @@
           </audio>
         </div>
 
-        <!-- 14 Questions in two blocks -->
         <div class="space-y-6">
           <div>
             <h3 class="text-sm md:text-base font-bold text-[#002395] mb-3 pb-1 border-b border-blue-100">
@@ -504,7 +503,6 @@
   </footer>
 
   <script>
-    // 1. Data regular exercises (20 sentences) + hints
     const regularData = [
       { s: "Demain, je ___ (parler) avec le nouveau directeur.", a: "parlerai", hint: "Verbe en -ER : Je parler + ai" },
       { s: "Tu ___ (marcher) jusqu'à la gare pour prendre ton train.", a: "marcheras", hint: "Verbe en -ER : Tu marcher + as" },
@@ -528,7 +526,6 @@
       { s: "Nous ___ (écouter) la radio pendant le trajet.", a: "écouterons", hint: "Verbe en -ER : Nous écouter + ons" }
     ];
 
-    // 2. Data matching game (16 pairs)
     const matchData = [
       { inf: "Avoir", rad: "aur-" },
       { inf: "Être", rad: "ser-" },
@@ -548,7 +545,6 @@
       { inf: "Pleuvoir", rad: "pleuvr-" }
     ];
 
-    // 3. Data irregular exercises (20 sentences) + hints
     const irregularData = [
       { s: "L'année prochaine, j'___ (avoir) trente ans.", a: "aurai", hint: "Avoir -> Radical aur- + ai" },
       { s: "Tu ___ (être) en retard si tu ne te dépêches pas.", a: "seras", hint: "Être -> Radical ser- + as" },
@@ -572,7 +568,6 @@
       { s: "Elles ___ (faire) leurs valises ce soir.", a: "feront", hint: "Faire -> Radical fer- + ont" }
     ];
 
-    // 4. Data recap exercises (12 mixed sentences) + hints
     const recapData = [
       { s: "Pendant les vacances, nous ___ (visiter) des musées.", a: "visiterons", hint: "Verbe régulier : visiter + ons" },
       { s: "Je pense qu'il ___ (faire) très beau demain.", a: "fera", hint: "Verbe irrégulier : fer- + a" },
@@ -588,7 +583,6 @@
       { s: "Ce projet ___ (être) une excellente opportunité.", a: "sera", hint: "Verbe irrégulier : ser- + a" }
     ];
 
-    // 5. Data Reading CE (12 complete questions Vrai/Faux from Horoscope)
     const ceQuestionsData = [
       { q: "1. Le Bélier doit prendre une décision difficile concernant son travail.", a: "V", exp: "Texte : 'Vous prendrez une décision importante pour votre carrière lundi matin.'" },
       { q: "2. Le Taureau restera dans son bureau toute la semaine.", a: "F", exp: "Texte : 'Vous partirez en voyage d'affaires à l'étranger.'" },
@@ -604,7 +598,6 @@
       { q: "12. Les Poissons travailleront seuls, sans contact avec les autres.", a: "F", exp: "Texte : 'Vous aiderez un stagiaire qui arrive dans l'équipe. Vous partagerez votre expérience.'" }
     ];
 
-    // 6. Data Audio Listening CO (14 questions)
     const coGeneralData = [
       { q: "1. Quel est le sujet principal de la conversation ?", options: ["Les projets d'avenir, le travail et la vie", "Une recette de cuisine", "Un problème de voiture"], ans: 0 },
       { q: "2. Qui sont les deux personnes qui parlent ?", options: ["Corinne et sa grand-mère", "Corinne et sa sœur", "Deux collègues de bureau"], ans: 0 },
@@ -636,7 +629,6 @@
       document.getElementById('btn-' + tabId).classList.add('active');
     }
 
-    // Render exercise list with error feedback box
     function renderExerciseGroup(containerId, data) {
       const container = document.getElementById(containerId);
       container.innerHTML = '';
@@ -762,13 +754,9 @@
 
       const expected = matchData.find(item => item.inf === selectedInf.val);
       if (expected && expected.rad === selectedRad.val) {
-        // MATCH!
         matchedPairs.push({ inf: selectedInf.val, rad: selectedRad.val });
-
-        // Dynamic element removal to shorten columns
         selectedInf.btn.remove();
         selectedRad.btn.remove();
-
         updateMatchedDisplay();
         updateRemainingCounts();
 
@@ -776,7 +764,6 @@
           document.getElementById('matching-complete-msg').classList.remove('hidden');
         }
       } else {
-        // ERROR animation
         const ib = selectedInf.btn;
         const rb = selectedRad.btn;
         ib.classList.add('bg-red-100', 'border-red-500');
@@ -939,7 +926,6 @@
       document.getElementById('score-co').textContent = '';
     }
 
-    // Initialize on DOM Ready
     window.addEventListener('DOMContentLoaded', () => {
       renderExerciseGroup('regular-list', regularData);
       renderExerciseGroup('irreg-list', irregularData);
