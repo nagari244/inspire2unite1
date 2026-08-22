@@ -1,0 +1,954 @@
+<!doctype html>
+<html lang="fr" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Le Futur Simple - FLE A2 (France & Canada)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --c-france-blue: #002395;
+      --c-canada-red: #D80027;
+      --c-navy: #1E293B;
+      --c-success: #16A34A;
+      --c-bg: #F8FAFC;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--c-bg);
+      color: #0F172A;
+    }
+    h1, h2, h3, h4, .font-heading {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .header-solid {
+      background-color: #002395;
+      border-bottom: 4px solid #D80027;
+    }
+    .btn-main-tab.active {
+      background-color: #002395;
+      color: #FFFFFF;
+      border-color: #002395;
+      box-shadow: 0 4px 10px rgba(0, 35, 149, 0.25);
+    }
+    .btn-main-tab:not(.active) {
+      background-color: #FFFFFF;
+      color: #334155;
+      border: 1px solid #CBD5E1;
+    }
+    .btn-main-tab:not(.active):hover {
+      background-color: #FEF2F2;
+      color: #D80027;
+      border-color: #FECACA;
+    }
+    .input-fill {
+      border-bottom: 2px solid #94A3B8;
+      background: #F1F5F9;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    .input-fill:focus {
+      border-color: #002395;
+      background: #FFFFFF;
+      box-shadow: 0 2px 8px rgba(0, 35, 149, 0.15);
+    }
+    .input-fill.correct {
+      border-color: #16A34A;
+      background: #F0FDF4;
+      color: #15803D;
+      font-weight: 700;
+    }
+    .input-fill.incorrect {
+      border-color: #DC2626;
+      background: #FEF2F2;
+      color: #991B1B;
+      font-weight: 700;
+      animation: shake 0.35s ease;
+    }
+    .match-btn {
+      transition: all 0.2s ease;
+      user-select: none;
+      touch-action: manipulation;
+    }
+    .match-btn.selected {
+      border-color: #D80027;
+      background-color: #FEF2F2;
+      transform: scale(1.02);
+      box-shadow: 0 0 0 3px rgba(216, 0, 39, 0.25);
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+  </style>
+</head>
+<body class="min-h-full flex flex-col">
+
+  <header class="header-solid text-white shadow-md">
+    <div class="max-w-5xl mx-auto px-4 py-6 text-center">
+      <div class="flex items-center justify-center gap-2 mb-2">
+        <span class="text-xl">🇫🇷</span>
+        <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-semibold uppercase tracking-wider text-slate-100">Activité FLE • Niveau A2</span>
+        <span class="text-xl">🇨🇦</span>
+      </div>
+      <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight">Le Futur Simple</h1>
+      <p class="text-sm md:text-base text-slate-200 mt-1 max-w-xl mx-auto">Verbes réguliers, verbes irréguliers, compréhension écrite et compréhension orale.</p>
+    </div>
+  </header>
+
+  <div class="sticky top-0 z-40 bg-slate-50/95 backdrop-blur border-b border-slate-200 py-3 shadow-sm">
+    <div class="max-w-5xl mx-auto px-2 sm:px-4 flex flex-wrap justify-center gap-1.5 sm:gap-3">
+      <button onclick="switchMainTab('tab-reguliers')" id="btn-tab-reguliers" class="btn-main-tab active px-3 sm:px-5 py-2 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-1.5">
+        <span>📘</span> 1. Réguliers
+      </button>
+      <button onclick="switchMainTab('tab-irreguliers')" id="btn-tab-irreguliers" class="btn-main-tab px-3 sm:px-5 py-2 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-1.5">
+        <span>⚡</span> 2. Irréguliers
+      </button>
+      <button onclick="switchMainTab('tab-lecture')" id="btn-tab-lecture" class="btn-main-tab px-3 sm:px-5 py-2 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-1.5">
+        <span>📰</span> 3. Lecture (CE)
+      </button>
+      <button onclick="switchMainTab('tab-audio')" id="btn-tab-audio" class="btn-main-tab px-3 sm:px-5 py-2 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-1.5">
+        <span>🎧</span> 4. Audio (CO)
+      </button>
+    </div>
+  </div>
+
+  <main class="flex-1 max-w-5xl w-full mx-auto px-3 sm:px-4 py-6 space-y-8">
+
+    <!-- ======================================================== -->
+    <!-- ONGLET 1 : VERBES RÉGULIERS                              -->
+    <!-- ======================================================== -->
+    <div id="tab-reguliers" class="space-y-6">
+      
+      <!-- Section A : Rule Explanation -->
+      <section class="bg-white border-2 border-blue-900/20 rounded-2xl p-5 md:p-8 shadow-sm">
+        <div class="flex items-center gap-3 border-b border-slate-200 pb-4 mb-5">
+          <span class="p-3 bg-blue-100 text-[#002395] text-2xl rounded-xl">💡</span>
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900">Comment former le Futur Simple ?</h2>
+            <p class="text-xs md:text-sm text-slate-500">Explication générale pour les verbes réguliers</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-slate-700">
+          <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+            <h3 class="font-bold text-[#002395] text-base">1. Règle Générale (-ER et -IR)</h3>
+            <p>On conserve **l'infinitif complet** et on ajoute les terminaisons uniques du futur simple :</p>
+            <div class="bg-white p-3 rounded-lg border border-slate-300 font-mono text-xs md:text-sm space-y-1">
+              <div><strong>Je</strong> &rarr; -ai <span class="text-slate-500 font-sans">(Je parler<strong>ai</strong>, Je finir<strong>ai</strong>)</span></div>
+              <div><strong>Tu</strong> &rarr; -as <span class="text-slate-500 font-sans">(Tu parler<strong>as</strong>, Tu finir<strong>as</strong>)</span></div>
+              <div><strong>Il / Elle / On</strong> &rarr; -a <span class="text-slate-500 font-sans">(Il parler<strong>a</strong>, Elle finir<strong>a</strong>)</span></div>
+              <div><strong>Nous</strong> &rarr; -ons <span class="text-slate-500 font-sans">(Nous parler<strong>ons</strong>)</span></div>
+              <div><strong>Vous</strong> &rarr; -ez <span class="text-slate-500 font-sans">(Vous parler<strong>ez</strong>)</span></div>
+              <div><strong>Ils / Elles</strong> &rarr; -ont <span class="text-slate-500 font-sans">(Ils parler<strong>ont</strong>)</span></div>
+            </div>
+          </div>
+
+          <div class="bg-red-50/50 p-4 rounded-xl border border-red-200 flex flex-col justify-between space-y-3">
+            <div>
+              <h3 class="font-bold text-[#D80027] text-base">2. Verbes terminés par -RE</h3>
+              <p class="mb-2">Pour les verbes en <strong>-RE</strong> (comme <em>prendre, attendre, lire, mettre</em>), on <strong>supprime le -e final</strong> avant d'ajouter la terminaison :</p>
+              <ul class="list-disc list-inside space-y-1 bg-white p-3 rounded-lg border border-red-200 font-medium text-xs md:text-sm">
+                <li>Attendr<del class="text-red-600">e</del> &rarr; J'<strong>attendrai</strong></li>
+                <li>Prendr<del class="text-red-600">e</del> &rarr; Nous <strong>prendrons</strong></li>
+                <li>Lir<del class="text-red-600">e</del> &rarr; Vous <strong>lirez</strong></li>
+                <li>Mettr<del class="text-red-600">e</del> &rarr; Elles <strong>mettront</strong></li>
+              </ul>
+            </div>
+            <div class="p-3 bg-emerald-50 rounded-lg border border-emerald-300 text-xs text-emerald-900 font-medium">
+              ✨ <strong>Rappel :</strong> Les terminaisons (-ai, -as, -a, -ons, -ez, -ont) sont identiques pour TOUS les verbes !
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section B : 20 Regular Sentences -->
+      <section class="bg-white border-2 border-blue-900/20 rounded-2xl p-5 md:p-8 shadow-sm">
+        <div class="flex items-center justify-between border-b border-slate-200 pb-4 mb-6">
+          <div class="flex items-center gap-3">
+            <span class="p-3 bg-red-100 text-[#D80027] text-2xl rounded-xl">✍️</span>
+            <div>
+              <h2 class="text-xl md:text-2xl font-bold text-slate-900">Exercice : Verbes Réguliers</h2>
+              <p class="text-xs md:text-sm text-slate-500">Conjuguez les 20 verbes entre parenthèses au futur simple.</p>
+            </div>
+          </div>
+          <span id="score-reg" class="text-xs md:text-sm font-bold px-3 py-1.5 bg-blue-100 text-[#002395] rounded-full hidden">Score: -/20</span>
+        </div>
+
+        <div id="regular-list" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm"></div>
+
+        <div class="mt-8 flex flex-wrap justify-center gap-3">
+          <button onclick="verifyGroup('regular-list', 'score-reg')" class="px-6 py-3 bg-[#16A34A] hover:bg-green-700 text-white font-bold rounded-xl shadow-sm transition-all">
+            ✓ Vérifier les réponses
+          </button>
+          <button onclick="resetGroup('regular-list', 'score-reg')" class="px-6 py-3 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-xl transition-all">
+            🔄 Réinitialiser
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- ONGLET 2 : VERBES IRRÉGULIERS                            -->
+    <!-- ======================================================== -->
+    <div id="tab-irreguliers" class="space-y-8 hidden">
+      
+      <section class="bg-white border-2 border-blue-900/20 rounded-2xl p-5 md:p-8 shadow-sm">
+        <div class="flex items-center gap-3 border-b border-slate-200 pb-4 mb-5">
+          <span class="p-3 bg-blue-100 text-[#002395] text-2xl rounded-xl">🗂️</span>
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900">Classement des verbes irréguliers (4 groupes)</h2>
+            <p class="text-xs md:text-sm text-slate-500">Le radical modifié reçoit les terminaisons habituelles (-ai, -as, -a, -ons, -ez, -ont).</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs md:text-sm">
+          <div class="p-4 rounded-xl bg-blue-50 border border-blue-200">
+            <h3 class="font-bold text-[#002395] text-base mb-2">Groupe -RR</h3>
+            <ul class="space-y-1 text-slate-700 font-medium">
+              <li><strong>Voir</strong> &rarr; verr-</li>
+              <li><strong>Pouvoir</strong> &rarr; pourr-</li>
+              <li><strong>Envoyer</strong> &rarr; enverr-</li>
+              <li><strong>Courir</strong> &rarr; courr-</li>
+              <li><strong>Mourir</strong> &rarr; mourr-</li>
+            </ul>
+          </div>
+
+          <div class="p-4 rounded-xl bg-red-50 border border-red-200">
+            <h3 class="font-bold text-[#D80027] text-base mb-2">Groupe -VR</h3>
+            <ul class="space-y-1 text-slate-700 font-medium">
+              <li><strong>Devoir</strong> &rarr; devr-</li>
+              <li><strong>Recevoir</strong> &rarr; recevr-</li>
+              <li><strong>Pleuvoir</strong> &rarr; pleuvr-</li>
+            </ul>
+          </div>
+
+          <div class="p-4 rounded-xl bg-blue-50 border border-blue-200">
+            <h3 class="font-bold text-[#002395] text-base mb-2">Groupe -DR</h3>
+            <ul class="space-y-1 text-slate-700 font-medium">
+              <li><strong>Venir</strong> &rarr; viendr-</li>
+              <li><strong>Tenir</strong> &rarr; tiendr-</li>
+              <li><strong>Vouloir</strong> &rarr; voudr-</li>
+              <li><strong>Falloir</strong> &rarr; faudr-</li>
+              <li><strong>Valoir</strong> &rarr; vaudr-</li>
+            </ul>
+          </div>
+
+          <div class="p-4 rounded-xl bg-red-50 border border-red-200">
+            <h3 class="font-bold text-[#D80027] text-base mb-2">Groupe Autres</h3>
+            <ul class="space-y-1 text-slate-700 font-medium">
+              <li><strong>Être</strong> &rarr; ser-</li>
+              <li><strong>Avoir</strong> &rarr; aur-</li>
+              <li><strong>Aller</strong> &rarr; ir-</li>
+              <li><strong>Faire</strong> &rarr; fer-</li>
+              <li><strong>Savoir</strong> &rarr; saur-</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-white border-2 border-blue-900/20 rounded-2xl p-5 md:p-8 shadow-sm">
+        <div class="flex items-center gap-3 border-b border-slate-200 pb-4 mb-5">
+          <span class="p-3 bg-blue-100 text-[#002395] text-2xl rounded-xl">🔗</span>
+          <div>
+            <h2 class="text-xl md:text-2xl font-bold text-slate-900">Appariement : Infinitif & Radical</h2>
+            <p class="text-xs md:text-sm text-slate-500">Sélectionnez un infinitif puis son radical. Lorsqu'un couple est correct, il disparaît de la liste !</p>
+          </div>
+        </div>
+
+        <!-- Zone d'affichage des couples trouvés -->
+        <div class="mb-5 p-4 bg-slate-100 rounded-xl border border-slate-300">
+          <div class="text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+            ✨ Couples formés (<span id="match-count">0</span>/16)
+          </div>
+          <div id="matched-pairs-box" class="flex flex-wrap gap-2 min-h-[45px]">
+            <span class="text-xs text-slate-400 italic">Aucun couple formé pour l'instant.</span>
+          </div>
+        </div>
+
+        <!-- Colonnes interactives qui raccourcissent -->
+        <div class="grid grid-cols-2 gap-3 sm:gap-4">
+          <div>
+            <h3 class="font-bold text-xs uppercase tracking-wider text-slate-500 mb-2">📚 Infinitifs (<span id="count-infs">16</span>)</h3>
+            <div id="match-infinitives" class="flex flex-col gap-2"></div>
+          </div>
+          <div>
+            <h3 class="font-bold text-xs uppercase tracking-wider text-slate-500 mb-2">🎯 Radicaux (<span id="count-rads">16</span>)</h3>
+            <div id="match-radicals" class="flex flex-col gap-2"></div>
+          </div>
+        </div>
+        
+        <div id="matching-complete-msg" class="hidden mt-6 p-4 bg-emerald-100 border-2 border-emerald-500 rounded-xl text-center text-emerald-800 font-bold">
+          🎉 Bravo ! Vous avez associé tous les infinitifs avec leurs radicaux !
+        </div>
+
+        <div class="mt-5 text-center">
+          <button onclick="initMatchingGame()" class="px-5 py-2.5 text-xs font-bold text-slate-700 bg-slate-200 hover:bg-slate-300 rounded-xl">
+            🔄 Réinitialiser l'appariement
+          </button>
+        </div>
+      </section>
+
+      <section class="bg-white border-2 border-blue-900/20 rounded-2xl p-5 md:p-8 shadow-sm">
+        <div class="flex items-center justify-between border-b border-slate-200 pb-4 mb-6">
+          <div class="flex items-center gap-3">
+            <span class="p-3 bg-red-100 text-[#D80027] text-2xl rounded-xl">⚡</span>
+            <div>
+              <h2 class="text-xl md:text-2xl font-bold text-slate-900">Exercice : Verbes Irréguliers</h2>
+              <p class="text-xs md:text-sm text-slate-500">20 phrases à trous avec verbes uniquement irréguliers.</p>
+            </div>
+          </div>
+          <span id="score-irreg" class="text-xs md:text-sm font-bold px-3 py-1.5 bg-blue-100 text-[#002395] rounded-full hidden">Score: -/20</span>
+        </div>
+
+        <div id="irreg-list" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm"></div>
+
+        <div class="mt-8 flex flex-wrap justify-center gap-3">
+          <button onclick="verifyGroup('irreg-list', 'score-irreg')" class="px-6 py-3 bg-[#16A34A] hover:bg-green-700 text-white font-bold rounded-xl shadow-sm transition-all">
+            ✓ Vérifier
+          </button>
+          <button onclick="resetGroup('irreg-list', 'score-irreg')" class="px-6 py-3 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-xl transition-all">
+            🔄 Réinitialiser
+          </button>
+        </div>
+      </section>
+
+      <section class="bg-white border-2 border-blue-900/20 rounded-2xl p-5 md:p-8 shadow-sm">
+        <div class="flex items-center justify-between border-b border-slate-200 pb-4 mb-6">
+          <div class="flex items-center gap-3">
+            <span class="p-3 bg-blue-100 text-[#002395] text-2xl rounded-xl">🎯</span>
+            <div>
+              <h2 class="text-xl md:text-2xl font-bold text-slate-900">Activité Récapitulative (Mixte)</h2>
+              <p class="text-xs md:text-sm text-slate-500">Conjuguez tant des verbes réguliers qu'irréguliers (12 phrases).</p>
+            </div>
+          </div>
+          <span id="score-recap" class="text-xs md:text-sm font-bold px-3 py-1.5 bg-blue-100 text-[#002395] rounded-full hidden">Score: -/12</span>
+        </div>
+
+        <div id="recap-list" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm"></div>
+
+        <div class="mt-8 flex flex-wrap justify-center gap-3">
+          <button onclick="verifyGroup('recap-list', 'score-recap')" class="px-6 py-3 bg-[#002395] hover:bg-blue-800 text-white font-bold rounded-xl shadow-sm transition-all">
+            ✓ Vérifier la synthèse
+          </button>
+          <button onclick="resetGroup('recap-list', 'score-recap')" class="px-6 py-3 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-xl transition-all">
+            🔄 Réinitialiser
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- ONGLET 3 : COMPÉTENCES LECTURE (CE)                      -->
+    <!-- ======================================================== -->
+    <div id="tab-lecture" class="space-y-6 hidden">
+      <section class="bg-white border-2 border-blue-900/20 rounded-2xl p-5 md:p-8 shadow-sm">
+        <div class="flex items-center gap-3 border-b border-slate-200 pb-4 mb-5">
+          <span class="p-3 bg-red-100 text-[#D80027] text-2xl rounded-xl">📰</span>
+          <div>
+            <h2 class="text-xl md:text-2xl font-bold text-slate-900">Compréhension de l'écrit : Horoscope Professionnel</h2>
+            <p class="text-xs md:text-sm text-slate-500">Document intégral des 12 signes et questionnaire complet (12 questions Vrai / Faux)</p>
+          </div>
+        </div>
+
+        <!-- Full Horoscope Document (12 Signs) -->
+        <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 mb-6 text-sm text-slate-800 space-y-4">
+          <div class="text-center font-bold text-sm uppercase tracking-wider text-[#002395] border-b border-slate-300 pb-2">
+            HOROSCOPE PROFESSIONNEL • SEMAINE DU 15 AU 21 MARS
+          </div>
+          <p class="text-xs text-slate-600 text-center italic">Lisez les prévisions de la semaine pour chaque signe astrologique et répondez aux 12 questions.</p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs md:text-sm">
+            <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm space-y-1">
+              <div class="font-bold text-[#002395] border-b pb-1 mb-1">♈ Bélier</div>
+              <p>Vous prendrez une décision importante pour votre carrière lundi matin. Ne soyez pas stressé !</p>
+            </div>
+
+            <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm space-y-1">
+              <div class="font-bold text-[#002395] border-b pb-1 mb-1">♉ Taureau</div>
+              <p>Vous partirez en voyage d'affaires à l'étranger. Ce sera une opportunité incroyable pour vous.</p>
+            </div>
+
+            <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm space-y-1">
+              <div class="font-bold text-[#002395] border-b pb-1 mb-1">♊ Gémeaux</div>
+              <p>Vous rencontrerez de nouveaux collaborateurs très intéressants lors d'une réunion.</p>
+            </div>
+
+            <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm space-y-1">
+              <div class="font-bold text-[#D80027] border-b pb-1 mb-1">♋ Cancer</div>
+              <p>Vous resterez à la maison pour faire du télétravail. Vous finirez vos dossiers calmement.</p>
+            </div>
+
+            <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm space-y-1">
+              <div class="font-bold text-[#D80027] border-b pb-1 mb-1">♌ Lion</div>
+              <p>Votre patron vous félicitera et vous recevrez une prime (un bonus d'argent) pour vos résultats.</p>
+            </div>
+
+            <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm space-y-1">
+              <div class="font-bold text-[#D80027] border-b pb-1 mb-1">♍ Vierge</div>
+              <p>Vous organiserez votre bureau et vous chercherez de nouvelles idées pour vos projets.</p>
+            </div>
+
+            <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm space-y-1">
+              <div class="font-bold text-[#002395] border-b pb-1 mb-1">♎ Balance</div>
+              <p>Vous discuterez avec votre manager pour obtenir une promotion ou une augmentation.</p>
+            </div>
+
+            <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm space-y-1">
+              <div class="font-bold text-[#002395] border-b pb-1 mb-1">♏ Scorpion</div>
+              <p>Attention ! Vous travaillerez beaucoup cette semaine. Vous serez très fatigué vendredi soir.</p>
+            </div>
+
+            <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm space-y-1">
+              <div class="font-bold text-[#002395] border-b pb-1 mb-1">♐ Sagittaire</div>
+              <p>Vous signerez enfin ce nouveau contrat que vous attendez depuis longtemps.</p>
+            </div>
+
+            <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm space-y-1">
+              <div class="font-bold text-[#D80027] border-b pb-1 mb-1">♑ Capricorne</div>
+              <p>Vous apprendrez à utiliser un nouveau logiciel informatique très utile pour votre métier.</p>
+            </div>
+
+            <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm space-y-1">
+              <div class="font-bold text-[#D80027] border-b pb-1 mb-1">♒ Verseau</div>
+              <p>Vous mangerez au restaurant avec vos collègues pour fêter un succès collectif.</p>
+            </div>
+
+            <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm space-y-1">
+              <div class="font-bold text-[#D80027] border-b pb-1 mb-1">♓ Poissons</div>
+              <p>Vous aiderez un stagiaire qui arrive dans l'équipe. Vous partagerez votre expérience.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Questionnaire Vrai / Faux (12 questions) -->
+        <h3 class="font-bold text-base text-slate-900 mb-3">Questionnaire Vrai / Faux (12 questions) :</h3>
+        <div class="space-y-3 text-sm" id="ce-questions"></div>
+
+        <div class="mt-6 flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-200">
+          <span id="score-ce" class="text-sm font-bold text-[#002395]"></span>
+          <div class="flex gap-2">
+            <button onclick="verifyCE()" class="px-6 py-2.5 bg-[#16A34A] hover:bg-green-700 text-white font-bold rounded-xl shadow-sm text-sm">
+              ✓ Vérifier les réponses
+            </button>
+            <button onclick="resetCE()" class="px-4 py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-xl text-sm">
+              🔄 Réinitialiser
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- ONGLET 4 : COMPÉTENCES AUDIO (CO)                        -->
+    <!-- ======================================================== -->
+    <div id="tab-audio" class="space-y-6 hidden">
+      <section class="bg-white border-2 border-blue-900/20 rounded-2xl p-5 md:p-8 shadow-sm">
+        <div class="flex items-center gap-3 border-b border-slate-200 pb-4 mb-5">
+          <span class="p-3 bg-blue-100 text-[#002395] text-2xl rounded-xl">🎧</span>
+          <div>
+            <h2 class="text-xl md:text-2xl font-bold text-slate-900">Compréhension Orale : Conversation familiale</h2>
+            <p class="text-xs md:text-sm text-slate-500">Écoutez le document sonore "futur_simple_audio1.mp3" puis répondez aux 14 questions.</p>
+          </div>
+        </div>
+
+        <!-- Audio Player -->
+        <div class="bg-slate-100 p-4 rounded-xl border border-slate-300 mb-6">
+          <label class="block text-xs font-bold uppercase text-[#002395] mb-2">Document Audio : <span class="font-mono">futur_simple_audio1.mp3</span></label>
+          <audio controls class="w-full h-11 rounded-lg">
+            <source src="futur_simple_audio1.mp3" type="audio/mpeg">
+            Votre navigateur ne supporte pas l'élément audio.
+          </audio>
+        </div>
+
+        <!-- 14 Questions in two blocks -->
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-sm md:text-base font-bold text-[#002395] mb-3 pb-1 border-b border-blue-100">
+              a) Compréhension Générale (7 questions)
+            </h3>
+            <div id="co-general-list" class="space-y-4"></div>
+          </div>
+
+          <div>
+            <h3 class="text-sm md:text-base font-bold text-[#D80027] mb-3 pb-1 border-b border-red-100">
+              b) Compréhension Détaillée du Futur Simple (7 questions)
+            </h3>
+            <div id="co-detail-list" class="space-y-4"></div>
+          </div>
+        </div>
+
+        <div class="mt-8 flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-200">
+          <span id="score-co" class="text-sm font-bold text-[#002395]"></span>
+          <div class="flex gap-2">
+            <button onclick="verifyCO()" class="px-6 py-3 bg-[#002395] hover:bg-blue-800 text-white font-bold rounded-xl shadow-md text-sm">
+              ✓ Vérifier les réponses
+            </button>
+            <button onclick="resetCO()" class="px-4 py-3 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-xl text-sm">
+              🔄 Réinitialiser
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
+    Activités FLE A2 • Le Futur Simple • France & Canada 🇨🇦 🇫🇷
+  </footer>
+
+  <script>
+    // 1. Data regular exercises (20 sentences) + hints
+    const regularData = [
+      { s: "Demain, je ___ (parler) avec le nouveau directeur.", a: "parlerai", hint: "Verbe en -ER : Je parler + ai" },
+      { s: "Tu ___ (marcher) jusqu'à la gare pour prendre ton train.", a: "marcheras", hint: "Verbe en -ER : Tu marcher + as" },
+      { s: "Il ___ (choisir) le menu du jour à la cantine.", a: "choisira", hint: "Verbe en -IR : Il choisir + a" },
+      { s: "Nous ___ (finir) notre projet avant la fin du mois.", a: "finirons", hint: "Verbe en -IR : Nous finir + ons" },
+      { s: "Vous ___ (habiter) dans un nouvel appartement.", a: "habiterez", hint: "Verbe en -ER : Vous habiter + ez" },
+      { s: "Elles ___ (réunir) leurs collègues pour la fête.", a: "réuniront", hint: "Verbe en -IR : Elles réunir + ont" },
+      { s: "Je ___ (réussir) mon examen de français A2.", a: "réussirai", hint: "Verbe en -IR : Je réussir + ai" },
+      { s: "Tu ___ (attendre) ton ami à la sortie du bureau.", a: "attendras", hint: "Verbe en -RE : Supprimer le -e final -> attendr + as" },
+      { s: "Elle ___ (lire) le journal pendant son voyage.", a: "lira", hint: "Verbe en -RE : Supprimer le -e final -> lir + a" },
+      { s: "Nous ___ (prendre) le train de 8 heures.", a: "prendrons", hint: "Verbe en -RE : Supprimer le -e final -> prendr + ons" },
+      { s: "Vous ___ (comprendre) rapidement les nouvelles règles.", a: "comprendrez", hint: "Verbe en -RE : Supprimer le -e final -> comprendr + ez" },
+      { s: "Ils ___ (répondre) à votre courriel demain.", a: "répondront", hint: "Verbe en -RE : Supprimer le -e final -> répondr + ont" },
+      { s: "Je ___ (mettre) un manteau chaud car il fait froid.", a: "mettrai", hint: "Verbe en -RE : Supprimer le -e final -> mettr + ai" },
+      { s: "Tu ___ (promettre) de m'écrire régulièrement.", a: "promettras", hint: "Verbe en -RE : Supprimer le -e final -> promettr + as" },
+      { s: "Il ___ (dire) bonjour à toute l'équipe.", a: "dira", hint: "Verbe en -RE : Supprimer le -e final -> dir + a" },
+      { s: "Nous ___ (vendre) notre ancienne voiture.", a: "vendrons", hint: "Verbe en -RE : Supprimer le -e final -> vendr + ons" },
+      { s: "Vous ___ (servir) le café aux invités.", a: "servirez", hint: "Verbe en -IR : Vous servir + ez" },
+      { s: "Elles ___ (dormir) dans un bel hôtel.", a: "dormiront", hint: "Verbe en -IR : Elles dormir + ont" },
+      { s: "Je ___ (danser) toute la soirée avec mes amis.", a: "danserai", hint: "Verbe en -ER : Je danser + ai" },
+      { s: "Nous ___ (écouter) la radio pendant le trajet.", a: "écouterons", hint: "Verbe en -ER : Nous écouter + ons" }
+    ];
+
+    // 2. Data matching game (16 pairs)
+    const matchData = [
+      { inf: "Avoir", rad: "aur-" },
+      { inf: "Être", rad: "ser-" },
+      { inf: "Faire", rad: "fer-" },
+      { inf: "Aller", rad: "ir-" },
+      { inf: "Venir", rad: "viendr-" },
+      { inf: "Voir", rad: "verr-" },
+      { inf: "Pouvoir", rad: "pourr-" },
+      { inf: "Vouloir", rad: "voudr-" },
+      { inf: "Devoir", rad: "devr-" },
+      { inf: "Savoir", rad: "saur-" },
+      { inf: "Envoyer", rad: "enverr-" },
+      { inf: "Recevoir", rad: "recevr-" },
+      { inf: "Falloir", rad: "faudr-" },
+      { inf: "Courir", rad: "courr-" },
+      { inf: "Tenir", rad: "tiendr-" },
+      { inf: "Pleuvoir", rad: "pleuvr-" }
+    ];
+
+    // 3. Data irregular exercises (20 sentences) + hints
+    const irregularData = [
+      { s: "L'année prochaine, j'___ (avoir) trente ans.", a: "aurai", hint: "Avoir -> Radical aur- + ai" },
+      { s: "Tu ___ (être) en retard si tu ne te dépêches pas.", a: "seras", hint: "Être -> Radical ser- + as" },
+      { s: "Elle ___ (faire) un stage dans une entreprise.", a: "fera", hint: "Faire -> Radical fer- + a" },
+      { s: "Nous ___ (aller) au restaurant vendredi soir.", a: "irons", hint: "Aller -> Radical ir- + ons" },
+      { s: "Vous ___ (venir) à notre fête cet été ?", a: "viendrez", hint: "Venir -> Radical viendr- + ez" },
+      { s: "Ils ___ (pouvoir) entrer avec leur passeport.", a: "pourront", hint: "Pouvoir -> Radical pourr- + ont" },
+      { s: "Demain, il ___ (pleuvoir) sur toute la région.", a: "pleuvra", hint: "Pleuvoir -> Radical pleuvr- + a" },
+      { s: "Tu ___ (voir) une magnifique exposition au musée.", a: "verras", hint: "Voir -> Radical verr- + as" },
+      { s: "Nous ___ (savoir) la réponse la semaine prochaine.", a: "saurons", hint: "Savoir -> Radical saur- + ons" },
+      { s: "Vous ___ (devoir) remplir ce formulaire.", a: "devrez", hint: "Devoir -> Radical devr- + ez" },
+      { s: "J'___ (envoyer) le paquet par la poste lundi.", a: "enverrai", hint: "Envoyer -> Radical enverr- + ai" },
+      { s: "Elles ___ (recevoir) les résultats par courrier.", a: "recevront", hint: "Recevoir -> Radical recevr- + ont" },
+      { s: "Il ___ (falloir) réserver les billets à l'avance.", a: "faudra", hint: "Falloir -> Radical faudr- + a" },
+      { s: "Est-ce que tu ___ (vouloir) m'accompagner ?", a: "voudras", hint: "Vouloir -> Radical voudr- + as" },
+      { s: "Nous ___ (tenir) notre engagement.", a: "tiendrons", hint: "Tenir -> Radical tiendr- + ons" },
+      { s: "Ils ___ (courir) le marathon dimanche.", a: "courront", hint: "Courir -> Radical courr- + ont" },
+      { s: "Ce bijou ___ (valoir) beaucoup d'argent.", a: "vaudra", hint: "Valoir -> Radical vaudr- + a" },
+      { s: "J'___ (être) ravi de faire votre connaissance.", a: "serai", hint: "Être -> Radical ser- + ai" },
+      { s: "Vous ___ (avoir) du temps pour visiter la ville.", a: "aurez", hint: "Avoir -> Radical aur- + ez" },
+      { s: "Elles ___ (faire) leurs valises ce soir.", a: "feront", hint: "Faire -> Radical fer- + ont" }
+    ];
+
+    // 4. Data recap exercises (12 mixed sentences) + hints
+    const recapData = [
+      { s: "Pendant les vacances, nous ___ (visiter) des musées.", a: "visiterons", hint: "Verbe régulier : visiter + ons" },
+      { s: "Je pense qu'il ___ (faire) très beau demain.", a: "fera", hint: "Verbe irrégulier : fer- + a" },
+      { s: "Tu ___ (apprendre) tes leçons chaque soir.", a: "apprendras", hint: "Verbe en -RE : apprendr + as" },
+      { s: "Vous ___ (aller) en train ou en voiture ?", a: "irez", hint: "Verbe irrégulier : ir- + ez" },
+      { s: "Ils ___ (partir) à 7 heures précises.", a: "partiront", hint: "Verbe en -IR : partir + ont" },
+      { s: "Elle ___ (avoir) besoin de son ordinateur.", a: "aura", hint: "Verbe irrégulier : aur- + a" },
+      { s: "Nous ___ (prendre) un café ensemble.", a: "prendrons", hint: "Verbe en -RE : prendr + ons" },
+      { s: "J'___ (écrire) une lettre de motivation.", a: "écrirai", hint: "Verbe en -RE : écrir + ai" },
+      { s: "Tu ___ (pouvoir) m'appeler dès ton arrivée.", a: "pourras", hint: "Verbe irrégulier : pourr- + as" },
+      { s: "Vous ___ (finir) la rédaction de votre rapport.", a: "finirez", hint: "Verbe régulier : finir + ez" },
+      { s: "Ils ___ (venir) nous rendre visite dimanche.", a: "viendront", hint: "Verbe irrégulier : viendr- + ont" },
+      { s: "Ce projet ___ (être) une excellente opportunité.", a: "sera", hint: "Verbe irrégulier : ser- + a" }
+    ];
+
+    // 5. Data Reading CE (12 complete questions Vrai/Faux from Horoscope)
+    const ceQuestionsData = [
+      { q: "1. Le Bélier doit prendre une décision difficile concernant son travail.", a: "V", exp: "Texte : 'Vous prendrez une décision importante pour votre carrière lundi matin.'" },
+      { q: "2. Le Taureau restera dans son bureau toute la semaine.", a: "F", exp: "Texte : 'Vous partirez en voyage d'affaires à l'étranger.'" },
+      { q: "3. Les Gémeaux vont travailler avec de nouvelles personnes.", a: "V", exp: "Texte : 'Vous rencontrerez de nouveaux collaborateurs très intéressants...'" },
+      { q: "4. Le Cancer travaillera en présentiel (au bureau).", a: "F", exp: "Texte : 'Vous resterez à la maison pour faire du télétravail.'" },
+      { q: "5. Le Lion gagnera un peu plus d'argent cette semaine.", a: "V", exp: "Texte : '...vous recevrez une prime (un bonus d'argent)...'" },
+      { q: "6. La Vierge a besoin de mettre de l'ordre dans son espace de travail.", a: "V", exp: "Texte : 'Vous organiserez votre bureau...'" },
+      { q: "7. La Balance veut évoluer professionnellement ou gagner plus.", a: "V", exp: "Texte : 'Vous discuterez avec votre manager pour obtenir une promotion ou une augmentation.'" },
+      { q: "8. Le Scorpion aura une semaine très relaxante et calme.", a: "F", exp: "Texte : 'Vous travaillerez beaucoup cette semaine. Vous serez très fatigué...'" },
+      { q: "9. Le Sagittaire va signer un document officiel important.", a: "V", exp: "Texte : 'Vous signerez enfin ce nouveau contrat que vous attendez...'" },
+      { q: "10. Le Capricorne apprendra à utiliser un nouvel outil informatique.", a: "V", exp: "Texte : 'Vous apprendrez à utiliser un nouveau logiciel informatique...'" },
+      { q: "11. Le Verseau célébrera un succès personnel seul au restaurant.", a: "F", exp: "Texte : 'Vous mangerez au restaurant avec vos collègues pour fêter un succès collectif.'" },
+      { q: "12. Les Poissons travailleront seuls, sans contact avec les autres.", a: "F", exp: "Texte : 'Vous aiderez un stagiaire qui arrive dans l'équipe. Vous partagerez votre expérience.'" }
+    ];
+
+    // 6. Data Audio Listening CO (14 questions)
+    const coGeneralData = [
+      { q: "1. Quel est le sujet principal de la conversation ?", options: ["Les projets d'avenir, le travail et la vie", "Une recette de cuisine", "Un problème de voiture"], ans: 0 },
+      { q: "2. Qui sont les deux personnes qui parlent ?", options: ["Corinne et sa grand-mère", "Corinne et sa sœur", "Deux collègues de bureau"], ans: 0 },
+      { q: "3. Comment Corinne se sent-elle au début du dialogue ?", options: ["Inquiète et indécise pour son avenir", "Très en colère", "Très joyeuse et détendue"], ans: 0 },
+      { q: "4. Quelle ville est évoquée pour le déménagement ?", options: ["Paris", "Bordeaux", "Marseille"], ans: 0 },
+      { q: "5. Quelle est l'attitude de la grand-mère ?", options: ["Rassurante et encourageante", "Sévère et autoritaire", "Triste et silencieuse"], ans: 0 },
+      { q: "6. Que dit la grand-mère à propos des jeunes d'aujourd'hui ?", options: ["Qu'ils ont de la chance de pouvoir faire ce qu'ils veulent", "Qu'ils ne travaillent pas assez", "Qu'ils doivent rester à la maison"], ans: 0 },
+      { q: "7. Que donne la grand-mère à la fin du dialogue ?", options: ["Quelques billets d'argent", "Un livre de grammaire", "Une photo ancienne"], ans: 0 }
+    ];
+
+    const coDetailData = [
+      { q: "8. Quel verbe au futur la grand-mère utilise-t-elle pour le garçon ?", options: ["Tu rencontreras un gentil garçon", "Tu as rencontré un gentil garçon", "Tu rencontres un gentil garçon"], ans: 0 },
+      { q: "9. Pour le mariage, quelle est la forme entendue au futur ?", options: ["Vous vous marierez", "Vous vous mariez", "Vous vous êtes mariés"], ans: 0 },
+      { q: "10. Pour les enfants, quelle est la phrase exacte au futur ?", options: ["Tu auras des enfants", "Tu as des enfants", "Tu avais des enfants"], ans: 0 },
+      { q: "11. Complétez la phrase exacte : 'Et tu verras, tout ___ bien.'", options: ["ira", "va", "irait"], ans: 0 },
+      { q: "12. Que feront les amis de Corinne si elle déménage à Paris ?", options: ["Ils viendront la voir", "Ils téléphonent", "Ils partiront en vacances"], ans: 0 },
+      { q: "13. Quelle forme du verbe 'venir' est utilisée par la mamie ?", options: ["Moi aussi je viendrai", "Moi aussi je viens", "Moi aussi je venais"], ans: 0 },
+      { q: "14. Quelle réplique au futur utilise Corinne ?", options: ["J'aurai 40 ans", "J'ai 40 ans", "J'avais 40 ans"], ans: 0 }
+    ];
+
+    function switchMainTab(tabId) {
+      const tabs = ['tab-reguliers', 'tab-irreguliers', 'tab-lecture', 'tab-audio'];
+      const btns = ['btn-tab-reguliers', 'btn-tab-irreguliers', 'btn-tab-lecture', 'btn-tab-audio'];
+
+      tabs.forEach(t => document.getElementById(t).classList.add('hidden'));
+      btns.forEach(b => document.getElementById(b).classList.remove('active'));
+
+      document.getElementById(tabId).classList.remove('hidden');
+      document.getElementById('btn-' + tabId).classList.add('active');
+    }
+
+    // Render exercise list with error feedback box
+    function renderExerciseGroup(containerId, data) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+      data.forEach((item, index) => {
+        const parts = item.s.split('___');
+        const row = document.createElement('div');
+        row.className = 'p-3 bg-slate-50 rounded-xl border border-slate-200 text-slate-800 space-y-1';
+        row.innerHTML = `
+          <div class="flex flex-wrap items-center gap-1.5">
+            <span class="font-bold text-xs text-[#002395] w-5">${index + 1}.</span>
+            <span>${parts[0]}</span>
+            <input type="text" class="input-fill w-28 md:w-32 px-2 py-1 text-center font-semibold rounded-md text-sm" data-ans="${item.a}" data-hint="${item.hint}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="...">
+            <span>${parts[1] || ''}</span>
+          </div>
+          <div class="feedback-msg text-xs hidden pt-1 font-medium"></div>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    function verifyGroup(containerId, scoreId) {
+      const container = document.getElementById(containerId);
+      const rows = container.children;
+      let score = 0;
+
+      Array.from(rows).forEach(row => {
+        const input = row.querySelector('input');
+        const fb = row.querySelector('.feedback-msg');
+        const user = input.value.trim().toLowerCase();
+        const expected = input.dataset.ans.toLowerCase();
+        const hint = input.dataset.hint;
+
+        fb.classList.remove('hidden');
+
+        if (user === expected) {
+          input.classList.remove('incorrect');
+          input.classList.add('correct');
+          fb.innerHTML = `<span class="text-emerald-700 font-bold">✓ Bravo ! Réponse correcte.</span>`;
+          score++;
+        } else {
+          input.classList.remove('correct');
+          input.classList.add('incorrect');
+          fb.innerHTML = `<span class="text-red-700 font-bold">✗ Réponse attendue : "${expected}"</span> <span class="text-slate-600">(${hint})</span>`;
+        }
+      });
+
+      const scoreBadge = document.getElementById(scoreId);
+      scoreBadge.textContent = `Score : ${score}/${rows.length}`;
+      scoreBadge.classList.remove('hidden');
+    }
+
+    function resetGroup(containerId, scoreId) {
+      const container = document.getElementById(containerId);
+      const rows = container.children;
+      Array.from(rows).forEach(row => {
+        const input = row.querySelector('input');
+        const fb = row.querySelector('.feedback-msg');
+        input.value = '';
+        input.classList.remove('correct', 'incorrect');
+        fb.classList.add('hidden');
+        fb.innerHTML = '';
+      });
+      const scoreBadge = document.getElementById(scoreId);
+      if (scoreBadge) scoreBadge.classList.add('hidden');
+    }
+
+    let selectedInf = null;
+    let selectedRad = null;
+    let matchedPairs = [];
+
+    function initMatchingGame() {
+      matchedPairs = [];
+      selectedInf = null;
+      selectedRad = null;
+      document.getElementById('matching-complete-msg').classList.add('hidden');
+      updateMatchedDisplay();
+
+      const infContainer = document.getElementById('match-infinitives');
+      const radContainer = document.getElementById('match-radicals');
+      infContainer.innerHTML = '';
+      radContainer.innerHTML = '';
+
+      const shuffledInfs = [...matchData].sort(() => Math.random() - 0.5);
+      const shuffledRads = [...matchData].sort(() => Math.random() - 0.5);
+
+      shuffledInfs.forEach(item => {
+        const btn = document.createElement('button');
+        btn.className = 'match-btn match-inf-btn p-2.5 bg-white border-2 border-slate-300 text-slate-800 rounded-xl font-bold text-xs md:text-sm text-left shadow-sm hover:border-[#002395]';
+        btn.textContent = item.inf;
+        btn.dataset.inf = item.inf;
+        btn.onclick = () => selectInf(btn, item.inf);
+        infContainer.appendChild(btn);
+      });
+
+      shuffledRads.forEach(item => {
+        const btn = document.createElement('button');
+        btn.className = 'match-btn match-rad-btn p-2.5 bg-white border-2 border-slate-300 text-slate-800 rounded-xl font-bold text-xs md:text-sm text-left shadow-sm hover:border-[#D80027]';
+        btn.textContent = item.rad;
+        btn.dataset.rad = item.rad;
+        btn.onclick = () => selectRad(btn, item.rad);
+        radContainer.appendChild(btn);
+      });
+
+      updateRemainingCounts();
+    }
+
+    function selectInf(btn, infValue) {
+      document.querySelectorAll('.match-inf-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      selectedInf = { btn, val: infValue };
+      checkMatchAttempt();
+    }
+
+    function selectRad(btn, radValue) {
+      document.querySelectorAll('.match-rad-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      selectedRad = { btn, val: radValue };
+      checkMatchAttempt();
+    }
+
+    function checkMatchAttempt() {
+      if (!selectedInf || !selectedRad) return;
+
+      const expected = matchData.find(item => item.inf === selectedInf.val);
+      if (expected && expected.rad === selectedRad.val) {
+        // MATCH!
+        matchedPairs.push({ inf: selectedInf.val, rad: selectedRad.val });
+
+        // Dynamic element removal to shorten columns
+        selectedInf.btn.remove();
+        selectedRad.btn.remove();
+
+        updateMatchedDisplay();
+        updateRemainingCounts();
+
+        if (matchedPairs.length === matchData.length) {
+          document.getElementById('matching-complete-msg').classList.remove('hidden');
+        }
+      } else {
+        // ERROR animation
+        const ib = selectedInf.btn;
+        const rb = selectedRad.btn;
+        ib.classList.add('bg-red-100', 'border-red-500');
+        rb.classList.add('bg-red-100', 'border-red-500');
+        setTimeout(() => {
+          ib.classList.remove('bg-red-100', 'border-red-500', 'selected');
+          rb.classList.remove('bg-red-100', 'border-red-500', 'selected');
+        }, 400);
+      }
+
+      selectedInf = null;
+      selectedRad = null;
+    }
+
+    function updateRemainingCounts() {
+      const remInfs = document.getElementById('match-infinitives').children.length;
+      const remRads = document.getElementById('match-radicals').children.length;
+      document.getElementById('count-infs').textContent = remInfs;
+      document.getElementById('count-rads').textContent = remRads;
+    }
+
+    function updateMatchedDisplay() {
+      const countSpan = document.getElementById('match-count');
+      const box = document.getElementById('matched-pairs-box');
+      countSpan.textContent = matchedPairs.length;
+
+      if (matchedPairs.length === 0) {
+        box.innerHTML = `<span class="text-xs text-slate-400 italic">Aucun couple formé pour l'instant.</span>`;
+        return;
+      }
+
+      box.innerHTML = '';
+      matchedPairs.forEach(pair => {
+        const chip = document.createElement('span');
+        chip.className = 'inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-emerald-400 text-emerald-900 text-xs font-bold rounded-full shadow-sm';
+        chip.innerHTML = `${pair.inf} &rarr; <span class="font-mono text-[#002395] font-extrabold">${pair.rad}</span>`;
+        box.appendChild(chip);
+      });
+    }
+
+    function renderCE() {
+      const container = document.getElementById('ce-questions');
+      container.innerHTML = '';
+      ceQuestionsData.forEach((item, index) => {
+        const qDiv = document.createElement('div');
+        qDiv.className = 'p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs md:text-sm space-y-1';
+        qDiv.innerHTML = `
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <span class="text-slate-900 font-medium">${item.q}</span>
+            <div class="flex items-center gap-4 shrink-0">
+              <label class="inline-flex items-center gap-1 cursor-pointer">
+                <input type="radio" name="ce_${index}" value="V" class="text-[#002395] focus:ring-[#002395]">
+                <span class="font-bold text-slate-700">Vrai</span>
+              </label>
+              <label class="inline-flex items-center gap-1 cursor-pointer">
+                <input type="radio" name="ce_${index}" value="F" class="text-[#002395] focus:ring-[#002395]">
+                <span class="font-bold text-slate-700">Faux</span>
+              </label>
+            </div>
+          </div>
+          <div class="ce-feedback text-xs font-medium hidden pt-1"></div>
+        `;
+        container.appendChild(qDiv);
+      });
+    }
+
+    function verifyCE() {
+      let score = 0;
+      ceQuestionsData.forEach((item, index) => {
+        const radios = document.querySelectorAll(`input[name="ce_${index}"]`);
+        const parent = radios[0]?.closest('.p-3.5');
+        const feedback = parent?.querySelector('.ce-feedback');
+        let selected = null;
+        radios.forEach(r => { if (r.checked) selected = r.value; });
+
+        feedback.classList.remove('hidden');
+        if (selected === item.a) {
+          score++;
+          feedback.innerHTML = `<span class="text-emerald-700 font-bold">✓ Correct !</span> <span class="text-slate-600">${item.exp}</span>`;
+        } else {
+          feedback.innerHTML = `<span class="text-red-700 font-bold">✗ Incorrect (${item.a === 'V' ? 'Vrai' : 'Faux'}).</span> <span class="text-slate-600">${item.exp}</span>`;
+        }
+      });
+
+      document.getElementById('score-ce').textContent = `Score CE : ${score}/${ceQuestionsData.length}`;
+    }
+
+    function resetCE() {
+      ceQuestionsData.forEach((item, index) => {
+        document.querySelectorAll(`input[name="ce_${index}"]`).forEach(r => r.checked = false);
+      });
+      document.querySelectorAll('.ce-feedback').forEach(f => {
+        f.innerHTML = '';
+        f.classList.add('hidden');
+      });
+      document.getElementById('score-ce').textContent = '';
+    }
+
+    function renderCOGroup(containerId, dataList, prefix) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+      dataList.forEach((item, qIdx) => {
+        const qCard = document.createElement('div');
+        qCard.className = 'p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs md:text-sm space-y-2';
+        
+        let optionsHtml = '';
+        item.options.forEach((opt, optIdx) => {
+          optionsHtml += `
+            <label class="flex items-center gap-2 p-2 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-blue-50">
+              <input type="radio" name="${prefix}_${qIdx}" value="${optIdx}" class="text-[#002395] focus:ring-[#002395]">
+              <span class="text-slate-800">${opt}</span>
+            </label>
+          `;
+        });
+
+        qCard.innerHTML = `
+          <p class="font-bold text-slate-900">${item.q}</p>
+          <div class="space-y-1.5">${optionsHtml}</div>
+          <div class="co-feedback text-xs font-medium hidden"></div>
+        `;
+        container.appendChild(qCard);
+      });
+    }
+
+    function verifyCO() {
+      let score = 0;
+      let total = coGeneralData.length + coDetailData.length;
+
+      function checkList(dataList, prefix, containerId) {
+        const container = document.getElementById(containerId);
+        const cards = container.children;
+        dataList.forEach((item, idx) => {
+          const radios = document.querySelectorAll(`input[name="${prefix}_${idx}"]`);
+          const fb = cards[idx].querySelector('.co-feedback');
+          let selected = null;
+          radios.forEach(r => { if (r.checked) selected = parseInt(r.value); });
+
+          fb.classList.remove('hidden');
+          if (selected === item.ans) {
+            score++;
+            fb.innerHTML = '<span class="text-emerald-700 font-bold">✓ Bonne réponse !</span>';
+          } else {
+            fb.innerHTML = `<span class="text-red-700 font-bold">✗ Réponse attendue : "${item.options[item.ans]}"</span>`;
+          }
+        });
+      }
+
+      checkList(coGeneralData, 'co_gen', 'co-general-list');
+      checkList(coDetailData, 'co_det', 'co-detail-list');
+
+      document.getElementById('score-co').textContent = `Score CO : ${score}/${total} (${Math.round((score/total)*100)}%)`;
+    }
+
+    function resetCO() {
+      document.querySelectorAll('input[name^="co_"]').forEach(r => r.checked = false);
+      document.querySelectorAll('.co-feedback').forEach(f => {
+        f.innerHTML = '';
+        f.classList.add('hidden');
+      });
+      document.getElementById('score-co').textContent = '';
+    }
+
+    // Initialize on DOM Ready
+    window.addEventListener('DOMContentLoaded', () => {
+      renderExerciseGroup('regular-list', regularData);
+      renderExerciseGroup('irreg-list', irregularData);
+      renderExerciseGroup('recap-list', recapData);
+      initMatchingGame();
+      renderCE();
+      renderCOGroup('co-general-list', coGeneralData, 'co_gen');
+      renderCOGroup('co-detail-list', coDetailData, 'co_det');
+    });
+  </script>
+</body>
+</html>

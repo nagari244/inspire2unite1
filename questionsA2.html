@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="fr">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L'Interrogation et l'Entretien d'Embauche en FLE - Niveau A2</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <!-- Police Lexend, optimale pour la lisibilité et la projection -->
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+        body { font-family: 'Lexend', sans-serif; font-size: 16px; }
+        
+        /* Palette Entreprise / Corporate : Bleu Marine (#1e293b / #0f172a), Bleu Corporate (#1e40af), Accent Ambre/Or (#d97706) */
+        .header-bg { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); }
+        .tab-btn { transition: all 0.2s ease-in-out; border-bottom: 3px solid transparent; touch-action: manipulation; }
+        .tab-active { border-bottom-color: #2563eb; color: #1e40af; font-weight: 700; background-color: #eff6ff; }
+        
+        .correct { background-color: #ecfdf5 !important; border-color: #10b981 !important; color: #065f46 !important; }
+        .incorrect { background-color: #fef2f2 !important; border-color: #ef4444 !important; color: #991b1b !important; }
+        
+        .explanation-box { background: #f8fafc; border-left: 4px solid #1e40af; }
+        
+        /* Style distinctif pour les mots interrogatifs A2 */
+        .q-word {
+            display: inline-block;
+            background-color: #fef3c7;
+            color: #92400e;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.375rem;
+            font-weight: 700;
+            border: 1px solid #fde68a;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        /* Optimisations ergonomiques mobiles & tactiles */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        button, input, label { touch-action: manipulation; }
+        
+        @media (max-width: 768px) {
+            body { font-size: 16px; }
+            h1 { font-size: 1.5rem !important; }
+            .tab-btn { font-size: 13px; padding: 0.85rem 0.6rem; }
+            /* Empêche le zoom auto gênant d'iOS Safari lors du clic dans un champ d'écriture */
+            input[type="text"] { font-size: 16px !important; }
+        }
+    </style>
+ </head>
+ <body class="w-full min-h-screen bg-slate-100 text-slate-800 flex flex-col justify-between">
+  
+  <!-- HEADER CORPORATE -->
+  <header class="w-full px-6 py-6 header-bg text-white shadow-lg">
+   <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+    <div>
+     <div class="inline-block px-3 py-1 bg-blue-500/30 text-blue-200 text-xs font-semibold rounded-full uppercase tracking-wider mb-2">FLE Niveau A2</div>
+     <h1 class="font-bold text-2xl md:text-3xl tracking-tight">L'Interrogation &amp; L'Entretien d'Embauche</h1>
+     <p class="text-slate-300 text-sm md:text-base mt-1">Maîtriser les poser de questions, les registres de langue et la compréhension en contexte professionnel.</p>
+    </div>
+    <!-- Badge Score Global -->
+    <div class="bg-white/10 backdrop-blur-md px-5 py-3 rounded-xl border border-white/20 text-center min-w-[160px]">
+     <span class="text-xs uppercase tracking-wider text-slate-300 font-medium block">Score Total</span>
+     <span id="global-score-badge" class="text-2xl font-extrabold text-amber-400">0 / 28</span>
+    </div>
+   </div>
+  </header>
+
+  <!-- NAVIGATION ONGLETS -->
+  <nav class="w-full bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+   <div class="flex overflow-x-auto hide-scrollbar max-w-5xl mx-auto px-2 scroll-smooth">
+     <button class="tab-btn tab-active py-3 px-4 whitespace-nowrap text-sm font-medium shrink-0" onclick="showTab(0)" id="tab-btn-0">1. L'Inversion Totale (A2)</button> 
+     <button class="tab-btn py-3 px-4 text-slate-600 whitespace-nowrap text-sm font-medium shrink-0" onclick="showTab(1)" id="tab-btn-1">2. Mots Interrogatifs</button> 
+     <button class="tab-btn py-3 px-4 text-slate-600 whitespace-nowrap text-sm font-medium shrink-0" onclick="showTab(2)" id="tab-btn-2">3. Que / Qu'est-ce que / Quoi</button> 
+     <button class="tab-btn py-3 px-4 text-slate-600 whitespace-nowrap text-sm font-medium shrink-0" onclick="showTab(3)" id="tab-btn-3">4. Entretien d'Embauche (CO)</button>
+     <button class="tab-btn py-3 px-4 text-slate-600 whitespace-nowrap text-sm font-medium shrink-0" onclick="showTab(4)" id="tab-btn-4">5. Synthèse &amp; Bilan Global</button>
+   </div>
+  </nav>
+
+  <!-- CONTENU PRINCIPAL -->
+  <main class="w-full max-w-4xl mx-auto px-4 py-8 flex-grow">
+   
+   <!-- TAB 0: Inversion Totale A2 -->
+   <section id="tab-0" class="tab-content">
+    <div class="explanation-box p-5 rounded-xl mb-6 border-slate-300 shadow-sm">
+     <h2 class="font-bold text-lg text-blue-900 mb-2">L'interrogation totale au niveau A2 (Réponse par Oui ou Non)</h2>
+     <p class="text-slate-700 leading-relaxed text-sm md:text-base mb-3">
+      Au niveau A2, on utilise trois façons de poser une question sans mot interrogatif spécifique :
+     </p>
+     <ul class="list-disc list-inside space-y-1 text-slate-700 text-sm md:text-base font-medium">
+      <li><strong class="text-slate-900">Familier (Intonation) :</strong> Sujet + Verbe ? (ex: <em>Vous venez ce soir ?</em>)</li>
+      <li><strong class="text-blue-700">Standard :</strong> <span class="q-word">Est-ce que</span> + Sujet + Verbe ? (ex: <em><span class="q-word">Est-ce que</span> vous venez ce soir ?</em>)</li>
+      <li><strong class="text-indigo-900">Soutenu (Inversion simple) :</strong> Verbe-Sujet ? (ex: <em>Venez-vous ce soir ?</em>)</li>
+     </ul>
+    </div>
+
+    <!-- Tableau récapitulatif -->
+    <div class="overflow-x-auto mb-6 rounded-xl border border-slate-200 shadow-sm bg-white">
+     <table class="w-full text-sm text-left border-collapse">
+      <thead class="bg-slate-800 text-white">
+       <tr>
+        <th class="p-3">Registre Familier</th>
+        <th class="p-3">Registre Standard</th>
+        <th class="p-3">Registre Soutenu</th>
+       </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-100 text-slate-700">
+       <tr>
+        <td class="p-3">Vous cherchez un travail ?</td>
+        <td class="p-3 text-blue-700 font-medium"><span class="q-word">Est-ce que</span> vous cherchez un travail ?</td>
+        <td class="p-3 text-indigo-900 font-medium">Cherchez-vous un travail ?</td>
+       </tr>
+       <tr>
+        <td class="p-3">Tu connais le directeur ?</td>
+        <td class="p-3 text-blue-700 font-medium"><span class="q-word">Est-ce que</span> tu connais le directeur ?</td>
+        <td class="p-3 text-indigo-900 font-medium">Connais-tu le directeur ?</td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    
+    <div class="flex justify-between items-center mb-4 border-b pb-2">
+     <h3 class="font-bold text-lg text-slate-800">Activité 1 : Transformation de registres (6 points)</h3>
+     <span id="score-act-0" class="text-sm font-bold bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Score : 0 / 6</span>
+    </div>
+    <div id="exercises-0" class="space-y-4"></div>
+   </section>
+
+   <!-- TAB 1: Mots Interrogatifs -->
+   <section id="tab-1" class="tab-content hidden">
+    <div class="explanation-box p-5 rounded-xl mb-6 shadow-sm">
+     <h2 class="font-bold text-lg text-blue-900 mb-2">Les Mots Interrogatifs A2</h2>
+     <p class="text-slate-700 leading-relaxed text-sm md:text-base mb-3">
+      Pour poser une question précise, repérez le mot interrogatif approprié :
+     </p>
+     <div class="flex flex-wrap gap-2 text-sm">
+      <span class="q-word">Où</span> (lieu)
+      <span class="q-word">Quand</span> (temps)
+      <span class="q-word">Comment</span> (manière)
+      <span class="q-word">Pourquoi</span> (cause)
+      <span class="q-word">Qui</span> (personne)
+      <span class="q-word">Combien</span> (quantité)
+     </div>
+    </div>
+
+    <div class="flex justify-between items-center mb-4 border-b pb-2">
+     <h3 class="font-bold text-lg text-slate-800">Activité 2 : Maîtrise des mots interrogatifs (6 points)</h3>
+     <span id="score-act-1" class="text-sm font-bold bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Score : 0 / 6</span>
+    </div>
+    <div id="exercises-1" class="space-y-4"></div>
+   </section>
+
+   <!-- TAB 2: Que / Qu'est-ce que / Quoi -->
+   <section id="tab-2" class="tab-content hidden">
+    <div class="explanation-box p-5 rounded-xl mb-6 shadow-sm">
+     <h2 class="font-bold text-lg text-blue-900 mb-2">Poser des questions sur les choses : Quoi / Qu'est-ce que / Que</h2>
+     <p class="text-slate-700 leading-relaxed text-sm md:text-base mb-3">
+      Selon le registre de langue, la forme du mot interrogatif change :
+     </p>
+     <ul class="list-disc list-inside space-y-1 text-slate-700 text-sm md:text-base">
+      <li><strong>Familier :</strong> Le mot <span class="q-word">quoi</span> se place après le verbe. (<em>Tu fais <span class="q-word">quoi</span> ?</em>)</li>
+      <li><strong>Standard :</strong> On utilise <span class="q-word">Qu'est-ce que</span> en début de phrase. (<em><span class="q-word">Qu'est-ce que</span> tu fais ?</em>)</li>
+      <li><strong>Soutenu :</strong> On utilise <span class="q-word">Que</span> + inversion du pronom. (<em><span class="q-word">Que</span> faites-vous ?</em>)</li>
+     </ul>
+    </div>
+
+    <div class="flex justify-between items-center mb-4 border-b pb-2">
+     <h3 class="font-bold text-lg text-slate-800">Activité 3 : Formulation des questions sur l'objet (6 points)</h3>
+     <span id="score-act-2" class="text-sm font-bold bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Score : 0 / 6</span>
+    </div>
+    <div id="exercises-2" class="space-y-4"></div>
+   </section>
+
+   <!-- TAB 3: Comprendre un entretien d'embauche (NOUVEAU) -->
+   <section id="tab-3" class="tab-content hidden">
+    <div class="explanation-box p-5 rounded-xl mb-6 shadow-sm">
+     <h2 class="font-bold text-lg text-blue-900 mb-2">Compréhension Orale : Entretien d'embauche</h2>
+     <p class="text-slate-700 text-sm md:text-base mb-4">
+      Écoutez l'enregistrement vidéo/audio ci-dessous d'un entretien d'embauche entre un candidat (Hippolyte) et une responsable de recrutement, puis répondez aux activités.
+     </p>
+     
+     <!-- Lecteur Audio -->
+     <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex flex-col md:flex-row items-center gap-4">
+      <div class="flex items-center gap-2 text-slate-700 font-semibold text-sm">
+       <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+       <span>Audio : entretien.mp3</span>
+      </div>
+      <audio controls class="w-full max-w-md h-10">
+       <source src="entretien.mp3" type="audio/mpeg">
+       Votre navigateur ne supporte pas le lecteur audio.
+      </audio>
+     </div>
+    </div>
+
+    <!-- ACTIVITE CO 1 -->
+    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm mb-6">
+     <div class="flex justify-between items-center mb-4 border-b pb-2">
+      <h3 class="font-bold text-lg text-slate-800">Activité 4A : Compréhension globale (6 points)</h3>
+      <span id="score-act-co1" class="text-sm font-bold bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Score : 0 / 6</span>
+     </div>
+     <div id="co-part-1" class="space-y-5"></div>
+    </div>
+
+    <!-- ACTIVITE CO 2 -->
+    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+     <div class="flex justify-between items-center mb-4 border-b pb-2">
+      <h3 class="font-bold text-lg text-slate-800">Activité 4B : Reconnaissance du registre de langue (4 points)</h3>
+      <span id="score-act-co2" class="text-sm font-bold bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Score : 0 / 4</span>
+     </div>
+     <p class="text-xs md:text-sm text-slate-600 mb-4">Identifiez la question exacte prononcée dans l'audio et le registre de langue associé.</p>
+     <div id="co-part-2" class="space-y-5"></div>
+    </div>
+   </section>
+
+   <!-- TAB 4: Synthèse & Bilan Global -->
+   <section id="tab-4" class="tab-content hidden">
+    <div class="explanation-box p-5 rounded-xl mb-6 shadow-sm">
+     <h2 class="font-bold text-lg text-blue-900 mb-2">Évaluation formative globale - Niveau A2</h2>
+     <p class="text-slate-700 text-sm md:text-base">
+      Complétez ce dernier exercice récapitulatif (6 points) pour calculer votre score final global sur l'ensemble des modules.
+     </p>
+    </div>
+    
+    <div class="flex justify-between items-center mb-4 border-b pb-2">
+     <h3 class="font-bold text-lg text-slate-800">Activité 5 : Synthèse des structures A2 (6 points)</h3>
+     <span id="score-act-3" class="text-sm font-bold bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Score : 0 / 6</span>
+    </div>
+    <div id="exercises-3" class="space-y-4 mb-8"></div>
+
+    <!-- CARTE RECAPITULATIVE DU SCORE FINAL -->
+    <div class="bg-slate-900 text-white rounded-2xl p-6 shadow-xl text-center border border-slate-700">
+     <h3 class="text-xl font-bold mb-2">Bilan des Résultats du Module</h3>
+     <p class="text-slate-400 text-sm mb-6">Voici le détail de vos performances sur les 5 activités :</p>
+
+     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 mb-6">
+      <div class="bg-slate-800 p-3 rounded-xl border border-slate-700">
+       <span class="text-xs text-slate-400 block">Act. 1 (Inversion)</span>
+       <span id="res-act-0" class="text-lg font-bold text-blue-400">0 / 6</span>
+      </div>
+      <div class="bg-slate-800 p-3 rounded-xl border border-slate-700">
+       <span class="text-xs text-slate-400 block">Act. 2 (Mots Inter.)</span>
+       <span id="res-act-1" class="text-lg font-bold text-blue-400">0 / 6</span>
+      </div>
+      <div class="bg-slate-800 p-3 rounded-xl border border-slate-700">
+       <span class="text-xs text-slate-400 block">Act. 3 (Que/Quoi)</span>
+       <span id="res-act-2" class="text-lg font-bold text-blue-400">0 / 6</span>
+      </div>
+      <div class="bg-slate-800 p-3 rounded-xl border border-slate-700">
+       <span class="text-xs text-slate-400 block">Act. 4 (Entretien)</span>
+       <span id="res-act-co" class="text-lg font-bold text-blue-400">0 / 10</span>
+      </div>
+      <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 col-span-2 sm:col-span-1">
+       <span class="text-xs text-slate-400 block">Act. 5 (Synthèse)</span>
+       <span id="res-act-3" class="text-lg font-bold text-blue-400">0 / 6</span>
+      </div>
+     </div>
+
+     <div class="pt-4 border-t border-slate-800 flex flex-col items-center">
+      <div class="text-slate-300 font-medium mb-1">Score Total Général</div>
+      <div id="final-total-score" class="text-4xl font-black text-amber-400 my-1">0 / 28 (0%)</div>
+      <div id="final-appraisal" class="mt-3 text-sm font-semibold px-4 py-2 rounded-full bg-slate-800 text-slate-300 inline-block">
+       Complétez les exercices pour afficher votre appréciation.
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+
+  <!-- FOOTER CORPORATE -->
+  <footer class="w-full py-6 bg-slate-900 text-slate-400 text-center text-sm border-t border-slate-800">
+    <p>Conception pédagogique : <strong>Nadia Aguilar Neri</strong> • Adapté au Niveau A2 FLE • Support Entreprise</p>
+  </footer>
+
+  <script>
+    // Tab navigation
+    function showTab(n) {
+        document.querySelectorAll('.tab-content').forEach((el,i) => {
+            el.classList.toggle('hidden', i !== n);
+        });
+        document.querySelectorAll('.tab-btn').forEach((btn,i) => {
+            btn.classList.toggle('tab-active', i === n);
+            if(i !== n) btn.classList.add('text-slate-600');
+            else btn.classList.remove('text-slate-600');
+        });
+    }
+
+    // Scores System Tracking
+    const userScores = {
+        act0: Array(6).fill(0),
+        act1: Array(6).fill(0),
+        act2: Array(6).fill(0),
+        co1: Array(6).fill(0),
+        co2: Array(4).fill(0),
+        act3: Array(6).fill(0)
+    };
+
+    function updateScores() {
+        const sum = arr => arr.reduce((a, b) => a + b, 0);
+        
+        const score0 = sum(userScores.act0);
+        const score1 = sum(userScores.act1);
+        const score2 = sum(userScores.act2);
+        const scoreCO1 = sum(userScores.co1);
+        const scoreCO2 = sum(userScores.co2);
+        const score3 = sum(userScores.act3);
+        
+        const totalCO = scoreCO1 + scoreCO2;
+        const totalGlobal = score0 + score1 + score2 + totalCO + score3;
+        const percentage = Math.round((totalGlobal / 28) * 100);
+
+        // Update individual Tab UI
+        document.getElementById('score-act-0').innerText = `Score : ${score0} / 6`;
+        document.getElementById('score-act-1').innerText = `Score : ${score1} / 6`;
+        document.getElementById('score-act-2').innerText = `Score : ${score2} / 6`;
+        document.getElementById('score-act-co1').innerText = `Score : ${scoreCO1} / 6`;
+        document.getElementById('score-act-co2').innerText = `Score : ${scoreCO2} / 4`;
+        document.getElementById('score-act-3').innerText = `Score : ${score3} / 6`;
+
+        // Update Summary Dashboard
+        document.getElementById('res-act-0').innerText = `${score0} / 6`;
+        document.getElementById('res-act-1').innerText = `${score1} / 6`;
+        document.getElementById('res-act-2').innerText = `${score2} / 6`;
+        document.getElementById('res-act-co').innerText = `${totalCO} / 10`;
+        document.getElementById('res-act-3').innerText = `${score3} / 6`;
+
+        // Update Header & Final Card
+        document.getElementById('global-score-badge').innerText = `${totalGlobal} / 28`;
+        document.getElementById('final-total-score').innerText = `${totalGlobal} / 28 (${percentage}%)`;
+
+        // Dynamic Feedback Appraisal
+        const appraisalEl = document.getElementById('final-appraisal');
+        if(percentage >= 85) {
+            appraisalEl.className = "mt-3 text-sm font-semibold px-4 py-2 rounded-full bg-emerald-900/80 text-emerald-200 border border-emerald-500/30";
+            appraisalEl.innerText = "🌟 Excellent travail ! Niveau A2 parfaitement maîtrisé.";
+        } else if(percentage >= 60) {
+            appraisalEl.className = "mt-3 text-sm font-semibold px-4 py-2 rounded-full bg-blue-900/80 text-blue-200 border border-blue-500/30";
+            appraisalEl.innerText = "👍 Bon travail ! Les bases de l'interrogation A2 sont acquises.";
+        } else if(percentage >= 40) {
+            appraisalEl.className = "mt-3 text-sm font-semibold px-4 py-2 rounded-full bg-amber-900/80 text-amber-200 border border-amber-500/30";
+            appraisalEl.innerText = "⚠️ Encore un effort : révisez les règles de chaque onglet.";
+        } else {
+            appraisalEl.className = "mt-3 text-sm font-semibold px-4 py-2 rounded-full bg-slate-800 text-slate-300";
+            appraisalEl.innerText = "Complétez les exercices pour afficher votre appréciation.";
+        }
+    }
+
+    // EXERCISES DATA (ADAPTED TO A2 - 6 QUESTIONS PER EXERCISE)
+    const ex0 = [
+        {
+            q:"Vous cherchez un stage ?", 
+            std:"Est-ce que vous cherchez un stage ?", 
+            sout:"Cherchez-vous un stage ?",
+            explanation: "Au niveau A2 : pour la forme standard, ajoutez '<span class='q-word'>Est-ce que</span>'. Pour le soutenu, inversez le verbe et le pronom (<em>Cherchez-vous</em>)."
+        },
+        {
+            q:"Paul travaille dans cette entreprise ?", 
+            std:"Est-ce que Paul travaille dans cette entreprise ?", 
+            sout:"Paul travaille-t-il dans cette entreprise ?",
+            explanation: "Attention : quand le sujet est un nom (Paul) et le verbe finit par une voyelle (travailler), on ajoute '-t-' entre le verbe et 'il'."
+        },
+        {
+            q:"Vous avez de l'expérience ?", 
+            std:"Est-ce que vous avez de l'expérience ?", 
+            sout:"Avez-vous de l'expérience ?",
+            explanation: "Inversion simple du verbe 'avoir' avec le pronom 'vous' : <em>Avez-vous</em>."
+        },
+        {
+            q:"Tu connais le directeur ?", 
+            std:"Est-ce que tu connais le directeur ?", 
+            sout:"Connais-tu le directeur ?",
+            explanation: "Pour le registre soutenu, liez le verbe et le pronom par un trait d'union : <em>Connais-tu</em>."
+        },
+        {
+            q:"Les étudiants révisent pour l'examen ?", 
+            std:"Est-ce que les étudiants révisent pour l'examen ?", 
+            sout:"Les étudiants révisent-ils pour l'examen ?",
+            explanation: "En français soutenu, on garde le groupe sujet 'les étudiants' et on ajoute le pronom 'ils' après le verbe."
+        },
+        {
+            q:"Votre entreprise recrute des stagiaires ?", 
+            std:"Est-ce que votre entreprise recrute des stagiaires ?", 
+            sout:"Votre entreprise recrute-t-elle des stagiaires ?",
+            explanation: "Entre le verbe 'recrute' (finit par une voyelle) et le pronom 'elle', n'oubliez pas le '-t-' euphonique."
+        }
+    ];
+
+    const ex1 = [
+        {
+            q:"Le responsable arrive quand ?", reg:"standard", ans:"Quand est-ce que le responsable arrive ?",
+            hint: "Rappel A2 : <span class='q-word'>Quand</span> + <span class='q-word'>est-ce que</span> + sujet + verbe.",
+            explain: "En forme standard, placez le mot interrogatif '<span class='q-word'>Quand</span>' au début, suivi de '<span class='q-word'>est-ce que</span>'."
+        },
+        {
+            q:"Vous habitez où ?", reg:"standard", ans:"Où est-ce que vous habitez ?",
+            hint: "Rappel A2 : <span class='q-word'>Où</span> + <span class='q-word'>est-ce que</span> + vous + verbe.",
+            explain: "Pour demander le lieu en français standard : '<span class='q-word'>Où</span>' se place en tête de phrase."
+        },
+        {
+            q:"Comment tu t'appelles ?", reg:"soutenu", ans:"Comment vous appelez-vous ?",
+            hint: "Rappel A2 (forme formelle/soutenu) : <span class='q-word'>Comment</span> + verbe - pronom.",
+            explain: "En contexte professionnel soutenu, on utilise la forme 'Vous' avec inversion : <em>Comment vous appelez-vous ?</em>"
+        },
+        {
+            q:"Pourquoi vous apprenez le français ?", reg:"standard", ans:"Pourquoi est-ce que vous apprenez le français ?",
+            hint: "Rappel A2 : <span class='q-word'>Pourquoi</span> + <span class='q-word'>est-ce que</span>...",
+            explain: "La forme standard utilise systématiquement '<span class='q-word'>Pourquoi est-ce que</span>'."
+        },
+        {
+            q:"Combien coûte ce projet ?", reg:"standard", ans:"Combien est-ce que ce projet coûte ?",
+            hint: "Rappel A2 : <span class='q-word'>Combien</span> + <span class='q-word'>est-ce que</span>...",
+            explain: "En standard : '<span class='q-word'>Combien est-ce que</span>' introduit la quantité."
+        },
+        {
+            q:"Vous travaillez avec qui ?", reg:"standard", ans:"Avec qui est-ce que vous travaillez ?",
+            hint: "Rappel A2 : Préposition + <span class='q-word'>Qui</span> + <span class='q-word'>est-ce que</span>...",
+            explain: "La préposition 'avec' reste devant le mot interrogatif '<span class='q-word'>qui</span>'."
+        }
+    ];
+
+    const ex2 = [
+        {
+            q:"Vous cherchez quoi ?", reg:"standard", ans:"Qu'est-ce que vous cherchez ?",
+            explain: "En français standard, '<span class='q-word'>quoi</span>' devient '<span class='q-word'>Qu'est-ce que</span>' au début de la phrase."
+        },
+        {
+            q:"Vous faites quoi dans la vie ?", reg:"soutenu", ans:"Que faites-vous dans la vie ?",
+            explain: "Au registre soutenu professionnel, on utilise '<span class='q-word'>Que</span>' suivi de l'inversion du verbe (<em>Que faites-vous...</em>)."
+        },
+        {
+            q:"Qu'est-ce que tu étudies ?", reg:"familier", ans:"Tu étudies quoi ?",
+            explain: "Au registre familier/oral courant, le mot interrogatif '<span class='q-word'>quoi</span>' se met après le verbe."
+        },
+        {
+            q:"Que voulez-vous savoir ?", reg:"standard", ans:"Qu'est-ce que vous voulez savoir ?",
+            explain: "Pour transformer la forme soutenue ('<span class='q-word'>Que</span>' + inversion) en standard, utilisez '<span class='q-word'>Qu'est-ce que</span>'."
+        },
+        {
+            q:"Vous préparez quoi pour la réunion ?", reg:"standard", ans:"Qu'est-ce que vous préparez pour la réunion ?",
+            explain: "Devant une voyelle ou une consonne, la formule standard reste '<span class='q-word'>Qu'est-ce que</span>'."
+        },
+        {
+            q:"Qu'est-ce qu'il aime dans ce travail ?", reg:"soutenu", ans:"Qu'aime-t-il dans ce travail ?",
+            explain: "Forme soutenue : '<span class='q-word'>Que</span>' devint 'Qu'' devant la voyelle 'a' + inversion <em>-t-il</em>."
+        }
+    ];
+
+    const ex3 = [
+        {
+            q:"Que faites-vous le week-end ?", reg:"familier", ans:"Vous faites quoi le week-end ?",
+            explain: "Au registre familier, placez le sujet au début et '<span class='q-word'>quoi</span>' après le verbe."
+        },
+        {
+            q:"Vous habitez où ?", reg:"soutenu", ans:"Où habitez-vous ?",
+            explain: "Forme soutenue : Mot interrogatif '<span class='q-word'>Où</span>' + inversion du verbe et du pronom (<em>habitez-vous</em>)."
+        },
+        {
+            q:"Est-ce que le candidat a de l'expérience ?", reg:"soutenu", ans:"Le candidat a-t-il de l'expérience ?",
+            explain: "Inversion complexe A2/B1 : Sujet nominal + verbe + '-t-' + pronom (<em>a-t-il</em>)."
+        },
+        {
+            q:"Quand est-ce que le stage commence ?", reg:"familier", ans:"Le stage commence quand ?",
+            explain: "Forme orale familière : Sujet + verbe + mot interrogatif '<span class='q-word'>quand</span>' à la fin."
+        },
+        {
+            q:"Pourquoi étudiez-vous le management ?", reg:"standard", ans:"Pourquoi est-ce que vous étudiez le management ?",
+            explain: "Forme standard : la structure fixe est '<span class='q-word'>Pourquoi est-ce que</span>'."
+        },
+        {
+            q:"Vous préférez quel poste ?", reg:"standard", ans:"Quel poste est-ce que vous préférez ?",
+            explain: "Structure standard avec 'quel' : Adjectif interrogatif + nom + '<span class='q-word'>est-ce que</span>'."
+        }
+    ];
+
+    // CO DATA (AUDIO : entretien.mp3)
+    const coDataPart1 = [
+        {
+            q: "1. Quel est l'objectif du rendez-vous d'Hippolyte Tissot ?",
+            options: [
+                "Il veut passer un entretien pour un emploi à temps plein.",
+                "Il souhaite effectuer son stage de master en Belgique.",
+                "Il demande une bourse pour étudier en France."
+            ],
+            correct: 1,
+            feedback: "Correct ! La responsable confirme : 'vous voulez faire votre stage de master chez nous, en Belgique ?'."
+        },
+        {
+            q: "2. Quel diplôme Hippolyte a-t-il obtenu l'année dernière ?",
+            options: [
+                "Son baccalauréat scientifique (Bac S).",
+                "Sa double licence en droit et gestion à Paris 1.",
+                "Son diplôme de master de gestion."
+            ],
+            correct: 1,
+            feedback: "Exact ! Il précise : 'J'ai obtenu ma double licence l'année dernière'."
+        },
+        {
+            q: "3. Quelle spécialité intéresse particulièrement Hippolyte ?",
+            options: [
+                "L'économie circulaire et le management de l'innovation.",
+                "La comptabilité internationale.",
+                "Le droit des contrats européens."
+            ],
+            correct: 0,
+            feedback: "Exactement ! Il veut faire un master 'innovation/management' et s'intéresser à 'l'économie circulaire'."
+        },
+        {
+            q: "4. Quelle est la particularité de l'entreprise Phenix mentionnée dans l'entretien ?",
+            options: [
+                "Elle fabrique des vêtements de sport.",
+                "Elle réutilise les plastiques pour limiter le gaspillage.",
+                "Elle vend des produits informatiques d'occasion."
+            ],
+            correct: 1,
+            feedback: "Bravo ! Hippolyte mentionne : 'utiliser à nouveau les plastiques pour limiter le gaspillage'."
+        },
+        {
+            q: "5. Quelle expérience utile Hippolyte possède-t-il déjà ?",
+            options: [
+                "Il a déjà géré une grande entreprise en Belgique.",
+                "Il est responsable d'une association à sa faculté.",
+                "Il a été formateur professionnel dans un salon."
+            ],
+            correct: 1,
+            feedback: "Très bien ! Il répond : 'Je suis responsable d'une association à ma fac'."
+        },
+        {
+            q: "6. Quelle est la réponse d'Hippolyte concernant sa disponibilité ?",
+            options: [
+                "Il est disponible uniquement en semaine.",
+                "Il n'est pas disponible pendant les vacances.",
+                "Il est aussi disponible le week-end."
+            ],
+            correct: 2,
+            feedback: "Correct ! À la question sur le week-end, il confirme : 'Oui, bien sûr !'."
+        }
+    ];
+
+    const coDataPart2 = [
+        {
+            q: "1. Quelle question exacte la responsable pose-t-elle pour demander la formation d'Hippolyte ?",
+            options: [
+                "a) Quel est votre cursus ? (Registre Soutenu)",
+                "b) Vous étudiez quoi ? (Registre Familier)",
+                "c) Est-ce que vous avez un diplôme ? (Registre Standard)"
+            ],
+            correct: 0,
+            feedback: "Exact ! La responsable formule au registre soutenu : 'Quel est votre cursus ?'."
+        },
+        {
+            q: "2. Comment la responsable demande-t-elle s'il connaît l'entreprise ?",
+            options: [
+                "a) Vous connaissez notre entreprise ? (Registre Familier)",
+                "b) Est-ce que vous connaissez notre entreprise ? (Registre Standard)",
+                "c) Connaissez-vous notre entreprise ? (Registre Soutenu)"
+            ],
+            correct: 1,
+            feedback: "Très bien ! Elle utilise la formule standard : 'Est-ce que vous connaissez notre entreprise ?'."
+        },
+        {
+            q: "3. Quelle question entend-on pour connaître ce qui l'intéresse chez Phenix ?",
+            options: [
+                "a) Et qu'est-ce qui vous plaît chez Phenix ? (Registre Standard)",
+                "b) Et que vous plaît-il chez Phenix ? (Registre Soutenu)",
+                "c) Phenix vous plaît pour quoi ? (Registre Familier)"
+            ],
+            correct: 0,
+            feedback: "Bravo ! La question enregistrée est : 'Et qu'est-ce qui vous plaît chez Phenix ?'."
+        },
+        {
+            q: "4. Quelle question la responsable pose-t-elle au registre soutenu avec inversion ?",
+            options: [
+                "a) Est-ce que vous savez organiser des actions de communication ?",
+                "b) Vous savez organiser des événements ?",
+                "c) Savez-vous organiser des actions de communication ?"
+            ],
+            correct: 2,
+            feedback: "Correct ! Elle demande au registre soutenu : 'Savez-vous organiser des actions de communication ?'."
+        }
+    ];
+
+    function normalize(s) {
+        return s.trim().toLowerCase().replace(/[\s]+/g,' ').replace(/['’]/g,"'").replace(/\s*\?\s*$/,'').replace(/\s*$/,'');
+    }
+
+    // Builder pour les exercices de transformation
+    function buildExercise(container, data, showReg, actTypeIndex) {
+        const el = document.getElementById(container);
+        data.forEach((item, i) => {
+            const div = document.createElement('div');
+            div.className = 'p-4 sm:p-5 bg-white rounded-xl shadow-sm border border-slate-200';
+            
+            // Formatage du texte avec mot interrogatif mis en relief si présent
+            let questionFormatted = item.q;
+            const interrogatives = ["quand", "où", "comment", "pourquoi", "qui", "combien", "quoi", "que", "qu'est-ce que", "quel", "quelle"];
+            interrogatives.forEach(word => {
+                const regex = new RegExp(`\\b(${word})\\b`, 'gi');
+                questionFormatted = questionFormatted.replace(regex, `<span class="q-word">$1</span>`);
+            });
+
+            const label = showReg ? ` → <span class="inline-block px-2 py-0.5 rounded text-xs font-bold bg-amber-100 text-amber-900 border border-amber-200">Registre ${item.reg}</span>` : ` → <span class="inline-block px-2 py-0.5 rounded text-xs font-bold bg-blue-100 text-blue-900 border border-blue-200">standard</span> + <span class="inline-block px-2 py-0.5 rounded text-xs font-bold bg-indigo-100 text-indigo-900 border border-indigo-200">soutenu</span>`;
+            
+            div.innerHTML = `
+                <p class="font-medium mb-3 text-base text-slate-800">${i+1}. Énoncé : <em>${questionFormatted}</em> ${label}</p>
+                ${showReg ? `<input type="text" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 text-base ex-input focus:ring-2 focus:ring-blue-500 focus:outline-none" data-idx="${i}" placeholder="Rédigez la question complète..." autocomplete="off">` :
+                `<input type="text" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 text-base ex-input mb-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" data-idx="${i}" data-field="std" placeholder="Forme standard (Est-ce que...)" autocomplete="off">
+                 <input type="text" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 text-base ex-input focus:ring-2 focus:ring-blue-500 focus:outline-none" data-idx="${i}" data-field="sout" placeholder="Forme soutenue (Inversion...)" autocomplete="off">`}
+                <div class="flex gap-2 mt-3 flex-wrap">
+                    <button onclick="checkAnswer('${container}',${i},${showReg},${actTypeIndex})" class="px-4 py-2 rounded-lg text-xs md:text-sm font-bold text-white shadow-sm transition bg-blue-700 hover:bg-blue-800">Vérifier</button>
+                    <button onclick="showAnswer('${container}',${i},${showReg})" class="px-4 py-2 rounded-lg text-xs md:text-sm font-bold bg-slate-100 text-slate-700 transition hover:bg-slate-200">Solution</button>
+                </div>
+                <div class="feedback text-xs md:text-sm mt-3 hidden p-3 rounded-lg leading-relaxed font-medium"></div>
+            `;
+            el.appendChild(div);
+        });
+    }
+
+    // Builder pour la CO (QCM)
+    function buildCOExercise(container, data, scoreArrayKey, actScoreType) {
+        const el = document.getElementById(container);
+        data.forEach((item, idx) => {
+            const div = document.createElement('div');
+            div.className = 'p-4 rounded-lg bg-slate-50 border border-slate-200';
+            let optionsHTML = item.options.map((opt, optIdx) => `
+                <label class="flex items-center gap-3 p-2.5 rounded-md bg-white border border-slate-200 cursor-pointer hover:bg-blue-50/50 transition text-sm">
+                    <input type="radio" name="${scoreArrayKey}_${idx}" value="${optIdx}" class="w-4 h-4 text-blue-600 focus:ring-blue-500">
+                    <span class="text-slate-700">${opt}</span>
+                </label>
+            `).join('');
+
+            div.innerHTML = `
+                <p class="font-semibold text-slate-800 text-sm md:text-base mb-3">${item.q}</p>
+                <div class="space-y-2">${optionsHTML}</div>
+                <div class="flex gap-2 mt-3">
+                    <button onclick="checkCORadio('${scoreArrayKey}', ${idx}, ${item.correct}, '${container}', '${actScoreType}')" class="px-3 py-1.5 rounded-md text-xs font-bold text-white bg-blue-700 hover:bg-blue-800 shadow-sm">Vérifier</button>
+                </div>
+                <div id="${scoreArrayKey}_feedback_${idx}" class="feedback text-xs md:text-sm mt-2 hidden p-2.5 rounded-md font-medium"></div>
+            `;
+            el.appendChild(div);
+        });
+    }
+
+    function checkCORadio(scoreKey, qIdx, correctOptIdx, containerId, actScoreType) {
+        const selected = document.querySelector(`input[name="${scoreKey}_${qIdx}"]:checked`);
+        const feedbackEl = document.getElementById(`${scoreKey}_feedback_${qIdx}`);
+        feedbackEl.classList.remove('hidden', 'correct', 'incorrect');
+
+        const dataArr = scoreKey === 'co1' ? coDataPart1 : coDataPart2;
+        const item = dataArr[qIdx];
+
+        if(!selected) {
+            feedbackEl.className = "feedback text-xs md:text-sm mt-2 p-2.5 rounded-md font-medium bg-amber-50 text-amber-800 border border-amber-200";
+            feedbackEl.innerHTML = "⚠️ Veuillez sélectionner une réponse avant de vérifier.";
+            return;
+        }
+
+        const userChoice = parseInt(selected.value);
+        if(userChoice === correctOptIdx) {
+            feedbackEl.className = "feedback text-xs md:text-sm mt-2 p-2.5 rounded-md font-medium correct";
+            feedbackEl.innerHTML = `✓ ${item.feedback}`;
+            userScores[scoreKey][qIdx] = 1;
+        } else {
+            feedbackEl.className = "feedback text-xs md:text-sm mt-2 p-2.5 rounded-md font-medium incorrect";
+            feedbackEl.innerHTML = `✗ Réponse incorrecte.<br/><strong>Explication / Indice :</strong> ${item.feedback}`;
+            userScores[scoreKey][qIdx] = 0;
+        }
+        updateScores();
+    }
+
+    function getExData(container) {
+        if(container==='exercises-0') return ex0;
+        if(container==='exercises-1') return ex1;
+        if(container==='exercises-2') return ex2;
+        if(container==='exercises-3') return ex3;
+    }
+
+    function checkAnswer(container, idx, showReg, actScoreType) {
+        const parent = document.getElementById(container).children[idx];
+        const data = getExData(container)[idx];
+        const feedback = parent.querySelector('.feedback');
+        feedback.classList.remove('hidden', 'correct', 'incorrect');
+
+        let isCorrect = false;
+
+        if(showReg) {
+            const input = parent.querySelector('input');
+            if(normalize(input.value) === normalize(data.ans)) {
+                input.className = input.className.replace(/incorrect/g, '');
+                input.classList.add('correct');
+                feedback.className = "feedback text-xs md:text-sm mt-3 p-3 rounded-lg leading-relaxed font-medium correct";
+                feedback.innerHTML = `✓ Correct ! Excellente formulation.<br/><span class='text-xs opacity-90'>${data.explain}</span>`;
+                isCorrect = true;
+            } else {
+                input.className = input.className.replace(/correct/g, '');
+                input.classList.add('incorrect');
+                feedback.className = "feedback text-xs md:text-sm mt-3 p-3 rounded-lg leading-relaxed font-medium incorrect";
+                feedback.innerHTML = `✗ Attention : Votre réponse "${input.value}" comporte une erreur.<br/><strong>Correction attendue :</strong> "<em>${data.ans}</em>"<br/><span class='text-xs mt-1 block font-normal'><strong>Règle :</strong> ${data.explain}</span>`;
+            }
+        } else {
+            const inputs = parent.querySelectorAll('input');
+            const stdCorrect = normalize(inputs[0].value) === normalize(data.std);
+            const soutCorrect = normalize(inputs[1].value) === normalize(data.sout);
+            
+            if(stdCorrect) { inputs[0].className = inputs[0].className.replace(/incorrect/g, ''); inputs[0].classList.add('correct'); } 
+            else { inputs[0].className = inputs[0].className.replace(/correct/g, ''); inputs[0].classList.add('incorrect'); }
+            
+            if(soutCorrect) { inputs[1].className = inputs[1].className.replace(/incorrect/g, ''); inputs[1].classList.add('correct'); } 
+            else { inputs[1].className = inputs[1].className.replace(/correct/g, ''); inputs[1].classList.add('incorrect'); }
+            
+            if(stdCorrect && soutCorrect) {
+                feedback.className = "feedback text-xs md:text-sm mt-3 p-3 rounded-lg leading-relaxed font-medium correct";
+                feedback.innerHTML = `✓ Parfait ! Les deux registres sont parfaitement maîtrisés.<br/><span class='text-xs opacity-90'>${data.explanation}</span>`;
+                isCorrect = true;
+            } else {
+                feedback.className = "feedback text-xs md:text-sm mt-3 p-3 rounded-lg leading-relaxed font-medium incorrect";
+                let msg = '✗ Erreur détectée :<br/>';
+                if(!stdCorrect) msg += `• Standard attendu : "<em>${data.std}</em>"<br/>`;
+                if(!soutCorrect) msg += `• Soutenu attendu : "<em>${data.sout}</em>"<br/>`;
+                msg += `<span class='text-xs mt-1 block font-normal'><strong>Conseil :</strong> ${data.explanation}</span>`;
+                feedback.innerHTML = msg;
+            }
+        }
+
+        // Store score dynamically
+        const keyMap = {0:'act0', 1:'act1', 2:'act2', 3:'act3'};
+        userScores[keyMap[actScoreType]][idx] = isCorrect ? 1 : 0;
+        updateScores();
+    }
+
+    function showAnswer(container, idx, showReg) {
+        const parent = document.getElementById(container).children[idx];
+        const data = getExData(container)[idx];
+        const feedback = parent.querySelector('.feedback');
+        feedback.classList.remove('hidden', 'correct', 'incorrect');
+        feedback.className = "feedback text-xs md:text-sm mt-3 p-3 rounded-lg leading-relaxed font-medium bg-blue-50 text-blue-900 border border-blue-200";
+        if(showReg) {
+            feedback.innerHTML = `<strong>Solution attendue :</strong> ${data.ans}<br/><span class='text-xs text-slate-600 font-normal'>${data.explain}</span>`;
+        } else {
+            feedback.innerHTML = `<strong>Standard :</strong> ${data.std}<br/><strong>Soutenu :</strong> ${data.sout}<br/><span class='text-xs text-slate-600 font-normal'>${data.explanation}</span>`;
+        }
+    }
+
+    // INITIALISATION DES EXERCICES
+    buildExercise('exercises-0', ex0, false, 0);
+    buildExercise('exercises-1', ex1, true, 1);
+    buildExercise('exercises-2', ex2, true, 2);
+    buildCOExercise('co-part-1', coDataPart1, 'co1', 'co1');
+    buildCOExercise('co-part-2', coDataPart2, 'co2', 'co2');
+    buildExercise('exercises-3', ex3, true, 3);
+
+    // Dynamic initial display
+    updateScores();
+  </script>
+ </body>
+</html>

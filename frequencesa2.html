@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pratiquer les Adverbes de Fréquence (A2)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        oifBlue: '#0055A5',
+                        oifRed: '#E1000F',
+                        oifYellow: '#FFB800',
+                        oifGreen: '#00A651',
+                        oifPurple: '#6F2C91',
+                        oifDark: '#1E293B',
+                        oifLight: '#F8FAFC'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F1F5F9;
+        }
+        .oif-border-top {
+            border-top: 6px solid #0055A5;
+        }
+        /* Custom solid shadow utility */
+        .solid-shadow {
+            box-shadow: 4px 4px 0px #1E293B;
+        }
+        .solid-shadow-sm {
+            box-shadow: 2px 2px 0px #1E293B;
+        }
+        .chip {
+            transition: transform 0.1s ease, background-color 0.15s ease;
+            user-select: none;
+            touch-action: manipulation;
+        }
+        .chip:active {
+            transform: scale(0.96);
+        }
+    </style>
+</head>
+<body class="text-oifDark bg-slate-100 min-h-screen pb-12">
+
+    <header class="bg-white border-b-4 border-oifDark shadow-sm">
+        <!-- OIF 5-Color Flag Ribbon Top -->
+        <div class="grid grid-cols-5 h-3 w-full">
+            <div class="bg-oifBlue"></div>
+            <div class="bg-oifRed"></div>
+            <div class="bg-oifYellow"></div>
+            <div class="bg-oifGreen"></div>
+            <div class="bg-oifPurple"></div>
+        </div>
+        
+        <div class="max-w-5xl mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <span class="inline-block bg-oifBlue text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider mb-2">
+                    Niveau A2 • Grammaire FLE
+                </span>
+                <h1 class="text-2xl md:text-3xl font-extrabold text-oifDark flex items-center gap-3">
+                    <i class="fa-solid fa-clock-rotate-left text-oifPurple"></i>
+                    Les adverbes de fréquence
+                </h1>
+                <p class="text-slate-600 text-sm mt-1">
+                    Exprimez la régularité et respectez la structure de la phrase française.
+                </p>
+            </div>
+
+            <!-- Score Summary Card -->
+            <div class="bg-slate-50 border-2 border-oifDark rounded-xl p-3 flex items-center gap-4 solid-shadow-sm min-w-[200px] justify-around">
+                <div class="text-center">
+                    <span class="text-xs text-slate-500 font-bold block uppercase">Activité 1</span>
+                    <span id="score-act1" class="text-xl font-black text-oifBlue">0 / 7</span>
+                </div>
+                <div class="h-8 w-[2px] bg-slate-300"></div>
+                <div class="text-center">
+                    <span class="text-xs text-slate-500 font-bold block uppercase">Activité 2</span>
+                    <span id="score-act2" class="text-xl font-black text-oifPurple">0 / 10</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 mt-8 space-y-8">
+
+        <!-- Visual Grammar Rule Box -->
+        <section class="bg-white border-2 border-oifDark rounded-2xl p-5 md:p-6 solid-shadow">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="bg-oifYellow text-oifDark font-black p-2 rounded-lg text-lg">
+                    <i class="fa-solid fa-lightbulb"></i>
+                </div>
+                <h2 class="text-lg md:text-xl font-bold">Rappel des symboles et de la règle générale</h2>
+            </div>
+
+            <!-- Symbol Legend Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-6 text-sm font-semibold">
+                <div class="bg-rose-50 border-2 border-oifRed rounded-xl p-2 text-center">
+                    <span class="block text-oifRed font-black text-base">Ø / 0</span>
+                    <span class="text-slate-700">ne... jamais</span>
+                </div>
+                <div class="bg-amber-50 border-2 border-amber-500 rounded-xl p-2 text-center">
+                    <span class="block text-amber-600 font-black text-base">-</span>
+                    <span class="text-slate-700">rarement</span>
+                </div>
+                <div class="bg-blue-50 border-2 border-oifBlue rounded-xl p-2 text-center">
+                    <span class="block text-oifBlue font-black text-base">+</span>
+                    <span class="text-slate-700">parfois</span>
+                </div>
+                <div class="bg-emerald-50 border-2 border-oifGreen rounded-xl p-2 text-center">
+                    <span class="block text-oifGreen font-black text-base">++</span>
+                    <span class="text-slate-700">souvent</span>
+                </div>
+                <div class="bg-purple-50 border-2 border-oifPurple rounded-xl p-2 text-center col-span-2 sm:col-span-1">
+                    <span class="block text-oifPurple font-black text-base">+++</span>
+                    <span class="text-slate-700">toujours</span>
+                </div>
+            </div>
+
+            <!-- Sentence Construction Formula -->
+            <div class="bg-slate-100 border-2 border-slate-300 rounded-xl p-4">
+                <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Ordre obligatoire des mots dans la phrase :</p>
+                <div class="flex flex-wrap items-center gap-2 font-bold text-sm md:text-base text-slate-800">
+                    <span class="bg-oifBlue text-white px-3 py-1 rounded-lg">SUJET</span>
+                    <span>+</span>
+                    <span class="bg-oifGreen text-white px-3 py-1 rounded-lg">VERBE</span>
+                    <span>+</span>
+                    <span class="bg-oifPurple text-white px-3 py-1 rounded-lg">ADVERBE DE FRÉQUENCE</span>
+                    <span>+</span>
+                    <span class="bg-slate-700 text-white px-3 py-1 rounded-lg">INFORMATION EXTRA</span>
+                </div>
+                <div class="mt-3 text-xs md:text-sm text-slate-600 bg-white p-3 rounded-lg border border-slate-200">
+                    <strong class="text-oifRed">Cas particulier (Ø / 0) :</strong> <span class="font-mono font-bold text-slate-800">SUJET + NE + VERBE + JAMAIS + EXTRA</span>
+                    <span class="block text-slate-500 text-xs mt-1">Exemple : <i>Il adore rencontrer des gens. (aller à la fête des voisins +++) → Il va <b>toujours</b> à la fête des voisins.</i></span>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white border-2 border-oifDark rounded-2xl p-5 md:p-6 solid-shadow">
+            <div class="border-b-2 border-slate-200 pb-4 mb-6 flex flex-col md:flex-row md:items-center justify-between gap-2">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="bg-oifBlue text-white font-extrabold px-3 py-1 rounded-lg text-sm">Activité 1</span>
+                        <h2 class="text-xl font-extrabold text-oifDark">Écrivez la phrase correcte</h2>
+                    </div>
+                    <p class="text-sm text-slate-600 mt-1">Transformez l'indication entre parenthèses en une phrase complète.</p>
+                </div>
+                <button onclick="checkAllActivity1()" class="self-start md:self-auto bg-oifBlue hover:bg-blue-700 text-white font-bold px-4 py-2 rounded-xl border-2 border-oifDark solid-shadow-sm transition text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-list-check"></i>
+                    Tout vérifier (Activité 1)
+                </button>
+            </div>
+
+            <!-- Activity 1 Exercises List -->
+            <div id="act1-container" class="space-y-6">
+                <!-- Javascript will insert questions dynamically -->
+            </div>
+        </section>
+
+        <section class="bg-white border-2 border-oifDark rounded-2xl p-5 md:p-6 solid-shadow">
+            <div class="border-b-2 border-slate-200 pb-4 mb-6 flex flex-col md:flex-row md:items-center justify-between gap-2">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="bg-oifPurple text-white font-extrabold px-3 py-1 rounded-lg text-sm">Activité 2</span>
+                        <h2 class="text-xl font-extrabold text-oifDark">Méli-mélo : Mettez les mots dans l'ordre</h2>
+                    </div>
+                    <p class="text-sm text-slate-600 mt-1">Cliquez sur les mots dans l'ordre exact pour reconstruire la phrase.</p>
+                </div>
+                <button onclick="checkAllActivity2()" class="self-start md:self-auto bg-oifPurple hover:bg-purple-800 text-white font-bold px-4 py-2 rounded-xl border-2 border-oifDark solid-shadow-sm transition text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-list-check"></i>
+                    Tout vérifier (Activité 2)
+                </button>
+            </div>
+
+            <!-- Activity 2 Examples Box -->
+            <div class="mb-6 p-3 bg-amber-50 border-2 border-oifYellow rounded-xl text-sm font-semibold text-amber-900 flex items-center gap-3">
+                <i class="fa-solid fa-star text-oifYellow text-xl"></i>
+                <div>
+                    <strong>Exemple :</strong> <span class="font-normal">déjeune • ne • je • jamais • mes collègues • avec</span> 
+                    <br><i class="fa-solid fa-arrow-right text-xs"></i> <span class="text-oifBlue font-bold">Je ne déjeune jamais avec mes collègues.</span>
+                </div>
+            </div>
+
+            <!-- Activity 2 Items Container -->
+            <div id="act2-container" class="space-y-6">
+                <!-- Javascript will insert scramble questions dynamically -->
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="max-w-5xl mx-auto px-4 mt-12 text-center text-slate-500 text-xs">
+        <p>Activité interactive de FLE - Niveau A2 • Les adverbes de fréquence</p>
+        <p class="mt-1">Inspiré des référentiels de français langue étrangère • Palette OIF</p>
+    </footer>
+
+    <script>
+        const act1Data = [
+            {
+                id: 1,
+                context: "Paul adore la musique classique.",
+                prompt: "écouter des concerts le samedi +++",
+                subject: "Paul / Il",
+                accepted: [
+                    "Paul écoute toujours des concerts le samedi.",
+                    "Il écoute toujours des concerts le samedi."
+                ],
+                explanation: "Fréquence +++ = 'toujours'. Structure : Paul (sujet) + écoute (verbe) + toujours (adverbe) + des concerts le samedi."
+            },
+            {
+                id: 2,
+                context: "Sophie est très casanière.",
+                prompt: "sortir en boîte de nuit Ø",
+                subject: "Sophie / Elle",
+                accepted: [
+                    "Sophie ne sort jamais en boîte de nuit.",
+                    "Elle ne sort jamais en boîte de nuit."
+                ],
+                explanation: "Fréquence Ø = 'ne... jamais'. Structure : Elle (sujet) + ne + sort (verbe) + jamais (adverbe) + en boîte de nuit."
+            },
+            {
+                id: 3,
+                context: "Nous faisons attention à notre santé.",
+                prompt: "manger des légumes bio ++",
+                subject: "Nous",
+                accepted: [
+                    "Nous mangeons souvent des légumes bio."
+                ],
+                explanation: "Fréquence ++ = 'souvent'. Structure : Nous (sujet) + mangeons (verbe) + souvent (adverbe) + des légumes bio."
+            },
+            {
+                id: 4,
+                context: "Thomas habite loin de son travail.",
+                prompt: "prendre le train le matin +",
+                subject: "Thomas / Il",
+                accepted: [
+                    "Thomas prend parfois le train le matin.",
+                    "Il prend parfois le train le matin."
+                ],
+                explanation: "Fréquence + = 'parfois'. Structure : Thomas (sujet) + prend (verbe) + parfois (adverbe) + le train le matin."
+            },
+            {
+                id: 5,
+                context: "Vous n'aimez pas beaucoup le café.",
+                prompt: "boire du café l'après-midi -",
+                subject: "Vous",
+                accepted: [
+                    "Vous buvez rarement du café l'après-midi."
+                ],
+                explanation: "Fréquence - = 'rarement'. Structure : Vous (sujet) + buvez (verbe) + rarement (adverbe) + du café l'après-midi."
+            },
+            {
+                id: 6,
+                context: "Les étudiants révisent pour les examens.",
+                prompt: "étudier à la bibliothèque ++",
+                subject: "Les étudiants / Ils",
+                accepted: [
+                    "Les étudiants étudient souvent à la bibliothèque.",
+                    "Ils étudient souvent à la bibliothèque."
+                ],
+                explanation: "Fréquence ++ = 'souvent'. Structure : Les étudiants (sujet) + étudient (verbe) + souvent (adverbe) + à la bibliothèque."
+            },
+            {
+                id: 7,
+                context: "Je ne suis pas très sportif.",
+                prompt: "faire du jogging le dimanche -",
+                subject: "Je",
+                accepted: [
+                    "Je fais rarement du jogging le dimanche."
+                ],
+                explanation: "Fréquence - = 'rarement'. Structure : Je (sujet) + fais (verbe) + rarement (adverbe) + du jogging le dimanche."
+            }
+        ];
+
+        const act2Data = [
+            {
+                id: 1,
+                words: ["dîner", "mon", "toujours", "frère", "le", "prépare"],
+                correct: "Mon frère prépare toujours le dîner.",
+                explanation: "Ordre : Sujet (Mon frère) + Verbe (prépare) + Adverbe (toujours) + Complément (le dîner)."
+            },
+            {
+                id: 2,
+                words: ["jamais", "infos", "regardons", "ne", "les", "nous"],
+                correct: "Nous ne regardons jamais les infos.",
+                explanation: "Ordre : Sujet (Nous) + ne + Verbe (regardons) + jamais + Complément (les infos)."
+            },
+            {
+                id: 3,
+                words: ["métro", "souvent", "prennent", "le", "elles"],
+                correct: "Elles prennent souvent le métro.",
+                explanation: "Ordre : Sujet (Elles) + Verbe (prennent) + Adverbe (souvent) + Complément (le métro)."
+            },
+            {
+                id: 4,
+                words: ["rarement", "en", "arrives", "retard", "tu"],
+                correct: "Tu arrives rarement en retard.",
+                explanation: "Ordre : Sujet (Tu) + Verbe (arrives) + Adverbe (rarement) + Complément (en retard)."
+            },
+            {
+                id: 5,
+                words: ["parfois", "mon", "journal", "lit", "père", "le"],
+                correct: "Mon père lit parfois le journal.",
+                explanation: "Ordre : Sujet (Mon père) + Verbe (lit) + Adverbe (parfois) + Complément (le journal)."
+            },
+            {
+                id: 6,
+                words: ["jamais", "mange", "de", "elle", "viande", "ne"],
+                correct: "Elle ne mange jamais de viande.",
+                explanation: "Ordre : Sujet (Elle) + ne + Verbe (mange) + jamais + Complément (de viande)."
+            },
+            {
+                id: 7,
+                words: ["souvent", "au", "vont", "cinéma", "ils"],
+                correct: "Ils vont souvent au cinéma.",
+                explanation: "Ordre : Sujet (Ils) + Verbe (vont) + Adverbe (souvent) + Complément (au cinéma)."
+            },
+            {
+                id: 8,
+                words: ["toujours", "l'exercice", "de", "vous", "faites"],
+                correct: "Vous faites toujours de l'exercice.",
+                explanation: "Ordre : Sujet (Vous) + Verbe (faites) + Adverbe (toujours) + Complément (de l'exercice)."
+            },
+            {
+                id: 9,
+                words: ["du", "bois", "je", "thé", "rarement"],
+                correct: "Je bois rarement du thé.",
+                explanation: "Ordre : Sujet (Je) + Verbe (bois) + Adverbe (rarement) + Complément (du thé)."
+            },
+            {
+                id: 10,
+                words: ["parfois", "les", "ensemble", "parlent", "voisins"],
+                correct: "Les voisins parlent parfois ensemble.",
+                explanation: "Ordre : Sujet (Les voisins) + Verbe (parlent) + Adverbe (parfois) + Complément (ensemble)."
+            }
+        ];
+
+        // State storage for Activity 2 selections
+        const act2State = act2Data.map(item => ({
+            selectedIndices: [],
+            availableIndices: item.words.map((_, idx) => idx)
+        }));
+
+        function renderActivity1() {
+            const container = document.getElementById('act1-container');
+            container.innerHTML = act1Data.map((item, index) => `
+                <div class="bg-slate-50 border-2 border-slate-300 rounded-xl p-4 md:p-5 relative">
+                    <div class="flex items-start justify-between gap-2 mb-2">
+                        <div>
+                            <span class="text-xs font-bold text-slate-500 uppercase">Question ${index + 1} / 7</span>
+                            <p class="font-bold text-slate-800 text-base md:text-lg mt-0.5">${item.context}</p>
+                            <p class="text-sm font-semibold text-oifBlue mt-1 bg-blue-50 border border-blue-200 px-3 py-1 rounded-lg inline-block">
+                                Indication : (${item.prompt})
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Input Box and Individual Check Button -->
+                    <div class="mt-4 flex flex-col sm:flex-row gap-3">
+                        <div class="relative flex-1">
+                            <input 
+                                type="text" 
+                                id="act1-input-${item.id}" 
+                                placeholder="Sujet + Verbe + Adverbe + Information extra..." 
+                                class="w-full bg-white border-2 border-slate-300 rounded-xl px-4 py-3 text-slate-800 font-medium focus:outline-none focus:border-oifBlue transition text-sm md:text-base"
+                                onkeypress="if(event.key==='Enter') checkActivity1Item(${item.id})"
+                            />
+                        </div>
+                        <button 
+                            onclick="checkActivity1Item(${item.id})" 
+                            class="bg-oifDark hover:bg-slate-700 text-white font-bold px-5 py-3 rounded-xl border-2 border-oifDark solid-shadow-sm transition text-sm flex items-center justify-center gap-2"
+                        >
+                            <i class="fa-solid fa-check"></i>
+                            Vérifier
+                        </button>
+                    </div>
+
+                    <!-- Feedback Box -->
+                    <div id="act1-feedback-${item.id}" class="hidden mt-3 p-3 rounded-xl border-2 text-sm"></div>
+                </div>
+            `).join('');
+        }
+
+        function renderActivity2() {
+            const container = document.getElementById('act2-container');
+            container.innerHTML = act2Data.map((item, index) => `
+                <div class="bg-slate-50 border-2 border-slate-300 rounded-xl p-4 md:p-5">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-bold text-slate-500 uppercase">Phrase ${index + 1} / 10</span>
+                        <button onclick="resetActivity2Item(${item.id})" class="text-xs font-bold text-slate-500 hover:text-oifRed transition flex items-center gap-1">
+                            <i class="fa-solid fa-rotate-left"></i> Réinitialiser
+                        </button>
+                    </div>
+
+                    <!-- Selection Display Area -->
+                    <div 
+                        id="act2-target-${item.id}" 
+                        class="min-h-[56px] bg-white border-2 border-dashed border-slate-300 rounded-xl p-2.5 flex flex-wrap items-center gap-2 mb-3"
+                    >
+                        <span id="act2-placeholder-${item.id}" class="text-slate-400 text-xs md:text-sm font-medium italic pl-1">
+                            Cliquez sur les mots ci-dessous pour construire la phrase...
+                        </span>
+                    </div>
+
+                    <!-- Available Word Chips Pool -->
+                    <div id="act2-pool-${item.id}" class="flex flex-wrap items-center gap-2 mb-4">
+                        <!-- Chips inserted dynamically -->
+                    </div>
+
+                    <!-- Actions and Verification -->
+                    <div class="flex items-center justify-between gap-3 pt-2 border-t border-slate-200">
+                        <button 
+                            onclick="checkActivity2Item(${item.id})" 
+                            class="bg-oifDark hover:bg-slate-700 text-white font-bold px-4 py-2.5 rounded-xl border-2 border-oifDark solid-shadow-sm transition text-sm flex items-center gap-2"
+                        >
+                            <i class="fa-solid fa-check"></i>
+                            Vérifier la phrase
+                        </button>
+                    </div>
+
+                    <!-- Feedback Box -->
+                    <div id="act2-feedback-${item.id}" class="hidden mt-3 p-3 rounded-xl border-2 text-sm"></div>
+                </div>
+            `).join('');
+
+            // Render chips for each item
+            act2Data.forEach(item => updateActivity2Pool(item.id));
+        }
+
+        function updateActivity2Pool(itemId) {
+            const state = act2State[itemId - 1];
+            const data = act2Data[itemId - 1];
+            
+            const poolEl = document.getElementById(`act2-pool-${itemId}`);
+            const targetEl = document.getElementById(`act2-target-${itemId}`);
+            const placeholderEl = document.getElementById(`act2-placeholder-${itemId}`);
+
+            // Render Target Area (Selected Words)
+            targetEl.querySelectorAll('.chip-selected').forEach(el => el.remove());
+            
+            if (state.selectedIndices.length > 0) {
+                if (placeholderEl) placeholderEl.classList.add('hidden');
+                state.selectedIndices.forEach((wordIdx) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'chip-selected bg-oifPurple text-white font-bold text-sm px-3 py-1.5 rounded-lg border-2 border-oifDark chip flex items-center gap-1.5';
+                    btn.innerHTML = `${data.words[wordIdx]} <i class="fa-solid fa-xmark text-xs opacity-75"></i>`;
+                    btn.onclick = () => removeWordFromSentence(itemId, wordIdx);
+                    targetEl.appendChild(btn);
+                });
+            } else {
+                if (placeholderEl) placeholderEl.classList.remove('hidden');
+            }
+
+            // Render Pool Area (Available Words)
+            poolEl.innerHTML = '';
+            data.words.forEach((word, wordIdx) => {
+                const isSelected = state.selectedIndices.includes(wordIdx);
+                const btn = document.createElement('button');
+                btn.className = `font-semibold text-sm px-3 py-1.5 rounded-lg border-2 border-oifDark chip transition ${
+                    isSelected 
+                        ? 'bg-slate-200 text-slate-400 border-slate-300 cursor-not-allowed' 
+                        : 'bg-white text-slate-800 hover:bg-amber-100 solid-shadow-sm'
+                }`;
+                btn.innerText = word;
+                btn.disabled = isSelected;
+                btn.onclick = () => selectWordForSentence(itemId, wordIdx);
+                poolEl.appendChild(btn);
+            });
+        }
+
+        function selectWordForSentence(itemId, wordIdx) {
+            const state = act2State[itemId - 1];
+            if (!state.selectedIndices.includes(wordIdx)) {
+                state.selectedIndices.push(wordIdx);
+                updateActivity2Pool(itemId);
+            }
+        }
+
+        function removeWordFromSentence(itemId, wordIdx) {
+            const state = act2State[itemId - 1];
+            state.selectedIndices = state.selectedIndices.filter(idx => idx !== wordIdx);
+            updateActivity2Pool(itemId);
+        }
+
+        function resetActivity2Item(itemId) {
+            const state = act2State[itemId - 1];
+            state.selectedIndices = [];
+            updateActivity2Pool(itemId);
+            const feedbackEl = document.getElementById(`act2-feedback-${itemId}`);
+            feedbackEl.className = 'hidden';
+            updateScoreDisplay();
+        }
+
+        function cleanText(text) {
+            return text
+                .trim()
+                .replace(/\s+/g, ' ')
+                .replace(/[.,!?]$/, '');
+        }
+
+        function checkActivity1Item(itemId) {
+            const item = act1Data.find(d => d.id === itemId);
+            const inputEl = document.getElementById(`act1-input-${item.id}`);
+            const feedbackEl = document.getElementById(`act1-feedback-${item.id}`);
+            const userVal = cleanText(inputEl.value);
+
+            if (!userVal) {
+                feedbackEl.className = 'mt-3 p-3 rounded-xl border-2 border-amber-400 bg-amber-50 text-amber-900 text-sm font-semibold';
+                feedbackEl.innerHTML = '<i class="fa-solid fa-circle-exclamation mr-2"></i> Veuillez écrire votre phrase avant de vérifier.';
+                feedbackEl.classList.remove('hidden');
+                return false;
+            }
+
+            // Check against accepted strings (case insensitive comparison)
+            const isCorrect = item.accepted.some(acc => cleanText(acc).toLowerCase() === userVal.toLowerCase());
+
+            if (isCorrect) {
+                feedbackEl.className = 'mt-3 p-3 rounded-xl border-2 border-oifGreen bg-emerald-50 text-emerald-900 text-sm font-semibold';
+                feedbackEl.innerHTML = `
+                    <div class="flex items-start gap-2">
+                        <i class="fa-solid fa-circle-check text-oifGreen text-lg mt-0.5"></i>
+                        <div>
+                            <p class="font-bold">Bravo ! La phrase est parfaitement construite.</p>
+                            <p class="text-xs text-emerald-800 mt-1">${item.explanation}</p>
+                        </div>
+                    </div>
+                `;
+                feedbackEl.classList.remove('hidden');
+                updateScoreDisplay();
+                return true;
+            } else {
+                // Generate detailed specific feedback error messages
+                let errorHint = "Rappel de la structure : <b>SUJET + VERBE + ADVERBE + COMPLÉMENT</b>.";
+                const lowerVal = userVal.toLowerCase();
+
+                if (item.prompt.includes('Ø') && (!lowerVal.includes('ne') || !lowerVal.includes('jamais'))) {
+                    errorHint = "Pour le symbole <b>Ø (0)</b>, n'oubliez pas d'utiliser la négation complète <b>ne ... jamais</b> autour du verbe conjugué !";
+                } else if (item.prompt.includes('++') && !lowerVal.includes('souvent')) {
+                    errorHint = "Le symbole <b>++</b> correspond à l'adverbe <b>souvent</b>.";
+                } else if (item.prompt.includes('+') && !item.prompt.includes('++') && !lowerVal.includes('parfois')) {
+                    errorHint = "Le symbole <b>+</b> correspond à l'adverbe <b>parfois</b>.";
+                } else if (item.prompt.includes('-') && !lowerVal.includes('rarement')) {
+                    errorHint = "Le symbole <b>-</b> correspond à l'adverbe <b>rarement</b>.";
+                } else if (item.prompt.includes('+++') && !lowerVal.includes('toujours')) {
+                    errorHint = "Le symbole <b>+++</b> correspond à l'adverbe <b>toujours</b>.";
+                } else {
+                    errorHint = "Vérifiez l'orthographe, la conjugaison du verbe ou la place de l'adverbe (directement après le verbe !).";
+                }
+
+                feedbackEl.className = 'mt-3 p-3 rounded-xl border-2 border-oifRed bg-rose-50 text-rose-950 text-sm';
+                feedbackEl.innerHTML = `
+                    <div class="flex items-start gap-2">
+                        <i class="fa-solid fa-circle-xmark text-oifRed text-lg mt-0.5"></i>
+                        <div>
+                            <p class="font-bold">Pas tout à fait correct.</p>
+                            <p class="mt-1">${errorHint}</p>
+                            <p class="text-xs text-slate-500 mt-2">Réponse attendue : <span class="font-bold text-slate-800">${item.accepted[0]}</span></p>
+                        </div>
+                    </div>
+                `;
+                feedbackEl.classList.remove('hidden');
+                updateScoreDisplay();
+                return false;
+            }
+        }
+
+        function checkAllActivity1() {
+            act1Data.forEach(item => checkActivity1Item(item.id));
+        }
+
+        function checkActivity2Item(itemId) {
+            const item = act2Data.find(d => d.id === itemId);
+            const state = act2State[itemId - 1];
+            const feedbackEl = document.getElementById(`act2-feedback-${itemId}`);
+
+            if (state.selectedIndices.length === 0) {
+                feedbackEl.className = 'mt-3 p-3 rounded-xl border-2 border-amber-400 bg-amber-50 text-amber-900 text-sm font-semibold';
+                feedbackEl.innerHTML = '<i class="fa-solid fa-circle-exclamation mr-2"></i> Veuillez sélectionner au moins quelques mots.';
+                feedbackEl.classList.remove('hidden');
+                return false;
+            }
+
+            const constructedSentenceWords = state.selectedIndices.map(idx => item.words[idx]);
+            // Capitalize first letter for natural comparison
+            let userSentence = constructedSentenceWords.join(' ');
+            userSentence = userSentence.charAt(0).toUpperCase() + userSentence.slice(1);
+
+            const isCorrect = cleanText(userSentence).toLowerCase() === cleanText(item.correct).toLowerCase() &&
+                              state.selectedIndices.length === item.words.length;
+
+            if (isCorrect) {
+                feedbackEl.className = 'mt-3 p-3 rounded-xl border-2 border-oifGreen bg-emerald-50 text-emerald-900 text-sm font-semibold';
+                feedbackEl.innerHTML = `
+                    <div class="flex items-start gap-2">
+                        <i class="fa-solid fa-circle-check text-oifGreen text-lg mt-0.5"></i>
+                        <div>
+                            <p class="font-bold">Excellent ! L'ordre des mots est parfait.</p>
+                            <p class="text-xs text-emerald-800 mt-1">${item.explanation}</p>
+                        </div>
+                    </div>
+                `;
+                feedbackEl.classList.remove('hidden');
+                updateScoreDisplay();
+                return true;
+            } else {
+                let hint = "L'ordre des mots n'est pas tout à fait correct.";
+                if (state.selectedIndices.length < item.words.length) {
+                    hint = `Il manque des mots (${state.selectedIndices.length} / ${item.words.length} mots utilisés).`;
+                }
+
+                feedbackEl.className = 'mt-3 p-3 rounded-xl border-2 border-oifRed bg-rose-50 text-rose-950 text-sm';
+                feedbackEl.innerHTML = `
+                    <div class="flex items-start gap-2">
+                        <i class="fa-solid fa-circle-xmark text-oifRed text-lg mt-0.5"></i>
+                        <div>
+                            <p class="font-bold">Attention à l'ordre des éléments !</p>
+                            <p class="mt-1">${hint}</p>
+                            <p class="text-xs text-slate-500 mt-2">Phrase correcte : <span class="font-bold text-slate-800">${item.correct}</span></p>
+                        </div>
+                    </div>
+                `;
+                feedbackEl.classList.remove('hidden');
+                updateScoreDisplay();
+                return false;
+            }
+        }
+
+        function checkAllActivity2() {
+            act2Data.forEach(item => checkActivity2Item(item.id));
+        }
+
+        function updateScoreDisplay() {
+            // Count Activity 1 correct
+            let act1Correct = 0;
+            act1Data.forEach(item => {
+                const inputEl = document.getElementById(`act1-input-${item.id}`);
+                if (inputEl) {
+                    const userVal = cleanText(inputEl.value);
+                    if (userVal && item.accepted.some(acc => cleanText(acc).toLowerCase() === userVal.toLowerCase())) {
+                        act1Correct++;
+                    }
+                }
+            });
+
+            // Count Activity 2 correct
+            let act2Correct = 0;
+            act2Data.forEach(item => {
+                const state = act2State[item.id - 1];
+                if (state.selectedIndices.length === item.words.length) {
+                    let userSentence = state.selectedIndices.map(idx => item.words[idx]).join(' ');
+                    userSentence = userSentence.charAt(0).toUpperCase() + userSentence.slice(1);
+                    if (cleanText(userSentence).toLowerCase() === cleanText(item.correct).toLowerCase()) {
+                        act2Correct++;
+                    }
+                }
+            });
+
+            document.getElementById('score-act1').innerText = `${act1Correct} / 7`;
+            document.getElementById('score-act2').innerText = `${act2Correct} / 10`;
+        }
+
+        window.onload = function() {
+            renderActivity1();
+            renderActivity2();
+        };
+    </script>
+</body>
+</html>

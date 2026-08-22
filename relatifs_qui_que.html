@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les Pronoms Relatifs : QUI, QUE, QU' (Version 2 - Exercices PDF)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        quiColor: {
+                            light: '#dcfce7',
+                            DEFAULT: '#16a34a',
+                            dark: '#15803d',
+                        },
+                        queColor: {
+                            light: '#e0e7ff',
+                            DEFAULT: '#4f46e5',
+                            dark: '#4338ca',
+                        },
+                        verbHighlight: '#ec4899', // Pink/Fuchsia for verbs after QUI
+                        subjectHighlight: '#f97316', // Orange for subjects after QUE
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
+        }
+        .card-shadow {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        }
+        /* Custom highlight classes requested by user */
+        .hl-qui {
+            background-color: #dcfce7;
+            color: #15803d;
+            font-weight: 800;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.375rem;
+            border: 1px solid #86efac;
+        }
+        .hl-verb {
+            background-color: #fce7f3;
+            color: #be185d;
+            font-weight: 700;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.375rem;
+            border: 1px dashed #f472b6;
+        }
+        .hl-que {
+            background-color: #e0e7ff;
+            color: #3730a3;
+            font-weight: 800;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.375rem;
+            border: 1px solid #a5b4fc;
+        }
+        .hl-sujet {
+            background-color: #ffedd5;
+            color: #c2410c;
+            font-weight: 700;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.375rem;
+            border: 1px dashed #fb923c;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="bg-amber-400/20 p-2.5 rounded-xl border border-amber-400/30 backdrop-blur-md">
+                    <i class="fa-solid fa-book-open text-2xl text-amber-400"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h1 class="text-xl sm:text-2xl font-black tracking-tight">Grammaire Française</h1>
+                        <span class="bg-amber-400 text-slate-900 font-extrabold text-xs px-2 py-0.5 rounded-full">Version 2</span>
+                    </div>
+                    <p class="text-xs text-indigo-200">Exercices d'entraînement : <span class="text-emerald-300 font-bold">QUI</span> et <span class="text-indigo-300 font-bold">QUE / QU'</span></p>
+                </div>
+            </div>
+
+            <!-- Global Score Dashboard -->
+            <div class="flex items-center gap-4 bg-white/10 backdrop-blur-md px-4 py-2 rounded-2xl border border-white/10">
+                <div class="text-right">
+                    <div class="text-xs text-indigo-200 font-medium uppercase tracking-wider">Score Global</div>
+                    <div class="text-xl font-black text-amber-300"><span id="global-score">0</span> / <span id="global-max">36</span></div>
+                </div>
+                <div class="w-10 h-10 rounded-xl bg-amber-400/20 flex items-center justify-center text-amber-300 font-bold">
+                    <i class="fa-solid fa-trophy text-lg"></i>
+                </div>
+            </div>
+
+            <!-- Quick Nav -->
+            <nav class="flex flex-wrap justify-center gap-1.5 text-xs font-semibold">
+                <a href="#tableau" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition">Règles & Couleurs</a>
+                <a href="#ex1" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition">Ex 1: Fruits</a>
+                <a href="#ex2" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition">Ex 2: Jeux</a>
+                <a href="#ex3" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition">Ex 3: Enfants</a>
+                <a href="#recap" class="px-3 py-1.5 rounded-lg bg-amber-400 text-slate-900 font-bold hover:bg-amber-300 transition">Ex 4: Musée</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- SECTION 1: TABLEAU EXPLICATIF DE REPERAGE COLORÉ -->
+        <section id="tableau" class="bg-white rounded-2xl p-6 sm:p-8 card-shadow border border-slate-100">
+            <div class="flex items-center space-x-3 mb-6 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-black text-lg">1</span>
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-800">Tableau Explicatif : Code Couleur Grammatical</h2>
+                    <p class="text-sm text-slate-500">Observez attentivement ce qui suit immédiatement le pronom relatif.</p>
+                </div>
+            </div>
+
+            <!-- Color Rules Banner -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <!-- QUI + VERBE Rule -->
+                <div class="bg-emerald-50/60 border-2 border-emerald-200 rounded-2xl p-5 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="hl-qui text-lg">QUI</span>
+                        <span class="text-xs font-bold bg-emerald-600 text-white px-2.5 py-1 rounded-full uppercase">Rôle : Sujet</span>
+                    </div>
+                    <p class="text-sm text-slate-700">
+                        Après <strong class="text-emerald-700">QUI</strong>, on trouve directement le <span class="hl-verb">VERBE</span>.
+                    </p>
+                    <div class="bg-white p-3 rounded-xl border border-emerald-200 text-sm space-y-1">
+                        <p class="font-bold text-slate-600 text-xs">Exemple :</p>
+                        <p class="text-slate-800">
+                            C'est le garçon <span class="hl-qui">qui</span> <span class="hl-verb">pousse</span> le ballon.
+                        </p>
+                    </div>
+                    <p class="text-xs text-emerald-800 font-semibold italic">
+                        💡 <span class="hl-verb">pousse</span> est le verbe conjugué dont "qui" est le sujet.
+                    </p>
+                </div>
+
+                <!-- QUE / QU' + SUJET + VERBE Rule -->
+                <div class="bg-indigo-50/60 border-2 border-indigo-200 rounded-2xl p-5 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="hl-que text-lg">QUE / QU'</span>
+                        <span class="text-xs font-bold bg-indigo-600 text-white px-2.5 py-1 rounded-full uppercase">Rôle : COD</span>
+                    </div>
+                    <p class="text-sm text-slate-700">
+                        Après <strong class="text-indigo-700">QUE / QU'</strong>, on trouve le <span class="hl-sujet">SUJET (Nom/Pronom)</span> + son <span class="hl-verb">VERBE</span>.
+                    </p>
+                    <div class="bg-white p-3 rounded-xl border border-indigo-200 text-sm space-y-1">
+                        <p class="font-bold text-slate-600 text-xs">Exemple :</p>
+                        <p class="text-slate-800">
+                            C'est le ballon <span class="hl-que">que</span> <span class="hl-sujet">Paul</span> <span class="hl-verb">regarde</span>.
+                        </p>
+                        <p class="text-slate-800">
+                            C'est le ballon <span class="hl-que">qu'</span><span class="hl-sujet">il</span> <span class="hl-verb">achète</span>.
+                        </p>
+                    </div>
+                    <p class="text-xs text-indigo-800 font-semibold italic">
+                        💡 <span class="hl-sujet">Paul / il</span> est le sujet et <span class="hl-verb">regarde / achète</span> est son verbe.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Quick visual guide table -->
+            <div class="overflow-x-auto rounded-xl border border-slate-200 bg-slate-50 p-4">
+                <table class="w-full text-sm text-left">
+                    <thead class="text-xs uppercase bg-slate-200/70 text-slate-700">
+                        <tr>
+                            <th class="p-3">Pronom</th>
+                            <th class="p-3">Suivi immédiatement par...</th>
+                            <th class="p-3">Exemple de la fiche</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <tr>
+                            <td class="p-3 font-bold text-emerald-700">QUI</td>
+                            <td class="p-3"><span class="hl-verb">Un verbe</span></td>
+                            <td class="p-3">...un fruit <span class="hl-qui">qui</span> <span class="hl-verb">pousse</span> à la Martinique.</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold text-indigo-700">QUE</td>
+                            <td class="p-3"><span class="hl-sujet">Sujet (consonne)</span> + <span class="hl-verb">Verbe</span></td>
+                            <td class="p-3">...un fruit <span class="hl-que">que</span> <span class="hl-sujet">vous</span> <span class="hl-verb">devez</span> manger.</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold text-indigo-700">QU'</td>
+                            <td class="p-3"><span class="hl-sujet">Sujet (voyelle/h)</span> + <span class="hl-verb">Verbe</span></td>
+                            <td class="p-3">...les vitamines <span class="hl-que">qu'</span><span class="hl-sujet">il</span> <span class="hl-verb">contient</span>.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECTION 2: EXERCICE 1 - SALADE DE FRUITS -->
+        <section id="ex1" class="bg-white rounded-2xl p-6 sm:p-8 card-shadow border border-slate-100">
+            <div class="flex items-center justify-between mb-6 border-b border-slate-100 pb-4 flex-wrap gap-3">
+                <div class="flex items-center space-x-3">
+                    <span class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-black text-lg">2</span>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h2 class="text-xl sm:text-2xl font-bold text-slate-800">Exercice 1 : Salade de fruits !</h2>
+                            <span class="text-xs bg-indigo-100 text-indigo-800 font-bold px-2.5 py-0.5 rounded-full">PDF - Ex. 1</span>
+                        </div>
+                        <p class="text-sm text-slate-500">Complétez avec <span class="font-bold text-emerald-600">qui</span>, <span class="font-bold text-indigo-600">que</span> ou <span class="font-bold text-indigo-600">qu'</span> et identifiez le fruit.</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="text-sm font-bold text-slate-600 bg-slate-100 px-3 py-1.5 rounded-xl border border-slate-200">Score Ex 1 : <span id="score-ex1" class="text-indigo-600">0</span> / 16</span>
+                    <button onclick="checkEx1()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold text-sm shadow-md transition flex items-center gap-2">
+                        <i class="fa-solid fa-circle-check"></i> Vérifier
+                    </button>
+                </div>
+            </div>
+
+            <!-- List of available fruits helper -->
+            <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 mb-6 flex items-center justify-between flex-wrap gap-2 text-xs sm:text-sm text-amber-900 font-medium">
+                <span class="font-bold text-amber-800"><i class="fa-solid fa-basket-shopping text-amber-600 mr-1"></i> Fruits à choisir :</span>
+                <div class="flex flex-wrap gap-2">
+                    <span class="bg-white px-2.5 py-1 rounded-lg border border-amber-300 shadow-sm font-semibold">la banane</span>
+                    <span class="bg-white px-2.5 py-1 rounded-lg border border-amber-300 shadow-sm font-semibold">l'orange</span>
+                    <span class="bg-white px-2.5 py-1 rounded-lg border border-amber-300 shadow-sm font-semibold">le raisin</span>
+                    <span class="bg-white px-2.5 py-1 rounded-lg border border-amber-300 shadow-sm font-semibold">la pêche</span>
+                    <span class="bg-white px-2.5 py-1 rounded-lg border border-amber-300 shadow-sm font-semibold">la pomme</span>
+                </div>
+            </div>
+
+            <!-- Riddle Items -->
+            <div class="space-y-6" id="ex1-container">
+
+                <!-- Item 1 Example -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-5">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-bold bg-slate-200 text-slate-700 px-2.5 py-0.5 rounded-md">Exemple modèle</span>
+                    </div>
+                    <p class="text-slate-800 text-base leading-relaxed">
+                        1. Voilà un fruit <span class="hl-qui">qui</span> <span class="hl-verb">pousse</span> à la Martinique, <span class="hl-que">que</span> <span class="hl-sujet">vous</span> <span class="hl-verb">devez</span> manger sans la peau et <span class="hl-qui">qui</span> <span class="hl-verb">est</span> jaune : <strong class="text-emerald-700 underline">la banane</strong>.
+                    </p>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-5 space-y-3" id="ex1-card-2">
+                    <div class="font-bold text-slate-700 text-sm">2. Phrase à compléter :</div>
+                    <p class="text-slate-800 text-base leading-relaxed">
+                        Voilà un fruit 
+                        <select id="ex1-gap-2a" class="mx-1 px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                            <option value="">...</option>
+                            <option value="qui">qui</option>
+                            <option value="que">que</option>
+                            <option value="qu'">qu'</option>
+                        </select>
+                        <span class="hl-verb">est</span> acide, 
+                        <select id="ex1-gap-2b" class="mx-1 px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                            <option value="">...</option>
+                            <option value="qui">qui</option>
+                            <option value="que">que</option>
+                            <option value="qu'">qu'</option>
+                        </select>
+                        <span class="hl-verb">porte</span> le nom d'une couleur et 
+                        <select id="ex1-gap-2c" class="mx-1 px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                            <option value="">...</option>
+                            <option value="qui">qui</option>
+                            <option value="que">que</option>
+                            <option value="qu'">qu'</option>
+                        </select>
+                        <span class="hl-sujet">les sportifs</span> <span class="hl-verb">aiment</span> beaucoup pour les vitamines C 
+                        <select id="ex1-gap-2d" class="mx-1 px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                            <option value="">...</option>
+                            <option value="qui">qui</option>
+                            <option value="que">que</option>
+                            <option value="qu'">qu'</option>
+                        </select>
+                        <span class="hl-sujet">il</span> <span class="hl-verb">contient</span> : 
+                        <select id="ex1-fruit-2" class="mx-1 px-3 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-amber-800 focus:ring-2 focus:ring-amber-400 outline-none">
+                            <option value="">-- Quel fruit ? --</option>
+                            <option value="la banane">la banane</option>
+                            <option value="l'orange">l'orange</option>
+                            <option value="le raisin">le raisin</option>
+                            <option value="la pêche">la pêche</option>
+                            <option value="la pomme">la pomme</option>
+                        </select>
+                    </p>
+                    <div id="ex1-fb-2" class="hidden text-xs rounded-xl p-3 font-medium"></div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-5 space-y-3" id="ex1-card-3">
+                    <div class="font-bold text-slate-700 text-sm">3. Phrase à compléter :</div>
+                    <p class="text-slate-800 text-base leading-relaxed">
+                        C'est un fruit 
+                        <select id="ex1-gap-3a" class="mx-1 px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                            <option value="">...</option>
+                            <option value="qui">qui</option>
+                            <option value="que">que</option>
+                            <option value="qu'">qu'</option>
+                        </select>
+                        <span class="hl-sujet">on</span> <span class="hl-verb">récolte</span> à la fin de l'été en Europe, 
+                        <select id="ex1-gap-3b" class="mx-1 px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                            <option value="">...</option>
+                            <option value="qui">qui</option>
+                            <option value="que">que</option>
+                            <option value="qu'">qu'</option>
+                        </select>
+                        <span class="hl-verb">sert</span> à faire le vin et 
+                        <select id="ex1-gap-3c" class="mx-1 px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                            <option value="">...</option>
+                            <option value="qui">qui</option>
+                            <option value="que">que</option>
+                            <option value="qu'">qu'</option>
+                        </select>
+                        <span class="hl-sujet">on</span> <span class="hl-verb">achète</span> en grappes : 
+                        <select id="ex1-fruit-3" class="mx-1 px-3 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-amber-800 focus:ring-2 focus:ring-amber-400 outline-none">
+                            <option value="">-- Quel fruit ? --</option>
+                            <option value="la banane">la banane</option>
+                            <option value="l'orange">l'orange</option>
+                            <option value="le raisin">le raisin</option>
+                            <option value="la pêche">la pêche</option>
+                            <option value="la pomme">la pomme</option>
+                        </select>
+                    </p>
+                    <div id="ex1-fb-3" class="hidden text-xs rounded-xl p-3 font-medium"></div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-5 space-y-3" id="ex1-card-4">
+                    <div class="font-bold text-slate-700 text-sm">4. Phrase à compléter :</div>
+                    <p class="text-slate-800 text-base leading-relaxed">
+                        Voilà un fruit 
+                        <select id="ex1-gap-4a" class="mx-1 px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                            <option value="">...</option>
+                            <option value="qui">qui</option>
+                            <option value="que">que</option>
+                            <option value="qu'">qu'</option>
+                        </select>
+                        <span class="hl-sujet">vous</span> <span class="hl-verb">trouverez</span> l'été en Europe sur les marchés, 
+                        <select id="ex1-gap-4b" class="mx-1 px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                            <option value="">...</option>
+                            <option value="qui">qui</option>
+                            <option value="que">que</option>
+                            <option value="qu'">qu'</option>
+                        </select>
+                        <span class="hl-verb">est</span> rouge, blanc ou jaune et 
+                        <select id="ex1-gap-4c" class="mx-1 px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                            <option value="">...</option>
+                            <option value="qui">qui</option>
+                            <option value="que">que</option>
+                            <option value="qu'">qu'</option>
+                        </select>
+                        <span class="hl-verb">a</span> un noyau : 
+                        <select id="ex1-fruit-4" class="mx-1 px-3 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-amber-800 focus:ring-2 focus:ring-amber-400 outline-none">
+                            <option value="">-- Quel fruit ? --</option>
+                            <option value="la banane">la banane</option>
+                            <option value="l'orange">l'orange</option>
+                            <option value="le raisin">le raisin</option>
+                            <option value="la pêche">la pêche</option>
+                            <option value="la pomme">la pomme</option>
+                        </select>
+                    </p>
+                    <div id="ex1-fb-4" class="hidden text-xs rounded-xl p-3 font-medium"></div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-5 space-y-3" id="ex1-card-5">
+                    <div class="font-bold text-slate-700 text-sm">5. Phrase à compléter :</div>
+                    <p class="text-slate-800 text-base leading-relaxed">
+                        C'est un fruit 
+                        <select id="ex1-gap-5a" class="mx-1 px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                            <option value="">...</option>
+                            <option value="qui">qui</option>
+                            <option value="que">que</option>
+                            <option value="qu'">qu'</option>
+                        </select>
+                        <span class="hl-verb">peut</span> être vert, jaune ou rouge, 
+                        <select id="ex1-gap-5b" class="mx-1 px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                            <option value="">...</option>
+                            <option value="qui">qui</option>
+                            <option value="que">que</option>
+                            <option value="qu'">qu'</option>
+                        </select>
+                        <span class="hl-sujet">les enfants</span> <span class="hl-verb">mangent</span> souvent en compote : 
+                        <select id="ex1-fruit-5" class="mx-1 px-3 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-amber-800 focus:ring-2 focus:ring-amber-400 outline-none">
+                            <option value="">-- Quel fruit ? --</option>
+                            <option value="la banane">la banane</option>
+                            <option value="l'orange">l'orange</option>
+                            <option value="le raisin">le raisin</option>
+                            <option value="la pêche">la pêche</option>
+                            <option value="la pomme">la pomme</option>
+                        </select>
+                    </p>
+                    <div id="ex1-fb-5" class="hidden text-xs rounded-xl p-3 font-medium"></div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 3: EXERCICE 2 - JEUX DE SOCIÉTÉ -->
+        <section id="ex2" class="bg-white rounded-2xl p-6 sm:p-8 card-shadow border border-slate-100">
+            <div class="flex items-center justify-between mb-6 border-b border-slate-100 pb-4 flex-wrap gap-3">
+                <div class="flex items-center space-x-3">
+                    <span class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-black text-lg">3</span>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h2 class="text-xl sm:text-2xl font-bold text-slate-800">Exercice 2 : Jeux de société</h2>
+                            <span class="text-xs bg-indigo-100 text-indigo-800 font-bold px-2.5 py-0.5 rounded-full">PDF - Ex. 2</span>
+                        </div>
+                        <p class="text-sm text-slate-500">Faites une seule phrase avec <span class="font-bold text-emerald-600">qui</span>, <span class="font-bold text-indigo-600">que</span> ou <span class="font-bold text-indigo-600">qu'</span>.</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="text-sm font-bold text-slate-600 bg-slate-100 px-3 py-1.5 rounded-xl border border-slate-200">Score Ex 2 : <span id="score-ex2" class="text-indigo-600">0</span> / 2</span>
+                    <button onclick="checkEx2()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold text-sm shadow-md transition flex items-center gap-2">
+                        <i class="fa-solid fa-circle-check"></i> Vérifier
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sentence Combinations -->
+            <div class="space-y-6">
+
+                <!-- Item 1 Example -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-2">
+                    <div class="text-xs font-bold bg-slate-200 text-slate-700 px-2.5 py-0.5 rounded-md inline-block">1. Exemple guidé</div>
+                    <p class="text-sm font-semibold text-slate-700">Le bridge est un jeu de cartes.</p>
+                    <ul class="text-xs text-slate-600 list-disc list-inside pl-2">
+                        <li>a. Il exige une bonne mémoire visuelle.</li>
+                        <li>b. Les enfants ne l'aiment pas.</li>
+                    </ul>
+                    <div class="bg-emerald-50 p-3 rounded-xl border border-emerald-200 text-sm text-slate-800 mt-2">
+                        👉 <strong>Phrase combinée :</strong> Le bridge est un jeu de cartes <span class="hl-qui">qui</span> <span class="hl-verb">exige</span> une bonne mémoire visuelle et <span class="hl-que">que</span> <span class="hl-sujet">les enfants</span> <span class="hl-verb">n'aiment pas</span>.
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3" id="ex2-card-2">
+                    <div class="text-xs font-bold bg-indigo-100 text-indigo-800 px-2.5 py-0.5 rounded-md inline-block">2. À vous de jouer</div>
+                    <p class="text-sm font-bold text-slate-800">Le Scrabble est un jeu.</p>
+                    <ul class="text-xs text-slate-600 list-disc list-inside pl-2 space-y-0.5">
+                        <li>a. Il <span class="hl-verb">développe</span> la connaissance du vocabulaire.</li>
+                        <li>b. <span class="hl-sujet">On</span> le <span class="hl-verb">pratique</span> en famille ou entre amis.</li>
+                    </ul>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Écrivez la phrase complète :</label>
+                        <input type="text" id="ex2-input-2" placeholder="Le Scrabble est un jeu..." class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-indigo-400 outline-none">
+                    </div>
+                    <div id="ex2-fb-2" class="hidden text-xs rounded-xl p-3 font-medium"></div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3" id="ex2-card-3">
+                    <div class="text-xs font-bold bg-indigo-100 text-indigo-800 px-2.5 py-0.5 rounded-md inline-block">3. À vous de jouer</div>
+                    <p class="text-sm font-bold text-slate-800">Le jeu des sept familles est un jeu de cartes.</p>
+                    <ul class="text-xs text-slate-600 list-disc list-inside pl-2 space-y-0.5">
+                        <li>a. <span class="hl-sujet">Les enfants</span> l'<span class="hl-verb">adorent</span>.</li>
+                        <li>b. Il <span class="hl-verb">consiste</span> à composer des familles.</li>
+                    </ul>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Écrivez la phrase complète :</label>
+                        <input type="text" id="ex2-input-3" placeholder="Le jeu des sept familles est un jeu de cartes..." class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-indigo-400 outline-none">
+                    </div>
+                    <div id="ex2-fb-3" class="hidden text-xs rounded-xl p-3 font-medium"></div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 4: EXERCICE 3 - DÉFINIR UNE PERSONNE -->
+        <section id="ex3" class="bg-white rounded-2xl p-6 sm:p-8 card-shadow border border-slate-100">
+            <div class="flex items-center justify-between mb-6 border-b border-slate-100 pb-4 flex-wrap gap-3">
+                <div class="flex items-center space-x-3">
+                    <span class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-black text-lg">4</span>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h2 class="text-xl sm:text-2xl font-bold text-slate-800">Exercice 3 : Définir une personne</h2>
+                            <span class="text-xs bg-indigo-100 text-indigo-800 font-bold px-2.5 py-0.5 rounded-full">PDF - Ex. 3</span>
+                        </div>
+                        <p class="text-sm text-slate-500">Complétez les portraits d'enfants avec <span class="font-bold text-emerald-600">qui</span>, <span class="font-bold text-indigo-600">que</span> ou <span class="font-bold text-indigo-600">qu'</span>.</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="text-sm font-bold text-slate-600 bg-slate-100 px-3 py-1.5 rounded-xl border border-slate-200">Score Ex 3 : <span id="score-ex3" class="text-indigo-600">0</span> / 10</span>
+                    <button onclick="checkEx3()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold text-sm shadow-md transition flex items-center gap-2">
+                        <i class="fa-solid fa-circle-check"></i> Vérifier
+                    </button>
+                </div>
+            </div>
+
+            <div class="space-y-4" id="ex3-container">
+
+                <!-- 1. Coquin Example -->
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm sm:text-base">
+                    <span class="font-bold text-slate-700">1. Un enfant coquin :</span> 
+                    c'est un enfant <span class="hl-qui">qui</span> <span class="hl-verb">fait</span> des blagues et <span class="hl-que">que</span> <span class="hl-sujet">les professeurs</span> <span class="hl-verb">n'aiment pas</span> beaucoup.
+                    <span class="text-xs text-slate-400 italic block mt-1">(Exemple du PDF)</span>
+                </div>
+
+                <!-- 2. Extraverti -->
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm sm:text-base space-y-2" id="ex3-card-2">
+                    <div>
+                        <span class="font-bold text-slate-700">2. Un enfant extraverti :</span> 
+                        c'est un enfant 
+                        <select id="ex3-gap-2a" class="mx-1 px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                            <option value="">...</option>
+                            <option value="qui">qui</option>
+                            <option value="que">que</option>
+                            <option value="qu'">qu'</option>
+                        </select>
+                        <span class="hl-verb">parle</span> à tout le monde et 
+                        <select id="ex3-gap-2b" class="mx-1 px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                            <option value="">...</option>
+                            <option value="qui">qui</option>
+                            <option value="que">que</option>
+                            <option value="qu'">qu'</option>
+                        </select>
+                        <span class="hl-sujet">on</span> <span class="hl-verb">entend</span> beaucoup.
+                    </div>
+                    <div id="ex3-fb-2" class="hidden text-xs rounded-xl p-2.5 font-medium"></div>
+                </div>
+
+                <!-- 3. Timide -->
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm sm:text-base space-y-2" id="ex3-card-3">
+                    <div>
+                        <span class="font-bold text-slate-700">3. Un enfant timide :</span> 
+                        c'est un enfant 
+                        <select id="ex3-gap-3a" class="mx-1 px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                            <option value="">...</option>
+                            <option value="qui">qui</option>
+                            <option value="que">que</option>
+                            <option value="qu'">qu'</option>
+                        </select>
+                        <span class="hl-verb">reste</span> seul et 
+                        <select id="ex3-gap-3b" class="mx-1 px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                            <option value="">...</option>
+                            <option value="qui">qui</option>
+                            <option value="que">que</option>
+                            <option value="qu'">qu'</option>
+                        </select>
+                        <span class="hl-verb">rougit</span> souvent.
+                    </div>
+                    <div id="ex3-fb-3" class="hidden text-xs rounded-xl p-2.5 font-medium"></div>
+                </div>
+
+                <!-- 4. Vif -->
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm sm:text-base space-y-2" id="ex3-card-4">
+                    <div>
+                        <span class="font-bold text-slate-700">4. Un enfant vif :</span> 
+                        c'est un enfant 
+                        <select id="ex3-gap-4a" class="mx-1 px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                            <option value="">...</option>
+                            <option value="qui">qui</option>
+                            <option value="que">que</option>
+                            <option value="qu'">qu'</option>
+                        </select>
+                        <span class="hl-verb">comprend</span> très vite et 
+                        <select id="ex3-gap-4b" class="mx-1 px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                            <option value="">...</option>
+                            <option value="qui">qui</option>
+                            <option value="que">que</option>
+                            <option value="qu'">qu'</option>
+                        </select>
+                        <span class="hl-sujet">les adultes</span> <span class="hl-verb">remarquent</span>.
+                    </div>
+                    <div id="ex3-fb-4" class="hidden text-xs rounded-xl p-2.5 font-medium"></div>
+                </div>
+
+                <!-- 5. Sage -->
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm sm:text-base space-y-2" id="ex3-card-5">
+                    <div>
+                        <span class="font-bold text-slate-700">5. Un enfant sage :</span> 
+                        c'est un enfant 
+                        <select id="ex3-gap-5a" class="mx-1 px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                            <option value="">...</option>
+                            <option value="qui">qui</option>
+                            <option value="que">que</option>
+                            <option value="qu'">qu'</option>
+                        </select>
+                        <span class="hl-verb">obéit</span> et 
+                        <select id="ex3-gap-5b" class="mx-1 px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                            <option value="">...</option>
+                            <option value="qui">qui</option>
+                            <option value="que">que</option>
+                            <option value="qu'">qu'</option>
+                        </select>
+                        <span class="hl-sujet">on</span> <span class="hl-verb">félicite</span> souvent.
+                    </div>
+                    <div id="ex3-fb-5" class="hidden text-xs rounded-xl p-2.5 font-medium"></div>
+                </div>
+
+                <!-- 6. Rebelle -->
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm sm:text-base space-y-2" id="ex3-card-6">
+                    <div>
+                        <span class="font-bold text-slate-700">6. Un enfant rebelle :</span> 
+                        c'est un enfant 
+                        <select id="ex3-gap-6a" class="mx-1 px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                            <option value="">...</option>
+                            <option value="qui">qui</option>
+                            <option value="que">que</option>
+                            <option value="qu'">qu'</option>
+                        </select>
+                        <span class="hl-verb">n'est</span> jamais d'accord et 
+                        <select id="ex3-gap-6b" class="mx-1 px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                            <option value="">...</option>
+                            <option value="qui">qui</option>
+                            <option value="que">que</option>
+                            <option value="qu'">qu'</option>
+                        </select>
+                        <span class="hl-verb">fatigue</span> ses parents.
+                    </div>
+                    <div id="ex3-fb-6" class="hidden text-xs rounded-xl p-2.5 font-medium"></div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 5: ACTIVITÉ RÉCAPITULATIVE - UNE JOURNÉE AU MUSÉE -->
+        <section id="recap" class="bg-white rounded-2xl p-6 sm:p-8 card-shadow border border-slate-100">
+            <div class="flex items-center justify-between mb-6 border-b border-slate-100 pb-4 flex-wrap gap-3">
+                <div class="flex items-center space-x-3">
+                    <span class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-black text-lg">5</span>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h2 class="text-xl sm:text-2xl font-bold text-slate-800">Activité Récapitulative : Une journée au musée</h2>
+                            <span class="text-xs bg-indigo-100 text-indigo-800 font-bold px-2.5 py-0.5 rounded-full">Histoire à trous</span>
+                        </div>
+                        <p class="text-sm text-slate-500">Complétez le texte en sélectionnant le bon pronom relatif dans chaque case.</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="text-sm font-bold text-slate-600 bg-slate-100 px-3 py-1.5 rounded-xl border border-slate-200">Score Ex 4 : <span id="score-recap" class="text-indigo-600">0</span> / 8</span>
+                    <button onclick="checkRecapStory()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold text-sm shadow-md transition flex items-center gap-2">
+                        <i class="fa-solid fa-circle-check"></i> Vérifier
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 leading-relaxed text-base sm:text-lg text-slate-700 space-y-4" id="recap-story">
+                <p>
+                    Hier, je suis allé dans un grand musée 
+                    <select id="gap-1" class="mx-1 px-3 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                        <option value="">...</option>
+                        <option value="qui">qui</option>
+                        <option value="que">que</option>
+                        <option value="qu'">qu'</option>
+                    </select>
+                    se trouve au centre de la ville. Le guide 
+                    <select id="gap-2" class="mx-1 px-3 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                        <option value="">...</option>
+                        <option value="qui">qui</option>
+                        <option value="que">que</option>
+                        <option value="qu'">qu'</option>
+                    </select>
+                    nous a accueillis était très passionné. Il nous a montré des tableaux célèbres 
+                    <select id="gap-3" class="mx-1 px-3 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                        <option value="">...</option>
+                        <option value="qui">qui</option>
+                        <option value="que">que</option>
+                        <option value="qu'">qu'</option>
+                    </select>
+                    des artistes du XIXe siècle ont peints.
+                </p>
+                <p>
+                    J'ai particulièrement admiré une sculpture 
+                    <select id="gap-4" class="mx-1 px-3 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                        <option value="">...</option>
+                        <option value="qui">qui</option>
+                        <option value="que">que</option>
+                        <option value="qu'">qu'</option>
+                    </select>
+                    représente un lion féroce et 
+                    <select id="gap-5" class="mx-1 px-3 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                        <option value="">...</option>
+                        <option value="qui">qui</option>
+                        <option value="que">que</option>
+                        <option value="qu'">qu'</option>
+                    </select>
+                    un artiste italien a sculptée. Mon ami Pierre, 
+                    <select id="gap-6" class="mx-1 px-3 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                        <option value="">...</option>
+                        <option value="qui">qui</option>
+                        <option value="que">que</option>
+                        <option value="qu'">qu'</option>
+                    </select>
+                    adore la photographie, a pris plusieurs photos 
+                    <select id="gap-7" class="mx-1 px-3 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                        <option value="">...</option>
+                        <option value="qui">qui</option>
+                        <option value="que">que</option>
+                        <option value="qu'">qu'</option>
+                    </select>
+                    il va partager sur son blog. C'est une visite 
+                    <select id="gap-8" class="mx-1 px-3 py-1 bg-white border border-slate-300 rounded-lg text-sm font-bold text-indigo-700 focus:ring-2 focus:ring-indigo-400 outline-none">
+                        <option value="">...</option>
+                        <option value="qui">qui</option>
+                        <option value="que">que</option>
+                        <option value="qu'">qu'</option>
+                    </select>
+                    m'a beaucoup inspiré !
+                </p>
+            </div>
+
+            <!-- Result Feedback Box -->
+            <div id="recap-feedback" class="mt-4 hidden p-4 rounded-xl font-medium text-center"></div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 text-center py-6 border-t border-slate-800 text-xs">
+        <p>Grammaire Française - Pronoms Relatifs (Version 2 - Fiche PDF Numérisée)</p>
+    </footer>
+
+    <script>
+        // Data and Answers key
+        const ex1Answers = {
+            "2a": "qui", "2b": "qui", "2c": "que", "2d": "qu'", "fruit-2": "l'orange",
+            "3a": "qu'", "3b": "qui", "3c": "qu'", "fruit-3": "le raisin",
+            "4a": "que", "4b": "qui", "4c": "qui", "fruit-4": "la pêche",
+            "5a": "qui", "5b": "que", "fruit-5": "la pomme"
+        };
+
+        const ex2Answers = {
+            2: "Le Scrabble est un jeu qui développe la connaissance du vocabulaire et qu'on pratique en famille ou entre amis.",
+            3: "Le jeu des sept familles est un jeu de cartes que les enfants adorent et qui consiste à composer des familles."
+        };
+
+        const ex3Answers = {
+            "2a": "qui", "2b": "qu'",
+            "3a": "qui", "3b": "qui",
+            "4a": "qui", "4b": "que",
+            "5a": "qui", "5b": "qu'",
+            "6a": "qui", "6b": "qui"
+        };
+
+        const recapAnswers = {
+            "gap-1": "qui",
+            "gap-2": "qui",
+            "gap-3": "que",
+            "gap-4": "qui",
+            "gap-5": "qu'",
+            "gap-6": "qui",
+            "gap-7": "qu'",
+            "gap-8": "qui"
+        };
+
+        let scores = { ex1: 0, ex2: 0, ex3: 0, recap: 0 };
+
+        function updateGlobalScore() {
+            const total = scores.ex1 + scores.ex2 + scores.ex3 + scores.recap;
+            document.getElementById('global-score').innerText = total;
+        }
+
+        // Helper string normalization
+        function normalizeText(str) {
+            return str.toLowerCase()
+                .replace(/[.,!]/g, '')
+                .replace(/\s+/g, ' ')
+                .replace(/’/g, "'")
+                .trim();
+        }
+
+        // Check Exercise 1
+        function checkEx1() {
+            let ex1Score = 0;
+
+            // Check riddle 2
+            let r2Correct = true;
+            let fb2Details = [];
+            ['2a', '2b', '2c', '2d'].forEach(gap => {
+                const val = document.getElementById(`ex1-gap-${gap}`).value;
+                if (val === ex1Answers[gap]) { ex1Score++; } 
+                else { r2Correct = false; fb2Details.push(`Erreur sur le pronom '${gap.slice(-1)}' (attendu : ${ex1Answers[gap]})`); }
+            });
+            const fruit2Val = document.getElementById('ex1-fruit-2').value;
+            if (fruit2Val === ex1Answers['fruit-2']) { ex1Score++; }
+            else { r2Correct = false; fb2Details.push(`Fruit attendu : ${ex1Answers['fruit-2']}`); }
+
+            const fb2El = document.getElementById('ex1-fb-2');
+            fb2El.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-rose-100', 'text-rose-900');
+            if (r2Correct) {
+                fb2El.classList.add('bg-emerald-100', 'text-emerald-900');
+                fb2El.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> <strong>Parfait !</strong> L'orange est bien le fruit recherché.`;
+            } else {
+                fb2El.classList.add('bg-rose-100', 'text-rose-900');
+                fb2El.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-600 mr-1"></i> <strong>À corriger :</strong> ${fb2Details.join(' | ')}`;
+            }
+
+            // Check riddle 3
+            let r3Correct = true;
+            let fb3Details = [];
+            ['3a', '3b', '3c'].forEach(gap => {
+                const val = document.getElementById(`ex1-gap-${gap}`).value;
+                if (val === ex1Answers[gap]) { ex1Score++; }
+                else { r3Correct = false; fb3Details.push(`Pronom '${gap.slice(-1)}' attendu : ${ex1Answers[gap]}`); }
+            });
+            const fruit3Val = document.getElementById('ex1-fruit-3').value;
+            if (fruit3Val === ex1Answers['fruit-3']) { ex1Score++; }
+            else { r3Correct = false; fb3Details.push(`Fruit attendu : ${ex1Answers['fruit-3']}`); }
+
+            const fb3El = document.getElementById('ex1-fb-3');
+            fb3El.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-rose-100', 'text-rose-900');
+            if (r3Correct) {
+                fb3El.classList.add('bg-emerald-100', 'text-emerald-900');
+                fb3El.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> <strong>Parfait !</strong> Le raisin est bien le fruit recherché.`;
+            } else {
+                fb3El.classList.add('bg-rose-100', 'text-rose-900');
+                fb3El.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-600 mr-1"></i> <strong>À corriger :</strong> ${fb3Details.join(' | ')}`;
+            }
+
+            // Check riddle 4
+            let r4Correct = true;
+            let fb4Details = [];
+            ['4a', '4b', '4c'].forEach(gap => {
+                const val = document.getElementById(`ex1-gap-${gap}`).value;
+                if (val === ex1Answers[gap]) { ex1Score++; }
+                else { r4Correct = false; fb4Details.push(`Pronom '${gap.slice(-1)}' attendu : ${ex1Answers[gap]}`); }
+            });
+            const fruit4Val = document.getElementById('ex1-fruit-4').value;
+            if (fruit4Val === ex1Answers['fruit-4']) { ex1Score++; }
+            else { r4Correct = false; fb4Details.push(`Fruit attendu : ${ex1Answers['fruit-4']}`); }
+
+            const fb4El = document.getElementById('ex1-fb-4');
+            fb4El.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-rose-100', 'text-rose-900');
+            if (r4Correct) {
+                fb4El.classList.add('bg-emerald-100', 'text-emerald-900');
+                fb4El.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> <strong>Parfait !</strong> La pêche est le fruit avec un noyau.`;
+            } else {
+                fb4El.classList.add('bg-rose-100', 'text-rose-900');
+                fb4El.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-600 mr-1"></i> <strong>À corriger :</strong> ${fb4Details.join(' | ')}`;
+            }
+
+            // Check riddle 5
+            let r5Correct = true;
+            let fb5Details = [];
+            ['5a', '5b'].forEach(gap => {
+                const val = document.getElementById(`ex1-gap-${gap}`).value;
+                if (val === ex1Answers[gap]) { ex1Score++; }
+                else { r5Correct = false; fb5Details.push(`Pronom '${gap.slice(-1)}' attendu : ${ex1Answers[gap]}`); }
+            });
+            const fruit5Val = document.getElementById('ex1-fruit-5').value;
+            if (fruit5Val === ex1Answers['fruit-5']) { ex1Score++; }
+            else { r5Correct = false; fb5Details.push(`Fruit attendu : ${ex1Answers['fruit-5']}`); }
+
+            const fb5El = document.getElementById('ex1-fb-5');
+            fb5El.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-rose-100', 'text-rose-900');
+            if (r5Correct) {
+                fb5El.classList.add('bg-emerald-100', 'text-emerald-900');
+                fb5El.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> <strong>Parfait !</strong> La pomme est bien le fruit de la compote.`;
+            } else {
+                fb5El.classList.add('bg-rose-100', 'text-rose-900');
+                fb5El.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-600 mr-1"></i> <strong>À corriger :</strong> ${fb5Details.join(' | ')}`;
+            }
+
+            scores.ex1 = ex1Score;
+            document.getElementById('score-ex1').innerText = ex1Score;
+            updateGlobalScore();
+        }
+
+        // Check Exercise 2
+        function checkEx2() {
+            let ex2Score = 0;
+
+            // Item 2
+            const val2 = document.getElementById('ex2-input-2').value;
+            const fb2El = document.getElementById('ex2-fb-2');
+            fb2El.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-rose-100', 'text-rose-900');
+
+            if (normalizeText(val2) === normalizeText(ex2Answers[2])) {
+                ex2Score++;
+                fb2El.classList.add('bg-emerald-100', 'text-emerald-900');
+                fb2El.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> <strong>Bravo !</strong> Phrase parfaitement construite.`;
+            } else {
+                fb2El.classList.add('bg-rose-100', 'text-rose-900');
+                fb2El.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-600 mr-1"></i> <strong>Rappel :</strong> 'développe' est un verbe (QUI), et 'on' est un sujet commençant par voyelle (QU').<br><strong>Modèle :</strong> ${ex2Answers[2]}`;
+            }
+
+            // Item 3
+            const val3 = document.getElementById('ex2-input-3').value;
+            const fb3El = document.getElementById('ex2-fb-3');
+            fb3El.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-rose-100', 'text-rose-900');
+
+            if (normalizeText(val3) === normalizeText(ex2Answers[3])) {
+                ex2Score++;
+                fb3El.classList.add('bg-emerald-100', 'text-emerald-900');
+                fb3El.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> <strong>Bravo !</strong> Phrase parfaitement construite.`;
+            } else {
+                fb3El.classList.add('bg-rose-100', 'text-rose-900');
+                fb3El.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-600 mr-1"></i> <strong>Rappel :</strong> 'les enfants' est un sujet (QUE), et 'consiste' est un verbe (QUI).<br><strong>Modèle :</strong> ${ex2Answers[3]}`;
+            }
+
+            scores.ex2 = ex2Score;
+            document.getElementById('score-ex2').innerText = ex2Score;
+            updateGlobalScore();
+        }
+
+        // Check Exercise 3
+        function checkEx3() {
+            let ex3Score = 0;
+
+            const items = [2, 3, 4, 5, 6];
+            items.forEach(num => {
+                const gapA = document.getElementById(`ex3-gap-${num}a`).value;
+                const gapB = document.getElementById(`ex3-gap-${num}b`).value;
+                const targetA = ex3Answers[`${num}a`];
+                const targetB = ex3Answers[`${num}b`];
+
+                let itemScore = 0;
+                if (gapA === targetA) itemScore++;
+                if (gapB === targetB) itemScore++;
+                ex3Score += itemScore;
+
+                const fbEl = document.getElementById(`ex3-fb-${num}`);
+                fbEl.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-rose-100', 'text-rose-900');
+
+                if (itemScore === 2) {
+                    fbEl.classList.add('bg-emerald-100', 'text-emerald-900');
+                    fbEl.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> <strong>Excellent !</strong> (${targetA} / ${targetB})`;
+                } else {
+                    fbEl.classList.add('bg-rose-100', 'text-rose-900');
+                    fbEl.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-600 mr-1"></i> <strong>Correction :</strong> Réponses attendues : <strong>${targetA}</strong> et <strong>${targetB}</strong>.`;
+                }
+            });
+
+            scores.ex3 = ex3Score;
+            document.getElementById('score-ex3').innerText = ex3Score;
+            updateGlobalScore();
+        }
+
+        function checkRecapStory() {
+            let recapScore = 0;
+            const total = Object.keys(recapAnswers).length;
+
+            Object.keys(recapAnswers).forEach(id => {
+                const selectEl = document.getElementById(id);
+                const val = selectEl.value;
+
+                selectEl.classList.remove('border-slate-300', 'border-emerald-500', 'bg-emerald-50', 'border-rose-500', 'bg-rose-50');
+
+                if (val === recapAnswers[id]) {
+                    recapScore++;
+                    selectEl.classList.add('border-emerald-500', 'bg-emerald-50');
+                } else {
+                    selectEl.classList.add('border-rose-500', 'bg-rose-50');
+                }
+            });
+
+            scores.recap = recapScore;
+            document.getElementById('score-recap').innerText = recapScore;
+            updateGlobalScore();
+
+            const feedbackEl = document.getElementById('recap-feedback');
+            feedbackEl.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-amber-100', 'text-amber-900');
+
+            if (recapScore === total) {
+                feedbackEl.classList.add('bg-emerald-100', 'text-emerald-900');
+                feedbackEl.innerHTML = `<i class="fa-solid fa-trophy text-amber-500 text-lg mr-2"></i> <strong>Parfait ! Score : ${recapScore}/${total}</strong>. Vous maîtrisez parfaitement l'usage de QUI, QUE et QU' !`;
+            } else {
+                feedbackEl.classList.add('bg-amber-100', 'text-amber-900');
+                feedbackEl.innerHTML = `<i class="fa-solid fa-circle-info text-amber-600 text-lg mr-2"></i> <strong>Résultat : ${recapScore}/${total} correct(s).</strong> Regardez les éléments surlignés en rouge et réessayez !`;
+            }
+        }
+    </script>
+</body>
+</html>
