@@ -82,21 +82,26 @@
             <div class="w-1/5 bg-oifGreen"></div>
             <div class="w-1/5 bg-oifViolet"></div>
         </div>
-        <!-- Bouton Retour à l'Index -->
-<a href="index.html" class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-xl font-semibold text-xs transition backdrop-blur-md shadow-sm">
-    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-    </svg>
-    <span>Retour au sommaire</span>
-</a>
+
         <div class="max-w-6xl mx-auto px-3 sm:px-4 py-3 sm:py-4 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
-            <div class="flex items-center gap-2.5 sm:gap-3 w-full sm:w-auto justify-between sm:justify-start">
+            
+            <!-- Bloc gauche : Bouton retour + Logo + Titre -->
+            <div class="flex flex-wrap sm:flex-nowrap items-center gap-2.5 sm:gap-3 w-full sm:w-auto justify-between sm:justify-start">
+                
+                <!-- BOUTON RETOUR À L'INDEX EN HAUT À GAUCHE -->
+                <a href="index.html" class="inline-flex items-center gap-1.5 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 rounded-xl font-bold text-xs transition-all shadow-sm shrink-0">
+                    <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    <span>Sommaire</span>
+                </a>
+
                 <div class="flex items-center gap-2.5">
                     <div class="p-2 sm:p-2.5 bg-slate-100 rounded-xl text-oifBlue font-bold text-lg sm:text-xl flex items-center justify-center shadow-inner">
                         🇫🇷 A2
                     </div>
                     <div>
-                        <h1 class="text-lg sm:text-2xl font-bold text-slate-900 leading-tight">Grammaire Interactive FLE</h1>
+                        <h1 class="text-base sm:text-xl md:text-2xl font-bold text-slate-900 leading-tight">Grammaire Interactive FLE</h1>
                         <p class="text-xs sm:text-sm text-slate-500 font-medium">Les nuances du présent et le futur proche</p>
                     </div>
                 </div>
@@ -109,7 +114,7 @@
                 </div>
             </div>
             
-            <div class="hidden sm:flex items-center gap-2 bg-slate-100 p-1.5 rounded-xl border border-slate-200">
+            <div class="hidden sm:flex items-center gap-2 bg-slate-100 p-1.5 rounded-xl border border-slate-200 shrink-0">
                 <span class="text-xs font-semibold px-2 text-slate-600">Progression globale :</span>
                 <span id="global-score-badge" class="bg-white text-oifBlue font-bold text-sm px-3 py-1 rounded-lg shadow-sm border border-slate-200">
                     0 / 44 pts
@@ -143,20 +148,15 @@
     <!-- Contenu Principal -->
     <main class="max-w-6xl mx-auto px-3 sm:px-4 py-4 sm:py-8 flex-grow w-full">
 
-        <!-- ========================================== -->
-        <!-- ONGLET 1 : LE PASSÉ RÉCENT                -->
-        <!-- ========================================== -->
+        <!-- ONGLET 1 : LE PASSÉ RÉCENT -->
         <section id="tab-passe-recent" class="tab-content space-y-5 sm:space-y-8">
-            <!-- En-tête de section -->
             <div class="bg-gradient-to-r from-oifBlue to-blue-700 rounded-2xl p-4 sm:p-6 text-white shadow-md">
                 <div class="inline-block px-2.5 py-0.5 sm:px-3 sm:py-1 bg-white/20 rounded-full text-[11px] sm:text-xs font-semibold mb-2">Grammaire & Pratique</div>
                 <h2 class="text-xl sm:text-3xl font-bold">1. Le passé récent</h2>
                 <p class="text-blue-100 text-xs sm:text-sm mt-1">Exprimer une action accomplie juste avant le moment où l'on parle.</p>
             </div>
 
-            <!-- Fiche Explicative -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-                <!-- a) Formation -->
                 <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
                     <div class="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3 text-oifBlue font-bold text-base sm:text-lg">
                         <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-blue-50 flex items-center justify-center text-xs sm:text-sm">A</span>
@@ -168,7 +168,6 @@
                     </div>
                 </div>
 
-                <!-- b) Exemples -->
                 <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
                     <div class="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3 text-oifBlue font-bold text-base sm:text-lg">
                         <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-blue-50 flex items-center justify-center text-xs sm:text-sm">B</span>
@@ -190,7 +189,6 @@
                     </ul>
                 </div>
 
-                <!-- c) Expressions temporelles -->
                 <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
                     <div class="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3 text-oifBlue font-bold text-base sm:text-lg">
                         <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-blue-50 flex items-center justify-center text-xs sm:text-sm">C</span>
@@ -206,9 +204,7 @@
                 </div>
             </div>
 
-            <!-- d) Activités interactives -->
             <div class="space-y-6">
-                <!-- Exercice 1 : 12 phrases à trous -->
                 <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-slate-100">
                         <div>
@@ -221,7 +217,6 @@
                     </div>
 
                     <form id="form-pr-1" class="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4">
-                        <!-- Généré dynamiquement en JS -->
                     </form>
 
                     <div class="flex flex-col sm:flex-row items-center justify-between gap-3 mt-6 pt-4 border-t border-slate-100">
@@ -234,18 +229,15 @@
                     </div>
                 </div>
 
-                <!-- Exercice 2 : 10 Fiches de conversation interactives avec support tactile Swipe -->
                 <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
                     <div class="mb-4 sm:mb-6">
                         <h3 class="text-base sm:text-lg font-bold text-slate-900">Activité 1.2 : Fiches de conversation</h3>
                         <p class="text-xs sm:text-sm text-slate-500">Comment répondre avec le passé récent ? Appuyez pour retourner la carte ou balayez (swipe) à gauche/droite !</p>
                     </div>
 
-                    <!-- Flashcard Carousel / Grid -->
                     <div class="flex flex-col items-center select-none">
                         <div id="flashcard-touch-zone" class="w-full max-w-lg h-72 sm:h-64 perspective-1000 cursor-pointer group" onclick="flipCard()">
                             <div id="flashcard-inner" class="w-full h-full relative transform-style-3d transition-transform duration-500 rounded-2xl border-2 border-oifBlue/20 shadow-md bg-white">
-                                <!-- Recto (Question) -->
                                 <div class="absolute inset-0 backface-hidden p-5 sm:p-6 flex flex-col justify-between items-center text-center bg-gradient-to-b from-white to-blue-50/50 rounded-2xl">
                                     <div class="flex items-center justify-between w-full">
                                         <span id="card-num-badge" class="px-2.5 py-0.5 bg-oifBlue text-white text-[11px] sm:text-xs font-bold rounded-full">Fiche 1 / 10</span>
@@ -259,7 +251,6 @@
                                         <span>👆 Touchez pour voir la réponse</span>
                                     </div>
                                 </div>
-                                <!-- Verso (Réponse) -->
                                 <div class="absolute inset-0 backface-hidden rotate-y-180 p-5 sm:p-6 flex flex-col justify-between items-center text-center bg-gradient-to-b from-oifBlue to-blue-800 text-white rounded-2xl">
                                     <div class="flex items-center justify-between w-full">
                                         <span class="px-2.5 py-0.5 bg-white/20 text-white text-[11px] sm:text-xs font-bold rounded-full">Exemple de réponse</span>
@@ -276,7 +267,6 @@
                             </div>
                         </div>
 
-                        <!-- Navigation Flashcards -->
                         <div class="flex items-center justify-between w-full max-w-lg gap-2 mt-4 sm:mt-6">
                             <button onclick="prevCard()" class="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 rounded-xl font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-1">
                                 ⬅️ Précédente
@@ -291,20 +281,15 @@
             </div>
         </section>
 
-        <!-- ========================================== -->
-        <!-- ONGLET 2 : LE PRÉSENT PROGRESSIF           -->
-        <!-- ========================================== -->
+        <!-- ONGLET 2 : LE PRÉSENT PROGRESSIF -->
         <section id="tab-present-progressif" class="tab-content space-y-5 sm:space-y-8 hidden">
-            <!-- En-tête de section -->
             <div class="bg-gradient-to-r from-oifGreen to-emerald-700 rounded-2xl p-4 sm:p-6 text-white shadow-md">
                 <div class="inline-block px-2.5 py-0.5 sm:px-3 sm:py-1 bg-white/20 rounded-full text-[11px] sm:text-xs font-semibold mb-2">Grammaire & Pratique</div>
                 <h2 class="text-xl sm:text-3xl font-bold">2. Le présent progressif</h2>
                 <p class="text-emerald-100 text-xs sm:text-sm mt-1">Exprimer une action qui est en train de se dérouler actuellement.</p>
             </div>
 
-            <!-- Fiche Explicative -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-                <!-- a) Formation -->
                 <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
                     <div class="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3 text-oifGreen font-bold text-base sm:text-lg">
                         <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-xs sm:text-sm">A</span>
@@ -316,7 +301,6 @@
                     </div>
                 </div>
 
-                <!-- b) Exemples -->
                 <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
                     <div class="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3 text-oifGreen font-bold text-base sm:text-lg">
                         <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-xs sm:text-sm">B</span>
@@ -339,7 +323,6 @@
                 </div>
             </div>
 
-            <!-- c) Activité interactive 10 phrases à trous -->
             <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-slate-100">
                     <div>
@@ -352,7 +335,6 @@
                 </div>
 
                 <form id="form-pp-1" class="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4">
-                    <!-- Généré dynamiquement en JS -->
                 </form>
 
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-3 mt-6 pt-4 border-t border-slate-100">
@@ -365,7 +347,6 @@
                 </div>
             </div>
 
-            <!-- d) Activité d'opposition Passé Récent vs Présent Progressif -->
             <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-slate-100">
                     <div>
@@ -378,7 +359,6 @@
                 </div>
 
                 <form id="form-opp-1" class="space-y-4 sm:space-y-6">
-                    <!-- Généré dynamiquement en JS -->
                 </form>
 
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-3 mt-6 pt-4 border-t border-slate-100">
@@ -392,20 +372,15 @@
             </div>
         </section>
 
-        <!-- ========================================== -->
-        <!-- ONGLET 3 : LE FUTUR PROCHE                 -->
-        <!-- ========================================== -->
+        <!-- ONGLET 3 : LE FUTUR PROCHE -->
         <section id="tab-futur-proche" class="tab-content space-y-5 sm:space-y-8 hidden">
-            <!-- En-tête de section -->
             <div class="bg-gradient-to-r from-amber-500 to-oifYellow text-slate-900 rounded-2xl p-4 sm:p-6 shadow-md">
                 <div class="inline-block px-2.5 py-0.5 sm:px-3 sm:py-1 bg-slate-900/10 rounded-full text-[11px] sm:text-xs font-bold mb-2">Grammaire & Pratique</div>
                 <h2 class="text-xl sm:text-3xl font-bold">3. Le futur proche</h2>
                 <p class="text-slate-800 text-xs sm:text-sm mt-1">Exprimer une action imminente ou un projet d'avenir proche.</p>
             </div>
 
-            <!-- Fiche Explicative -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-                <!-- a) Formation -->
                 <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
                     <div class="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3 text-amber-600 font-bold text-base sm:text-lg">
                         <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-amber-50 flex items-center justify-center text-xs sm:text-sm">A</span>
@@ -417,7 +392,6 @@
                     </div>
                 </div>
 
-                <!-- a bis) Expressions temporelles -->
                 <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
                     <div class="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3 text-amber-600 font-bold text-base sm:text-lg">
                         <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-amber-50 flex items-center justify-center text-xs sm:text-sm">A bis</span>
@@ -432,7 +406,6 @@
                     </div>
                 </div>
 
-                <!-- b) Exemples -->
                 <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
                     <div class="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3 text-amber-600 font-bold text-base sm:text-lg">
                         <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-amber-50 flex items-center justify-center text-xs sm:text-sm">B</span>
@@ -455,7 +428,6 @@
                 </div>
             </div>
 
-            <!-- c) Activité interactive -->
             <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-slate-100">
                     <div>
@@ -468,7 +440,6 @@
                 </div>
 
                 <form id="form-fp-1" class="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4">
-                    <!-- Généré dynamiquement en JS -->
                 </form>
 
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-3 mt-6 pt-4 border-t border-slate-100">
@@ -482,18 +453,14 @@
             </div>
         </section>
 
-        <!-- ========================================== -->
-        <!-- ONGLET 4 : SYNTHÈSE & ÉVALUATION          -->
-        <!-- ========================================== -->
+        <!-- ONGLET 4 : SYNTHÈSE & ÉVALUATION -->
         <section id="tab-synthese" class="tab-content space-y-5 sm:space-y-8 hidden">
-            <!-- En-tête de section -->
             <div class="bg-gradient-to-r from-oifViolet to-purple-800 rounded-2xl p-4 sm:p-6 text-white shadow-md">
                 <div class="inline-block px-2.5 py-0.5 sm:px-3 sm:py-1 bg-white/20 rounded-full text-[11px] sm:text-xs font-semibold mb-2">Évaluation globale</div>
                 <h2 class="text-xl sm:text-3xl font-bold">4. Synthèse : Choisir le bon temps</h2>
                 <p class="text-purple-100 text-xs sm:text-sm mt-1">Conjuguez au passé récent, au présent progressif ou au futur proche selon le contexte.</p>
             </div>
 
-            <!-- Activité globale de 12 questions -->
             <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-slate-100">
                     <div>
@@ -506,7 +473,6 @@
                 </div>
 
                 <form id="form-synth-1" class="space-y-3.5 sm:space-y-4">
-                    <!-- Généré dynamiquement en JS -->
                 </form>
 
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-3 mt-6 pt-4 border-t border-slate-100">
@@ -537,11 +503,6 @@
 
     <!-- Logique JavaScript -->
     <script>
-        // ==========================================
-        // DONNÉES DES EXERCICES
-        // ==========================================
-
-        // 1. Passé récent - Fill in the blank (12 questions)
         const dataPasseRecent1 = [
             { 
                 id: 'pr1_1', prefix: "1. Je", verb: "manger", suffix: "une pomme à l'instant.", answer: "viens de manger", hint: "venir (je = viens) + de + infinitif",
@@ -593,7 +554,6 @@
             }
         ];
 
-        // Passé récent - Flashcards (10 items)
         const flashcardsData = [
             { q: "Tu veux un café ?", a: "Non merci, je viens de boire un thé." },
             { q: "Vous avez faim ?", a: "Non, nous venons de manger un gâteau." },
@@ -607,7 +567,6 @@
             { q: "Ton frère dort encore ?", a: "Non, il vient de se lever." }
         ];
 
-        // 2. Présent progressif - Fill in the blank (10 questions)
         const dataPresentProgressif1 = [
             { 
                 id: 'pp1_1', prefix: "1. Ne fais pas de bruit, le bébé", verb: "dormir", suffix: ".", answer: "est en train de dormir", hint: "le bébé (il) = est en train de...",
@@ -651,7 +610,6 @@
             }
         ];
 
-        // Présent progressif vs Passé récent - Opposition (10 questions A/B)
         const dataOpposition = [
             {
                 id: 'opp_1',
@@ -735,7 +693,6 @@
             }
         ];
 
-        // 3. Futur proche - Fill in the blank (10 questions dont 4 forme négative)
         const dataFuturProche1 = [
             { 
                 id: 'fp1_1', prefix: "1. Demain, je", verb: "visiter", suffix: "le musée du Louvre.", answer: "vais visiter", hint: "aller (je = vais) + infinitif",
@@ -779,7 +736,6 @@
             }
         ];
 
-        // 4. Synthèse - 12 questions mixtes
         const dataSynthese = [
             { 
                 id: 'syn_1', prompt: "1. Jean ne veut pas manger de gâteau parce qu'il", spec: "faire un régime / présent progressif", suffix: ".", answer: "est en train de faire un régime", hint: "Présent progressif : être + en train de + infinitif",
@@ -831,30 +787,12 @@
             }
         ];
 
-
-        // ==========================================
-        // ETAT GLOBAL & SCORES
-        // ==========================================
-        const globalScores = {
-            pr1: 0,
-            pp1: 0,
-            opp: 0,
-            fp1: 0,
-            synth: 0
-        };
-
-        const maxScores = {
-            pr1: 12,
-            pp1: 10,
-            opp: 10,
-            fp1: 10,
-            synth: 12
-        };
+        const globalScores = { pr1: 0, pp1: 0, opp: 0, fp1: 0, synth: 0 };
+        const maxScores = { pr1: 12, pp1: 10, opp: 10, fp1: 10, synth: 12 };
 
         let currentCardIndex = 0;
         let isCardFlipped = false;
 
-        // Nettoyer les chaînes de caractères pour comparaison souple
         function cleanString(str) {
             if (!str) return "";
             return str
@@ -865,7 +803,6 @@
                 .trim();
         }
 
-        // Générer la liste de toutes les réponses candidates acceptées
         function getValidCandidates(item) {
             const candidates = new Set();
             const coreList = [item.answer, ...(item.altAnswers || [])];
@@ -902,7 +839,6 @@
             return Array.from(candidates);
         }
 
-        // Mise à jour de l'affichage du score total
         function updateGlobalScoreDisplay() {
             const currentTotal = Object.values(globalScores).reduce((a, b) => a + b, 0);
             const maxTotal = Object.values(maxScores).reduce((a, b) => a + b, 0);
@@ -916,8 +852,6 @@
             if (badgeFooter) badgeFooter.innerText = `${currentTotal} / ${maxTotal}`;
         }
 
-
-        // Navigation par Onglets
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(section => {
                 section.classList.add('hidden');
@@ -948,15 +882,10 @@
                     activeBtn.classList.add('bg-oifViolet', 'text-white');
                 }
 
-                // Smooth scroll button into view on mobile
                 activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
             }
         }
 
-
-        // ==========================================
-        // GESTION DES FLASHCARDS & GESTES TACTILES
-        // ==========================================
         function updateCardDisplay() {
             const cardInner = document.getElementById('flashcard-inner');
             cardInner.classList.remove('rotate-y-180');
@@ -991,7 +920,6 @@
             updateCardDisplay();
         }
 
-        // Configuration du Swipe Tactile sur la Zone des cartes
         let touchStartX = 0;
         let touchEndX = 0;
 
@@ -1012,16 +940,11 @@
         function handleSwipeGesture() {
             const swipeThreshold = 40;
             if (touchEndX < touchStartX - swipeThreshold) {
-                nextCard(); // Swipe vers la gauche -> carte suivante
+                nextCard();
             } else if (touchEndX > touchStartX + swipeThreshold) {
-                prevCard(); // Swipe vers la droite -> carte précédente
+                prevCard();
             }
         }
-
-
-        // ==========================================
-        // RENDU DYNAMIQUE DES EXERCICES
-        // ==========================================
 
         function renderFillInBlanks(containerId, items, colorTheme) {
             const container = document.getElementById(containerId);
@@ -1038,7 +961,6 @@
                         ${item.suffix}
                     </div>
                     <div class="space-y-1">
-                        <!-- text-base on mobile prevents automatic iOS Safari input zoom -->
                         <input type="text" id="input-${item.id}" autocomplete="off" autocorrect="off" spellcheck="false"
                             placeholder="Saisissez votre réponse..." 
                             class="w-full px-3 py-2 text-base sm:text-sm bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-${colorTheme} transition-all">
@@ -1101,11 +1023,6 @@
                 container.appendChild(card);
             });
         }
-
-
-        // ==========================================
-        // VÉRIFICATIONS ET FEEDBACKS
-        // ==========================================
 
         function checkFillInBlanks(items, key, scoreBadgeId) {
             let score = 0;
@@ -1224,10 +1141,6 @@
             updateGlobalScoreDisplay();
         }
 
-
-        // ==========================================
-        // INITIALISATION AU CHARGEMENT DE LA PAGE
-        // ==========================================
         window.onload = function() {
             renderFillInBlanks('form-pr-1', dataPasseRecent1, 'oifBlue');
             renderFillInBlanks('form-pp-1', dataPresentProgressif1, 'oifGreen');
