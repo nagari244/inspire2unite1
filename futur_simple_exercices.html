@@ -111,7 +111,6 @@
         <p class="text-xs md:text-sm text-slate-200 mt-1 max-w-xl mx-auto">Verbes réguliers, verbes irréguliers, compréhension écrite et compréhension orale.</p>
       </div>
 
-      <!-- Espace vide pour équilibrer la mise en page sur grand écran -->
       <div class="hidden md:block w-36"></div>
     </div>
   </header>
@@ -137,7 +136,6 @@
 
     <!-- ONGLET 1 : VERBES RÉGULIERS -->
     <div id="tab-reguliers" class="space-y-6">
-      
       <section class="bg-white border-2 border-blue-900/20 rounded-2xl p-5 md:p-8 shadow-sm">
         <div class="flex items-center gap-3 border-b border-slate-200 pb-4 mb-5">
           <span class="p-3 bg-blue-100 text-[#002395] text-2xl rounded-xl">💡</span>
@@ -206,7 +204,6 @@
 
     <!-- ONGLET 2 : VERBES IRRÉGULIERS -->
     <div id="tab-irreguliers" class="space-y-8 hidden">
-      
       <section class="bg-white border-2 border-blue-900/20 rounded-2xl p-5 md:p-8 shadow-sm">
         <div class="flex items-center gap-3 border-b border-slate-200 pb-4 mb-5">
           <span class="p-3 bg-blue-100 text-[#002395] text-2xl rounded-xl">🗂️</span>
@@ -584,18 +581,18 @@
     ];
 
     const ceQuestionsData = [
-      { q: "1. Le Bélier doit prendre une décision difficile concernant son travail.", a: "V", exp: "Texte : 'Vous prendrez une décision importante pour votre carrière lundi matin.'" },
-      { q: "2. Le Taureau restera dans son bureau toute la semaine.", a: "F", exp: "Texte : 'Vous partirez en voyage d'affaires à l'étranger.'" },
-      { q: "3. Les Gémeaux vont travailler avec de nouvelles personnes.", a: "V", exp: "Texte : 'Vous rencontrerez de nouveaux collaborateurs très intéressants...'" },
-      { q: "4. Le Cancer travaillera en présentiel (au bureau).", a: "F", exp: "Texte : 'Vous resterez à la maison pour faire du télétravail.'" },
-      { q: "5. Le Lion gagnera un peu plus d'argent cette semaine.", a: "V", exp: "Texte : '...vous recevrez une prime (un bonus d'argent)...'" },
-      { q: "6. La Vierge a besoin de mettre de l'ordre dans son espace de travail.", a: "V", exp: "Texte : 'Vous organiserez votre bureau...'" },
-      { q: "7. La Balance veut évoluer professionnellement ou gagner plus.", a: "V", exp: "Texte : 'Vous discuterez avec votre manager pour obtenir une promotion ou une augmentation.'" },
-      { q: "8. Le Scorpion aura une semaine très relaxante et calme.", a: "F", exp: "Texte : 'Vous travaillerez beaucoup cette semaine. Vous serez très fatigué...'" },
-      { q: "9. Le Sagittaire va signer un document officiel important.", a: "V", exp: "Texte : 'Vous signerez enfin ce nouveau contrat que vous attendez...'" },
-      { q: "10. Le Capricorne apprendra à utiliser un nouvel outil informatique.", a: "V", exp: "Texte : 'Vous apprendrez à utiliser un nouveau logiciel informatique...'" },
-      { q: "11. Le Verseau célébrera un succès personnel seul au restaurant.", a: "F", exp: "Texte : 'Vous mangerez au restaurant avec vos collègues pour fêter un succès collectif.'" },
-      { q: "12. Les Poissons travailleront seuls, sans contact avec les autres.", a: "F", exp: "Texte : 'Vous aiderez un stagiaire qui arrive dans l'équipe. Vous partagerez votre expérience.'" }
+      { q: "1. Le Bélier doit prendre une décision difficile concernant son travail.", a: "V", exp: "Texte : « Vous prendrez une décision importante pour votre carrière lundi matin. »" },
+      { q: "2. Le Taureau restera dans son bureau toute la semaine.", a: "F", exp: "Texte : « Vous partirez en voyage d'affaires à l'étranger. »" },
+      { q: "3. Les Gémeaux vont travailler avec de nouvelles personnes.", a: "V", exp: "Texte : « Vous rencontrerez de nouveaux collaborateurs très intéressants... »" },
+      { q: "4. Le Cancer travaillera en présentiel (au bureau).", a: "F", exp: "Texte : « Vous resterez à la maison pour faire du télétravail. »" },
+      { q: "5. Le Lion gagnera un peu plus d'argent cette semaine.", a: "V", exp: "Texte : « ...vous recevrez une prime (un bonus d'argent)... »" },
+      { q: "6. La Vierge a besoin de mettre de l'ordre dans son espace de travail.", a: "V", exp: "Texte : « Vous organiserez votre bureau... »" },
+      { q: "7. La Balance veut évoluer professionnellement ou gagner plus.", a: "V", exp: "Texte : « Vous discuterez avec votre manager pour obtenir une promotion ou une augmentation. »" },
+      { q: "8. Le Scorpion aura une semaine très relaxante et calme.", a: "F", exp: "Texte : « Vous travaillerez beaucoup cette semaine. Vous serez très fatigué... »" },
+      { q: "9. Le Sagittaire va signer un document officiel important.", a: "V", exp: "Texte : « Vous signerez enfin ce nouveau contrat que vous attendez... »" },
+      { q: "10. Le Capricorne apprendra à utiliser un nouvel outil informatique.", a: "V", exp: "Texte : « Vous apprendrez à utiliser un nouveau logiciel informatique... »" },
+      { q: "11. Le Verseau célébrera un succès personnel seul au restaurant.", a: "F", exp: "Texte : « Vous mangerez au restaurant avec vos collègues pour fêter un succès collectif. »" },
+      { q: "12. Les Poissons travailleront seuls, sans contact avec les autres.", a: "F", exp: "Texte : « Vous aiderez un stagiaire qui arrive dans l'équipe. »" }
     ];
 
     const coGeneralData = [
@@ -809,22 +806,23 @@
       container.innerHTML = '';
       ceQuestionsData.forEach((item, index) => {
         const qDiv = document.createElement('div');
-        qDiv.className = 'p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs md:text-sm space-y-1';
+        qDiv.id = `ce-card-${index}`;
+        qDiv.className = 'p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs md:text-sm space-y-2 transition-all';
         qDiv.innerHTML = `
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <span class="text-slate-900 font-medium">${item.q}</span>
+            <span class="text-slate-900 font-semibold">${item.q}</span>
             <div class="flex items-center gap-4 shrink-0">
-              <label class="inline-flex items-center gap-1 cursor-pointer">
+              <label class="inline-flex items-center gap-1.5 cursor-pointer px-2.5 py-1 bg-white border border-slate-300 rounded-lg hover:bg-slate-100 transition">
                 <input type="radio" name="ce_${index}" value="V" class="text-[#002395] focus:ring-[#002395]">
                 <span class="font-bold text-slate-700">Vrai</span>
               </label>
-              <label class="inline-flex items-center gap-1 cursor-pointer">
+              <label class="inline-flex items-center gap-1.5 cursor-pointer px-2.5 py-1 bg-white border border-slate-300 rounded-lg hover:bg-slate-100 transition">
                 <input type="radio" name="ce_${index}" value="F" class="text-[#002395] focus:ring-[#002395]">
                 <span class="font-bold text-slate-700">Faux</span>
               </label>
             </div>
           </div>
-          <div class="ce-feedback text-xs font-medium hidden pt-1"></div>
+          <div id="ce-fb-${index}" class="hidden p-2.5 rounded-lg text-xs font-medium mt-1 leading-relaxed"></div>
         `;
         container.appendChild(qDiv);
       });
@@ -834,30 +832,47 @@
       let score = 0;
       ceQuestionsData.forEach((item, index) => {
         const radios = document.querySelectorAll(`input[name="ce_${index}"]`);
-        const parent = radios[0]?.closest('.p-3.5');
-        const feedback = parent?.querySelector('.ce-feedback');
+        const card = document.getElementById(`ce-card-${index}`);
+        const feedback = document.getElementById(`ce-fb-${index}`);
+        
         let selected = null;
         radios.forEach(r => { if (r.checked) selected = r.value; });
 
-        feedback.classList.remove('hidden');
+        feedback.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'border-emerald-300', 'bg-rose-100', 'text-rose-950', 'border-rose-300', 'bg-amber-50', 'text-amber-900', 'border-amber-300');
+        card.classList.remove('border-emerald-400', 'border-rose-400', 'bg-emerald-50/20', 'bg-rose-50/20');
+
+        if (!selected) {
+          feedback.classList.add('bg-amber-50', 'text-amber-900', 'border', 'border-amber-300');
+          feedback.innerHTML = `⚠️ <strong>Veuillez cocher Vrai ou Faux</strong> pour cette affirmation.`;
+          return;
+        }
+
         if (selected === item.a) {
           score++;
-          feedback.innerHTML = `<span class="text-emerald-700 font-bold">✓ Correct !</span> <span class="text-slate-600">${item.exp}</span>`;
+          card.classList.add('border-emerald-400', 'bg-emerald-50/20');
+          feedback.classList.add('bg-emerald-100', 'text-emerald-900', 'border', 'border-emerald-300');
+          feedback.innerHTML = `✓ <strong>Exact !</strong> ${item.exp}`;
         } else {
-          feedback.innerHTML = `<span class="text-red-700 font-bold">✗ Incorrect (${item.a === 'V' ? 'Vrai' : 'Faux'}).</span> <span class="text-slate-600">${item.exp}</span>`;
+          card.classList.add('border-rose-400', 'bg-rose-50/20');
+          feedback.classList.add('bg-rose-100', 'text-rose-950', 'border', 'border-rose-300');
+          const expectedLabel = item.a === 'V' ? 'Vrai' : 'Faux';
+          feedback.innerHTML = `✗ <strong>Incorrect (Réponse : ${expectedLabel}).</strong><br><span class="opacity-90">${item.exp}</span>`;
         }
       });
 
-      document.getElementById('score-ce').textContent = `Score CE : ${score}/${ceQuestionsData.length}`;
+      document.getElementById('score-ce').textContent = `Score CE : ${score} / ${ceQuestionsData.length} (${Math.round((score/ceQuestionsData.length)*100)}%)`;
     }
 
     function resetCE() {
       ceQuestionsData.forEach((item, index) => {
         document.querySelectorAll(`input[name="ce_${index}"]`).forEach(r => r.checked = false);
-      });
-      document.querySelectorAll('.ce-feedback').forEach(f => {
-        f.innerHTML = '';
-        f.classList.add('hidden');
+        const card = document.getElementById(`ce-card-${index}`);
+        if (card) card.classList.remove('border-emerald-400', 'border-rose-400', 'bg-emerald-50/20', 'bg-rose-50/20');
+        const feedback = document.getElementById(`ce-fb-${index}`);
+        if (feedback) {
+          feedback.innerHTML = '';
+          feedback.classList.add('hidden');
+        }
       });
       document.getElementById('score-ce').textContent = '';
     }
@@ -882,7 +897,7 @@
         qCard.innerHTML = `
           <p class="font-bold text-slate-900">${item.q}</p>
           <div class="space-y-1.5">${optionsHtml}</div>
-          <div class="co-feedback text-xs font-medium hidden"></div>
+          <div class="co-feedback text-xs font-medium hidden p-2 rounded-lg mt-2"></div>
         `;
         container.appendChild(qCard);
       });
@@ -901,12 +916,14 @@
           let selected = null;
           radios.forEach(r => { if (r.checked) selected = parseInt(r.value); });
 
-          fb.classList.remove('hidden');
+          fb.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-rose-100', 'text-rose-950');
           if (selected === item.ans) {
             score++;
-            fb.innerHTML = '<span class="text-emerald-700 font-bold">✓ Bonne réponse !</span>';
+            fb.classList.add('bg-emerald-100', 'text-emerald-900');
+            fb.innerHTML = '<span class="font-bold">✓ Bonne réponse !</span>';
           } else {
-            fb.innerHTML = `<span class="text-red-700 font-bold">✗ Réponse attendue : "${item.options[item.ans]}"</span>`;
+            fb.classList.add('bg-rose-100', 'text-rose-950');
+            fb.innerHTML = `<span class="font-bold">✗ Réponse attendue :</span> "${item.options[item.ans]}"`;
           }
         });
       }
