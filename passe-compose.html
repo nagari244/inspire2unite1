@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FLE A2 | Ateliers Complets du Passé Composé</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            oif: {
+              blue: '#0072CE',
+              navy: '#002B49',
+              yellow: '#FFD100',
+              red: '#DA291C',
+              green: '#009639',
+              purple: '#782F40',
+              light: '#F4F7FA'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    button, select, input { touch-action: manipulation; }
+    .custom-scrollbar::-webkit-scrollbar { height: 6px; width: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 9999px; }
+    .tab-active {
+      border-bottom: 4px solid #FFD100;
+      color: #ffffff;
+      font-weight: 700;
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+    .dropzone-hover {
+      border-color: #0072CE !important;
+      background-color: #eff6ff !important;
+    }
+    @media print {
+      body * { visibility: hidden; }
+      #printable-report-area, #printable-report-area * { visibility: visible; }
+      #printable-report-area {
+        position: absolute; left: 0; top: 0; width: 100%;
+        margin: 0; padding: 20px; background: white !important;
+        color: black !important; display: block !important;
+      }
+      .no-print { display: none !important; }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-full flex flex-col">
+
+  <header class="bg-oif-navy text-white shadow-md border-b-4 border-oif-yellow sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row justify-between items-center py-3 sm:py-4 gap-3">
+        <div class="flex items-center space-x-3 text-center sm:text-left">
+          <div class="flex items-center space-x-1">
+            <span class="w-3.5 h-3.5 rounded-full bg-[#0072CE] inline-block shadow-sm"></span>
+            <span class="w-3.5 h-3.5 rounded-full bg-[#009639] inline-block shadow-sm"></span>
+            <span class="w-3.5 h-3.5 rounded-full bg-[#FFD100] inline-block shadow-sm"></span>
+            <span class="w-3.5 h-3.5 rounded-full bg-[#DA291C] inline-block shadow-sm"></span>
+            <span class="w-3.5 h-3.5 rounded-full bg-[#782F40] inline-block shadow-sm"></span>
+          </div>
+          <div>
+            <h1 class="text-xl sm:text-2xl font-black tracking-tight flex items-center gap-2">
+              <span>Français Langue Étrangère</span>
+              <span class="text-xs bg-rose-600 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider text-white">Niveau A2</span>
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-300">Grand Parcours Passé Composé • Auxiliaires Avoir & Être</p>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center sm:justify-end gap-2 sm:gap-3">
+          <div class="flex items-center gap-2 sm:gap-3 bg-white/10 px-3 py-1.5 rounded-xl border border-white/10 text-xs sm:text-sm">
+            <div class="text-right">
+              <span class="text-slate-300 block text-[11px] uppercase font-semibold">Progression globale</span>
+              <span id="globalScoreText" class="font-bold text-oif-yellow text-sm sm:text-base">0 / 125 réussites</span>
+            </div>
+            <div class="w-10 h-10 rounded-full bg-oif-blue/40 border-2 border-oif-yellow flex items-center justify-center font-bold text-sm" id="globalPercentText">
+              0%
+            </div>
+          </div>
+
+          <button onclick="openExportModal()" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-black text-xs sm:text-sm px-3.5 py-2.5 rounded-xl shadow-lg transition-all flex items-center gap-2 border border-amber-200 transform active:scale-95">
+            <i class="fa-solid fa-file-export text-slate-900"></i>
+            <span>Exporter mon bilan</span>
+          </button>
+        </div>
+      </div>
+
+      <nav class="flex overflow-x-auto space-x-1.5 pt-2 custom-scrollbar text-xs sm:text-sm font-semibold" aria-label="Onglets d'apprentissage">
+        <button onclick="switchTab('tab-passe')" id="btn-tab-passe" class="tab-btn tab-active px-3 py-2.5 rounded-t-xl transition-all whitespace-nowrap flex items-center gap-2 text-slate-200 hover:text-white">
+          <i class="fa-solid fa-clock-rotate-left text-rose-400"></i>
+          <span>1. Passé Composé & Audio</span>
+          <span id="badge-tab-passe" class="bg-white/20 text-[11px] px-1.5 py-0.5 rounded-full">0/30</span>
+        </button>
+
+        <button onclick="switchTab('tab-maison-etre')" id="btn-tab-maison-etre" class="tab-btn px-3 py-2.5 rounded-t-xl transition-all whitespace-nowrap flex items-center gap-2 text-slate-200 hover:text-white">
+          <i class="fa-solid fa-house-chimney text-cyan-400"></i>
+          <span>2. Atelier Auxiliaire ÊTRE</span>
+          <span id="badge-tab-maison-etre" class="bg-white/20 text-[11px] px-1.5 py-0.5 rounded-full">0/55</span>
+        </button>
+
+        <button onclick="switchTab('tab-etre-avoir')" id="btn-tab-etre-avoir" class="tab-btn px-3 py-2.5 rounded-t-xl transition-all whitespace-nowrap flex items-center gap-2 text-slate-200 hover:text-white">
+          <i class="fa-solid fa-scale-balanced text-amber-300"></i>
+          <span>3. ÊTRE ou AVOIR & Synthèse</span>
+          <span id="badge-tab-etre-avoir" class="bg-white/20 text-[11px] px-1.5 py-0.5 rounded-full">0/40</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+    <div id="toastMessage" class="hidden fixed bottom-5 right-5 z-50 max-w-md bg-slate-900 text-white p-4 rounded-xl shadow-2xl border-l-4 border-rose-500 flex items-start gap-3 transition-all transform translate-y-2">
+      <i id="toastIcon" class="fa-solid fa-circle-info text-oif-yellow text-xl mt-0.5"></i>
+      <div class="flex-1">
+        <h4 id="toastTitle" class="font-bold text-sm text-slate-100">Notification</h4>
+        <p id="toastBody" class="text-xs text-slate-300 mt-0.5"></p>
+      </div>
+      <button onclick="hideToast()" class="text-slate-400 hover:text-white text-sm"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <!-- SECTION 1 : LE PASSÉ COMPOSÉ DE BASE & AUDIO -->
+    <section id="tab-passe" class="space-y-8">
+      
+      <div class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200">
+        <div class="flex items-center gap-3 border-b pb-4 mb-5">
+          <span class="bg-rose-100 text-rose-700 p-3 rounded-xl"><i class="fa-solid fa-calendar-check text-xl"></i></span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-oif-navy">Le Passé Composé : Raconter des événements passés</h2>
+            <p class="text-sm text-slate-500">Règles fondamentales, auxiliaires avoir / être, accords et participes passés essentiels A2</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <div class="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+            <div class="bg-oif-blue text-white px-4 py-3 font-bold flex items-center justify-between text-sm">
+              <span>1. Avec l'auxiliaire AVOIR (Majorité des verbes)</span>
+              <i class="fa-solid fa-check"></i>
+            </div>
+            <div class="p-4 bg-blue-50/30 text-xs sm:text-sm space-y-3">
+              <p><strong>Règle générale :</strong> Le participe passé <strong>ne s'accorde JAMAIS</strong> avec le sujet !</p>
+              <div class="bg-white p-3 rounded-lg border font-mono text-xs text-slate-700">
+                Sujet + AVOIR (au présent) + Participe Passé<br>
+                <em>J'ai rencontré • Nous avons discuté • Elles ont parlé</em>
+              </div>
+              <p class="text-slate-600"><strong>Exemple p. 27 :</strong> « Nous avons interviewé les enfants de deux familles recomposées. »</p>
+            </div>
+          </div>
+
+          <div class="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+            <div class="bg-rose-600 text-white px-4 py-3 font-bold flex items-center justify-between text-sm">
+              <span>2. Avec l'auxiliaire ÊTRE (Mouvement & Pronominaux)</span>
+              <i class="fa-solid fa-person-walking"></i>
+            </div>
+            <div class="p-4 bg-rose-50/30 text-xs sm:text-sm space-y-3">
+              <p><strong>Règle d'accord :</strong> Le participe passé <strong>s'accorde obligatoirement en genre et en nombre avec le sujet</strong> (+e, +s, +es).</p>
+              <div class="bg-white p-3 rounded-lg border font-mono text-xs text-slate-700">
+                Sujet + ÊTRE (au présent) + Participe Passé accordé<br>
+                <em>Ma mère est venue • Mes frères sont partis • Elles se sont disputées</em>
+              </div>
+              <p class="text-slate-600"><strong>Verbes avec être :</strong> Les 14 verbes de déplacement + dérivés + verbes pronominaux.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+          <h4 class="font-bold text-slate-800 mb-3 text-sm uppercase tracking-wider flex items-center gap-2">
+            <i class="fa-solid fa-list-check text-oif-blue"></i>
+            Les Participes Passés indispensables du niveau A2
+          </h4>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+            <div class="bg-white p-2 rounded border"><span class="font-semibold text-slate-700">aimer / parler :</span> aimé / parlé</div>
+            <div class="bg-white p-2 rounded border"><span class="font-semibold text-slate-700">finir / choisir :</span> fini / choisi</div>
+            <div class="bg-white p-2 rounded border"><span class="font-semibold text-slate-700">aller / arriver :</span> allé / arrivé</div>
+            <div class="bg-white p-2 rounded border"><span class="font-semibold text-slate-700">partir / sortir :</span> parti / sorti</div>
+            <div class="bg-white p-2 rounded border"><span class="font-semibold text-rose-700">avoir :</span> <strong>eu</strong></div>
+            <div class="bg-white p-2 rounded border"><span class="font-semibold text-rose-700">être :</span> <strong>été</strong></div>
+            <div class="bg-white p-2 rounded border"><span class="font-semibold text-rose-700">faire :</span> <strong>fait</strong></div>
+            <div class="bg-white p-2 rounded border"><span class="font-semibold text-rose-700">prendre :</span> <strong>pris</strong></div>
+            <div class="bg-white p-2 rounded border"><span class="font-semibold text-rose-700">mettre :</span> <strong>mis</strong></div>
+            <div class="bg-white p-2 rounded border"><span class="font-semibold text-rose-700">voir :</span> <strong>vu</strong></div>
+            <div class="bg-white p-2 rounded border"><span class="font-semibold text-rose-700">boire :</span> <strong>bu</strong></div>
+            <div class="bg-white p-2 rounded border"><span class="font-semibold text-rose-700">lire :</span> <strong>lu</strong></div>
+            <div class="bg-white p-2 rounded border"><span class="font-semibold text-rose-700">venir :</span> <strong>venu</strong></div>
+            <div class="bg-white p-2 rounded border"><span class="font-semibold text-rose-700">naître :</span> <strong>né</strong></div>
+            <div class="bg-white p-2 rounded border"><span class="font-semibold text-rose-700">mourir :</span> <strong>mort</strong></div>
+            <div class="bg-white p-2 rounded border"><span class="font-semibold text-rose-700">comprendre :</span> <strong>compris</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACTIVITÉ 1 PC QCM -->
+      <div class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b pb-4 mb-6">
+          <div>
+            <span class="inline-block px-3 py-1 bg-rose-600 text-white rounded-md text-xs font-bold uppercase tracking-wider mb-1">Activité 1</span>
+            <h3 class="text-lg sm:text-xl font-bold text-oif-navy">Choix multiple : Auxiliaire et accord du participe (10 questions)</h3>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="score-pc-qcm" class="text-sm font-bold bg-slate-100 text-slate-700 px-3 py-1 rounded-lg border">Score : -/10</span>
+            <button onclick="checkPCQCM()" class="bg-rose-600 hover:bg-rose-700 text-white font-semibold text-sm px-4 py-2 rounded-xl transition-colors shadow-sm flex items-center gap-2">
+              <i class="fa-solid fa-circle-check"></i> Vérifier
+            </button>
+          </div>
+        </div>
+        <div id="container-pc-qcm" class="space-y-4"></div>
+      </div>
+
+      <!-- ACTIVITÉ 2 PC FILL -->
+      <div class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b pb-4 mb-6">
+          <div>
+            <span class="inline-block px-3 py-1 bg-rose-600 text-white rounded-md text-xs font-bold uppercase tracking-wider mb-1">Activité 2</span>
+            <h3 class="text-lg sm:text-xl font-bold text-oif-navy">Phrases à trous : Conjuguer au passé composé (10 questions)</h3>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="score-pc-fill" class="text-sm font-bold bg-slate-100 text-slate-700 px-3 py-1 rounded-lg border">Score : -/10</span>
+            <button onclick="checkPCFill()" class="bg-rose-600 hover:bg-rose-700 text-white font-semibold text-sm px-4 py-2 rounded-xl transition-colors shadow-sm flex items-center gap-2">
+              <i class="fa-solid fa-circle-check"></i> Vérifier
+            </button>
+          </div>
+        </div>
+        <div id="container-pc-fill" class="space-y-4"></div>
+      </div>
+
+      <!-- ACTIVITÉ 3 AUDIO -->
+      <div class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b pb-4 mb-6">
+          <div>
+            <span class="inline-block px-3 py-1 bg-amber-500 text-slate-900 rounded-md text-xs font-black uppercase tracking-wider mb-1">Laboratoire d'écoute orale</span>
+            <h3 class="text-lg sm:text-xl font-bold text-oif-navy">Activité audio : Présent ou Passé composé ? (10 questions)</h3>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="score-pc-audio" class="text-sm font-bold bg-slate-100 text-slate-700 px-3 py-1 rounded-lg border">Score : -/10</span>
+            <button onclick="checkPCAudio()" class="bg-rose-600 hover:bg-rose-700 text-white font-semibold text-sm px-4 py-2 rounded-xl transition-colors shadow-sm flex items-center gap-2">
+              <i class="fa-solid fa-circle-check"></i> Vérifier
+            </button>
+          </div>
+        </div>
+        <div id="container-pc-audio" class="space-y-3"></div>
+
+        <div class="mt-8 p-4 bg-rose-50 rounded-xl border border-rose-200 flex flex-col sm:flex-row justify-between items-center gap-3">
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-award text-2xl text-rose-600"></i>
+            <div>
+              <span class="text-xs uppercase font-bold text-slate-500 tracking-wider">Sous-total Section 1</span>
+              <h4 class="text-base font-bold text-rose-950">Passé Composé de Base</h4>
+            </div>
+          </div>
+          <span id="total-score-passe" class="text-lg font-black text-rose-700 bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-200">
+            Score section : 0 / 30
+          </span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SECTION 2 : ATELIER AUXILIAIRE ÊTRE -->
+    <section id="tab-maison-etre" class="hidden space-y-8">
+
+      <!-- Tri des 25 verbes -->
+      <div class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b pb-4 mb-5">
+          <div>
+            <span class="inline-block px-3 py-1 bg-cyan-600 text-white rounded-md text-xs font-bold uppercase tracking-wider mb-1">
+              Atelier 1 • Identification & Tri
+            </span>
+            <h2 class="text-xl sm:text-2xl font-black text-oif-navy">
+              Classer les 25 verbes : Auxiliaire ÊTRE ou AVOIR ?
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-500">
+              Glissez-déposez ou cliquez sur les verbes pour les ranger dans la bonne boîte.
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="score-sort-verbs" class="text-sm font-bold bg-slate-100 text-slate-700 px-3 py-1 rounded-lg border">Score : -/25</span>
+            <button onclick="checkVerbSorting()" class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold text-sm px-4 py-2 rounded-xl transition-all shadow-sm flex items-center gap-2">
+              <i class="fa-solid fa-circle-check"></i> Vérifier le tri
+            </button>
+            <button onclick="resetVerbSorting()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 text-sm px-3 py-2 rounded-xl transition-all">
+              <i class="fa-solid fa-rotate-left"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-5 bg-slate-50 border border-slate-200 rounded-xl p-4">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-600">
+              <i class="fa-solid fa-layer-group text-cyan-600 mr-1"></i> Verbes à classer :
+            </span>
+            <span id="remaining-verbs-count" class="text-xs font-bold bg-white px-2 py-0.5 rounded border text-cyan-800">25 verbes</span>
+          </div>
+          <div id="verbs-pool" class="flex flex-wrap gap-2 min-h-[50px] p-2 bg-white rounded-lg border border-dashed border-slate-300"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div id="dropzone-etre" class="border-2 border-dashed border-cyan-400 bg-cyan-50/40 rounded-2xl p-4 min-h-[200px] flex flex-col transition-all">
+            <div class="flex items-center justify-between pb-3 border-b border-cyan-200 mb-3">
+              <div class="flex items-center gap-2">
+                <span class="w-7 h-7 rounded-lg bg-cyan-600 text-white flex items-center justify-center font-bold text-sm">
+                  <i class="fa-solid fa-house-chimney"></i>
+                </span>
+                <h4 class="font-extrabold text-cyan-950 text-sm sm:text-base">Verbes à auxiliaire ÊTRE</h4>
+              </div>
+              <span id="badge-count-etre" class="text-xs font-bold bg-white text-cyan-800 px-2 py-0.5 rounded-full border border-cyan-300">0</span>
+            </div>
+            <div id="box-etre-verbs" class="flex-grow flex flex-wrap gap-2 content-start min-h-[120px]"></div>
+          </div>
+
+          <div id="dropzone-avoir" class="border-2 border-dashed border-amber-400 bg-amber-50/40 rounded-2xl p-4 min-h-[200px] flex flex-col transition-all">
+            <div class="flex items-center justify-between pb-3 border-b border-amber-200 mb-3">
+              <div class="flex items-center gap-2">
+                <span class="w-7 h-7 rounded-lg bg-amber-500 text-white flex items-center justify-center font-bold text-sm">
+                  <i class="fa-solid fa-box-archive"></i>
+                </span>
+                <h4 class="font-extrabold text-amber-950 text-sm sm:text-base">Verbes à auxiliaire AVOIR</h4>
+              </div>
+              <span id="badge-count-avoir" class="text-xs font-bold bg-white text-amber-800 px-2 py-0.5 rounded-full border border-amber-300">0</span>
+            </div>
+            <div id="box-avoir-verbs" class="flex-grow flex flex-wrap gap-2 content-start min-h-[120px]"></div>
+          </div>
+        </div>
+
+        <div id="grammaire-note-unlocked" class="hidden mt-6 bg-gradient-to-r from-emerald-50 via-teal-50 to-emerald-100 border-2 border-emerald-400 rounded-xl p-5 shadow-sm transition-all">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-base shadow">
+              <i class="fa-solid fa-crown"></i>
+            </span>
+            <h4 class="font-black text-emerald-950 text-base sm:text-lg">
+              Règle d'or validée : Les verbes de « La Maison d'Être » !
+            </h4>
+          </div>
+          <div class="space-y-2 text-xs sm:text-sm text-emerald-900 leading-relaxed pl-1">
+            <p>
+              🌟 <strong>Règle fondamentale :</strong> Tous les verbes qui ne sont <strong>pas</strong> les 14 verbes de la Maison d'Être (<em>naître / mourir, entrer / sortir, partir / arriver, monter / descendre, venir / aller, passer / retourner, rester, tomber</em>) ni leurs dérivés (<em>rentrer, revenir, devenir</em>), ni les verbes pronominaux (<em>se lever, se coucher</em>), vont dans la catégorie <strong>auxiliaire AVOIR</strong>.
+            </p>
+            <p class="font-semibold text-emerald-950 bg-white/70 p-2.5 rounded-lg border border-emerald-300">
+              ⚡ <strong>Attention à l'accord :</strong> <u>Seulement les verbes à auxiliaire ÊTRE</u> font obligatoirement l'accord au féminin (+e) ou au pluriel (+s, +es) en fonction du sujet ! Avec l'auxiliaire AVOIR, le participe passé ne s'accorde jamais avec le sujet.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Accords Participe (Doc IPN) -->
+      <div class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b pb-4 mb-6">
+          <div>
+            <span class="inline-block px-3 py-1 bg-cyan-600 text-white rounded-md text-xs font-bold uppercase tracking-wider mb-1">
+              Atelier 2 • Document IPN (p. 3)
+            </span>
+            <h3 class="text-lg sm:text-xl font-bold text-oif-navy">
+              Identifiez le sujet et indiquez l'orthographe correcte du participe passé (9 questions)
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500">
+              Sélectionnez la bonne terminaison accordée en genre et en nombre avec le sujet.
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="score-ipn-accords" class="text-sm font-bold bg-slate-100 text-slate-700 px-3 py-1 rounded-lg border">Score : -/9</span>
+            <button onclick="checkIPNAccords()" class="bg-cyan-600 hover:bg-cyan-700 text-white font-semibold text-sm px-4 py-2 rounded-xl transition-colors shadow-sm flex items-center gap-2">
+              <i class="fa-solid fa-circle-check"></i> Vérifier
+            </button>
+          </div>
+        </div>
+        <div id="container-ipn-accords" class="space-y-4"></div>
+      </div>
+
+      <!-- Devinettes littéraires -->
+      <div class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b pb-4 mb-6">
+          <div>
+            <span class="inline-block px-3 py-1 bg-purple-700 text-white rounded-md text-xs font-bold uppercase tracking-wider mb-1">
+              Atelier 3 • Devinettes littéraires (100% Être)
+            </span>
+            <h3 class="text-lg sm:text-xl font-bold text-oif-navy">
+              Conjuguer au passé composé [① sujet + ② être + ③ participe] et trouver le personnage !
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500">
+              Chaque verbe utilise exclusivement l'auxiliaire <strong>ÊTRE</strong>. N'oubliez pas les accords !
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="score-devinettes" class="text-sm font-bold bg-slate-100 text-slate-700 px-3 py-1 rounded-lg border">Score : -/21</span>
+            <button onclick="checkDevinettes()" class="bg-purple-700 hover:bg-purple-800 text-white font-semibold text-sm px-4 py-2 rounded-xl transition-colors shadow-sm flex items-center gap-2">
+              <i class="fa-solid fa-circle-check"></i> Vérifier les devinettes
+            </button>
+          </div>
+        </div>
+
+        <!-- Devinette 1 -->
+        <div class="p-5 rounded-2xl border border-slate-200 bg-slate-50 mb-6" id="card-devinette-1">
+          <div class="flex items-center justify-between pb-3 border-b mb-4">
+            <h4 class="font-extrabold text-slate-800 text-base flex items-center gap-2">
+              <span class="bg-purple-100 text-purple-800 px-2.5 py-0.5 rounded-lg text-xs font-bold">Devinette 1</span>
+              Le géant vert du marais
+            </h4>
+            <span class="text-xs text-slate-500 font-medium">8 verbes à conjuguer + 1 identification</span>
+          </div>
+          <p class="text-sm sm:text-base leading-loose text-slate-800">
+            Il <input type="text" id="dev1_v1" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-purple-700 w-28 text-center text-sm outline-none focus:ring-1 focus:ring-purple-500"> (1. naître) dans un marais. Un jour, il <input type="text" id="dev1_v2" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-purple-700 w-28 text-center text-sm outline-none focus:ring-1 focus:ring-purple-500"> (2. partir) à la recherche d'une princesse. Il <input type="text" id="dev1_v3" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-purple-700 w-28 text-center text-sm outline-none focus:ring-1 focus:ring-purple-500"> (3. monter) à la tour la plus élevée et il <input type="text" id="dev1_v4" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-purple-700 w-32 text-center text-sm outline-none focus:ring-1 focus:ring-purple-500"> (4. descendre) avec elle. Ils <input type="text" id="dev1_v5" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-purple-700 w-32 text-center text-sm outline-none focus:ring-1 focus:ring-purple-500"> (5. partir) ensemble de retour chez elle, mais sur le chemin la princesse <input type="text" id="dev1_v6" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-purple-700 w-32 text-center text-sm outline-none focus:ring-1 focus:ring-purple-500"> (6. devenir) ogresse ! Alors, tous les deux <input type="text" id="dev1_v7" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-purple-700 w-32 text-center text-sm outline-none focus:ring-1 focus:ring-purple-500"> (7. tomber) amoureux. Quelques années plus tard, leurs triplets <input type="text" id="dev1_v8" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-purple-700 w-28 text-center text-sm outline-none focus:ring-1 focus:ring-purple-500"> (8. naître).
+          </p>
+          <div class="mt-4 pt-3 border-t flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-white p-3 rounded-xl border">
+            <span class="font-bold text-slate-800 text-sm">🤔 Qui est-ce ?</span>
+            <div class="flex flex-wrap gap-2 text-xs sm:text-sm">
+              <label class="px-3 py-1.5 rounded-lg border hover:bg-slate-100 cursor-pointer flex items-center gap-1.5 font-medium">
+                <input type="radio" name="who_dev_1" value="Schreck"> Shrek (Schreck)
+              </label>
+              <label class="px-3 py-1.5 rounded-lg border hover:bg-slate-100 cursor-pointer flex items-center gap-1.5 font-medium">
+                <input type="radio" name="who_dev_1" value="Petit Poucet"> Le Petit Poucet
+              </label>
+              <label class="px-3 py-1.5 rounded-lg border hover:bg-slate-100 cursor-pointer flex items-center gap-1.5 font-medium">
+                <input type="radio" name="who_dev_1" value="Le Grand Schtroumpf"> Le Grand Schtroumpf
+              </label>
+            </div>
+          </div>
+          <div id="dev1-feedback" class="hidden mt-3 p-3 rounded-lg text-xs leading-relaxed"></div>
+        </div>
+
+        <!-- Devinette 2 -->
+        <div class="p-5 rounded-2xl border border-slate-200 bg-slate-50" id="card-devinette-2">
+          <div class="flex items-center justify-between pb-3 border-b mb-4">
+            <h4 class="font-extrabold text-slate-800 text-base flex items-center gap-2">
+              <span class="bg-purple-100 text-purple-800 px-2.5 py-0.5 rounded-lg text-xs font-bold">Devinette 2</span>
+              L'explorateur des étoiles
+            </h4>
+            <span class="text-xs text-slate-500 font-medium">11 verbes à conjuguer + 1 identification</span>
+          </div>
+          <p class="text-sm sm:text-base leading-loose text-slate-800">
+            Il <input type="text" id="dev2_v1" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-purple-700 w-28 text-center text-sm outline-none focus:ring-1 focus:ring-purple-500"> (1. naître) sur un astéroïde lointain. Un jour, il <input type="text" id="dev2_v2" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-purple-700 w-28 text-center text-sm outline-none focus:ring-1 focus:ring-purple-500"> (2. partir) en voyage dans le cosmos. Il <input type="text" id="dev2_v3" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-purple-700 w-28 text-center text-sm outline-none focus:ring-1 focus:ring-purple-500"> (3. monter) dans les cieux et il <input type="text" id="dev2_v4" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-purple-700 w-28 text-center text-sm outline-none focus:ring-1 focus:ring-purple-500"> (4. passer) par plusieurs planètes étranges. Puis, il <input type="text" id="dev2_v5" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-purple-700 w-32 text-center text-sm outline-none focus:ring-1 focus:ring-purple-500"> (5. arriver) sur la planète Terre où il <input type="text" id="dev2_v6" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-purple-700 w-28 text-center text-sm outline-none focus:ring-1 focus:ring-purple-500"> (6. tomber) dans le sable d'un immense désert. Il <input type="text" id="dev2_v7" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-purple-700 w-28 text-center text-sm outline-none focus:ring-1 focus:ring-purple-500"> (7. venir) à la rencontre d'un aviateur perdu. Il <input type="text" id="dev2_v8" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-purple-700 w-28 text-center text-sm outline-none focus:ring-1 focus:ring-purple-500"> (8. rester) auprès de lui pendant quelques jours et il <input type="text" id="dev2_v9" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-purple-700 w-32 text-center text-sm outline-none focus:ring-1 focus:ring-purple-500"> (9. devenir) son ami intime avec un renard. À la fin, pour retrouver sa rose, il <input type="text" id="dev2_v10" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-purple-700 w-28 text-center text-sm outline-none focus:ring-1 focus:ring-purple-500"> (10. mourir) au regard des humains mais il <input type="text" id="dev2_v11" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-purple-700 w-32 text-center text-sm outline-none focus:ring-1 focus:ring-purple-500"> (11. retourner) vivant sur son étoile !
+          </p>
+          <div class="mt-4 pt-3 border-t flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-white p-3 rounded-xl border">
+            <span class="font-bold text-slate-800 text-sm">🤔 Qui est-ce ?</span>
+            <div class="flex flex-wrap gap-2 text-xs sm:text-sm">
+              <label class="px-3 py-1.5 rounded-lg border hover:bg-slate-100 cursor-pointer flex items-center gap-1.5 font-medium">
+                <input type="radio" name="who_dev_2" value="Le petit Chaperon rouge"> Le Petit Chaperon rouge
+              </label>
+              <label class="px-3 py-1.5 rounded-lg border hover:bg-slate-100 cursor-pointer flex items-center gap-1.5 font-medium">
+                <input type="radio" name="who_dev_2" value="Le petit Prince"> Le Petit Prince
+              </label>
+              <label class="px-3 py-1.5 rounded-lg border hover:bg-slate-100 cursor-pointer flex items-center gap-1.5 font-medium">
+                <input type="radio" name="who_dev_2" value="La petite souris"> La Petite Souris
+              </label>
+            </div>
+          </div>
+          <div id="dev2-feedback" class="hidden mt-3 p-3 rounded-lg text-xs leading-relaxed"></div>
+        </div>
+
+        <div class="mt-8 p-4 bg-cyan-50 rounded-xl border border-cyan-200 flex flex-col sm:flex-row justify-between items-center gap-3">
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-award text-2xl text-cyan-700"></i>
+            <div>
+              <span class="text-xs uppercase font-bold text-slate-500 tracking-wider">Sous-total Section 2</span>
+              <h4 class="text-base font-bold text-cyan-950">Atelier Maison d'Être</h4>
+            </div>
+          </div>
+          <span id="total-score-maison-etre" class="text-lg font-black text-cyan-800 bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-200">
+            Score section : 0 / 55
+          </span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SECTION 3 : ÊTRE OU AVOIR & SYNTHÈSE -->
+    <section id="tab-etre-avoir" class="hidden space-y-8">
+
+      <!-- Exercices EPF 12 Ressources_04 -->
+      <div class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b pb-4 mb-6">
+          <div>
+            <span class="inline-block px-3 py-1 bg-amber-600 text-white rounded-md text-xs font-bold uppercase tracking-wider mb-1">
+              EPF 12 • Ressources_04
+            </span>
+            <h3 class="text-lg sm:text-xl font-bold text-oif-navy">
+              Choisir l'auxiliaire (Avoir ou Être) et former le participe passé (15 phrases ciblées)
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500">
+              Complétez avec le verbe auxiliaire correct au présent et le participe passé bien orthographié.
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="score-epf-ex1" class="text-sm font-bold bg-slate-100 text-slate-700 px-3 py-1 rounded-lg border">Score : -/15</span>
+            <button onclick="checkEPFEx1()" class="bg-amber-600 hover:bg-amber-700 text-white font-semibold text-sm px-4 py-2 rounded-xl transition-colors shadow-sm flex items-center gap-2">
+              <i class="fa-solid fa-circle-check"></i> Vérifier
+            </button>
+          </div>
+        </div>
+        <div id="container-epf-ex1" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+      </div>
+
+      <!-- Texte Corinne -->
+      <div class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b pb-4 mb-6">
+          <div>
+            <span class="inline-block px-3 py-1 bg-rose-600 text-white rounded-md text-xs font-bold uppercase tracking-wider mb-1">
+              Activité Extra • EPF 12 Ressources_06
+            </span>
+            <h3 class="text-lg sm:text-xl font-bold text-oif-navy">
+              Récit complet : Les vacances de Corinne au passé composé (13 verbes - Avoir & Être)
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500">
+              Transformez ce texte du présent au passé composé. Faites attention aux verbes de déplacement (être), pronominaux (être) et transitifs (avoir) !
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="score-corinne-text" class="text-sm font-bold bg-slate-100 text-slate-700 px-3 py-1 rounded-lg border">Score : -/13</span>
+            <button onclick="checkCorinneText()" class="bg-rose-600 hover:bg-rose-700 text-white font-semibold text-sm px-4 py-2 rounded-xl transition-colors shadow-sm flex items-center gap-2">
+              <i class="fa-solid fa-circle-check"></i> Vérifier le texte
+            </button>
+          </div>
+        </div>
+
+        <div class="bg-slate-100 border border-slate-300 rounded-xl p-4 mb-4 text-xs sm:text-sm text-slate-700">
+          <p class="font-bold text-slate-900 mb-1"><i class="fa-solid fa-file-lines mr-1 text-rose-600"></i> Texte original au présent :</p>
+          <p class="italic">
+            « Tous les ans, Corinne <u>va</u> en colonies de vacances avec ses copines. Elle <u>part</u> à mi-juillet et <u>reste</u> jusqu'à la fin du mois. En colo elle <u>se lève</u> très tôt, à 6 ou 7 heures. Elle <u>se lave</u> et elle <u>se brosse</u> les dents. Ensuite, elle <u>prend</u> le petit-déjeuner dans la cantine du camp. Après ses copines et elle <u>font</u> le ménage. À midi les enfants <u>se promènent</u> dans la forêt. Ils <u>jouent</u>, ils <u>nagent</u>, ils <u>lisent</u>. Le soir ils <u>se réunissent</u> devant le feu de camp et ils <u>se couchent</u> tard. »
+          </p>
+        </div>
+
+        <div class="bg-rose-50/40 border border-rose-200 rounded-xl p-5 text-sm sm:text-base leading-loose text-slate-800">
+          <p>
+            Cette année, Corinne <input type="text" id="corinne_v1" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-rose-700 w-32 text-center text-sm outline-none focus:ring-1 focus:ring-rose-500"> comme d'habitude en colonies de vacances avec ses copines. Elle <input type="text" id="corinne_v2" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-rose-700 w-32 text-center text-sm outline-none focus:ring-1 focus:ring-rose-500"> à mi-juillet et elle <input type="text" id="corinne_v3" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-rose-700 w-32 text-center text-sm outline-none focus:ring-1 focus:ring-rose-500"> jusqu'à la fin du mois.
+          </p>
+          <p class="mt-3">
+            Ce jour-là, elle <input type="text" id="corinne_v4" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-rose-700 w-32 text-center text-sm outline-none focus:ring-1 focus:ring-rose-500"> très tôt, à 6 heures. Elle <input type="text" id="corinne_v5" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-rose-700 w-32 text-center text-sm outline-none focus:ring-1 focus:ring-rose-500"> et elle <input type="text" id="corinne_v6" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-rose-700 w-32 text-center text-sm outline-none focus:ring-1 focus:ring-rose-500"> les dents. Ensuite, elle <input type="text" id="corinne_v7" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-rose-700 w-28 text-center text-sm outline-none focus:ring-1 focus:ring-rose-500"> le petit-déjeuner dans la cantine. Après, ses copines et elle <input type="text" id="corinne_v8" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-rose-700 w-28 text-center text-sm outline-none focus:ring-1 focus:ring-rose-500"> le ménage.
+          </p>
+          <p class="mt-3">
+            À midi, les enfants <input type="text" id="corinne_v9" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-rose-700 w-44 text-center text-sm outline-none focus:ring-1 focus:ring-rose-500"> dans la forêt. Ils <input type="text" id="corinne_v10" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-rose-700 w-28 text-center text-sm outline-none focus:ring-1 focus:ring-rose-500">, ils <input type="text" id="corinne_v11" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-rose-700 w-28 text-center text-sm outline-none focus:ring-1 focus:ring-rose-500"> et ils <input type="text" id="corinne_v12" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-rose-700 w-28 text-center text-sm outline-none focus:ring-1 focus:ring-rose-500"> un livre. Le soir, ils <input type="text" id="corinne_v13" placeholder="--" class="px-2 py-0.5 border rounded font-mono font-bold text-rose-700 w-40 text-center text-sm outline-none focus:ring-1 focus:ring-rose-500"> devant le feu de camp !
+          </p>
+        </div>
+        <div id="corinne-feedback" class="hidden mt-3 p-3 rounded-lg text-xs leading-relaxed"></div>
+      </div>
+
+      <!-- Grand quiz récapitulatif -->
+      <div class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b pb-4 mb-6">
+          <div>
+            <span class="inline-block px-3 py-1 bg-oif-blue text-white rounded-md text-xs font-bold uppercase tracking-wider mb-1">
+              Grand Test Récapitulatif
+            </span>
+            <h3 class="text-lg sm:text-xl font-bold text-oif-navy">
+              Maîtrise complète des auxiliaires et accords au passé composé (12 questions)
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500">
+              Choisissez la bonne proposition parmi les choix pour valider votre bilan.
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="score-recap-quiz" class="text-sm font-bold bg-slate-100 text-slate-700 px-3 py-1 rounded-lg border">Score : -/12</span>
+            <button onclick="checkRecapQuiz()" class="bg-oif-blue hover:bg-blue-700 text-white font-semibold text-sm px-4 py-2 rounded-xl transition-colors shadow-sm flex items-center gap-2">
+              <i class="fa-solid fa-circle-check"></i> Vérifier
+            </button>
+          </div>
+        </div>
+        <div id="container-recap-quiz" class="space-y-4"></div>
+
+        <div class="mt-8 p-4 bg-amber-50 rounded-xl border border-amber-200 flex flex-col sm:flex-row justify-between items-center gap-3">
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-award text-2xl text-amber-600"></i>
+            <div>
+              <span class="text-xs uppercase font-bold text-slate-500 tracking-wider">Sous-total Section 3</span>
+              <h4 class="text-base font-bold text-amber-950">Être ou Avoir & Synthèse</h4>
+            </div>
+          </div>
+          <span id="total-score-etre-avoir" class="text-lg font-black text-amber-800 bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-200">
+            Score section : 0 / 40
+          </span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Modal Exportation -->
+    <div id="exportModal" class="hidden fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+      <div class="bg-white w-full max-w-xl rounded-2xl shadow-2xl border border-slate-200 overflow-hidden my-6">
+        <div class="bg-oif-navy p-5 text-white flex items-center justify-between border-b-4 border-oif-yellow">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-rose-600 flex items-center justify-center text-lg text-oif-yellow">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div>
+              <h3 class="font-black text-lg text-white">Bilan Passé Composé & Auxiliaires</h3>
+              <p class="text-xs text-slate-300">Parcours A2 Complet (Avoir & Être)</p>
+            </div>
+          </div>
+          <button onclick="closeExportModal()" class="text-slate-400 hover:text-white text-lg p-1.5 transition-colors">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <div class="p-6 space-y-5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="studentName" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Nom et Prénom *</label>
+              <input type="text" id="studentName" placeholder="Ex. Marie Dupont" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-rose-500 outline-none" required>
+            </div>
+            <div>
+              <label for="studentGroup" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Groupe / Classe *</label>
+              <input type="text" id="studentGroup" placeholder="Ex. Groupe A2 - Mardi" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-rose-500 outline-none">
+            </div>
+          </div>
+
+          <div>
+            <label for="teacherEmail" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Courriel du professeur (optionnel)</label>
+            <input type="email" id="teacherEmail" placeholder="professeur@ecole.fr" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm font-medium text-slate-900 focus:ring-2 focus:ring-rose-500 outline-none">
+          </div>
+
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+            <div class="flex justify-between items-center mb-3">
+              <span class="text-xs uppercase font-bold text-slate-500">Score global Passé Composé :</span>
+              <span id="modalScoreDisplay" class="font-black text-rose-700 text-base">0 / 125 (0%)</span>
+            </div>
+            <div class="grid grid-cols-3 gap-2 text-center text-xs">
+              <div class="p-2 bg-white rounded border">
+                <span class="text-slate-500 block text-[9px] font-bold uppercase">1. PC Base & Audio</span>
+                <strong id="modalScorePasse" class="text-rose-700 font-black text-sm">0/30</strong>
+              </div>
+              <div class="p-2 bg-white rounded border">
+                <span class="text-slate-500 block text-[9px] font-bold uppercase">2. Maison d'Être</span>
+                <strong id="modalScoreMaisonEtre" class="text-cyan-700 font-black text-sm">0/55</strong>
+              </div>
+              <div class="p-2 bg-white rounded border">
+                <span class="text-slate-500 block text-[9px] font-bold uppercase">3. Avoir/Être & Quiz</span>
+                <strong id="modalScoreEtreAvoir" class="text-amber-700 font-black text-sm">0/40</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2.5 pt-2">
+            <button onclick="exportToPDF()" class="w-full bg-oif-navy hover:bg-slate-900 text-white font-bold text-sm py-3 px-4 rounded-xl transition-all shadow-md flex items-center justify-center gap-2">
+              <i class="fa-solid fa-file-pdf text-rose-400"></i>
+              <span>Télécharger / Imprimer l'attestation PDF</span>
+            </button>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <button onclick="copyResultsText()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl transition-colors border border-slate-300 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-copy text-rose-600"></i>
+                <span>Copier le rapport texte</span>
+              </button>
+              <button onclick="sendViaEmail()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl transition-colors border border-slate-300 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-paper-plane text-emerald-600"></i>
+                <span>Envoyer par courriel</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Zone d'impression PDF -->
+    <div id="printable-report-area" class="hidden">
+      <div style="border: 3px solid #002B49; border-radius: 12px; padding: 24px; font-family: sans-serif; max-width: 800px; margin: 0 auto;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #FFD100; padding-bottom: 12px; margin-bottom: 16px;">
+          <div>
+            <h2 style="color: #002B49; font-size: 20px; font-weight: bold; margin: 0;">ATTESTATION FLE A2 • PASSÉ COMPOSÉ</h2>
+            <p style="color: #64748b; font-size: 13px; margin: 4px 0 0 0;">Auxiliaires AVOIR et ÊTRE • Théorie & Ateliers pratiques</p>
+          </div>
+          <div style="text-align: right;"><span style="font-size: 12px; color: #64748b;" id="printDate"></span></div>
+        </div>
+        <div style="background-color: #F4F7FA; border: 1px solid #cbd5e1; border-radius: 8px; padding: 12px; margin-bottom: 16px; font-size: 14px;">
+          <p style="margin: 0 0 6px 0;"><strong>Nom de l'étudiant(e) :</strong> <span id="printStudentName" style="color: #0072CE;">-</span></p>
+          <p style="margin: 0;"><strong>Groupe / Classe :</strong> <span id="printStudentGroup">-</span></p>
+        </div>
+        <div style="margin-bottom: 20px; text-align: center; padding: 16px; background: #f8fafc; border: 2px dashed #DA291C; border-radius: 10px;">
+          <span style="font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: #64748b;">Résultat total Passé Composé</span>
+          <div style="font-size: 28px; font-weight: 900; color: #002B49; margin: 4px 0;" id="printGrandTotal">0 / 125 (0%)</div>
+          <p style="font-size: 12px; color: #009639; margin: 0; font-weight: bold;" id="printStatusMention">Module complété</p>
+        </div>
+        <table style="width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 20px;">
+          <thead>
+            <tr style="background-color: #f1f5f9; text-align: left;">
+              <th style="padding: 6px; border: 1px solid #cbd5e1;">Section</th>
+              <th style="padding: 6px; border: 1px solid #cbd5e1;">Activité</th>
+              <th style="padding: 6px; border: 1px solid #cbd5e1; text-align: center;">Score</th>
+            </tr>
+          </thead>
+          <tbody id="printScoresTableBody"></tbody>
+        </table>
+        <div style="border-top: 1px solid #cbd5e1; padding-top: 12px; display: flex; justify-content: space-between; font-size: 11px; color: #94a3b8;">
+          <span>Validation autonome • Plateforme FLE A2</span>
+          <span>Ateliers Passé Composé • IPN / Hachette</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center space-x-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-rose-600"></span>
+        <span class="font-bold text-slate-700">Parcours Pédagogique FLE A2 • Le Passé Composé</span>
+      </div>
+      <p class="text-slate-400">Ressource autocorrective interactive consacrée aux verbes et auxiliaires au passé</p>
+    </div>
+  </footer>
+
+  <script>
+    const scores = {
+      pcQCM: 0,
+      pcFill: 0,
+      pcAudio: 0,
+      sortVerbs: 0,
+      ipnAccords: 0,
+      devinettes: 0,
+      epfEx1: 0,
+      corinneText: 0,
+      recapQuiz: 0
+    };
+
+    function showToast(title, message, isSuccess = true) {
+      const toast = document.getElementById('toastMessage');
+      const toastTitle = document.getElementById('toastTitle');
+      const toastBody = document.getElementById('toastBody');
+      const toastIcon = document.getElementById('toastIcon');
+
+      toastTitle.textContent = title;
+      toastBody.textContent = message;
+
+      if (isSuccess) {
+        toast.className = toast.className.replace(/border-[a-z0-9-]+/, 'border-emerald-500');
+        toastIcon.className = "fa-solid fa-circle-check text-emerald-400 text-xl mt-0.5";
+      } else {
+        toast.className = toast.className.replace(/border-[a-z0-9-]+/, 'border-rose-500');
+        toastIcon.className = "fa-solid fa-circle-exclamation text-rose-400 text-xl mt-0.5";
+      }
+
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.remove('translate-y-2'), 10);
+      clearTimeout(window.toastTimer);
+      window.toastTimer = setTimeout(hideToast, 4000);
+    }
+
+    function hideToast() {
+      const toast = document.getElementById('toastMessage');
+      toast.classList.add('translate-y-2');
+      setTimeout(() => toast.classList.add('hidden'), 200);
+    }
+
+    function switchTab(tabId) {
+      const tabs = ['tab-passe', 'tab-maison-etre', 'tab-etre-avoir'];
+      tabs.forEach(id => {
+        const section = document.getElementById(id);
+        const btn = document.getElementById('btn-' + id);
+        if (id === tabId) {
+          section.classList.remove('hidden');
+          btn.classList.add('tab-active');
+        } else {
+          section.classList.add('hidden');
+          btn.classList.remove('tab-active');
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // --- SECTION 1 : LOGIQUE PASSÉ COMPOSÉ DE BASE & AUDIO ---
+    const pcQCMData = [
+      { id: 1, question: "Hier, ma mère _______ dans ma chambre pour me parler.", options: ["est entrée", "a entré", "est entré", "a entrée"], answer: "est entrée", feedback: "« Entrer » utilise ÊTRE & accord féminin : « est entrée »." },
+      { id: 2, question: "L'année dernière, nous _______ de magnifiques vacances.", options: ["avons passé", "sommes passés", "avons passés", "sommes passé"], answer: "avons passé", feedback: "Passer + COD utilise AVOIR sans accord : « avons passé »." },
+      { id: 3, question: "Mes demi-sœurs _______ le train de 8 heures pour venir.", options: ["ont pris", "sont prises", "ont prises", "sont pris"], answer: "ont pris", feedback: "« Prendre » utilise AVOIR : « ont pris »." },
+      { id: 4, question: "Sophie et Émilie _______ à la maison hier soir.", options: ["sont arrivées", "ont arrivé", "sont arrivé", "ont arrivées"], answer: "sont arrivées", feedback: "« Arriver » utilise ÊTRE & accord féminin pluriel : « sont arrivées »." },
+      { id: 5, question: "Mon père et ma belle-mère _______ un bel appartement.", options: ["ont acheté", "sont achetés", "ont achetés", "sont acheté"], answer: "ont acheté", feedback: "« Acheter » se conjugue avec AVOIR : « ont acheté »." },
+      { id: 6, question: "Théo _______ de ses difficultés dans une émission.", options: ["a témoigné", "est témoigné", "a témoigner", "est témoignée"], answer: "a témoigné", feedback: "« Témoigner » utilise AVOIR : « a témoigné »." },
+      { id: 7, question: "Après le divorce, elles _______ vivre chez leur père.", options: ["sont parties", "ont parti", "sont parti", "ont parties"], answer: "sont parties", feedback: "« Partir » utilise ÊTRE & accord féminin pluriel : « sont parties »." },
+      { id: 8, question: "— Tu _______ la compagne de ton père ? — Oui !", options: ["as rencontré", "es rencontré", "as rencontrée", "es rencontrée"], answer: "as rencontré", feedback: "« Rencontrer » utilise AVOIR : « as rencontré »." },
+      { id: 9, question: "Mon petit frère _______ dans le jardin en jouant.", options: ["est tombé", "a tombé", "est tomber", "a tomber"], answer: "est tombé", feedback: "« Tomber » utilise ÊTRE : « est tombé »." },
+      { id: 10, question: "Mes parents _______ l'année dernière.", options: ["se sont séparés", "ont séparé", "se sont séparé", "se sont séparées"], answer: "se sont séparés", feedback: "Verbe pronominal &rarr; ÊTRE + accord masc. pluriel : « se sont séparés »." }
+    ];
+
+    function renderPCQCM() {
+      const container = document.getElementById('container-pc-qcm');
+      container.innerHTML = pcQCMData.map((item, idx) => `
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50" id="pc-qcm-card-${item.id}">
+          <p class="font-medium text-slate-800 text-sm sm:text-base mb-3">
+            <span class="inline-block w-6 h-6 bg-rose-100 text-rose-800 rounded-full text-center text-xs font-bold leading-6 mr-1">${idx + 1}</span>
+            ${item.question}
+          </p>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            ${item.options.map(opt => `
+              <label class="flex items-center p-2.5 rounded-lg border border-slate-200 bg-white hover:bg-rose-50/50 cursor-pointer text-sm font-medium transition-colors">
+                <input type="radio" name="pc_qcm_${item.id}" value="${opt}" class="text-rose-600 mr-2">
+                <span>${opt}</span>
+              </label>
+            `).join('')}
+          </div>
+          <div id="pc-qcm-fb-${item.id}" class="hidden mt-3 p-3 rounded-lg text-xs leading-relaxed"></div>
+        </div>
+      `).join('');
+    }
+
+    const pcFillData = [
+      { id: 1, sentence: "L'année dernière, ma mère (avoir) _______ un bébé.", expected: "a eu", accepted: ["a eu"], feedback: "AVOIR + participe irrégulier 'eu' &rarr; « a eu »." },
+      { id: 2, sentence: "Mes grands-parents (venir) _______ dîner chez nous.", expected: "sont venus", accepted: ["sont venus"], feedback: "ÊTRE + accord masc. pluriel &rarr; « sont venus »." },
+      { id: 3, sentence: "Nous (faire) _______ beaucoup d'efforts.", expected: "avons fait", accepted: ["avons fait"], feedback: "AVOIR + fait &rarr; « avons fait »." },
+      { id: 4, sentence: "Ma sœur (naître) _______ en juillet 2018.", expected: "est née", accepted: ["est née", "est nee"], feedback: "ÊTRE + accord fém. singulier &rarr; « est née »." },
+      { id: 5, sentence: "Mes deux demi-sœurs (partir) _______ en vacances.", expected: "sont parties", accepted: ["sont parties"], feedback: "ÊTRE + accord fém. pluriel &rarr; « sont parties »." },
+      { id: 6, sentence: "Vous (lire) _______ l'article sur la famille ?", expected: "avez lu", accepted: ["avez lu"], feedback: "AVOIR + lu &rarr; « avez lu »." },
+      { id: 7, sentence: "Mon beau-père (mettre) _______ ses livres dans le salon.", expected: "a mis", accepted: ["a mis"], feedback: "AVOIR + mis &rarr; « a mis »." },
+      { id: 8, sentence: "Elle (aller) _______ voir son père hier.", expected: "est allée", accepted: ["est allée", "est allee"], feedback: "ÊTRE + accord fém. &rarr; « est allée »." },
+      { id: 9, sentence: "Nous (voir) _______ nos cousins pendant les fêtes.", expected: "avons vu", accepted: ["avons vu"], feedback: "AVOIR + vu &rarr; « avons vu »." },
+      { id: 10, sentence: "Ce matin, je (boire) _______ un grand café.", expected: "ai bu", accepted: ["ai bu", "j'ai bu"], feedback: "AVOIR + bu &rarr; « ai bu »." }
+    ];
+
+    function renderPCFill() {
+      const container = document.getElementById('container-pc-fill');
+      container.innerHTML = pcFillData.map((item, idx) => `
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50" id="pc-fill-card-${item.id}">
+          <p class="text-sm sm:text-base font-medium text-slate-800 mb-2">
+            <span class="inline-block w-6 h-6 bg-rose-100 text-rose-800 rounded-full text-center text-xs font-bold leading-6 mr-1">${idx + 1}</span>
+            ${item.sentence}
+          </p>
+          <div class="flex items-center gap-3">
+            <input type="text" id="pc-fill-input-${item.id}" placeholder="auxiliaire + participe" class="w-64 px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-sm font-bold text-rose-700 outline-none" autocomplete="off">
+          </div>
+          <div id="pc-fill-fb-${item.id}" class="hidden mt-2 p-2.5 rounded-lg text-xs leading-relaxed"></div>
+        </div>
+      `).join('');
+    }
+
+    const pcAudioData = [
+      { id: 1, frenchText: "Mon père prépare le dîner pour toute la famille.", correctTense: "Présent", tenseExplanation: "Présent simple : « prépare »." },
+      { id: 2, frenchText: "Mon père a préparé le dîner pour toute la famille hier soir.", correctTense: "Passé composé", tenseExplanation: "Deux éléments : « a » + « préparé »." },
+      { id: 3, frenchText: "Mes deux demi-sœurs sont arrivées ce matin à la gare.", correctTense: "Passé composé", tenseExplanation: "Auxiliaire être « sont » + « arrivées »." },
+      { id: 4, frenchText: "Mes deux demi-sœurs arrivent toujours à l'heure au collège.", correctTense: "Présent", tenseExplanation: "Présent simple : « arrivent »." },
+      { id: 5, frenchText: "Nous avons rencontré son nouveau compagnon la semaine dernière.", correctTense: "Passé composé", tenseExplanation: "« Avons rencontré »." },
+      { id: 6, frenchText: "Nous rencontrons des personnes très sympathiques dans notre quartier.", correctTense: "Présent", tenseExplanation: "Présent : « rencontrons »." },
+      { id: 7, frenchText: "Ils ont fini leurs études de médecine l'année passée.", correctTense: "Passé composé", tenseExplanation: "« Ont fini »." },
+      { id: 8, frenchText: "Ils finissent leurs devoirs scolaires dans la chambre.", correctTense: "Présent", tenseExplanation: "Présent : « finissent »." },
+      { id: 9, frenchText: "Elle est partie vivre à Marseille avec sa mère.", correctTense: "Passé composé", tenseExplanation: "« Est partie »." },
+      { id: 10, frenchText: "Elle part souvent en voyage pendant les vacances scolaires.", correctTense: "Présent", tenseExplanation: "Présent simple : « part »." }
+    ];
+
+    function playSpeech(text, btnElement) {
+      if (!('speechSynthesis' in window)) {
+        showToast("Synthèse vocale indisponible", "Votre navigateur ne prend pas en charge la synthèse vocale.", false);
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'fr-FR';
+      utterance.rate = 0.9;
+      const voices = window.speechSynthesis.getVoices();
+      const frenchVoice = voices.find(v => v.lang.startsWith('fr'));
+      if (frenchVoice) utterance.voice = frenchVoice;
+
+      const orig = btnElement.innerHTML;
+      btnElement.innerHTML = '<i class="fa-solid fa-volume-high text-amber-500 animate-pulse"></i> Écoute...';
+      utterance.onend = () => { btnElement.innerHTML = orig; };
+      utterance.onerror = () => { btnElement.innerHTML = orig; };
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function renderPCAudio() {
+      const container = document.getElementById('container-pc-audio');
+      container.innerHTML = pcAudioData.map((item, idx) => `
+        <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-3" id="pc-audio-card-${item.id}">
+          <div class="flex items-center gap-3">
+            <span class="inline-block w-6 h-6 bg-amber-100 text-amber-800 rounded-full text-center text-xs font-bold leading-6 shrink-0">${idx + 1}</span>
+            <button onclick="playSpeech('${item.frenchText.replace(/'/g, "\\'")}', this)" class="bg-white hover:bg-slate-100 border border-slate-300 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold transition-all shadow-sm flex items-center gap-2">
+              <i class="fa-solid fa-volume-high text-oif-blue"></i>
+              <span>Écouter</span>
+            </button>
+          </div>
+          <div class="flex items-center gap-2">
+            <label class="flex items-center gap-1.5 text-xs sm:text-sm font-semibold cursor-pointer bg-white px-3 py-1.5 rounded-lg border hover:bg-slate-100">
+              <input type="radio" name="pc_audio_choice_${item.id}" value="Présent" class="text-oif-blue">
+              <span>Présent</span>
+            </label>
+            <label class="flex items-center gap-1.5 text-xs sm:text-sm font-semibold cursor-pointer bg-white px-3 py-1.5 rounded-lg border hover:bg-slate-100">
+              <input type="radio" name="pc_audio_choice_${item.id}" value="Passé composé" class="text-rose-600">
+              <span>Passé composé</span>
+            </label>
+          </div>
+          <div id="pc-audio-fb-${item.id}" class="hidden w-full mt-2 p-2 rounded-lg text-xs leading-relaxed"></div>
+        </div>
+      `).join('');
+    }
+
+    function checkPCQCM() {
+      let score = 0;
+      pcQCMData.forEach(item => {
+        const selected = document.querySelector(`input[name="pc_qcm_${item.id}"]:checked`);
+        const card = document.getElementById(`pc-qcm-card-${item.id}`);
+        const fb = document.getElementById(`pc-qcm-fb-${item.id}`);
+        fb.classList.remove('hidden');
+        if (selected && selected.value === item.answer) {
+          score++;
+          card.className = "p-4 rounded-xl border border-emerald-300 bg-emerald-50/50";
+          fb.className = "mt-3 p-2.5 rounded-lg text-xs bg-emerald-100 text-emerald-900 border border-emerald-200";
+          fb.innerHTML = `<strong><i class="fa-solid fa-check mr-1"></i> Bravo !</strong> ${item.feedback}`;
+        } else {
+          card.className = "p-4 rounded-xl border border-rose-300 bg-rose-50/50";
+          fb.className = "mt-3 p-2.5 rounded-lg text-xs bg-rose-100 text-rose-900 border border-rose-200";
+          fb.innerHTML = `<strong><i class="fa-solid fa-xmark mr-1"></i> Erreur.</strong> Forme correcte : <strong class="text-emerald-800 underline">${item.answer}</strong>. ${item.feedback}`;
+        }
+      });
+      scores.pcQCM = score;
+      document.getElementById('score-pc-qcm').textContent = `Score : ${score}/10`;
+      updateTotals();
+      showToast("Activité vérifiée", `Vous avez obtenu ${score}/10 au passé composé QCM.`);
+    }
+
+    function checkPCFill() {
+      let score = 0;
+      pcFillData.forEach(item => {
+        const input = document.getElementById(`pc-fill-input-${item.id}`);
+        const userVal = input.value.trim().toLowerCase();
+        const card = document.getElementById(`pc-fill-card-${item.id}`);
+        const fb = document.getElementById(`pc-fill-fb-${item.id}`);
+        fb.classList.remove('hidden');
+        const isCorrect = item.accepted.some(acc => acc.toLowerCase() === userVal);
+        if (isCorrect) {
+          score++;
+          card.className = "p-4 rounded-xl border border-emerald-300 bg-emerald-50/50";
+          fb.className = "mt-2 p-2.5 rounded-lg text-xs bg-emerald-100 text-emerald-900 border border-emerald-200";
+          fb.innerHTML = `<strong><i class="fa-solid fa-check mr-1"></i> Très bien !</strong> ${item.feedback}`;
+        } else {
+          card.className = "p-4 rounded-xl border border-rose-300 bg-rose-50/50";
+          fb.className = "mt-2 p-2.5 rounded-lg text-xs bg-rose-100 text-rose-900 border border-rose-200";
+          fb.innerHTML = `<strong><i class="fa-solid fa-xmark mr-1"></i> Forme incorrecte.</strong> Réponse attendue : <strong class="text-emerald-800 underline">${item.expected}</strong>. ${item.feedback}`;
+        }
+      });
+      scores.pcFill = score;
+      document.getElementById('score-pc-fill').textContent = `Score : ${score}/10`;
+      updateTotals();
+      showToast("Activité vérifiée", `Vous avez obtenu ${score}/10 aux phrases à trous.`);
+    }
+
+    function checkPCAudio() {
+      let score = 0;
+      pcAudioData.forEach(item => {
+        const selected = document.querySelector(`input[name="pc_audio_choice_${item.id}"]:checked`);
+        const card = document.getElementById(`pc-audio-card-${item.id}`);
+        const fb = document.getElementById(`pc-audio-fb-${item.id}`);
+        fb.classList.remove('hidden');
+        if (selected && selected.value === item.correctTense) {
+          score++;
+          card.className = "p-3.5 rounded-xl border border-emerald-300 bg-emerald-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-3";
+          fb.className = "w-full mt-2 p-2.5 rounded-lg text-xs bg-emerald-100 text-emerald-900 border border-emerald-200";
+          fb.innerHTML = `<strong><i class="fa-solid fa-check mr-1"></i> Bonne écoute !</strong> <em>« ${item.frenchText} »</em> &rarr; <strong>${item.correctTense}</strong>. ${item.tenseExplanation}`;
+        } else {
+          card.className = "p-3.5 rounded-xl border border-rose-300 bg-rose-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-3";
+          fb.className = "w-full mt-2 p-2.5 rounded-lg text-xs bg-rose-100 text-rose-900 border border-rose-200";
+          fb.innerHTML = `<strong><i class="fa-solid fa-xmark mr-1"></i> Erreur d'écoute.</strong> Le temps est : <strong class="text-rose-800 underline">${item.correctTense}</strong>. ${item.tenseExplanation}`;
+        }
+      });
+      scores.pcAudio = score;
+      document.getElementById('score-pc-audio').textContent = `Score : ${score}/10`;
+      updateTotals();
+      showToast("Activité vérifiée", `Vous avez obtenu ${score}/10 en discrimination auditive.`);
+    }
+
+    // --- SECTION 2 : LOGIQUE ATELIER AUXILIAIRE ÊTRE ---
+    const verbsList = [
+      { id: "v1", name: "naître", aux: "etre" },
+      { id: "v2", name: "mourir", aux: "etre" },
+      { id: "v3", name: "entrer", aux: "etre" },
+      { id: "v4", name: "sortir", aux: "etre" },
+      { id: "v5", name: "partir", aux: "etre" },
+      { id: "v6", name: "arriver", aux: "etre" },
+      { id: "v7", name: "monter", aux: "etre" },
+      { id: "v8", name: "descendre", aux: "etre" },
+      { id: "v9", name: "venir", aux: "etre" },
+      { id: "v10", name: "aller", aux: "etre" },
+      { id: "v11", name: "passer", aux: "etre" },
+      { id: "v12", name: "retourner", aux: "etre" },
+      { id: "v13", name: "rester", aux: "etre" },
+      { id: "v14", name: "tomber", aux: "etre" },
+      { id: "v15", name: "rentrer", aux: "etre" },
+      { id: "v16", name: "revenir", aux: "etre" },
+      { id: "v17", name: "devenir", aux: "etre" },
+      { id: "v18", name: "manger", aux: "avoir" },
+      { id: "v19", name: "aimer", aux: "avoir" },
+      { id: "v20", name: "parler", aux: "avoir" },
+      { id: "v21", name: "choisir", aux: "avoir" },
+      { id: "v22", name: "faire", aux: "avoir" },
+      { id: "v23", name: "prendre", aux: "avoir" },
+      { id: "v24", name: "boire", aux: "avoir" },
+      { id: "v25", name: "comprendre", aux: "avoir" }
+    ];
+
+    let verbPlacement = {};
+
+    function initVerbSorting() {
+      const shuffled = [...verbsList].sort(() => Math.random() - 0.5);
+      verbPlacement = {};
+      renderVerbsPool(shuffled);
+      setupDropZones();
+      updateVerbBadges();
+    }
+
+    function resetVerbSorting() {
+      initVerbSorting();
+      document.getElementById('grammaire-note-unlocked').classList.add('hidden');
+      document.getElementById('score-sort-verbs').textContent = 'Score : -/25';
+      showToast("Réinitialisation", "Les verbes sont remis dans la réserve.");
+    }
+
+    function renderVerbsPool(list) {
+      const pool = document.getElementById('verbs-pool');
+      const boxEtre = document.getElementById('box-etre-verbs');
+      const boxAvoir = document.getElementById('box-avoir-verbs');
+      pool.innerHTML = ''; boxEtre.innerHTML = ''; boxAvoir.innerHTML = '';
+
+      list.forEach(v => {
+        verbPlacement[v.id] = null;
+        const chip = createVerbChip(v);
+        pool.appendChild(chip);
+      });
+      updateRemainingCount();
+    }
+
+    function createVerbChip(v) {
+      const chip = document.createElement('div');
+      chip.id = `chip-${v.id}`;
+      chip.draggable = true;
+      chip.className = "cursor-grab active:cursor-grabbing px-3 py-1.5 rounded-lg border border-slate-300 bg-white hover:bg-slate-100 text-xs sm:text-sm font-bold text-slate-800 shadow-sm flex items-center gap-1.5 transition-all select-none";
+      chip.innerHTML = `<span>${v.name}</span> <i class="fa-solid fa-arrows-up-down-left-right text-[10px] text-slate-400"></i>`;
+
+      chip.ondragstart = (e) => {
+        e.dataTransfer.setData('text/plain', v.id);
+        chip.classList.add('opacity-50');
+      };
+      chip.ondragend = () => {
+        chip.classList.remove('opacity-50');
+      };
+
+      chip.onclick = () => {
+        const currentLoc = verbPlacement[v.id];
+        if (!currentLoc) moveVerb(v.id, 'etre');
+        else if (currentLoc === 'etre') moveVerb(v.id, 'avoir');
+        else moveVerb(v.id, 'pool');
+      };
+
+      return chip;
+    }
+
+    function setupDropZones() {
+      const dropEtre = document.getElementById('dropzone-etre');
+      const dropAvoir = document.getElementById('dropzone-avoir');
+      const pool = document.getElementById('verbs-pool');
+
+      [dropEtre, dropAvoir, pool].forEach(zone => {
+        zone.ondragover = (e) => {
+          e.preventDefault();
+          zone.classList.add('dropzone-hover');
+        };
+        zone.ondragleave = () => {
+          zone.classList.remove('dropzone-hover');
+        };
+        zone.ondrop = (e) => {
+          e.preventDefault();
+          zone.classList.remove('dropzone-hover');
+          const verbId = e.dataTransfer.getData('text/plain');
+          if (zone === dropEtre) moveVerb(verbId, 'etre');
+          else if (zone === dropAvoir) moveVerb(verbId, 'avoir');
+          else if (zone === pool) moveVerb(verbId, 'pool');
+        };
+      });
+    }
+
+    function moveVerb(verbId, targetZone) {
+      const chip = document.getElementById(`chip-${verbId}`);
+      if (!chip) return;
+
+      chip.classList.remove('bg-rose-100', 'border-rose-400', 'text-rose-900', 'bg-emerald-100', 'border-emerald-400');
+
+      if (targetZone === 'etre') {
+        verbPlacement[verbId] = 'etre';
+        document.getElementById('box-etre-verbs').appendChild(chip);
+      } else if (targetZone === 'avoir') {
+        verbPlacement[verbId] = 'avoir';
+        document.getElementById('box-avoir-verbs').appendChild(chip);
+      } else {
+        verbPlacement[verbId] = null;
+        document.getElementById('verbs-pool').appendChild(chip);
+      }
+      updateVerbBadges();
+      updateRemainingCount();
+    }
+
+    function updateVerbBadges() {
+      const etreCount = Object.values(verbPlacement).filter(v => v === 'etre').length;
+      const avoirCount = Object.values(verbPlacement).filter(v => v === 'avoir').length;
+      document.getElementById('badge-count-etre').textContent = `${etreCount} verbes`;
+      document.getElementById('badge-count-avoir').textContent = `${avoirCount} verbes`;
+    }
+
+    function updateRemainingCount() {
+      const remaining = Object.values(verbPlacement).filter(v => v === null).length;
+      document.getElementById('remaining-verbs-count').textContent = `${remaining} restants`;
+    }
+
+    function checkVerbSorting() {
+      let correct = 0;
+      let incorrectCount = 0;
+
+      verbsList.forEach(v => {
+        const placed = verbPlacement[v.id];
+        const chip = document.getElementById(`chip-${v.id}`);
+        if (!chip) return;
+
+        if (placed === v.aux) {
+          correct++;
+          chip.className = "cursor-grab px-3 py-1.5 rounded-lg border border-emerald-400 bg-emerald-100 text-emerald-900 text-xs sm:text-sm font-bold shadow-sm flex items-center gap-1.5";
+        } else {
+          incorrectCount++;
+          chip.className = "cursor-grab px-3 py-1.5 rounded-lg border border-rose-400 bg-rose-100 text-rose-900 text-xs sm:text-sm font-bold shadow-sm flex items-center gap-1.5 animate-pulse";
+        }
+      });
+
+      scores.sortVerbs = correct;
+      document.getElementById('score-sort-verbs').textContent = `Score : ${correct}/25`;
+      updateTotals();
+
+      const noteBox = document.getElementById('grammaire-note-unlocked');
+      if (correct === 25) {
+        noteBox.classList.remove('hidden');
+        showToast("Bravo !", "Tous les verbes sont parfaitement classés dans la bonne boîte !");
+      } else {
+        noteBox.classList.add('hidden');
+        showToast("Tri à corriger", `${incorrectCount} verbe(s) mal classé(s) (en rouge).`, false);
+      }
+    }
+
+    const ipnData = [
+      { id: 1, sentence: "Le message est", options: ["arrivé", "arrivée", "arrivés", "arrivées"], answer: "arrivé", hint: "« Le message » = masculin singulier &rarr; arrivé." },
+      { id: 2, sentence: "Mes parents sont", options: ["parti", "partie", "partis", "parties"], answer: "partis", hint: "« Mes parents » = masculin pluriel &rarr; partis." },
+      { id: 3, sentence: "Julie et Marc sont", options: ["resté", "restée", "restés", "restées"], answer: "restés", hint: "Julie (fém.) + Marc (masc.) = masculin pluriel &rarr; restés." },
+      { id: 4, sentence: "Mes marguerites sont", options: ["mort", "morte", "morts", "mortes"], answer: "mortes", hint: "« Une marguerite » (fleur) = féminin pluriel &rarr; mortes." },
+      { id: 5, sentence: "La pleine lune est", options: ["sorti", "sortie", "sortis", "sorties"], answer: "sortie", hint: "« La pleine lune » = féminin singulier &rarr; sortie." },
+      { id: 6, sentence: "La fille de Jules est", options: ["né", "née", "nés", "nées"], answer: "née", hint: "« La fille » = féminin singulier &rarr; née." },
+      { id: 7, sentence: "Héloïse et Marie sont", options: ["rentré", "rentrée", "rentrés", "rentrées"], answer: "rentrées", hint: "Héloïse et Marie = féminin pluriel &rarr; rentrées." },
+      { id: 8, sentence: "La température est", options: ["monté", "montée", "montés", "montées"], answer: "montée", secondPart: "le matin et elle est", secondOptions: ["descendu", "descendue", "descendus", "descendues"], secondAnswer: "descendue", hint: "« La température » (elle) = féminin singulier &rarr; montée, descendue." },
+      { id: 9, sentence: "Je suis [locutrice féminine]", options: ["venu", "venue", "venus", "venues"], answer: "venue", extraText: "à la réunion.", hint: "Accord avec le sujet féminin 'Je' &rarr; venue." }
+    ];
+
+    function renderIPNAccords() {
+      const container = document.getElementById('container-ipn-accords');
+      container.innerHTML = ipnData.map((item, idx) => `
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50" id="ipn-card-${item.id}">
+          <p class="font-semibold text-slate-800 text-sm sm:text-base mb-3">
+            <span class="inline-block w-6 h-6 bg-cyan-100 text-cyan-800 rounded-full text-center text-xs font-bold leading-6 mr-1">${idx + 1}</span>
+            ${item.sentence} ... ${item.secondPart ? item.secondPart + ' ...' : ''} ${item.extraText || ''}
+          </p>
+          <div class="flex flex-wrap items-center gap-3">
+            <div class="flex flex-wrap gap-2">
+              ${item.options.map(opt => `
+                <label class="px-3 py-1.5 rounded-lg border bg-white hover:bg-cyan-50 cursor-pointer text-xs sm:text-sm font-semibold flex items-center gap-1">
+                  <input type="radio" name="ipn_${item.id}" value="${opt}" class="text-cyan-600">
+                  <span>${opt}</span>
+                </label>
+              `).join('')}
+            </div>
+
+            ${item.secondPart ? `
+              <div class="flex flex-wrap gap-2 items-center pl-2 border-l border-slate-300">
+                <span class="text-xs text-slate-500 font-bold">2e verbe :</span>
+                ${item.secondOptions.map(opt => `
+                  <label class="px-3 py-1.5 rounded-lg border bg-white hover:bg-cyan-50 cursor-pointer text-xs sm:text-sm font-semibold flex items-center gap-1">
+                    <input type="radio" name="ipn_${item.id}_2" value="${opt}" class="text-cyan-600">
+                    <span>${opt}</span>
+                  </label>
+                `).join('')}
+              </div>
+            ` : ''}
+          </div>
+          <div id="ipn-fb-${item.id}" class="hidden mt-2 p-2.5 rounded-lg text-xs leading-relaxed"></div>
+        </div>
+      `).join('');
+    }
+
+    function checkIPNAccords() {
+      let score = 0;
+      ipnData.forEach(item => {
+        const sel1 = document.querySelector(`input[name="ipn_${item.id}"]:checked`);
+        const card = document.getElementById(`ipn-card-${item.id}`);
+        const fb = document.getElementById(`ipn-fb-${item.id}`);
+        fb.classList.remove('hidden');
+
+        let isOk = sel1 && sel1.value === item.answer;
+        if (item.secondPart) {
+          const sel2 = document.querySelector(`input[name="ipn_${item.id}_2"]:checked`);
+          isOk = isOk && sel2 && sel2.value === item.secondAnswer;
+        }
+
+        if (isOk) {
+          score++;
+          card.className = "p-4 rounded-xl border border-emerald-300 bg-emerald-50/50";
+          fb.className = "mt-2 p-2 rounded-lg text-xs bg-emerald-100 text-emerald-900 border border-emerald-200";
+          fb.innerHTML = `<strong><i class="fa-solid fa-check mr-1"></i> Bravo !</strong> ${item.hint}`;
+        } else {
+          card.className = "p-4 rounded-xl border border-rose-300 bg-rose-50/50";
+          fb.className = "mt-2 p-2 rounded-lg text-xs bg-rose-100 text-rose-900 border border-rose-200";
+          fb.innerHTML = `<strong><i class="fa-solid fa-xmark mr-1"></i> À corriger.</strong> ${item.hint}`;
+        }
+      });
+
+      scores.ipnAccords = score;
+      document.getElementById('score-ipn-accords').textContent = `Score : ${score}/9`;
+      updateTotals();
+      showToast("Activité vérifiée", `Vous avez obtenu ${score}/9 sur les accords.`);
+    }
+
+    const devinette1Answers = {
+      v1: ["est né", "est ne"],
+      v2: ["est parti"],
+      v3: ["est monté", "est monte"],
+      v4: ["est descendu"],
+      v5: ["sont partis"],
+      v6: ["est devenue"],
+      v7: ["sont tombés", "sont tombes"],
+      v8: ["sont nés", "sont nes"]
+    };
+
+    const devinette2Answers = {
+      v1: ["est né", "est ne"],
+      v2: ["est parti"],
+      v3: ["est monté", "est monte"],
+      v4: ["est passé", "est passe"],
+      v5: ["est arrivé", "est arrive"],
+      v6: ["est tombé", "est tombe"],
+      v7: ["est venu"],
+      v8: ["est resté", "est reste"],
+      v9: ["est devenu"],
+      v10: ["est mort"],
+      v11: ["est retourné", "est retourne"]
+    };
+
+    function checkDevinettes() {
+      let score = 0;
+      let dev1VerbsOk = 0;
+      Object.keys(devinette1Answers).forEach((key) => {
+        const inp = document.getElementById(`dev1_${key}`);
+        const val = inp.value.trim().toLowerCase();
+        if (devinette1Answers[key].includes(val)) {
+          dev1VerbsOk++;
+          inp.className = "px-2 py-0.5 border border-emerald-400 bg-emerald-50 rounded font-mono font-bold text-emerald-800 text-sm outline-none";
+        } else {
+          inp.className = "px-2 py-0.5 border border-rose-400 bg-rose-50 rounded font-mono font-bold text-rose-800 text-sm outline-none";
+        }
+      });
+      score += dev1VerbsOk;
+
+      const who1 = document.querySelector('input[name="who_dev_1"]:checked');
+      const isWho1Ok = who1 && who1.value === "Schreck";
+      if (isWho1Ok) score++;
+
+      const fb1 = document.getElementById('dev1-feedback');
+      fb1.classList.remove('hidden');
+      if (dev1VerbsOk === 8 && isWho1Ok) {
+        fb1.className = "mt-3 p-3 rounded-lg text-xs bg-emerald-100 text-emerald-900 border border-emerald-200";
+        fb1.innerHTML = `<strong><i class="fa-solid fa-check mr-1"></i> Formidable !</strong> Vous avez identifié <strong>Shrek</strong> et conjugué tous les verbes !`;
+      } else {
+        fb1.className = "mt-3 p-3 rounded-lg text-xs bg-rose-100 text-rose-900 border border-rose-200";
+        fb1.innerHTML = `<strong><i class="fa-solid fa-xmark mr-1"></i> À revoir :</strong> Personnage : <strong>Shrek</strong>. Verbes : <em>est né, est parti, est monté, est descendu, ils sont partis, elle est devenue, ils sont tombés, leurs triplets sont nés</em>.`;
+      }
+
+      let dev2VerbsOk = 0;
+      Object.keys(devinette2Answers).forEach((key) => {
+        const inp = document.getElementById(`dev2_${key}`);
+        const val = inp.value.trim().toLowerCase();
+        if (devinette2Answers[key].includes(val)) {
+          dev2VerbsOk++;
+          inp.className = "px-2 py-0.5 border border-emerald-400 bg-emerald-50 rounded font-mono font-bold text-emerald-800 text-sm outline-none";
+        } else {
+          inp.className = "px-2 py-0.5 border border-rose-400 bg-rose-50 rounded font-mono font-bold text-rose-800 text-sm outline-none";
+        }
+      });
+      score += dev2VerbsOk;
+
+      const who2 = document.querySelector('input[name="who_dev_2"]:checked');
+      const isWho2Ok = who2 && who2.value === "Le petit Prince";
+      if (isWho2Ok) score++;
+
+      const fb2 = document.getElementById('dev2-feedback');
+      fb2.classList.remove('hidden');
+      if (dev2VerbsOk === 11 && isWho2Ok) {
+        fb2.className = "mt-3 p-3 rounded-lg text-xs bg-emerald-100 text-emerald-900 border border-emerald-200";
+        fb2.innerHTML = `<strong><i class="fa-solid fa-check mr-1"></i> Magnifique !</strong> Il s'agit du <strong>Petit Prince</strong> !`;
+      } else {
+        fb2.className = "mt-3 p-3 rounded-lg text-xs bg-rose-100 text-rose-900 border border-rose-200";
+        fb2.innerHTML = `<strong><i class="fa-solid fa-xmark mr-1"></i> À revoir :</strong> Personnage : <strong>Le Petit Prince</strong>. Verbes : <em>est né, est parti, est monté, est passé, est arrivé, est tombé, est venu, est resté, est devenu, est mort, est retourné</em>.`;
+      }
+
+      scores.devinettes = score;
+      document.getElementById('score-devinettes').textContent = `Score : ${score}/21`;
+      updateTotals();
+      showToast("Devinettes vérifiées", `Score obtenu : ${score}/21.`);
+    }
+
+    // --- SECTION 3 : LOGIQUE EXERCICES AUXILIAIRE ÊTRE OU AVOIR ---
+    const epfEx1Data = [
+      { id: 1, sentence: "Hier, j' (marcher) _______ pendant des heures.", expected: "ai marché", accepted: ["ai marché", "ai marche"], aux: "avoir" },
+      { id: 2, sentence: "Tu (manger) _______ quelque chose ce midi ?", expected: "as mangé", accepted: ["as mangé", "as mange"], aux: "avoir" },
+      { id: 3, sentence: "Hier soir, ils (aller) _______ au restaurant.", expected: "sont allés", accepted: ["sont allés", "sont alles"], aux: "être" },
+      { id: 4, sentence: "Elle n' (pas répondre) _______ à mon message.", expected: "a pas répondu", accepted: ["a pas répondu", "a pas repondu", "n'a pas répondu"], aux: "avoir" },
+      { id: 5, sentence: "Ils ne (pas encore arriver) _______.", expected: "sont pas encore arrivés", accepted: ["sont pas encore arrivés", "sont pas encore arrives"], aux: "être" },
+      { id: 6, sentence: "Vous (sortir) _______ samedi soir ?", expected: "êtes sortis", accepted: ["êtes sortis", "etes sortis", "êtes sorti", "êtes sortie", "êtes sorties"], aux: "être" },
+      { id: 7, sentence: "Ma sœur (naître) _______ le 15 octobre.", expected: "est née", accepted: ["est née", "est nee"], aux: "être" },
+      { id: 8, sentence: "Elles (rester) _______ finalement à la maison.", expected: "sont restées", accepted: ["sont restées", "sont restees"], aux: "être" },
+      { id: 9, sentence: "Pierre (descendre) _______ avec toutes nos valises.", expected: "est descendu", accepted: ["est descendu"], aux: "être" },
+      { id: 10, sentence: "Hier, il (pleuvoir) _______ toute la journée.", expected: "a plu", accepted: ["a plu"], aux: "avoir" },
+      { id: 11, sentence: "Qu'est-ce que tu (faire) _______ pendant le weekend ?", expected: "as fait", accepted: ["as fait"], aux: "avoir" },
+      { id: 12, sentence: "Nous (boire) _______ trop de café ce matin.", expected: "avons bu", accepted: ["avons bu"], aux: "avoir" },
+      { id: 13, sentence: "En quelle année Édith Piaf (mourir) _______ -elle ?", expected: "est", extra: "morte", accepted: ["est"], aux: "être" },
+      { id: 14, sentence: "Ces gosses (devenir) _______ insupportables !", expected: "sont devenus", accepted: ["sont devenus"], aux: "être" },
+      { id: 15, sentence: "Je n' (pas prendre) _______ un jour de congé.", expected: "ai pas pris", accepted: ["ai pas pris", "n'ai pas pris"], aux: "avoir" }
+    ];
+
+    function renderEPFEx1() {
+      const container = document.getElementById('container-epf-ex1');
+      container.innerHTML = epfEx1Data.map((item, idx) => `
+        <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50/50 flex flex-col justify-between" id="epf-card-${item.id}">
+          <p class="font-medium text-slate-800 text-xs sm:text-sm mb-2">
+            <span class="inline-block w-5 h-5 bg-amber-100 text-amber-800 rounded-full text-center text-xs font-bold leading-5 mr-1">${idx + 1}</span>
+            ${item.sentence}
+          </p>
+          <div class="flex items-center gap-2">
+            <input type="text" id="epf_input_${item.id}" placeholder="Forme complète" class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs sm:text-sm font-bold text-amber-900 outline-none" autocomplete="off">
+          </div>
+          <div id="epf-fb-${item.id}" class="hidden mt-2 p-2 rounded-lg text-xs leading-relaxed"></div>
+        </div>
+      `).join('');
+    }
+
+    function checkEPFEx1() {
+      let score = 0;
+      epfEx1Data.forEach(item => {
+        const inp = document.getElementById(`epf_input_${item.id}`);
+        const userVal = inp.value.trim().toLowerCase();
+        const card = document.getElementById(`epf-card-${item.id}`);
+        const fb = document.getElementById(`epf-fb-${item.id}`);
+        fb.classList.remove('hidden');
+
+        const isOk = item.accepted.some(acc => acc.toLowerCase() === userVal);
+        if (isOk) {
+          score++;
+          card.className = "p-3.5 rounded-xl border border-emerald-300 bg-emerald-50/50 flex flex-col justify-between";
+          fb.className = "mt-2 p-2 rounded-lg text-xs bg-emerald-100 text-emerald-900 border border-emerald-200";
+          fb.innerHTML = `<strong><i class="fa-solid fa-check mr-1"></i> Correct !</strong> Auxiliaire : <strong>${item.aux.toUpperCase()}</strong>.`;
+        } else {
+          card.className = "p-3.5 rounded-xl border border-rose-300 bg-rose-50/50 flex flex-col justify-between";
+          fb.className = "mt-2 p-2 rounded-lg text-xs bg-rose-100 text-rose-900 border border-rose-200";
+          fb.innerHTML = `<strong><i class="fa-solid fa-xmark mr-1"></i> Attendu :</strong> <strong class="text-emerald-800 underline">${item.expected}</strong> (Auxiliaire ${item.aux.toUpperCase()}).`;
+        }
+      });
+
+      scores.epfEx1 = score;
+      document.getElementById('score-epf-ex1').textContent = `Score : ${score}/15`;
+      updateTotals();
+      showToast("Activité vérifiée", `Score EPF Ressources 04 : ${score}/15.`);
+    }
+
+    const corinneAnswers = {
+      v1: ["est allée", "est allee"],
+      v2: ["est partie"],
+      v3: ["est restée", "est restee"],
+      v4: ["s'est levée", "s'est levee"],
+      v5: ["s'est lavée", "s'est lavee"],
+      v6: ["s'est brossé", "s'est brosse", "s'est brossée"],
+      v7: ["a pris"],
+      v8: ["ont fait"],
+      v9: ["se sont promenés", "se sont promenes"],
+      v10: ["ont joué", "ont joue"],
+      v11: ["ont nagé", "ont nage"],
+      v12: ["ont lu"],
+      v13: ["se sont réunis", "se sont reunis"]
+    };
+
+    function checkCorinneText() {
+      let score = 0;
+      Object.keys(corinneAnswers).forEach(key => {
+        const inp = document.getElementById(`corinne_${key}`);
+        const userVal = inp.value.trim().toLowerCase();
+        if (corinneAnswers[key].includes(userVal)) {
+          score++;
+          inp.className = "px-2 py-0.5 border border-emerald-400 bg-emerald-50 rounded font-mono font-bold text-emerald-800 text-sm outline-none";
+        } else {
+          inp.className = "px-2 py-0.5 border border-rose-400 bg-rose-50 rounded font-mono font-bold text-rose-800 text-sm outline-none";
+        }
+      });
+
+      const fb = document.getElementById('corinne-feedback');
+      fb.classList.remove('hidden');
+      if (score === 13) {
+        fb.className = "mt-3 p-3 rounded-lg text-xs bg-emerald-100 text-emerald-900 border border-emerald-200";
+        fb.innerHTML = `<strong><i class="fa-solid fa-check mr-1"></i> Parfait !</strong> Toutes les formes verbales sont exactes.`;
+      } else {
+        fb.className = "mt-3 p-3 rounded-lg text-xs bg-rose-100 text-rose-900 border border-rose-200";
+        fb.innerHTML = `<strong><i class="fa-solid fa-xmark mr-1"></i> Corrigez les cases rouges :</strong> <em>est allée, est partie, est restée, s'est levée, s'est lavée, s'est brossé, a pris, ont fait, se sont promenés, ont joué, ont nagé, ont lu, se sont réunis</em>.`;
+      }
+
+      scores.corinneText = score;
+      document.getElementById('score-corinne-text').textContent = `Score : ${score}/13`;
+      updateTotals();
+      showToast("Texte de Corinne vérifié", `Score obtenu : ${score}/13.`);
+    }
+
+    const recapQuizData = [
+      { id: 1, question: "Marie _______ à l'hôpital de bonne heure pour accueillir son équipe.", options: ["est venue", "a venu", "est venu", "a venue"], answer: "est venue", feedback: "Venir utilise ÊTRE & accord féminin : « est venue »." },
+      { id: 2, question: "Mes voisins _______ leur voiture pour acheter des vélos électriques.", options: ["ont vendu", "sont vendus", "ont vendus", "sont vendu"], answer: "ont vendu", feedback: "Vendre utilise AVOIR : « ont vendu »." },
+      { id: 3, question: "Hier soir, mes filles _______ à la fête de l'école jusqu'à 22 heures.", options: ["sont restées", "ont resté", "sont resté", "ont restées"], answer: "sont restées", feedback: "Rester utilise ÊTRE & accord féminin pluriel : « sont restées »." },
+      { id: 4, question: "Les scientifiques _______ les conséquences du changement climatique.", options: ["ont compris", "sont compris", "ont comprisent", "sont comprit"], answer: "ont compris", feedback: "Comprendre utilise AVOIR : « ont compris »." },
+      { id: 5, question: "Ma petite sœur _______ de son vélo dans le jardin public.", options: ["est tombée", "a tombé", "est tombé", "a tombée"], answer: "est tombée", feedback: "Tomber utilise ÊTRE & accord fém. singulier : « est tombée »." },
+      { id: 6, question: "Les deux actrices _______ à Paris après leur tournage à Rome.", options: ["sont revenues", "ont revenu", "sont revenu", "ont revenues"], answer: "sont revenues", feedback: "Revenir (dérivé de venir) utilise ÊTRE & accord : « sont revenues »." },
+      { id: 7, question: "Nous _______ un délicieux couscous végétarien chez nos amis.", options: ["avons mangé", "sommes mangés", "avons mangés", "sommes mangé"], answer: "avons mangé", feedback: "Manger utilise AVOIR sans accord : « avons mangé »." },
+      { id: 8, question: "Les feuilles des arbres _______ pendant la tempête de vent.", options: ["sont descendues", "ont descendu", "sont descendu", "ont descendues"], answer: "sont descendues", feedback: "Descendre (mouvement intransitif) utilise ÊTRE : « sont descendues »." },
+      { id: 9, question: "— Pourquoi vous n'_______ pas venu(e)s à la réunion hier ?", options: ["êtes", "avez", "étiez", "aviez"], answer: "êtes", feedback: "Venir utilise l'auxiliaire ÊTRE : « vous n'êtes pas venu(e)s »." },
+      { id: 10, question: "Quels beaux paysages nous _______ pendant notre séjour !", options: ["avons vus", "avons vu", "sommes vus", "sommes vu"], answer: "avons vu", feedback: "Niveau A2 : le verbe voir utilise l'auxiliaire AVOIR (« avons vu »)." },
+      { id: 11, question: "Le célèbre peintre impressionniste _______ en 1919.", options: ["est mort", "a mort", "est mouru", "a mouru"], answer: "est mort", feedback: "Mourir utilise ÊTRE & participe « mort » : « est mort »." },
+      { id: 12, question: "Mes collègues _______ à la direction pour présenter le nouveau projet.", options: ["sont montés", "ont monté", "sont monté", "ont montés"], answer: "sont montés", feedback: "Monter (déplacement) utilise ÊTRE & accord : « sont montés »." }
+    ];
+
+    function renderRecapQuiz() {
+      const container = document.getElementById('container-recap-quiz');
+      container.innerHTML = recapQuizData.map((item, idx) => `
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50" id="recap-card-${item.id}">
+          <p class="font-medium text-slate-800 text-sm sm:text-base mb-3">
+            <span class="inline-block w-6 h-6 bg-oif-blue/10 text-oif-blue rounded-full text-center text-xs font-bold leading-6 mr-1">${idx + 1}</span>
+            ${item.question}
+          </p>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            ${item.options.map(opt => `
+              <label class="flex items-center p-2.5 rounded-lg border border-slate-200 bg-white hover:bg-blue-50/50 cursor-pointer text-sm font-medium transition-colors">
+                <input type="radio" name="recap_quiz_${item.id}" value="${opt}" class="text-oif-blue mr-2">
+                <span>${opt}</span>
+              </label>
+            `).join('')}
+          </div>
+          <div id="recap-fb-${item.id}" class="hidden mt-3 p-3 rounded-lg text-xs leading-relaxed"></div>
+        </div>
+      `).join('');
+    }
+
+    function checkRecapQuiz() {
+      let score = 0;
+      recapQuizData.forEach(item => {
+        const selected = document.querySelector(`input[name="recap_quiz_${item.id}"]:checked`);
+        const card = document.getElementById(`recap-card-${item.id}`);
+        const fb = document.getElementById(`recap-fb-${item.id}`);
+        fb.classList.remove('hidden');
+
+        if (selected && selected.value === item.answer) {
+          score++;
+          card.className = "p-4 rounded-xl border border-emerald-300 bg-emerald-50/50";
+          fb.className = "mt-3 p-2.5 rounded-lg text-xs bg-emerald-100 text-emerald-900 border border-emerald-200";
+          fb.innerHTML = `<strong><i class="fa-solid fa-check mr-1"></i> Bravo !</strong> ${item.feedback}`;
+        } else {
+          card.className = "p-4 rounded-xl border border-rose-300 bg-rose-50/50";
+          fb.className = "mt-3 p-2.5 rounded-lg text-xs bg-rose-100 text-rose-900 border border-rose-200";
+          fb.innerHTML = `<strong><i class="fa-solid fa-xmark mr-1"></i> Erreur.</strong> Réponse : <strong class="text-emerald-800 underline">${item.answer}</strong>. ${item.feedback}`;
+        }
+      });
+
+      scores.recapQuiz = score;
+      document.getElementById('score-recap-quiz').textContent = `Score : ${score}/12`;
+      updateTotals();
+      showToast("Grand Test validé", `Vous avez obtenu ${score}/12 au quiz récapitulatif.`);
+    }
+
+    // --- TOTAUX ET EXPORTATION SANS SERVEUR ---
+    function updateTotals() {
+      const totalPasse = scores.pcQCM + scores.pcFill + scores.pcAudio; // max 30
+      const totalMaisonEtre = scores.sortVerbs + scores.ipnAccords + scores.devinettes; // max 55
+      const totalEtreAvoir = scores.epfEx1 + scores.corinneText + scores.recapQuiz; // max 40
+
+      const grandTotal = totalPasse + totalMaisonEtre + totalEtreAvoir; // max 125
+      const percentage = Math.round((grandTotal / 125) * 100);
+
+      document.getElementById('total-score-passe').textContent = `Score section : ${totalPasse} / 30`;
+      document.getElementById('badge-tab-passe').textContent = `${totalPasse}/30`;
+
+      document.getElementById('total-score-maison-etre').textContent = `Score section : ${totalMaisonEtre} / 55`;
+      document.getElementById('badge-tab-maison-etre').textContent = `${totalMaisonEtre}/55`;
+
+      document.getElementById('total-score-etre-avoir').textContent = `Score section : ${totalEtreAvoir} / 40`;
+      document.getElementById('badge-tab-etre-avoir').textContent = `${totalEtreAvoir}/40`;
+
+      document.getElementById('globalScoreText').textContent = `${grandTotal} / 125 réussites`;
+      document.getElementById('globalPercentText').textContent = `${percentage}%`;
+    }
+
+    function openExportModal() {
+      const modal = document.getElementById('exportModal');
+      const totalPasse = scores.pcQCM + scores.pcFill + scores.pcAudio;
+      const totalMaisonEtre = scores.sortVerbs + scores.ipnAccords + scores.devinettes;
+      const totalEtreAvoir = scores.epfEx1 + scores.corinneText + scores.recapQuiz;
+
+      const grandTotal = totalPasse + totalMaisonEtre + totalEtreAvoir;
+      const percent = Math.round((grandTotal / 125) * 100);
+
+      document.getElementById('modalScoreDisplay').textContent = `${grandTotal} / 125 (${percent}%)`;
+      document.getElementById('modalScorePasse').textContent = `${totalPasse}/30`;
+      document.getElementById('modalScoreMaisonEtre').textContent = `${totalMaisonEtre}/55`;
+      document.getElementById('modalScoreEtreAvoir').textContent = `${totalEtreAvoir}/40`;
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeExportModal() {
+      document.getElementById('exportModal').classList.add('hidden');
+    }
+
+    function prepareReportData() {
+      const name = document.getElementById('studentName').value.trim() || 'Étudiant(e) Anonyme';
+      const group = document.getElementById('studentGroup').value.trim() || 'Non spécifié';
+      const teacher = document.getElementById('teacherEmail').value.trim() || '';
+      const dateStr = new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+      const totalPasse = scores.pcQCM + scores.pcFill + scores.pcAudio;
+      const totalMaisonEtre = scores.sortVerbs + scores.ipnAccords + scores.devinettes;
+      const totalEtreAvoir = scores.epfEx1 + scores.corinneText + scores.recapQuiz;
+
+      const grandTotal = totalPasse + totalMaisonEtre + totalEtreAvoir;
+      const percent = Math.round((grandTotal / 125) * 100);
+
+      return { name, group, teacher, dateStr, totalPasse, totalMaisonEtre, totalEtreAvoir, grandTotal, percent };
+    }
+
+    function exportToPDF() {
+      const data = prepareReportData();
+
+      document.getElementById('printStudentName').textContent = data.name;
+      document.getElementById('printStudentGroup').textContent = data.group;
+      document.getElementById('printDate').textContent = data.dateStr;
+      document.getElementById('printGrandTotal').textContent = `${data.grandTotal} / 125 (${data.percent}%)`;
+
+      let mention = "Validation réussie - Félicitations !";
+      if (data.percent < 50) mention = "Module à consolider";
+      else if (data.percent < 80) mention = "Bonne maîtrise des acquis";
+      document.getElementById('printStatusMention').textContent = mention;
+
+      const tbody = document.getElementById('printScoresTableBody');
+      tbody.innerHTML = `
+        <tr><td style="padding:5px;border:1px solid #cbd5e1;">Passé Composé Base</td><td style="padding:5px;border:1px solid #cbd5e1;">QCM Auxiliaire & Accord</td><td style="padding:5px;border:1px solid #cbd5e1;text-align:center;">${scores.pcQCM}/10</td></tr>
+        <tr><td style="padding:5px;border:1px solid #cbd5e1;">Passé Composé Base</td><td style="padding:5px;border:1px solid #cbd5e1;">Phrases à trous</td><td style="padding:5px;border:1px solid #cbd5e1;text-align:center;">${scores.pcFill}/10</td></tr>
+        <tr><td style="padding:5px;border:1px solid #cbd5e1;">Passé Composé Base</td><td style="padding:5px;border:1px solid #cbd5e1;">Discrimination Audio</td><td style="padding:5px;border:1px solid #cbd5e1;text-align:center;">${scores.pcAudio}/10</td></tr>
+        <tr style="background:#f8fafc;font-weight:bold;"><td colspan="2" style="padding:5px;border:1px solid #cbd5e1;">Sous-total Section 1</td><td style="padding:5px;border:1px solid #cbd5e1;text-align:center;">${data.totalPasse}/30</td></tr>
+        <tr><td style="padding:5px;border:1px solid #cbd5e1;">Maison d'Être</td><td style="padding:5px;border:1px solid #cbd5e1;">Tri Drag & Drop 25 Verbes</td><td style="padding:5px;border:1px solid #cbd5e1;text-align:center;">${scores.sortVerbs}/25</td></tr>
+        <tr><td style="padding:5px;border:1px solid #cbd5e1;">Maison d'Être</td><td style="padding:5px;border:1px solid #cbd5e1;">Accords Sujet / Participe (Doc IPN)</td><td style="padding:5px;border:1px solid #cbd5e1;text-align:center;">${scores.ipnAccords}/9</td></tr>
+        <tr><td style="padding:5px;border:1px solid #cbd5e1;">Maison d'Être</td><td style="padding:5px;border:1px solid #cbd5e1;">Devinettes des Héros (100% Être)</td><td style="padding:5px;border:1px solid #cbd5e1;text-align:center;">${scores.devinettes}/21</td></tr>
+        <tr style="background:#f8fafc;font-weight:bold;"><td colspan="2" style="padding:5px;border:1px solid #cbd5e1;">Sous-total Section 2</td><td style="padding:5px;border:1px solid #cbd5e1;text-align:center;">${data.totalMaisonEtre}/55</td></tr>
+        <tr><td style="padding:5px;border:1px solid #cbd5e1;">Être ou Avoir</td><td style="padding:5px;border:1px solid #cbd5e1;">Exercices EPF 12 Ressources_04</td><td style="padding:5px;border:1px solid #cbd5e1;text-align:center;">${scores.epfEx1}/15</td></tr>
+        <tr><td style="padding:5px;border:1px solid #cbd5e1;">Être ou Avoir</td><td style="padding:5px;border:1px solid #cbd5e1;">Récit Corinne au Passé Composé</td><td style="padding:5px;border:1px solid #cbd5e1;text-align:center;">${scores.corinneText}/13</td></tr>
+        <tr><td style="padding:5px;border:1px solid #cbd5e1;">Être ou Avoir</td><td style="padding:5px;border:1px solid #cbd5e1;">Grand Test Récapitulatif Final</td><td style="padding:5px;border:1px solid #cbd5e1;text-align:center;">${scores.recapQuiz}/12</td></tr>
+        <tr style="background:#f8fafc;font-weight:bold;"><td colspan="2" style="padding:5px;border:1px solid #cbd5e1;">Sous-total Section 3</td><td style="padding:5px;border:1px solid #cbd5e1;text-align:center;">${data.totalEtreAvoir}/40</td></tr>
+      `;
+
+      closeExportModal();
+      window.print();
+    }
+
+    function copyResultsText() {
+      const data = prepareReportData();
+      const reportText = `[BILAN COMPLET PASSÉ COMPOSÉ FLE A2]
+Étudiant(e) : ${data.name}
+Groupe / Classe : ${data.group}
+Date : ${data.dateStr}
+--------------------------------------------------
+SCORE TOTAL PASSÉ COMPOSÉ : ${data.grandTotal} / 125 (${data.percent}%)
+--------------------------------------------------
+1. SECTION PASSÉ COMPOSÉ BASE : ${data.totalPasse} / 30
+   • QCM Auxiliaires & Accords : ${scores.pcQCM}/10
+   • Phrases à trous : ${scores.pcFill}/10
+   • Discrimination orale Présent/PC : ${scores.pcAudio}/10
+
+2. SECTION ATELIER MAISON D'ÊTRE : ${data.totalMaisonEtre} / 55
+   • Tri 25 Verbes Drag & Drop : ${scores.sortVerbs}/25
+   • Accords Sujet / Participe (Doc IPN) : ${scores.ipnAccords}/9
+   • Devinettes des Héros (100% Être) : ${scores.devinettes}/21
+
+3. SECTION ÊTRE OU AVOIR & SYNTHÈSE : ${data.totalEtreAvoir} / 40
+   • Exercices EPF 12 Ressources_04 : ${scores.epfEx1}/15
+   • Récit Corinne au Passé Composé : ${scores.corinneText}/13
+   • Grand Test Récapitulatif : ${scores.recapQuiz}/12
+--------------------------------------------------
+Plateforme auto-corrective FLE A2 - IPN / Hachette FLE`;
+
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = reportText;
+      tempTextArea.style.position = 'fixed';
+      tempTextArea.style.left = '-9999px';
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      try {
+        document.execCommand('copy');
+        showToast("Rapport copié !", "Bilan Passé Composé copié dans le presse-papier.");
+      } catch (err) {
+        showToast("Erreur de copie", "Impossible de copier automatiquement.", false);
+      }
+      document.body.removeChild(tempTextArea);
+      closeExportModal();
+    }
+
+    function sendViaEmail() {
+      const data = prepareReportData();
+      const subject = encodeURIComponent(`Bilan Passé Composé FLE A2 - ${data.name} (${data.group})`);
+      const body = encodeURIComponent(`Bonjour,
+
+Voici mon bilan d'apprentissage complet sur le Passé Composé :
+Nom : ${data.name}
+Groupe : ${data.group}
+Date : ${data.dateStr}
+
+SCORE GLOBAL : ${data.grandTotal} / 125 (${data.percent}%)
+- Passé composé de base : ${data.totalPasse} / 30
+- Atelier Maison d'Être : ${data.totalMaisonEtre} / 55
+- Être ou Avoir & Synthèse : ${data.totalEtreAvoir} / 40
+
+Cordialement,
+${data.name}`);
+
+      window.location.href = `mailto:${encodeURIComponent(data.teacher)}?subject=${subject}&body=${body}`;
+    }
+
+    window.onload = function() {
+      renderPCQCM();
+      renderPCFill();
+      renderPCAudio();
+      initVerbSorting();
+      renderIPNAccords();
+      renderEPFEx1();
+      renderRecapQuiz();
+      updateTotals();
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.onvoiceschanged = () => {
+          window.speechSynthesis.getVoices();
+        };
+      }
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FLE A2 | Les Pronoms COD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            oif: {
+              blue: '#0072CE',
+              navy: '#002B49',
+              yellow: '#FFD100',
+              red: '#DA291C',
+              green: '#009639',
+              purple: '#782F40',
+              light: '#F4F7FA'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    button, select, input { touch-action: manipulation; }
+    @media print {
+      body * { visibility: hidden; }
+      #printable-report-area, #printable-report-area * { visibility: visible; }
+      #printable-report-area {
+        position: absolute; left: 0; top: 0; width: 100%;
+        margin: 0; padding: 20px; background: white !important;
+        color: black !important; display: block !important;
+      }
+      .no-print { display: none !important; }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-full flex flex-col">
+
+  <header class="bg-oif-navy text-white shadow-md border-b-4 border-oif-yellow sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row justify-between items-center py-3 sm:py-4 gap-3">
+        <div class="flex items-center space-x-3 text-center sm:text-left">
+          <div class="flex items-center space-x-1">
+            <span class="w-3.5 h-3.5 rounded-full bg-[#0072CE] inline-block shadow-sm"></span>
+            <span class="w-3.5 h-3.5 rounded-full bg-[#009639] inline-block shadow-sm"></span>
+            <span class="w-3.5 h-3.5 rounded-full bg-[#FFD100] inline-block shadow-sm"></span>
+            <span class="w-3.5 h-3.5 rounded-full bg-[#DA291C] inline-block shadow-sm"></span>
+            <span class="w-3.5 h-3.5 rounded-full bg-[#782F40] inline-block shadow-sm"></span>
+          </div>
+          <div>
+            <h1 class="text-xl sm:text-2xl font-black tracking-tight flex items-center gap-2">
+              <span>Français Langue Étrangère</span>
+              <span class="text-xs bg-oif-blue px-2 py-0.5 rounded-full font-bold uppercase tracking-wider text-white">Niveau A2</span>
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-300">Inspire 2 (Unité 2, p. 26-27) • Leçon 5 : Les Pronoms COD</p>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center sm:justify-end gap-2 sm:gap-3">
+          <div class="flex items-center gap-2 sm:gap-3 bg-white/10 px-3 py-1.5 rounded-xl border border-white/10 text-xs sm:text-sm">
+            <div class="text-right">
+              <span class="text-slate-300 block text-[11px] uppercase font-semibold">Progression COD</span>
+              <span id="globalScoreText" class="font-bold text-oif-yellow text-sm sm:text-base">0 / 40 réussites</span>
+            </div>
+            <div class="w-10 h-10 rounded-full bg-oif-blue/40 border-2 border-oif-yellow flex items-center justify-center font-bold text-sm" id="globalPercentText">
+              0%
+            </div>
+          </div>
+
+          <button onclick="openExportModal()" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-black text-xs sm:text-sm px-3.5 py-2.5 rounded-xl shadow-lg transition-all flex items-center gap-2 border border-amber-200 transform active:scale-95">
+            <i class="fa-solid fa-file-export text-slate-900"></i>
+            <span>Exporter mon bilan</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+    <div id="toastMessage" class="hidden fixed bottom-5 right-5 z-50 max-w-md bg-slate-900 text-white p-4 rounded-xl shadow-2xl border-l-4 border-oif-blue flex items-start gap-3 transition-all transform translate-y-2">
+      <i id="toastIcon" class="fa-solid fa-circle-info text-oif-yellow text-xl mt-0.5"></i>
+      <div class="flex-1">
+        <h4 id="toastTitle" class="font-bold text-sm text-slate-100">Notification</h4>
+        <p id="toastBody" class="text-xs text-slate-300 mt-0.5"></p>
+      </div>
+      <button onclick="hideToast()" class="text-slate-400 hover:text-white text-sm"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <section id="tab-cod" class="space-y-8">
+      
+      <div class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200">
+        <div class="flex items-center gap-3 border-b pb-4 mb-5">
+          <span class="bg-oif-blue/10 text-oif-blue p-3 rounded-xl"><i class="fa-solid fa-lightbulb text-xl"></i></span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-oif-navy">Leçon 5 • Les Pronoms COD (Compléments d'Objet Direct)</h2>
+            <p class="text-sm text-slate-500">Comprendre le fonctionnement et la place des pronoms compléments directs (p. 26-27)</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+          <div class="bg-blue-50/70 border border-blue-200 rounded-xl p-4">
+            <h3 class="font-bold text-oif-blue flex items-center gap-2 mb-2 text-sm uppercase tracking-wider">
+              <i class="fa-solid fa-quote-left"></i> a) Exemples du document (p. 26)
+            </h3>
+            <ul class="space-y-2 text-sm text-slate-700">
+              <li class="flex items-start gap-2">
+                <span class="text-oif-blue font-bold">•</span>
+                <span>« Ces nouvelles familles, on <strong class="text-oif-blue bg-blue-100 px-1 rounded">les</strong> trouve dans toutes les régions. »</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-oif-blue font-bold">•</span>
+                <span>« Son autre parent, il <strong class="text-oif-blue bg-blue-100 px-1 rounded">le</strong> voit un week-end sur deux. »</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-oif-blue font-bold">•</span>
+                <span>« Sa propre chambre, il <strong class="text-oif-blue bg-blue-100 px-1 rounded">la</strong> partage avec sa demi-sœur. »</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-oif-blue font-bold">•</span>
+                <span>« Elle <strong class="text-oif-blue bg-blue-100 px-1 rounded">m'</strong>appelle sa sœur, et elle <strong class="text-oif-blue bg-blue-100 px-1 rounded">nous</strong> fait rire ! »</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-amber-50/70 border border-amber-200 rounded-xl p-4">
+            <h3 class="font-bold text-amber-900 flex items-center gap-2 mb-2 text-sm uppercase tracking-wider">
+              <i class="fa-solid fa-magnifying-glass"></i> b) Phase d'observation guidée
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+              <strong>À quoi sert le COD ?</strong> Il remplace un nom de personne ou de chose <em>déjà mentionné</em> pour éviter la répétition.<br>
+              <strong>Où se place-t-il ?</strong> Il se place <strong>directement AVANT le verbe conjugué</strong> (ou avant l'infinitif quand il y en a un).<br>
+              <strong>Attention au piège :</strong> Dans « Il <em>vous</em> appelle », le pronom <em>vous</em> est l'objet (la personne appelée). Le sujet reste <strong>il</strong> ! Le verbe s'accorde toujours avec le <strong>sujet</strong>, jamais avec le pronom COD !
+            </p>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto rounded-xl border border-slate-200">
+          <table class="w-full text-left text-sm">
+            <thead class="bg-slate-100 text-slate-700 uppercase text-xs font-semibold">
+              <tr>
+                <th class="p-3">Personne</th>
+                <th class="p-3">Pronom COD</th>
+                <th class="p-3">Devant voyelle / h</th>
+                <th class="p-3">Exemple de la leçon (Unité 2)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 text-slate-700">
+              <tr class="hover:bg-slate-50">
+                <td class="p-3 font-medium">1ère singulier (moi)</td>
+                <td class="p-3 font-bold text-oif-blue">me</td>
+                <td class="p-3 text-slate-500 font-mono">m'</td>
+                <td class="p-3">Mon beau-père <strong>me</strong> comprend. / Il <strong>m'</strong>écoute.</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="p-3 font-medium">2ème singulier (toi)</td>
+                <td class="p-3 font-bold text-oif-blue">te</td>
+                <td class="p-3 text-slate-500 font-mono">t'</td>
+                <td class="p-3">Ta sœur <strong>te</strong> ressemble. / Elle <strong>t'</strong>adore.</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="p-3 font-medium">3ème masc. singulier</td>
+                <td class="p-3 font-bold text-oif-blue">le</td>
+                <td class="p-3 text-slate-500 font-mono">l'</td>
+                <td class="p-3">Mon père ? Je <strong>le</strong> vois le samedi. / Je <strong>l'</strong>aime.</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="p-3 font-medium">3ème fém. singulier</td>
+                <td class="p-3 font-bold text-oif-blue">la</td>
+                <td class="p-3 text-slate-500 font-mono">l'</td>
+                <td class="p-3">Cette grande maison, on <strong>la</strong> loue. / Je <strong>l'</strong>admire.</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="p-3 font-medium">1ère pluriel (nous)</td>
+                <td class="p-3 font-bold text-oif-blue">nous</td>
+                <td class="p-3 text-slate-500 font-mono">nous</td>
+                <td class="p-3">Notre mère <strong>nous</strong> aide beaucoup.</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="p-3 font-medium">2ème pluriel (vous)</td>
+                <td class="p-3 font-bold text-oif-blue">vous</td>
+                <td class="p-3 text-slate-500 font-mono">vous</td>
+                <td class="p-3">Vos quasi-frères ? Qui <strong>vous</strong> invite ce soir ?</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="p-3 font-medium">3ème pluriel (eux / elles)</td>
+                <td class="p-3 font-bold text-oif-blue">les</td>
+                <td class="p-3 text-slate-500 font-mono">les</td>
+                <td class="p-3">Mes demi-frères, je <strong>les</strong> vois un week-end sur deux.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mt-6 bg-gradient-to-r from-amber-50 to-orange-50 border-2 border-amber-300 rounded-xl p-4 sm:p-5 shadow-sm">
+          <div class="flex items-center gap-2.5 mb-3">
+            <span class="bg-amber-500 text-white w-7 h-7 rounded-lg flex items-center justify-center font-bold text-sm shadow-sm">
+              <i class="fa-solid fa-language"></i>
+            </span>
+            <h4 class="font-extrabold text-amber-950 text-sm sm:text-base">
+              Note réflexive : Et en espagnol ? Une structure identique !
+            </h4>
+          </div>
+
+          <div class="space-y-3 text-xs sm:text-sm text-slate-700 leading-relaxed">
+            <p>
+              En espagnol, quand tu parles, tu dis naturellement : <em class="font-semibold text-amber-900">« Mi papá me entiende »</em>.
+            </p>
+            <div class="bg-white/80 border border-amber-200 rounded-lg p-3 grid grid-cols-1 sm:grid-cols-3 gap-2 text-center font-medium">
+              <div class="p-1 bg-amber-50 rounded border border-amber-200">
+                <span class="text-[11px] uppercase tracking-wider text-amber-800 font-bold block">1. Sujet</span>
+                <strong class="text-slate-900">Mi papá</strong> (3<sup>e</sup> pers. sing.)
+              </div>
+              <div class="p-1 bg-blue-50 rounded border border-blue-200">
+                <span class="text-[11px] uppercase tracking-wider text-oif-blue font-bold block">2. Pronom COD</span>
+                <strong class="text-oif-blue">me</strong> (complément direct)
+              </div>
+              <div class="p-1 bg-emerald-50 rounded border border-emerald-200">
+                <span class="text-[11px] uppercase tracking-wider text-emerald-800 font-bold block">3. Verbe</span>
+                <strong class="text-emerald-700">entiende</strong> (accordé avec « mi papá »)
+              </div>
+            </div>
+
+            <p>
+              Même situation si tu analyses <em class="font-semibold text-amber-900">« Mi mamá nos quiere »</em> : le sujet est <strong>mi mamá</strong>, le COD est <strong>nos</strong>, et le verbe <strong>quiere</strong> est conjugué en relation avec <strong>mi mamá</strong> (et non pas avec « nos » !).
+            </p>
+
+            <div class="border-t border-amber-200/80 pt-3">
+              <span class="font-bold text-amber-950 block mb-2 text-xs uppercase tracking-wider">
+                <i class="fa-solid fa-arrows-left-right mr-1 text-amber-600"></i> Observe le parallélisme parfait entre les deux langues :
+              </span>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm font-mono">
+                <div class="bg-white p-2.5 rounded-lg border border-amber-200 flex items-center justify-between">
+                  <span class="text-slate-600">[Yo] te admiro</span>
+                  <i class="fa-solid fa-arrow-right text-amber-500 text-xs"></i>
+                  <span class="font-bold text-oif-blue">Je t'admire.</span>
+                </div>
+                <div class="bg-white p-2.5 rounded-lg border border-amber-200 flex items-center justify-between">
+                  <span class="text-slate-600">Usted nos respeta</span>
+                  <i class="fa-solid fa-arrow-right text-amber-500 text-xs"></i>
+                  <span class="font-bold text-oif-blue">Vous nous respectez.</span>
+                </div>
+                <div class="bg-white p-2.5 rounded-lg border border-amber-200 flex items-center justify-between">
+                  <span class="text-slate-600">Él me llama</span>
+                  <i class="fa-solid fa-arrow-right text-amber-500 text-xs"></i>
+                  <span class="font-bold text-oif-blue">Il m'appelle.</span>
+                </div>
+                <div class="bg-white p-2.5 rounded-lg border border-amber-200 flex items-center justify-between">
+                  <span class="text-slate-600">Él os / les llama</span>
+                  <i class="fa-solid fa-arrow-right text-amber-500 text-xs"></i>
+                  <span class="font-bold text-oif-blue">Il vous appelle.</span>
+                </div>
+              </div>
+              <p class="mt-2 text-[11px] text-amber-900 italic">
+                👉 <strong>Règle d'or :</strong> En français comme en espagnol, le verbe s'accorde toujours avec le <strong>sujet</strong>, jamais avec le pronom COD placé devant lui !
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACTIVITÉ 1 -->
+      <div class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b pb-4 mb-6">
+          <div>
+            <span class="inline-block px-3 py-1 bg-oif-blue text-white rounded-md text-xs font-bold uppercase tracking-wider mb-1">Activité 1</span>
+            <h3 class="text-lg sm:text-xl font-bold text-oif-navy">Choix multiple : Choisir le pronom COD correct (10 questions)</h3>
+            <p class="text-xs sm:text-sm text-slate-500">Sélectionnez le pronom direct qui convient selon le nom complété et le sens.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="score-cod-qcm" class="text-sm font-bold bg-slate-100 text-slate-700 px-3 py-1 rounded-lg border">Score : -/10</span>
+            <button onclick="checkCODQCM()" class="bg-oif-blue hover:bg-blue-700 text-white font-semibold text-sm px-4 py-2 rounded-xl transition-colors shadow-sm flex items-center gap-2">
+              <i class="fa-solid fa-circle-check"></i> Vérifier
+            </button>
+          </div>
+        </div>
+        <div id="container-cod-qcm" class="space-y-4"></div>
+      </div>
+
+      <!-- ACTIVITÉ 2 -->
+      <div class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b pb-4 mb-6">
+          <div>
+            <span class="inline-block px-3 py-1 bg-oif-blue text-white rounded-md text-xs font-bold uppercase tracking-wider mb-1">Activité 2</span>
+            <h3 class="text-lg sm:text-xl font-bold text-oif-navy">Systématisation : Reformuler pour éliminer la répétition (10 questions)</h3>
+            <p class="text-xs sm:text-sm text-slate-500">Remplacez le complément répété par le pronom COD à la bonne place.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="score-cod-rephrase" class="text-sm font-bold bg-slate-100 text-slate-700 px-3 py-1 rounded-lg border">Score : -/10</span>
+            <button onclick="checkCODRephrase()" class="bg-oif-blue hover:bg-blue-700 text-white font-semibold text-sm px-4 py-2 rounded-xl transition-colors shadow-sm flex items-center gap-2">
+              <i class="fa-solid fa-circle-check"></i> Vérifier
+            </button>
+          </div>
+        </div>
+        <div id="container-cod-rephrase" class="space-y-4"></div>
+      </div>
+
+      <!-- ACTIVITÉ 3 -->
+      <div class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b pb-4 mb-6">
+          <div>
+            <span class="inline-block px-3 py-1 bg-oif-red text-white rounded-md text-xs font-bold uppercase tracking-wider mb-1">Attention au piège fréquent !</span>
+            <h3 class="text-lg sm:text-xl font-bold text-oif-navy">1. Identifier le vrai sujet • 2. Conjuguer correctement (10 questions)</h3>
+            <p class="text-xs sm:text-sm text-slate-500">Exemple : « Il vous (appeler) » &rarr; Le sujet est <strong>il</strong>. Verbe : <strong>appelle</strong>.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="score-cod-subject" class="text-sm font-bold bg-slate-100 text-slate-700 px-3 py-1 rounded-lg border">Score : -/10</span>
+            <button onclick="checkCODSubject()" class="bg-oif-blue hover:bg-blue-700 text-white font-semibold text-sm px-4 py-2 rounded-xl transition-colors shadow-sm flex items-center gap-2">
+              <i class="fa-solid fa-circle-check"></i> Vérifier
+            </button>
+          </div>
+        </div>
+        <div id="container-cod-subject" class="space-y-4"></div>
+      </div>
+
+      <!-- ACTIVITÉ 4 -->
+      <div class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b pb-4 mb-6">
+          <div>
+            <span class="inline-block px-3 py-1 bg-emerald-600 text-white rounded-md text-xs font-bold uppercase tracking-wider mb-1">Activité 4 • Compréhension écrite</span>
+            <h3 class="text-lg sm:text-xl font-bold text-oif-navy">Témoignage : « Notre nouvelle vie en famille recomposée »</h3>
+            <p class="text-xs sm:text-sm text-slate-500">Lisez le texte et répondez aux 10 questions Vrai/Faux.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="score-cod-vf" class="text-sm font-bold bg-slate-100 text-slate-700 px-3 py-1 rounded-lg border">Score : -/10</span>
+            <button onclick="checkCODVF()" class="bg-oif-blue hover:bg-blue-700 text-white font-semibold text-sm px-4 py-2 rounded-xl transition-colors shadow-sm flex items-center gap-2">
+              <i class="fa-solid fa-circle-check"></i> Vérifier
+            </button>
+          </div>
+        </div>
+
+        <article class="bg-slate-100/80 border border-slate-300 rounded-xl p-5 sm:p-6 mb-6 text-sm sm:text-base leading-relaxed text-slate-800 space-y-3 shadow-inner">
+          <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+            <h4 class="font-black text-oif-navy text-base sm:text-lg flex items-center gap-2">
+              <i class="fa-solid fa-newspaper text-oif-blue"></i>
+              Témoignage de Clara (17 ans) : Notre grande fratrie
+            </h4>
+            <span class="text-xs bg-slate-200 px-2.5 py-1 rounded-full font-semibold text-slate-600">Magazine Vivre Ensemble • 19 mars</span>
+          </div>
+          <p>
+            « Mes parents ont divorcé quand j'avais 8 ans. Pendant longtemps, j'ai vécu seule avec ma maman. Mon père, je <strong>le</strong> voyais seulement un week-end sur deux et pendant les grandes vacances. Au début, cette situation était difficile, mais nous <strong>l'</strong>avons acceptée avec le temps.
+          </p>
+          <p>
+            Il y a trois ans, ma mère a rencontré Laurent. Elle <strong>l'</strong>a épousé l'année dernière dans notre mairie de quartier. Laurent avait déjà deux enfants d'un premier mariage : Thomas (15 ans) et Manon (12 ans). Ce sont mes <em>quasi-frère et quasi-sœur</em>. Au début, je <strong>les</strong> trouvais un peu bruyants et j'avais peur de perdre ma tranquillité. Mais très vite, nous avons appris à cohabiter. Thomas adore le cinéma et je <strong>l'</strong>accompagne souvent aux séances du samedi. Manon fait beaucoup de devoirs scolaires et ma mère <strong>l'</strong>aide régulièrement le soir.
+          </p>
+          <p>
+            Le mois dernier, notre famille s'est encore agrandie : ma mère a donné naissance à un petit garçon prénommé Lucas. C'est notre <em>demi-frère</em> à tous les trois ! Tout le monde <strong>l'</strong>adore dans la maison. Quand mes beaux-parents nous rendent visite, ils <strong>nous</strong> félicitent pour notre belle harmonie. Même si nous nous disputons parfois pour la télécommande ou la salle de bains, nous <strong>nous</strong> respectons profondément. Ces liens familiaux, nous <strong>les</strong> avons construits jour après jour, avec beaucoup de patience et d'amour ! »
+          </p>
+        </article>
+
+        <div id="container-cod-vf" class="space-y-4"></div>
+
+        <div class="mt-8 p-4 bg-oif-light rounded-xl border border-blue-200 flex flex-col sm:flex-row justify-between items-center gap-3">
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-award text-2xl text-oif-yellow"></i>
+            <div>
+              <span class="text-xs uppercase font-bold text-slate-500 tracking-wider">Bilan du document</span>
+              <h4 class="text-base font-bold text-oif-navy">Total Section Pronoms COD</h4>
+            </div>
+          </div>
+          <span id="total-score-cod" class="text-lg font-black text-oif-blue bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-200">
+            Score total : 0 / 40
+          </span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Modal Exportation -->
+    <div id="exportModal" class="hidden fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+      <div class="bg-white w-full max-w-xl rounded-2xl shadow-2xl border border-slate-200 overflow-hidden my-6">
+        <div class="bg-oif-navy p-5 text-white flex items-center justify-between border-b-4 border-oif-yellow">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-oif-blue flex items-center justify-center text-lg text-oif-yellow">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div>
+              <h3 class="font-black text-lg text-white">Bilan d'apprentissage : Pronoms COD</h3>
+              <p class="text-xs text-slate-300">Inspire 2 • Niveau A2</p>
+            </div>
+          </div>
+          <button onclick="closeExportModal()" class="text-slate-400 hover:text-white text-lg p-1.5 transition-colors">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <div class="p-6 space-y-5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="studentName" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Nom et Prénom *</label>
+              <input type="text" id="studentName" placeholder="Ex. Marie Dupont" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-oif-blue outline-none" required>
+            </div>
+            <div>
+              <label for="studentGroup" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Groupe / Classe *</label>
+              <input type="text" id="studentGroup" placeholder="Ex. Groupe A2 - Mardi" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-oif-blue outline-none">
+            </div>
+          </div>
+
+          <div>
+            <label for="teacherEmail" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Courriel du professeur (optionnel)</label>
+            <input type="email" id="teacherEmail" placeholder="professeur@ecole.fr" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm font-medium text-slate-900 focus:ring-2 focus:ring-oif-blue outline-none">
+          </div>
+
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+            <div class="flex justify-between items-center mb-3">
+              <span class="text-xs uppercase font-bold text-slate-500">Score global validé :</span>
+              <span id="modalScoreDisplay" class="font-black text-oif-blue text-base">0 / 40 (0%)</span>
+            </div>
+            <div class="grid grid-cols-4 gap-2 text-center text-xs">
+              <div class="p-1.5 bg-white rounded border">
+                <span class="text-slate-500 block text-[9px] font-bold uppercase">1. QCM</span>
+                <strong id="modalScoreCODQCM" class="text-oif-blue font-black text-xs">0/10</strong>
+              </div>
+              <div class="p-1.5 bg-white rounded border">
+                <span class="text-slate-500 block text-[9px] font-bold uppercase">2. Reformul.</span>
+                <strong id="modalScoreCODRephrase" class="text-oif-blue font-black text-xs">0/10</strong>
+              </div>
+              <div class="p-1.5 bg-white rounded border">
+                <span class="text-slate-500 block text-[9px] font-bold uppercase">3. Sujet/COD</span>
+                <strong id="modalScoreCODSubject" class="text-oif-blue font-black text-xs">0/10</strong>
+              </div>
+              <div class="p-1.5 bg-white rounded border">
+                <span class="text-slate-500 block text-[9px] font-bold uppercase">4. Compr. V/F</span>
+                <strong id="modalScoreCODVF" class="text-oif-blue font-black text-xs">0/10</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2.5 pt-2">
+            <button onclick="exportToPDF()" class="w-full bg-oif-navy hover:bg-slate-900 text-white font-bold text-sm py-3 px-4 rounded-xl transition-all shadow-md flex items-center justify-center gap-2">
+              <i class="fa-solid fa-file-pdf text-rose-400"></i>
+              <span>Télécharger / Imprimer l'attestation PDF</span>
+            </button>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <button onclick="copyResultsText()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl transition-colors border border-slate-300 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-copy text-oif-blue"></i>
+                <span>Copier le rapport texte</span>
+              </button>
+              <button onclick="sendViaEmail()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl transition-colors border border-slate-300 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-paper-plane text-emerald-600"></i>
+                <span>Envoyer par courriel</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Zone d'impression PDF -->
+    <div id="printable-report-area" class="hidden">
+      <div style="border: 3px solid #002B49; border-radius: 12px; padding: 24px; font-family: sans-serif; max-width: 800px; margin: 0 auto;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #FFD100; padding-bottom: 12px; margin-bottom: 16px;">
+          <div>
+            <h2 style="color: #002B49; font-size: 20px; font-weight: bold; margin: 0;">ATTESTATION FLE A2 • LES PRONOMS COD</h2>
+            <p style="color: #64748b; font-size: 13px; margin: 4px 0 0 0;">Inspire 2 • Unité 2 (p. 26-27)</p>
+          </div>
+          <div style="text-align: right;"><span style="font-size: 12px; color: #64748b;" id="printDate"></span></div>
+        </div>
+        <div style="background-color: #F4F7FA; border: 1px solid #cbd5e1; border-radius: 8px; padding: 12px; margin-bottom: 16px; font-size: 14px;">
+          <p style="margin: 0 0 6px 0;"><strong>Nom de l'étudiant(e) :</strong> <span id="printStudentName" style="color: #0072CE;">-</span></p>
+          <p style="margin: 0;"><strong>Groupe / Classe :</strong> <span id="printStudentGroup">-</span></p>
+        </div>
+        <div style="margin-bottom: 20px; text-align: center; padding: 16px; background: #f8fafc; border: 2px dashed #0072CE; border-radius: 10px;">
+          <span style="font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: #64748b;">Résultat global obtenu</span>
+          <div style="font-size: 28px; font-weight: 900; color: #002B49; margin: 4px 0;" id="printGrandTotal">0 / 40 (0%)</div>
+          <p style="font-size: 12px; color: #009639; margin: 0; font-weight: bold;" id="printStatusMention">Module complété</p>
+        </div>
+        <table style="width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 20px;">
+          <thead>
+            <tr style="background-color: #f1f5f9; text-align: left;">
+              <th style="padding: 6px; border: 1px solid #cbd5e1;">Activité</th>
+              <th style="padding: 6px; border: 1px solid #cbd5e1; text-align: center;">Score</th>
+            </tr>
+          </thead>
+          <tbody id="printScoresTableBody"></tbody>
+        </table>
+        <div style="border-top: 1px solid #cbd5e1; padding-top: 12px; display: flex; justify-content: space-between; font-size: 11px; color: #94a3b8;">
+          <span>Validation autonome • Plateforme FLE A2</span>
+          <span>Inspire 2 • Hachette FLE</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center space-x-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-oif-blue"></span>
+        <span class="font-bold text-slate-700">Méthode Inspire 2 • Unité 2 (p. 26-27)</span>
+      </div>
+      <p class="text-slate-400">Ressource autocorrective interactive pour les pronoms COD</p>
+    </div>
+  </footer>
+
+  <script>
+    const scores = { codQCM: 0, codRephrase: 0, codSubject: 0, codVF: 0 };
+
+    function showToast(title, message, isSuccess = true) {
+      const toast = document.getElementById('toastMessage');
+      const toastTitle = document.getElementById('toastTitle');
+      const toastBody = document.getElementById('toastBody');
+      const toastIcon = document.getElementById('toastIcon');
+
+      toastTitle.textContent = title;
+      toastBody.textContent = message;
+
+      if (isSuccess) {
+        toast.className = toast.className.replace(/border-[a-z0-9-]+/, 'border-emerald-500');
+        toastIcon.className = "fa-solid fa-circle-check text-emerald-400 text-xl mt-0.5";
+      } else {
+        toast.className = toast.className.replace(/border-[a-z0-9-]+/, 'border-rose-500');
+        toastIcon.className = "fa-solid fa-circle-exclamation text-rose-400 text-xl mt-0.5";
+      }
+
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.remove('translate-y-2'), 10);
+      clearTimeout(window.toastTimer);
+      window.toastTimer = setTimeout(hideToast, 4000);
+    }
+
+    function hideToast() {
+      const toast = document.getElementById('toastMessage');
+      toast.classList.add('translate-y-2');
+      setTimeout(() => toast.classList.add('hidden'), 200);
+    }
+
+    const codQCMData = [
+      { id: 1, question: "Mon père a une nouvelle compagne. Je _______ adore, elle est très gentille !", options: ["le", "la", "les", "lui"], answer: "la", feedback: "« Compagne » est féminin singulier &rarr; « la »." },
+      { id: 2, question: "Tu as un demi-frère ? Tu _______ vois souvent ?", options: ["le", "lui", "la", "l'"], answer: "le", feedback: "« Un demi-frère » est masculin singulier &rarr; « le »." },
+      { id: 3, question: "Ce sont mes quasi-sœurs. Je _______ invite à dîner samedi soir.", options: ["les", "leur", "la", "des"], answer: "les", feedback: "« Quasi-sœurs » est au pluriel &rarr; « les »." },
+      { id: 4, question: "Son beau-père est très sympa, il _______ écoute toujours quand elle a un problème.", options: ["l'", "le", "la", "lui"], answer: "l'", feedback: "Devant une voyelle, « le » ou « la » devient « l' »." },
+      { id: 5, question: "— Tu nous accompagnes au parc ? — Oui, bien sûr, je _______ accompagne avec plaisir !", options: ["vous", "nous", "les", "te"], answer: "vous", feedback: "Question avec « nous » &rarr; réponse avec « vous »." },
+      { id: 6, question: "Ma petite sœur a peur du noir, alors je _______ rassure avant de dormir.", options: ["la", "le", "lui", "l'"], answer: "la", feedback: "« Petite sœur » est féminin singulier &rarr; « la »." },
+      { id: 7, question: "Ces photos de famille sont magnifiques ! On _______ regarde ensemble ?", options: ["les", "leur", "la", "en"], answer: "les", feedback: "« Ces photos » est au pluriel &rarr; « les »." },
+      { id: 8, question: "— Tu m'entends bien au téléphone ? — Oui, je _______ entends très clairement !", options: ["t'", "te", "m'", "l'"], answer: "t'", feedback: "Question « tu m'entends ? » &rarr; « je t'entends »." },
+      { id: 9, question: "Notre maman prépare une fête, nous _______ aidons dans la cuisine.", options: ["l'", "la", "lui", "nous"], answer: "l'", feedback: "Devant la voyelle 'a' de « aidons », « la » s'élide en « l' »." },
+      { id: 10, question: "Tous mes cousins habitent à Marseille, je _______ retrouve pendant les vacances d'été.", options: ["les", "leur", "ils", "des"], answer: "les", feedback: "« Tous mes cousins » est au pluriel &rarr; « les »." }
+    ];
+
+    function renderCODQCM() {
+      const container = document.getElementById('container-cod-qcm');
+      container.innerHTML = codQCMData.map((item, idx) => `
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50" id="cod-qcm-card-${item.id}">
+          <p class="font-medium text-slate-800 text-sm sm:text-base mb-3">
+            <span class="inline-block w-6 h-6 bg-oif-blue/10 text-oif-blue rounded-full text-center text-xs font-bold leading-6 mr-1">${idx + 1}</span>
+            ${item.question}
+          </p>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            ${item.options.map(opt => `
+              <label class="flex items-center p-2.5 rounded-lg border border-slate-200 bg-white hover:bg-blue-50/50 cursor-pointer text-sm font-medium transition-colors">
+                <input type="radio" name="cod_qcm_${item.id}" value="${opt}" class="text-oif-blue mr-2">
+                <span>${opt}</span>
+              </label>
+            `).join('')}
+          </div>
+          <div id="cod-qcm-fb-${item.id}" class="hidden mt-3 p-3 rounded-lg text-xs leading-relaxed"></div>
+        </div>
+      `).join('');
+    }
+
+    const codRephraseData = [
+      { id: 1, sentence: "Nous aimons <u>notre nouvelle famille</u>.", templateBefore: "Nous", templateAfter: "aimons.", expected: "l'", accepted: ["l'", "l’"], feedback: "Féminin singulier devant voyelle : Nous l'aimons." },
+      { id: 2, sentence: "Elle respecte beaucoup <u>ses amis</u>.", templateBefore: "Elle", templateAfter: "respecte beaucoup.", expected: "les", accepted: ["les"], feedback: "Pluriel : Elle les respecte beaucoup." },
+      { id: 3, sentence: "Mon demi-frère fait souvent rire <u>ma sœur</u>.", templateBefore: "Mon demi-frère", templateAfter: "fait souvent rire.", expected: "la", accepted: ["la"], feedback: "Féminin singulier : Mon demi-frère la fait souvent rire." },
+      { id: 4, sentence: "Tu vois souvent <u>tes grands-parents</u> ?", templateBefore: "Tu", templateAfter: "vois souvent ?", expected: "les", accepted: ["les"], feedback: "Pluriel : Tu les vois souvent ?" },
+      { id: 5, sentence: "On adore <u>notre beau-père</u>.", templateBefore: "On", templateAfter: "adore.", expected: "l'", accepted: ["l'", "l’"], feedback: "Devant voyelle : On l'adore." },
+      { id: 6, sentence: "Il partage <u>sa propre chambre</u> avec son frère.", templateBefore: "Il", templateAfter: "partage avec son frère.", expected: "la", accepted: ["la"], feedback: "Féminin singulier : Il la partage..." },
+      { id: 7, sentence: "Je rencontre <u>son autre parent</u> demain après-midi.", templateBefore: "Je", templateAfter: "rencontre demain après-midi.", expected: "le", accepted: ["le"], feedback: "Masculin singulier : Je le rencontre..." },
+      { id: 8, sentence: "Ces adolescents soutiennent <u>cette démarche solidaire</u>.", templateBefore: "Ces adolescents", templateAfter: "soutiennent.", expected: "la", accepted: ["la"], feedback: "Féminin singulier : Ces adolescents la soutiennent." },
+      { id: 9, sentence: "Vous comprenez <u>nos difficultés</u> ?", templateBefore: "Vous", templateAfter: "comprenez ?", expected: "les", accepted: ["les"], feedback: "Pluriel : Vous les comprenez ?" },
+      { id: 10, sentence: "Le maire accueille <u>les nouvelles familles</u> dans sa commune.", templateBefore: "Le maire", templateAfter: "accueille dans sa commune.", expected: "les", accepted: ["les"], feedback: "Pluriel : Le maire les accueille..." }
+    ];
+
+    function renderCODRephrase() {
+      const container = document.getElementById('container-cod-rephrase');
+      container.innerHTML = codRephraseData.map((item, idx) => `
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50" id="cod-rephrase-card-${item.id}">
+          <p class="text-sm font-semibold text-slate-700 mb-2">
+            <span class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full font-bold mr-1">Phrase ${idx + 1}</span>
+            ${item.sentence}
+          </p>
+          <div class="flex flex-wrap items-center gap-2 text-sm sm:text-base font-medium">
+            <span>${item.templateBefore}</span>
+            <input type="text" id="cod-rephrase-input-${item.id}" placeholder="pronom" class="w-24 px-3 py-1.5 border border-slate-300 rounded-lg text-center font-bold text-oif-blue outline-none" autocomplete="off">
+            <span>${item.templateAfter}</span>
+          </div>
+          <div id="cod-rephrase-fb-${item.id}" class="hidden mt-2 p-3 rounded-lg text-xs leading-relaxed"></div>
+        </div>
+      `).join('');
+    }
+
+    const codSubjectData = [
+      { id: 1, sentence: "Mon frère vous (appeler) _______ au téléphone tous les soirs.", subjectOptions: ["Mon frère", "vous"], correctSubject: "Mon frère", verbConjugation: "appelle", feedback: "Le sujet est 'Mon frère' (3e pers. sing.), pas 'vous' !" },
+      { id: 2, sentence: "Il nous (regarder) _______ avec un grand sourire.", subjectOptions: ["Il", "nous"], correctSubject: "Il", verbConjugation: "regarde", feedback: "Le sujet est 'Il' &rarr; 'regarde'." },
+      { id: 3, sentence: "Mes parents m' (aider) _______ à faire mes devoirs.", subjectOptions: ["Mes parents", "m' (moi)"], correctSubject: "Mes parents", verbConjugation: "aident", feedback: "Le sujet est pluriel ('Mes parents' = ils) &rarr; 'aident'." },
+      { id: 4, sentence: "Cette histoire vous (intéresser) _______ beaucoup ?", subjectOptions: ["Cette histoire", "vous"], correctSubject: "Cette histoire", verbConjugation: "intéresse", feedback: "'Cette histoire' (= elle) est le sujet &rarr; 'intéresse'." },
+      { id: 5, sentence: "Mon demi-frère nous (faire) _______ souvent rire aux repas.", subjectOptions: ["Mon demi-frère", "nous"], correctSubject: "Mon demi-frère", verbConjugation: "fait", feedback: "'Mon demi-frère' (il) &rarr; 'fait'." },
+      { id: 6, sentence: "Ces enfants vous (adorer) _______ !", subjectOptions: ["Ces enfants", "vous"], correctSubject: "Ces enfants", verbConjugation: "adorent", feedback: "'Ces enfants' (ils) &rarr; 'adorent'." },
+      { id: 7, sentence: "Sa grand-mère la (comprendre) _______ très bien.", subjectOptions: ["Sa grand-mère", "la"], correctSubject: "Sa grand-mère", verbConjugation: "comprend", feedback: "'Sa grand-mère' (elle) &rarr; 'comprend'." },
+      { id: 8, sentence: "Notre beau-père nous (emmener) _______ au match de foot.", subjectOptions: ["Notre beau-père", "nous"], correctSubject: "Notre beau-père", verbConjugation: "emmène", feedback: "'Notre beau-père' (il) &rarr; 'emmène'." },
+      { id: 9, sentence: "Qui vous (inviter) _______ pour la fête de Noël ?", subjectOptions: ["Qui", "vous"], correctSubject: "Qui", verbConjugation: "invite", feedback: "'Qui' commande le singulier &rarr; 'invite'." },
+      { id: 10, sentence: "Tes cousines te (chercher) _______ partout dans le jardin.", subjectOptions: ["Tes cousines", "te"], correctSubject: "Tes cousines", verbConjugation: "cherchent", feedback: "'Tes cousines' (elles) &rarr; 'cherchent'." }
+    ];
+
+    function renderCODSubject() {
+      const container = document.getElementById('container-cod-subject');
+      container.innerHTML = codSubjectData.map((item, idx) => `
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50" id="cod-subject-card-${item.id}">
+          <p class="text-sm sm:text-base font-semibold text-slate-800 mb-3">
+            <span class="inline-block w-6 h-6 bg-oif-red/10 text-oif-red rounded-full text-center text-xs font-bold leading-6 mr-1">${idx + 1}</span>
+            ${item.sentence}
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
+            <div class="bg-white p-2.5 rounded-lg border">
+              <span class="font-bold text-slate-700 block mb-1">1. Vrai sujet :</span>
+              <div class="flex gap-2">
+                ${item.subjectOptions.map(subj => `
+                  <label class="flex items-center gap-1 cursor-pointer bg-slate-50 px-2 py-1 rounded border hover:bg-slate-100">
+                    <input type="radio" name="cod_subj_who_${item.id}" value="${subj}">
+                    <span>${subj}</span>
+                  </label>
+                `).join('')}
+              </div>
+            </div>
+            <div class="bg-white p-2.5 rounded-lg border flex flex-col justify-center">
+              <span class="font-bold text-slate-700 block mb-1">2. Conjugaison :</span>
+              <input type="text" id="cod_subj_verb_${item.id}" placeholder="Verbe conjugué" class="px-2.5 py-1 border rounded font-mono text-sm outline-none" autocomplete="off">
+            </div>
+          </div>
+          <div id="cod-subj-fb-${item.id}" class="hidden mt-3 p-3 rounded-lg text-xs leading-relaxed"></div>
+        </div>
+      `).join('');
+    }
+
+    const codVFData = [
+      { id: 1, statement: "Les parents de Clara sont encore mariés aujourd'hui.", expected: "Faux", feedback: "Faux : « Mes parents ont divorcé quand j'avais 8 ans. »" },
+      { id: 2, statement: "Après le divorce, Clara voyait son père un week-end sur deux.", expected: "Vrai", feedback: "Vrai : « Mon père, je le voyais seulement un week-end sur deux... »" },
+      { id: 3, statement: "Dans la phrase « nous l'avons acceptée », le pronom « l' » remplace « la situation ».", expected: "Vrai", feedback: "Vrai : « ...cette situation était difficile, mais nous l'avons acceptée... »" },
+      { id: 4, statement: "La mère de Clara a rencontré Laurent il y a dix ans.", expected: "Faux", feedback: "Faux : « Il y a trois ans, ma mère a rencontré Laurent. »" },
+      { id: 5, statement: "Thomas et Manon sont les enfants biologiques de la mère de Clara.", expected: "Faux", feedback: "Faux : Ce sont les enfants de Laurent (ses quasi-frère et quasi-sœur)." },
+      { id: 6, statement: "Au début, Clara avait peur de perdre sa tranquillité avec l'arrivée des enfants.", expected: "Vrai", feedback: "Vrai : « ...j'avais peur de perdre ma tranquillité. »" },
+      { id: 7, statement: "Dans « Clara l'accompagne souvent », « l' » est le pronom COD qui remplace Thomas.", expected: "Vrai", feedback: "Vrai : « Thomas adore le cinéma et je l'accompagne souvent... »" },
+      { id: 8, statement: "Le bébé Lucas est le demi-frère de Clara, Thomas et Manon.", expected: "Vrai", feedback: "Vrai : « C'est notre demi-frère à tous les trois ! »" },
+      { id: 9, statement: "Dans « les beaux-parents nous félicitent », « nous » est le sujet du verbe féliciter.", expected: "Faux", feedback: "Faux : Le sujet est « les beaux-parents ». « Nous » est le pronom COD." },
+      { id: 10, statement: "Dans « ces liens familiaux, nous les avons construits », le pronom COD est placé avant le verbe.", expected: "Vrai", feedback: "Vrai : « les » est placé devant « avons construits »." }
+    ];
+
+    function renderCODVF() {
+      const container = document.getElementById('container-cod-vf');
+      container.innerHTML = codVFData.map((item, idx) => `
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50" id="cod-vf-card-${item.id}">
+          <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 mb-2">
+            <p class="text-sm font-medium text-slate-800">
+              <span class="inline-block w-6 h-6 bg-slate-200 text-slate-700 rounded-full text-center text-xs font-bold leading-6 mr-1">${idx + 1}</span>
+              ${item.statement}
+            </p>
+            <div class="flex items-center gap-3 shrink-0">
+              <label class="inline-flex items-center cursor-pointer text-xs sm:text-sm font-bold bg-white px-3 py-1.5 rounded-lg border hover:bg-slate-100">
+                <input type="radio" name="cod_vf_${item.id}" value="Vrai" class="mr-1.5 text-emerald-600"> Vrai
+              </label>
+              <label class="inline-flex items-center cursor-pointer text-xs sm:text-sm font-bold bg-white px-3 py-1.5 rounded-lg border hover:bg-slate-100">
+                <input type="radio" name="cod_vf_${item.id}" value="Faux" class="mr-1.5 text-rose-600"> Faux
+              </label>
+            </div>
+          </div>
+          <div id="cod-vf-fb-${item.id}" class="hidden mt-2 p-2.5 rounded-lg text-xs leading-relaxed"></div>
+        </div>
+      `).join('');
+    }
+
+    function checkCODQCM() {
+      let score = 0;
+      codQCMData.forEach(item => {
+        const selected = document.querySelector(`input[name="cod_qcm_${item.id}"]:checked`);
+        const card = document.getElementById(`cod-qcm-card-${item.id}`);
+        const fb = document.getElementById(`cod-qcm-fb-${item.id}`);
+        fb.classList.remove('hidden');
+        if (selected && selected.value === item.answer) {
+          score++;
+          card.className = "p-4 rounded-xl border border-emerald-300 bg-emerald-50/50";
+          fb.className = "mt-3 p-2.5 rounded-lg text-xs bg-emerald-100 text-emerald-900 border border-emerald-200";
+          fb.innerHTML = `<strong><i class="fa-solid fa-check mr-1"></i> Bravo !</strong> ${item.feedback}`;
+        } else {
+          card.className = "p-4 rounded-xl border border-rose-300 bg-rose-50/50";
+          fb.className = "mt-3 p-2.5 rounded-lg text-xs bg-rose-100 text-rose-900 border border-rose-200";
+          const chosen = selected ? selected.value : "aucune réponse";
+          fb.innerHTML = `<strong><i class="fa-solid fa-xmark mr-1"></i> Attention (votre choix : ${chosen}).</strong> Réponse : <strong class="text-emerald-800 underline">${item.answer}</strong>. ${item.feedback}`;
+        }
+      });
+      scores.codQCM = score;
+      document.getElementById('score-cod-qcm').textContent = `Score : ${score}/10`;
+      updateTotals();
+      showToast("Activité vérifiée", `Vous avez obtenu ${score}/10 aux choix multiples COD.`);
+    }
+
+    function checkCODRephrase() {
+      let score = 0;
+      codRephraseData.forEach(item => {
+        const input = document.getElementById(`cod-rephrase-input-${item.id}`);
+        const userVal = input.value.trim().toLowerCase();
+        const card = document.getElementById(`cod-rephrase-card-${item.id}`);
+        const fb = document.getElementById(`cod-rephrase-fb-${item.id}`);
+        fb.classList.remove('hidden');
+        const isCorrect = item.accepted.some(acc => acc.toLowerCase() === userVal);
+        if (isCorrect) {
+          score++;
+          card.className = "p-4 rounded-xl border border-emerald-300 bg-emerald-50/50";
+          fb.className = "mt-2 p-2.5 rounded-lg text-xs bg-emerald-100 text-emerald-900 border border-emerald-200";
+          fb.innerHTML = `<strong><i class="fa-solid fa-check mr-1"></i> Excellent !</strong> ${item.feedback}`;
+        } else {
+          card.className = "p-4 rounded-xl border border-rose-300 bg-rose-50/50";
+          fb.className = "mt-2 p-2.5 rounded-lg text-xs bg-rose-100 text-rose-900 border border-rose-200";
+          fb.innerHTML = `<strong><i class="fa-solid fa-xmark mr-1"></i> À corriger.</strong> Pronom attendu : <strong class="text-emerald-800 underline">${item.expected}</strong>. ${item.feedback}`;
+        }
+      });
+      scores.codRephrase = score;
+      document.getElementById('score-cod-rephrase').textContent = `Score : ${score}/10`;
+      updateTotals();
+      showToast("Activité vérifiée", `Vous avez obtenu ${score}/10 aux reformulations COD.`);
+    }
+
+    function checkCODSubject() {
+      let score = 0;
+      codSubjectData.forEach(item => {
+        const selectedSubj = document.querySelector(`input[name="cod_subj_who_${item.id}"]:checked`);
+        const verbInput = document.getElementById(`cod_subj_verb_${item.id}`);
+        const userVerb = verbInput.value.trim().toLowerCase();
+        const card = document.getElementById(`cod-subject-card-${item.id}`);
+        const fb = document.getElementById(`cod-subj-fb-${item.id}`);
+        fb.classList.remove('hidden');
+        const isSubjOk = selectedSubj && selectedSubj.value === item.correctSubject;
+        const isVerbOk = userVerb === item.verbConjugation.toLowerCase();
+
+        if (isSubjOk && isVerbOk) {
+          score++;
+          card.className = "p-4 rounded-xl border border-emerald-300 bg-emerald-50/50";
+          fb.className = "mt-3 p-2.5 rounded-lg text-xs bg-emerald-100 text-emerald-900 border border-emerald-200";
+          fb.innerHTML = `<strong><i class="fa-solid fa-check mr-1"></i> Parfait !</strong> Sujet : « ${item.correctSubject} » &rarr; Verbe : « ${item.verbConjugation} ». ${item.feedback}`;
+        } else {
+          card.className = "p-4 rounded-xl border border-rose-300 bg-rose-50/50";
+          fb.className = "mt-3 p-2.5 rounded-lg text-xs bg-rose-100 text-rose-900 border border-rose-200";
+          fb.innerHTML = `<strong><i class="fa-solid fa-xmark mr-1"></i> Piège détecté !</strong> Sujet : <strong class="text-emerald-800">${item.correctSubject}</strong> | Verbe : <strong class="text-emerald-800">${item.verbConjugation}</strong>. ${item.feedback}`;
+        }
+      });
+      scores.codSubject = score;
+      document.getElementById('score-cod-subject').textContent = `Score : ${score}/10`;
+      updateTotals();
+      showToast("Activité vérifiée", `Vous avez obtenu ${score}/10 sur l'accord sujet/verbe.`);
+    }
+
+    function checkCODVF() {
+      let score = 0;
+      codVFData.forEach(item => {
+        const selected = document.querySelector(`input[name="cod_vf_${item.id}"]:checked`);
+        const card = document.getElementById(`cod-vf-card-${item.id}`);
+        const fb = document.getElementById(`cod-vf-fb-${item.id}`);
+        fb.classList.remove('hidden');
+        if (selected && selected.value === item.expected) {
+          score++;
+          card.className = "p-4 rounded-xl border border-emerald-300 bg-emerald-50/50";
+          fb.className = "mt-2 p-2.5 rounded-lg text-xs bg-emerald-100 text-emerald-900 border border-emerald-200";
+          fb.innerHTML = `<strong><i class="fa-solid fa-check mr-1"></i> Vrai/Faux correct (${item.expected}) !</strong> ${item.feedback}`;
+        } else {
+          card.className = "p-4 rounded-xl border border-rose-300 bg-rose-50/50";
+          fb.className = "mt-2 p-2.5 rounded-lg text-xs bg-rose-100 text-rose-900 border border-rose-200";
+          fb.innerHTML = `<strong><i class="fa-solid fa-xmark mr-1"></i> Erreur.</strong> Réponse : <strong class="text-emerald-800 underline">${item.expected}</strong>. ${item.feedback}`;
+        }
+      });
+      scores.codVF = score;
+      document.getElementById('score-cod-vf').textContent = `Score : ${score}/10`;
+      updateTotals();
+      showToast("Activité vérifiée", `Vous avez obtenu ${score}/10 en compréhension écrite.`);
+    }
+
+    function updateTotals() {
+      const grandTotal = scores.codQCM + scores.codRephrase + scores.codSubject + scores.codVF;
+      const percentage = Math.round((grandTotal / 40) * 100);
+
+      document.getElementById('total-score-cod').textContent = `Score total : ${grandTotal} / 40`;
+      document.getElementById('globalScoreText').textContent = `${grandTotal} / 40 réussites`;
+      document.getElementById('globalPercentText').textContent = `${percentage}%`;
+    }
+
+    function openExportModal() {
+      const grandTotal = scores.codQCM + scores.codRephrase + scores.codSubject + scores.codVF;
+      const percent = Math.round((grandTotal / 40) * 100);
+
+      document.getElementById('modalScoreDisplay').textContent = `${grandTotal} / 40 (${percent}%)`;
+      document.getElementById('modalScoreCODQCM').textContent = `${scores.codQCM}/10`;
+      document.getElementById('modalScoreCODRephrase').textContent = `${scores.codRephrase}/10`;
+      document.getElementById('modalScoreCODSubject').textContent = `${scores.codSubject}/10`;
+      document.getElementById('modalScoreCODVF').textContent = `${scores.codVF}/10`;
+
+      document.getElementById('exportModal').classList.remove('hidden');
+    }
+
+    function closeExportModal() {
+      document.getElementById('exportModal').classList.add('hidden');
+    }
+
+    function prepareReportData() {
+      const name = document.getElementById('studentName').value.trim() || 'Étudiant(e) Anonyme';
+      const group = document.getElementById('studentGroup').value.trim() || 'Non spécifié';
+      const teacher = document.getElementById('teacherEmail').value.trim() || '';
+      const dateStr = new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+      const grandTotal = scores.codQCM + scores.codRephrase + scores.codSubject + scores.codVF;
+      const percent = Math.round((grandTotal / 40) * 100);
+      return { name, group, teacher, dateStr, grandTotal, percent };
+    }
+
+    function exportToPDF() {
+      const data = prepareReportData();
+      document.getElementById('printStudentName').textContent = data.name;
+      document.getElementById('printStudentGroup').textContent = data.group;
+      document.getElementById('printDate').textContent = data.dateStr;
+      document.getElementById('printGrandTotal').textContent = `${data.grandTotal} / 40 (${data.percent}%)`;
+
+      let mention = "Validation réussie - Félicitations !";
+      if (data.percent < 50) mention = "Module à consolider";
+      else if (data.percent < 80) mention = "Bonne maîtrise des acquis";
+      document.getElementById('printStatusMention').textContent = mention;
+
+      const tbody = document.getElementById('printScoresTableBody');
+      tbody.innerHTML = `
+        <tr><td style="padding:5px;border:1px solid #cbd5e1;">QCM Choix du pronom COD</td><td style="padding:5px;border:1px solid #cbd5e1;text-align:center;">${scores.codQCM}/10</td></tr>
+        <tr><td style="padding:5px;border:1px solid #cbd5e1;">Reformulation sans répétition</td><td style="padding:5px;border:1px solid #cbd5e1;text-align:center;">${scores.codRephrase}/10</td></tr>
+        <tr><td style="padding:5px;border:1px solid #cbd5e1;">Identification Sujet vs COD</td><td style="padding:5px;border:1px solid #cbd5e1;text-align:center;">${scores.codSubject}/10</td></tr>
+        <tr><td style="padding:5px;border:1px solid #cbd5e1;">Compréhension écrite Vrai/Faux</td><td style="padding:5px;border:1px solid #cbd5e1;text-align:center;">${scores.codVF}/10</td></tr>
+      `;
+      closeExportModal();
+      window.print();
+    }
+
+    function copyResultsText() {
+      const data = prepareReportData();
+      const reportText = `[BILAN FLE A2 - LES PRONOMS COD]
+Étudiant(e) : ${data.name}
+Groupe / Classe : ${data.group}
+Date : ${data.dateStr}
+--------------------------------------------------
+SCORE TOTAL : ${data.grandTotal} / 40 (${data.percent}%)
+--------------------------------------------------
+• QCM Choix du pronom : ${scores.codQCM}/10
+• Reformulation : ${scores.codRephrase}/10
+• Sujet vs COD : ${scores.codSubject}/10
+• Vrai/Faux Compréhension : ${scores.codVF}/10
+--------------------------------------------------
+Inspire 2 • Hachette FLE`;
+
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = reportText;
+      tempTextArea.style.position = 'fixed';
+      tempTextArea.style.left = '-9999px';
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      try {
+        document.execCommand('copy');
+        showToast("Rapport copié !", "Bilan copié dans le presse-papier.");
+      } catch (err) {
+        showToast("Erreur de copie", "Impossible de copier.", false);
+      }
+      document.body.removeChild(tempTextArea);
+      closeExportModal();
+    }
+
+    function sendViaEmail() {
+      const data = prepareReportData();
+      const subject = encodeURIComponent(`Bilan FLE A2 COD - ${data.name} (${data.group})`);
+      const body = encodeURIComponent(`Bonjour,
+
+Voici mon bilan pour le module sur les Pronoms COD (Inspire 2, p. 26-27) :
+Nom : ${data.name}
+Groupe : ${data.group}
+Date : ${data.dateStr}
+
+SCORE COD : ${data.grandTotal} / 40 (${data.percent}%)
+- QCM : ${scores.codQCM}/10
+- Reformulation : ${scores.codRephrase}/10
+- Sujet vs COD : ${scores.codSubject}/10
+- Compréhension Vrai/Faux : ${scores.codVF}/10
+
+Cordialement,
+${data.name}`);
+
+      window.location.href = `mailto:${encodeURIComponent(data.teacher)}?subject=${subject}&body=${body}`;
+    }
+
+    window.onload = function() {
+      renderCODQCM();
+      renderCODRephrase();
+      renderCODSubject();
+      renderCODVF();
+      updateTotals();
+    };
+  </script>
+</body>
+</html>

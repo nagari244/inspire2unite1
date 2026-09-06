@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FLE A2 | Lexique des Relations Familiales</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            oif: {
+              blue: '#0072CE',
+              navy: '#002B49',
+              yellow: '#FFD100',
+              red: '#DA291C',
+              green: '#009639',
+              purple: '#782F40',
+              light: '#F4F7FA'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    button, select, input { touch-action: manipulation; }
+    @media print {
+      body * { visibility: hidden; }
+      #printable-report-area, #printable-report-area * { visibility: visible; }
+      #printable-report-area {
+        position: absolute; left: 0; top: 0; width: 100%;
+        margin: 0; padding: 20px; background: white !important;
+        color: black !important; display: block !important;
+      }
+      .no-print { display: none !important; }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-full flex flex-col">
+
+  <header class="bg-oif-navy text-white shadow-md border-b-4 border-oif-yellow sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row justify-between items-center py-3 sm:py-4 gap-3">
+        <div class="flex items-center space-x-3 text-center sm:text-left">
+          <div class="flex items-center space-x-1">
+            <span class="w-3.5 h-3.5 rounded-full bg-[#0072CE] inline-block shadow-sm"></span>
+            <span class="w-3.5 h-3.5 rounded-full bg-[#009639] inline-block shadow-sm"></span>
+            <span class="w-3.5 h-3.5 rounded-full bg-[#FFD100] inline-block shadow-sm"></span>
+            <span class="w-3.5 h-3.5 rounded-full bg-[#DA291C] inline-block shadow-sm"></span>
+            <span class="w-3.5 h-3.5 rounded-full bg-[#782F40] inline-block shadow-sm"></span>
+          </div>
+          <div>
+            <h1 class="text-xl sm:text-2xl font-black tracking-tight flex items-center gap-2">
+              <span>Français Langue Étrangère</span>
+              <span class="text-xs bg-emerald-600 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider text-white">Niveau A2</span>
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-300">Inspire 2 (Unité 2, p. 26-27) • Leçon 5 : Lexique de la Famille</p>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center sm:justify-end gap-2 sm:gap-3">
+          <div class="flex items-center gap-2 sm:gap-3 bg-white/10 px-3 py-1.5 rounded-xl border border-white/10 text-xs sm:text-sm">
+            <div class="text-right">
+              <span class="text-slate-300 block text-[11px] uppercase font-semibold">Progression Lexique</span>
+              <span id="globalScoreText" class="font-bold text-oif-yellow text-sm sm:text-base">0 / 20 réussites</span>
+            </div>
+            <div class="w-10 h-10 rounded-full bg-oif-blue/40 border-2 border-oif-yellow flex items-center justify-center font-bold text-sm" id="globalPercentText">
+              0%
+            </div>
+          </div>
+
+          <button onclick="openExportModal()" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-black text-xs sm:text-sm px-3.5 py-2.5 rounded-xl shadow-lg transition-all flex items-center gap-2 border border-amber-200 transform active:scale-95">
+            <i class="fa-solid fa-file-export text-slate-900"></i>
+            <span>Exporter mon bilan</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+    <div id="toastMessage" class="hidden fixed bottom-5 right-5 z-50 max-w-md bg-slate-900 text-white p-4 rounded-xl shadow-2xl border-l-4 border-emerald-500 flex items-start gap-3 transition-all transform translate-y-2">
+      <i id="toastIcon" class="fa-solid fa-circle-info text-oif-yellow text-xl mt-0.5"></i>
+      <div class="flex-1">
+        <h4 id="toastTitle" class="font-bold text-sm text-slate-100">Notification</h4>
+        <p id="toastBody" class="text-xs text-slate-300 mt-0.5"></p>
+      </div>
+      <button onclick="hideToast()" class="text-slate-400 hover:text-white text-sm"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <section id="tab-lexique" class="space-y-8">
+      
+      <div class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200">
+        <div class="flex items-center gap-3 border-b pb-4 mb-5">
+          <span class="bg-emerald-100 text-emerald-700 p-3 rounded-xl"><i class="fa-solid fa-book-bookmark text-xl"></i></span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-oif-navy">Leçon 5 • Lexique des relations familiales et des sentiments</h2>
+            <p class="text-sm text-slate-500">Vocabulaire officiel Inspire 2 (p. 26-27)</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 text-xs sm:text-sm">
+          <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+            <h4 class="font-bold text-oif-blue uppercase tracking-wider mb-2 flex items-center gap-1.5"><i class="fa-solid fa-users"></i> La Famille (2)</h4>
+            <p class="text-slate-600 leading-relaxed">Une famille recomposée, une fratrie, un fils/fille unique, un demi-frère/demi-sœur, un quasi-frère/quasi-sœur, un beau-père, une belle-mère.</p>
+          </div>
+          <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+            <h4 class="font-bold text-emerald-700 uppercase tracking-wider mb-2 flex items-center gap-1.5"><i class="fa-solid fa-heart"></i> Relations & Sentiments</h4>
+            <p class="text-slate-600 leading-relaxed">S'entendre bien, avoir des affinités, se respecter, adorer, aimer bien, faire rire, s'amuser, se disputer.</p>
+          </div>
+          <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+            <h4 class="font-bold text-amber-700 uppercase tracking-wider mb-2 flex items-center gap-1.5"><i class="fa-solid fa-calendar-days"></i> Fréquence & Proportions</h4>
+            <p class="text-slate-600 leading-relaxed">De temps en temps, un week-end sur deux, deux semaines par mois, un enfant sur dix (1/10).</p>
+          </div>
+        </div>
+
+        <!-- ACTIVITÉ A -->
+        <div class="border-t pt-6">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6">
+            <div>
+              <span class="inline-block px-3 py-1 bg-emerald-600 text-white rounded-md text-xs font-bold uppercase tracking-wider mb-1">Activité A</span>
+              <h3 class="text-lg sm:text-xl font-bold text-oif-navy">Association : Mot & Définition (10 termes)</h3>
+            </div>
+            <div class="flex items-center gap-2">
+              <span id="score-lexique-assoc" class="text-sm font-bold bg-slate-100 text-slate-700 px-3 py-1 rounded-lg border">Score : -/10</span>
+              <button onclick="checkLexiqueAssoc()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm px-4 py-2 rounded-xl transition-colors shadow-sm flex items-center gap-2">
+                <i class="fa-solid fa-circle-check"></i> Vérifier
+              </button>
+            </div>
+          </div>
+          <div id="container-lexique-assoc" class="space-y-3"></div>
+        </div>
+      </div>
+
+      <!-- ACTIVITÉ B -->
+      <div class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b pb-4 mb-6">
+          <div>
+            <span class="inline-block px-3 py-1 bg-emerald-600 text-white rounded-md text-xs font-bold uppercase tracking-wider mb-1">Activité B</span>
+            <h3 class="text-lg sm:text-xl font-bold text-oif-navy">Vocabulaire en contexte : Compléter la phrase (10 phrases)</h3>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="score-lexique-context" class="text-sm font-bold bg-slate-100 text-slate-700 px-3 py-1 rounded-lg border">Score : -/10</span>
+            <button onclick="checkLexiqueContext()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm px-4 py-2 rounded-xl transition-colors shadow-sm flex items-center gap-2">
+              <i class="fa-solid fa-circle-check"></i> Vérifier
+            </button>
+          </div>
+        </div>
+        <div id="container-lexique-context" class="space-y-4"></div>
+
+        <div class="mt-8 p-4 bg-emerald-50 rounded-xl border border-emerald-200 flex flex-col sm:flex-row justify-between items-center gap-3">
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-award text-2xl text-emerald-600"></i>
+            <div>
+              <span class="text-xs uppercase font-bold text-slate-500 tracking-wider">Bilan du document</span>
+              <h4 class="text-base font-bold text-emerald-950">Total Section Lexique</h4>
+            </div>
+          </div>
+          <span id="total-score-lexique" class="text-lg font-black text-emerald-700 bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-200">
+            Score total : 0 / 20
+          </span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Modal Exportation -->
+    <div id="exportModal" class="hidden fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+      <div class="bg-white w-full max-w-xl rounded-2xl shadow-2xl border border-slate-200 overflow-hidden my-6">
+        <div class="bg-oif-navy p-5 text-white flex items-center justify-between border-b-4 border-oif-yellow">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center text-lg text-oif-yellow">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div>
+              <h3 class="font-black text-lg text-white">Bilan : Lexique de la Famille</h3>
+              <p class="text-xs text-slate-300">Inspire 2 • Niveau A2</p>
+            </div>
+          </div>
+          <button onclick="closeExportModal()" class="text-slate-400 hover:text-white text-lg p-1.5 transition-colors">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <div class="p-6 space-y-5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="studentName" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Nom et Prénom *</label>
+              <input type="text" id="studentName" placeholder="Ex. Marie Dupont" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none" required>
+            </div>
+            <div>
+              <label for="studentGroup" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Groupe / Classe *</label>
+              <input type="text" id="studentGroup" placeholder="Ex. Groupe A2 - Mardi" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none">
+            </div>
+          </div>
+
+          <div>
+            <label for="teacherEmail" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Courriel du professeur (optionnel)</label>
+            <input type="email" id="teacherEmail" placeholder="professeur@ecole.fr" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm font-medium text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none">
+          </div>
+
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+            <div class="flex justify-between items-center mb-3">
+              <span class="text-xs uppercase font-bold text-slate-500">Score global validé :</span>
+              <span id="modalScoreDisplay" class="font-black text-emerald-700 text-base">0 / 20 (0%)</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2 text-center text-xs">
+              <div class="p-2 bg-white rounded border">
+                <span class="text-slate-500 block text-[9px] font-bold uppercase">1. Association Définitions</span>
+                <strong id="modalScoreLexiqueAssoc" class="text-emerald-700 font-black text-sm">0/10</strong>
+              </div>
+              <div class="p-2 bg-white rounded border">
+                <span class="text-slate-500 block text-[9px] font-bold uppercase">2. Vocabulaire en Contexte</span>
+                <strong id="modalScoreLexiqueContext" class="text-emerald-700 font-black text-sm">0/10</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2.5 pt-2">
+            <button onclick="exportToPDF()" class="w-full bg-oif-navy hover:bg-slate-900 text-white font-bold text-sm py-3 px-4 rounded-xl transition-all shadow-md flex items-center justify-center gap-2">
+              <i class="fa-solid fa-file-pdf text-rose-400"></i>
+              <span>Télécharger / Imprimer l'attestation PDF</span>
+            </button>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <button onclick="copyResultsText()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl transition-colors border border-slate-300 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-copy text-emerald-600"></i>
+                <span>Copier le rapport texte</span>
+              </button>
+              <button onclick="sendViaEmail()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl transition-colors border border-slate-300 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-paper-plane text-emerald-600"></i>
+                <span>Envoyer par courriel</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Zone d'impression PDF -->
+    <div id="printable-report-area" class="hidden">
+      <div style="border: 3px solid #002B49; border-radius: 12px; padding: 24px; font-family: sans-serif; max-width: 800px; margin: 0 auto;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #FFD100; padding-bottom: 12px; margin-bottom: 16px;">
+          <div>
+            <h2 style="color: #002B49; font-size: 20px; font-weight: bold; margin: 0;">ATTESTATION FLE A2 • LEXIQUE DE LA FAMILLE</h2>
+            <p style="color: #64748b; font-size: 13px; margin: 4px 0 0 0;">Inspire 2 • Unité 2 (p. 26-27)</p>
+          </div>
+          <div style="text-align: right;"><span style="font-size: 12px; color: #64748b;" id="printDate"></span></div>
+        </div>
+        <div style="background-color: #F4F7FA; border: 1px solid #cbd5e1; border-radius: 8px; padding: 12px; margin-bottom: 16px; font-size: 14px;">
+          <p style="margin: 0 0 6px 0;"><strong>Nom de l'étudiant(e) :</strong> <span id="printStudentName" style="color: #0072CE;">-</span></p>
+          <p style="margin: 0;"><strong>Groupe / Classe :</strong> <span id="printStudentGroup">-</span></p>
+        </div>
+        <div style="margin-bottom: 20px; text-align: center; padding: 16px; background: #f8fafc; border: 2px dashed #009639; border-radius: 10px;">
+          <span style="font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: #64748b;">Résultat obtenu</span>
+          <div style="font-size: 28px; font-weight: 900; color: #002B49; margin: 4px 0;" id="printGrandTotal">0 / 20 (0%)</div>
+          <p style="font-size: 12px; color: #009639; margin: 0; font-weight: bold;" id="printStatusMention">Module complété</p>
+        </div>
+        <table style="width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 20px;">
+          <thead>
+            <tr style="background-color: #f1f5f9; text-align: left;">
+              <th style="padding: 6px; border: 1px solid #cbd5e1;">Activité</th>
+              <th style="padding: 6px; border: 1px solid #cbd5e1; text-align: center;">Score</th>
+            </tr>
+          </thead>
+          <tbody id="printScoresTableBody"></tbody>
+        </table>
+        <div style="border-top: 1px solid #cbd5e1; padding-top: 12px; display: flex; justify-content: space-between; font-size: 11px; color: #94a3b8;">
+          <span>Validation autonome • Plateforme FLE A2</span>
+          <span>Inspire 2 • Hachette FLE</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center space-x-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
+        <span class="font-bold text-slate-700">Méthode Inspire 2 • Unité 2 (p. 26-27)</span>
+      </div>
+      <p class="text-slate-400">Ressource autocorrective interactive pour le vocabulaire de la famille</p>
+    </div>
+  </footer>
+
+  <script>
+    const scores = { lexiqueAssoc: 0, lexiqueContext: 0 };
+
+    function showToast(title, message, isSuccess = true) {
+      const toast = document.getElementById('toastMessage');
+      const toastTitle = document.getElementById('toastTitle');
+      const toastBody = document.getElementById('toastBody');
+      const toastIcon = document.getElementById('toastIcon');
+
+      toastTitle.textContent = title;
+      toastBody.textContent = message;
+
+      if (isSuccess) {
+        toast.className = toast.className.replace(/border-[a-z0-9-]+/, 'border-emerald-500');
+        toastIcon.className = "fa-solid fa-circle-check text-emerald-400 text-xl mt-0.5";
+      } else {
+        toast.className = toast.className.replace(/border-[a-z0-9-]+/, 'border-rose-500');
+        toastIcon.className = "fa-solid fa-circle-exclamation text-rose-400 text-xl mt-0.5";
+      }
+
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.remove('translate-y-2'), 10);
+      clearTimeout(window.toastTimer);
+      window.toastTimer = setTimeout(hideToast, 4000);
+    }
+
+    function hideToast() {
+      const toast = document.getElementById('toastMessage');
+      toast.classList.add('translate-y-2');
+      setTimeout(() => toast.classList.add('hidden'), 200);
+    }
+
+    const lexiqueAssocData = [
+      { id: 1, word: "Une famille recomposée", correctId: "def-1", feedback: "Couple vivant avec des enfants nés d'une précédente union." },
+      { id: 2, word: "Une fratrie", correctId: "def-2", feedback: "L'ensemble des frères et sœurs d'une même famille." },
+      { id: 3, word: "Un demi-frère / demi-sœur", correctId: "def-3", feedback: "Enfants partageant un seul parent biologique commun." },
+      { id: 4, word: "Un quasi-frère / quasi-sœur", correctId: "def-4", feedback: "Enfants n'ayant aucun parent biologique en commun." },
+      { id: 5, word: "Un beau-père / belle-mère", correctId: "def-5", feedback: "Nouveau conjoint du père ou de la mère." },
+      { id: 6, word: "Avoir des affinités", correctId: "def-6", feedback: "Partager des goûts et une complicité naturelle." },
+      { id: 7, word: "Se disputer", correctId: "def-7", feedback: "Avoir une querelle ou un conflit verbal." },
+      { id: 8, word: "Se respecter", correctId: "def-8", feedback: "Traiter l'autre avec considération et politesse." },
+      { id: 9, word: "Un week-end sur deux", correctId: "def-9", feedback: "Fréquence alternée bimensuelle." },
+      { id: 10, word: "Fils unique / fille unique", correctId: "def-10", feedback: "Enfant n'ayant aucun frère ni sœur." }
+    ];
+
+    const definitionsOptions = [
+      { id: "def-1", text: "Couple avec enfants nés d'unions précédentes." },
+      { id: "def-2", text: "L'ensemble des frères et sœurs de la famille." },
+      { id: "def-3", text: "Enfants avec un seul parent biologique commun." },
+      { id: "def-4", text: "Enfants d'un foyer sans aucun lien de sang." },
+      { id: "def-5", text: "Nouveau conjoint ou nouvelle conjointe d'un parent." },
+      { id: "def-6", text: "Partager des goûts et une complicité." },
+      { id: "def-7", text: "Avoir un désaccord conflictuel ou une querelle." },
+      { id: "def-8", text: "Accorder de la considération sans manquer d'égards." },
+      { id: "def-9", text: "Fréquence alternée toutes les deux semaines." },
+      { id: "def-10", text: "Personne grandissant sans aucun frère ni sœur." }
+    ];
+
+    function renderLexiqueAssoc() {
+      const container = document.getElementById('container-lexique-assoc');
+      const shuffled = [...definitionsOptions].sort((a, b) => a.text.localeCompare(b.text));
+      container.innerHTML = lexiqueAssocData.map((item, idx) => `
+        <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50/50 flex flex-col md:flex-row md:items-center justify-between gap-3" id="lex-assoc-card-${item.id}">
+          <div class="md:w-1/3">
+            <span class="inline-block w-5 h-5 bg-emerald-100 text-emerald-800 rounded-full text-center text-xs font-bold leading-5 mr-1">${idx + 1}</span>
+            <strong class="text-sm font-semibold text-slate-800">${item.word}</strong>
+          </div>
+          <div class="md:w-2/3">
+            <select id="lex-assoc-select-${item.id}" class="w-full text-xs sm:text-sm p-2 bg-white border border-slate-300 rounded-lg outline-none">
+              <option value="">-- Choisir la définition --</option>
+              ${shuffled.map(opt => `<option value="${opt.id}">${opt.text}</option>`).join('')}
+            </select>
+          </div>
+          <div id="lex-assoc-fb-${item.id}" class="hidden w-full mt-2 p-2.5 rounded-lg text-xs leading-relaxed"></div>
+        </div>
+      `).join('');
+    }
+
+    const lexiqueContextData = [
+      { id: 1, before: "Depuis le divorce de mes parents, je vis dans une famille", after: "avec mon père et ma belle-mère.", options: ["recomposée", "unique", "séparée", "fratrie"], answer: "recomposée", feedback: "Famille recomposée = nouveau couple avec enfants." },
+      { id: 2, before: "Lucas et moi avons la même mère mais des pères différents : Lucas est mon", after: ".", options: ["demi-frère", "quasi-frère", "beau-père", "fils unique"], answer: "demi-frère", feedback: "Un parent biologique commun = demi-frère." },
+      { id: 3, before: "Les enfants de mon beau-père n'ont aucun parent en commun avec moi : ce sont mes", after: ".", options: ["quasi-frères", "demi-frères", "beaux-parents", "conjoints"], answer: "quasi-frères", feedback: "Aucun lien de sang = quasi-frères." },
+      { id: 4, before: "À la maison, nous sommes 5 frères et sœurs : c'est une grande", after: "très unie !", options: ["fratrie", "fédération", "association", "naissance"], answer: "fratrie", feedback: "Fratrie = groupe des frères et sœurs." },
+      { id: 5, before: "Elle n'a ni frère ni sœur : elle a toujours été fille", after: ".", options: ["unique", "seule", "première", "modeste"], answer: "unique", feedback: "Fille unique / fils unique." },
+      { id: 6, before: "Même si nous ne sommes pas d'accord, il est essentiel de se", after: "au quotidien.", options: ["respecter", "séparer", "quitter", "disputer"], answer: "respecter", feedback: "Se respecter = vivre en harmonie." },
+      { id: 7, before: "Avec ma belle-mère, nous nous", after: "très bien, nous faisons des sorties ensemble.", options: ["entendons", "disputons", "quittons", "rencontrons"], answer: "entendons", feedback: "S'entendre bien." },
+      { id: 8, before: "En France, selon les statistiques, plus d'un enfant", after: "dix vit dans une famille recomposée.", options: ["sur", "dans", "par", "avec"], answer: "sur", feedback: "Proportion : un enfant sur dix." },
+      { id: 9, before: "Mon père habite loin, alors je le vois seulement un", after: "sur deux.", options: ["week-end", "mois", "an", "vacance"], answer: "week-end", feedback: "Un week-end sur deux." },
+      { id: 10, before: "Quand mes quasi-sœurs racontent des blagues, elles me font toujours", after: "!", options: ["rire", "disputer", "pleurer", "partir"], answer: "rire", feedback: "Faire rire." }
+    ];
+
+    function renderLexiqueContext() {
+      const container = document.getElementById('container-lexique-context');
+      container.innerHTML = lexiqueContextData.map((item, idx) => `
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50" id="lex-ctx-card-${item.id}">
+          <div class="flex flex-wrap items-center gap-2 text-sm sm:text-base font-medium text-slate-800 mb-2">
+            <span class="inline-block w-6 h-6 bg-emerald-100 text-emerald-800 rounded-full text-center text-xs font-bold leading-6 mr-1">${idx + 1}</span>
+            <span>${item.before}</span>
+            <select id="lex-ctx-select-${item.id}" class="px-3 py-1 bg-white border border-slate-300 rounded-lg text-emerald-800 font-bold outline-none">
+              <option value="">[...]</option>
+              ${item.options.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
+            </select>
+            <span>${item.after}</span>
+          </div>
+          <div id="lex-ctx-fb-${item.id}" class="hidden mt-2 p-2.5 rounded-lg text-xs leading-relaxed"></div>
+        </div>
+      `).join('');
+    }
+
+    function checkLexiqueAssoc() {
+      let score = 0;
+      lexiqueAssocData.forEach(item => {
+        const select = document.getElementById(`lex-assoc-select-${item.id}`);
+        const card = document.getElementById(`lex-assoc-card-${item.id}`);
+        const fb = document.getElementById(`lex-assoc-fb-${item.id}`);
+        fb.classList.remove('hidden');
+        if (select.value === item.correctId) {
+          score++;
+          card.className = "p-3.5 rounded-xl border border-emerald-300 bg-emerald-50/50 flex flex-col md:flex-row md:items-center justify-between gap-3";
+          fb.className = "w-full mt-2 p-2.5 rounded-lg text-xs bg-emerald-100 text-emerald-900 border border-emerald-200";
+          fb.innerHTML = `<strong><i class="fa-solid fa-check mr-1"></i> Correct !</strong> ${item.feedback}`;
+        } else {
+          card.className = "p-3.5 rounded-xl border border-rose-300 bg-rose-50/50 flex flex-col md:flex-row md:items-center justify-between gap-3";
+          fb.className = "w-full mt-2 p-2.5 rounded-lg text-xs bg-rose-100 text-rose-900 border border-rose-200";
+          fb.innerHTML = `<strong><i class="fa-solid fa-xmark mr-1"></i> Incorrect.</strong> ${item.feedback}`;
+        }
+      });
+      scores.lexiqueAssoc = score;
+      document.getElementById('score-lexique-assoc').textContent = `Score : ${score}/10`;
+      updateTotals();
+      showToast("Activité vérifiée", `Vous avez obtenu ${score}/10 sur le lexique.`);
+    }
+
+    function checkLexiqueContext() {
+      let score = 0;
+      lexiqueContextData.forEach(item => {
+        const select = document.getElementById(`lex-ctx-select-${item.id}`);
+        const card = document.getElementById(`lex-ctx-card-${item.id}`);
+        const fb = document.getElementById(`lex-ctx-fb-${item.id}`);
+        fb.classList.remove('hidden');
+        if (select.value === item.answer) {
+          score++;
+          card.className = "p-4 rounded-xl border border-emerald-300 bg-emerald-50/50";
+          fb.className = "mt-2 p-2.5 rounded-lg text-xs bg-emerald-100 text-emerald-900 border border-emerald-200";
+          fb.innerHTML = `<strong><i class="fa-solid fa-check mr-1"></i> Exact !</strong> ${item.feedback}`;
+        } else {
+          card.className = "p-4 rounded-xl border border-rose-300 bg-rose-50/50";
+          fb.className = "mt-2 p-2.5 rounded-lg text-xs bg-rose-100 text-rose-900 border border-rose-200";
+          fb.innerHTML = `<strong><i class="fa-solid fa-xmark mr-1"></i> Mot incorrect.</strong> Réponse : <strong class="text-emerald-700 underline">${item.answer}</strong>. ${item.feedback}`;
+        }
+      });
+      scores.lexiqueContext = score;
+      document.getElementById('score-lexique-context').textContent = `Score : ${score}/10`;
+      updateTotals();
+      showToast("Activité vérifiée", `Vous avez obtenu ${score}/10 en contexte.`);
+    }
+
+    function updateTotals() {
+      const grandTotal = scores.lexiqueAssoc + scores.lexiqueContext;
+      const percentage = Math.round((grandTotal / 20) * 100);
+
+      document.getElementById('total-score-lexique').textContent = `Score total : ${grandTotal} / 20`;
+      document.getElementById('globalScoreText').textContent = `${grandTotal} / 20 réussites`;
+      document.getElementById('globalPercentText').textContent = `${percentage}%`;
+    }
+
+    function openExportModal() {
+      const grandTotal = scores.lexiqueAssoc + scores.lexiqueContext;
+      const percent = Math.round((grandTotal / 20) * 100);
+
+      document.getElementById('modalScoreDisplay').textContent = `${grandTotal} / 20 (${percent}%)`;
+      document.getElementById('modalScoreLexiqueAssoc').textContent = `${scores.lexiqueAssoc}/10`;
+      document.getElementById('modalScoreLexiqueContext').textContent = `${scores.lexiqueContext}/10`;
+
+      document.getElementById('exportModal').classList.remove('hidden');
+    }
+
+    function closeExportModal() {
+      document.getElementById('exportModal').classList.add('hidden');
+    }
+
+    function prepareReportData() {
+      const name = document.getElementById('studentName').value.trim() || 'Étudiant(e) Anonyme';
+      const group = document.getElementById('studentGroup').value.trim() || 'Non spécifié';
+      const teacher = document.getElementById('teacherEmail').value.trim() || '';
+      const dateStr = new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+      const grandTotal = scores.lexiqueAssoc + scores.lexiqueContext;
+      const percent = Math.round((grandTotal / 20) * 100);
+      return { name, group, teacher, dateStr, grandTotal, percent };
+    }
+
+    function exportToPDF() {
+      const data = prepareReportData();
+      document.getElementById('printStudentName').textContent = data.name;
+      document.getElementById('printStudentGroup').textContent = data.group;
+      document.getElementById('printDate').textContent = data.dateStr;
+      document.getElementById('printGrandTotal').textContent = `${data.grandTotal} / 20 (${data.percent}%)`;
+
+      let mention = "Validation réussie - Félicitations !";
+      if (data.percent < 50) mention = "Module à consolider";
+      else if (data.percent < 80) mention = "Bonne maîtrise des acquis";
+      document.getElementById('printStatusMention').textContent = mention;
+
+      const tbody = document.getElementById('printScoresTableBody');
+      tbody.innerHTML = `
+        <tr><td style="padding:5px;border:1px solid #cbd5e1;">Association Mots & Définitions</td><td style="padding:5px;border:1px solid #cbd5e1;text-align:center;">${scores.lexiqueAssoc}/10</td></tr>
+        <tr><td style="padding:5px;border:1px solid #cbd5e1;">Vocabulaire en contexte</td><td style="padding:5px;border:1px solid #cbd5e1;text-align:center;">${scores.lexiqueContext}/10</td></tr>
+      `;
+      closeExportModal();
+      window.print();
+    }
+
+    function copyResultsText() {
+      const data = prepareReportData();
+      const reportText = `[BILAN FLE A2 - LEXIQUE DE LA FAMILLE]
+Étudiant(e) : ${data.name}
+Groupe / Classe : ${data.group}
+Date : ${data.dateStr}
+--------------------------------------------------
+SCORE TOTAL : ${data.grandTotal} / 20 (${data.percent}%)
+--------------------------------------------------
+• Association définitions : ${scores.lexiqueAssoc}/10
+• Vocabulaire en contexte : ${scores.lexiqueContext}/10
+--------------------------------------------------
+Inspire 2 • Hachette FLE`;
+
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = reportText;
+      tempTextArea.style.position = 'fixed';
+      tempTextArea.style.left = '-9999px';
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      try {
+        document.execCommand('copy');
+        showToast("Rapport copié !", "Bilan copié dans le presse-papier.");
+      } catch (err) {
+        showToast("Erreur de copie", "Impossible de copier.", false);
+      }
+      document.body.removeChild(tempTextArea);
+      closeExportModal();
+    }
+
+    function sendViaEmail() {
+      const data = prepareReportData();
+      const subject = encodeURIComponent(`Bilan FLE A2 Lexique - ${data.name} (${data.group})`);
+      const body = encodeURIComponent(`Bonjour,
+
+Voici mon bilan pour le module sur le Lexique de la famille (Inspire 2, p. 26-27) :
+Nom : ${data.name}
+Groupe : ${data.group}
+Date : ${data.dateStr}
+
+SCORE LEXIQUE : ${data.grandTotal} / 20 (${data.percent}%)
+- Association : ${scores.lexiqueAssoc}/10
+- En contexte : ${scores.lexiqueContext}/10
+
+Cordialement,
+${data.name}`);
+
+      window.location.href = `mailto:${encodeURIComponent(data.teacher)}?subject=${subject}&body=${body}`;
+    }
+
+    window.onload = function() {
+      renderLexiqueAssoc();
+      renderLexiqueContext();
+      updateTotals();
+    };
+  </script>
+</body>
+</html>
