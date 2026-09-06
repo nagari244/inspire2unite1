@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FLE A2 | Lexique des Relations Familiales</title>
+  <title>FLE A2 | Lexique des Relations Familiales & Laboratoire Audio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script>
@@ -30,6 +30,14 @@
   </script>
   <style>
     button, select, input { touch-action: manipulation; }
+    .custom-scrollbar::-webkit-scrollbar { height: 6px; width: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 9999px; }
+    .tab-active {
+      border-bottom: 4px solid #FFD100;
+      color: #ffffff;
+      font-weight: 700;
+      background-color: rgba(255, 255, 255, 0.15);
+    }
     @media print {
       body * { visibility: hidden; }
       #printable-report-area, #printable-report-area * { visibility: visible; }
@@ -60,15 +68,15 @@
               <span>Français Langue Étrangère</span>
               <span class="text-xs bg-emerald-600 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider text-white">Niveau A2</span>
             </h1>
-            <p class="text-xs sm:text-sm text-slate-300">Inspire 2 (Unité 2, p. 26-27) • Leçon 5 : Lexique de la Famille</p>
+            <p class="text-xs sm:text-sm text-slate-300">Inspire 2 (Unité 2, p. 26-27) • Leçon 5 : Lexique & Laboratoire Audio</p>
           </div>
         </div>
 
         <div class="flex flex-wrap items-center justify-center sm:justify-end gap-2 sm:gap-3">
           <div class="flex items-center gap-2 sm:gap-3 bg-white/10 px-3 py-1.5 rounded-xl border border-white/10 text-xs sm:text-sm">
             <div class="text-right">
-              <span class="text-slate-300 block text-[11px] uppercase font-semibold">Progression Lexique</span>
-              <span id="globalScoreText" class="font-bold text-oif-yellow text-sm sm:text-base">0 / 20 réussites</span>
+              <span class="text-slate-300 block text-[11px] uppercase font-semibold">Progression Totale</span>
+              <span id="globalScoreText" class="font-bold text-oif-yellow text-sm sm:text-base">0 / 32 réussites</span>
             </div>
             <div class="w-10 h-10 rounded-full bg-oif-blue/40 border-2 border-oif-yellow flex items-center justify-center font-bold text-sm" id="globalPercentText">
               0%
@@ -81,6 +89,20 @@
           </button>
         </div>
       </div>
+
+      <nav class="flex overflow-x-auto space-x-1.5 pt-2 custom-scrollbar text-xs sm:text-sm font-semibold" aria-label="Onglets d'apprentissage">
+        <button onclick="switchTab('tab-lexique')" id="btn-tab-lexique" class="tab-btn tab-active px-4 py-2.5 rounded-t-xl transition-all whitespace-nowrap flex items-center gap-2 text-slate-200 hover:text-white">
+          <i class="fa-solid fa-book-bookmark text-emerald-400"></i>
+          <span>1. Lexique & Définitions</span>
+          <span id="badge-tab-lexique" class="bg-white/20 text-[11px] px-1.5 py-0.5 rounded-full">0/20</span>
+        </button>
+
+        <button onclick="switchTab('tab-audio')" id="btn-tab-audio" class="tab-btn px-4 py-2.5 rounded-t-xl transition-all whitespace-nowrap flex items-center gap-2 text-slate-200 hover:text-white">
+          <i class="fa-solid fa-headphones text-oif-yellow"></i>
+          <span>2. Audio : Témoignages</span>
+          <span id="badge-tab-audio" class="bg-white/20 text-[11px] px-1.5 py-0.5 rounded-full">0/12</span>
+        </button>
+      </nav>
     </div>
   </header>
 
@@ -95,6 +117,9 @@
       <button onclick="hideToast()" class="text-slate-400 hover:text-white text-sm"><i class="fa-solid fa-xmark"></i></button>
     </div>
 
+    <!-- ========================================================================= -->
+    <!-- ONGLET 1 : RÉVISION DU LEXIQUE                                            -->
+    <!-- ========================================================================= -->
     <section id="tab-lexique" class="space-y-8">
       
       <div class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200">
@@ -171,7 +196,123 @@
 
     </section>
 
-    <!-- Modal Exportation -->
+    <!-- ========================================================================= -->
+    <!-- ONGLET 2 : LABORATOIRE AUDIO (ACTIVITÉS 1 ET 2)                           -->
+    <!-- ========================================================================= -->
+    <section id="tab-audio" class="hidden space-y-8">
+      
+      <!-- Lecteur Audio & Contrôles -->
+      <div class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b pb-5 mb-5">
+          <div class="flex items-center gap-3">
+            <span class="bg-amber-100 text-amber-700 p-3.5 rounded-xl text-xl">
+              <i class="fa-solid fa-headphones"></i>
+            </span>
+            <div>
+              <h2 class="text-xl sm:text-2xl font-black text-oif-navy">Parler des relations familiales</h2>
+              <p class="text-xs sm:text-sm text-slate-500">Témoignages de Nathan, Alexia et Pablo (Activités 1 et 2)</p>
+            </div>
+          </div>
+          <div class="w-full sm:w-auto">
+            <audio controls class="w-full sm:w-80 h-10 shadow-inner rounded-xl">
+              <source src="audio.mp3" type="audio/mpeg">
+              Votre navigateur ne prend pas en charge la balise audio.
+            </audio>
+          </div>
+        </div>
+
+        <!-- Zone Transcription conditionnelle -->
+        <div class="mb-2">
+          <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-50 border border-slate-200 rounded-xl p-3.5">
+            <div class="flex items-center gap-2 text-xs sm:text-sm text-slate-600">
+              <i class="fa-solid fa-file-lines text-oif-blue"></i>
+              <span>Transcription de l'enregistrement :</span>
+              <span id="transcript-status" class="text-[11px] font-semibold text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-md">
+                Verrouillée (Vérifiez d'abord une activité pour la débloquer)
+              </span>
+            </div>
+            <button id="btn-toggle-transcript" onclick="toggleTranscript()" disabled class="bg-slate-200 text-slate-400 font-bold text-xs px-3.5 py-2 rounded-lg transition-all flex items-center gap-2 cursor-not-allowed">
+              <i class="fa-solid fa-lock" id="icon-transcript-lock"></i>
+              <span>Consulter la transcription</span>
+            </button>
+          </div>
+
+          <div id="transcript-box" class="hidden mt-3 bg-blue-50/50 border border-blue-200 rounded-xl p-4 sm:p-5 text-xs sm:text-sm text-slate-700 space-y-3 leading-relaxed shadow-inner">
+            <div class="border-b border-blue-200 pb-2 flex items-center justify-between">
+              <span class="font-extrabold uppercase text-oif-navy tracking-wider flex items-center gap-2">
+                <i class="fa-solid fa-quote-left text-oif-blue"></i> Transcription intégrale
+              </span>
+              <span class="text-[11px] text-slate-500">Document audio officiel</span>
+            </div>
+            <p>
+              <strong class="text-oif-blue">– Nathan :</strong> « Je m'appelle Nathan, j'ai 14 ans. Je vis avec ma mère et son nouveau compagnon. J'ai un demi-frère de 10 ans, Joël. On s'aime bien et on s'amuse bien ! J'adore ma quasi-sœur, Yasmine. Elle vient un week-end sur deux à la maison, elle est très sympa. Elle me fait rire ! »
+            </p>
+            <p>
+              <strong class="text-emerald-700">– Alexia :</strong> « Moi, c'est Alexia, j'ai 16 ans, je suis fille unique. L'année dernière, mes parents ont divorcé. J'habite avec ma mère, et je vois une semaine sur deux mon père, ma belle-mère et le fils de ma belle-mère, qui a 15 ans. On a de bonnes relations et on se respecte. »
+            </p>
+            <p>
+              <strong class="text-purple-700">– Pablo :</strong> « Je m'appelle Pablo, j'ai 15 ans, j'habite avec mon père et sa nouvelle famille. J'ai un grand frère de 16 ans et une demi-sœur, qui a 5 ans. J'aime bien ma demi-sœur, mais je n'ai pas d'affinités avec elle, elle est petite ! »
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACTIVITÉ 1 : Choix du personnage -->
+      <div class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b pb-4 mb-6">
+          <div>
+            <span class="inline-block px-3 py-1 bg-oif-blue text-white rounded-md text-xs font-bold uppercase tracking-wider mb-1">Activité 1</span>
+            <h3 class="text-lg sm:text-xl font-bold text-oif-navy">Écoutez les témoignages de Nathan, Alexia et Pablo. Lisez les questions et sélectionnez la bonne réponse.</h3>
+            <p class="text-xs sm:text-sm text-slate-500">Exemple : Qui a 16 ans ? &rarr; <span class="font-bold text-emerald-700">Alexia</span></p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="score-audio-act1" class="text-sm font-bold bg-slate-100 text-slate-700 px-3 py-1 rounded-lg border">Score : -/6</span>
+            <button onclick="checkAudioAct1()" class="bg-oif-blue hover:bg-blue-700 text-white font-semibold text-sm px-4 py-2 rounded-xl transition-colors shadow-sm flex items-center gap-2">
+              <i class="fa-solid fa-circle-check"></i> Vérifier
+            </button>
+          </div>
+        </div>
+
+        <div id="container-audio-act1" class="space-y-4"></div>
+      </div>
+
+      <!-- ACTIVITÉ 2 : Vrai ou Faux -->
+      <div class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b pb-4 mb-6">
+          <div>
+            <span class="inline-block px-3 py-1 bg-emerald-600 text-white rounded-md text-xs font-bold uppercase tracking-wider mb-1">Activité 2</span>
+            <h3 class="text-lg sm:text-xl font-bold text-oif-navy">Réécoutez les témoignages. Cochez Vrai ou Faux.</h3>
+            <p class="text-xs sm:text-sm text-slate-500">Validez les affirmations selon les déclarations des 3 adolescents.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="score-audio-act2" class="text-sm font-bold bg-slate-100 text-slate-700 px-3 py-1 rounded-lg border">Score : -/6</span>
+            <button onclick="checkAudioAct2()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm px-4 py-2 rounded-xl transition-colors shadow-sm flex items-center gap-2">
+              <i class="fa-solid fa-circle-check"></i> Vérifier
+            </button>
+          </div>
+        </div>
+
+        <div id="container-audio-act2" class="space-y-4"></div>
+
+        <div class="mt-8 p-4 bg-amber-50 rounded-xl border border-amber-200 flex flex-col sm:flex-row justify-between items-center gap-3">
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-award text-2xl text-amber-600"></i>
+            <div>
+              <span class="text-xs uppercase font-bold text-slate-500 tracking-wider">Sous-total Onglet 2</span>
+              <h4 class="text-base font-bold text-amber-950">Compréhension Orale</h4>
+            </div>
+          </div>
+          <span id="total-score-audio" class="text-lg font-black text-amber-800 bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-200">
+            Score total : 0 / 12
+          </span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- MODALE D'EXPORTATION SANS SERVEUR                                         -->
+    <!-- ========================================================================= -->
     <div id="exportModal" class="hidden fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
       <div class="bg-white w-full max-w-xl rounded-2xl shadow-2xl border border-slate-200 overflow-hidden my-6">
         <div class="bg-oif-navy p-5 text-white flex items-center justify-between border-b-4 border-oif-yellow">
@@ -180,8 +321,8 @@
               <i class="fa-solid fa-graduation-cap"></i>
             </div>
             <div>
-              <h3 class="font-black text-lg text-white">Bilan : Lexique de la Famille</h3>
-              <p class="text-xs text-slate-300">Inspire 2 • Niveau A2</p>
+              <h3 class="font-black text-lg text-white">Bilan d'apprentissage FLE A2</h3>
+              <p class="text-xs text-slate-300">Lexique de la Famille & Laboratoire Audio</p>
             </div>
           </div>
           <button onclick="closeExportModal()" class="text-slate-400 hover:text-white text-lg p-1.5 transition-colors">
@@ -209,16 +350,24 @@
           <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
             <div class="flex justify-between items-center mb-3">
               <span class="text-xs uppercase font-bold text-slate-500">Score global validé :</span>
-              <span id="modalScoreDisplay" class="font-black text-emerald-700 text-base">0 / 20 (0%)</span>
+              <span id="modalScoreDisplay" class="font-black text-emerald-700 text-base">0 / 32 (0%)</span>
             </div>
-            <div class="grid grid-cols-2 gap-2 text-center text-xs">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs">
               <div class="p-2 bg-white rounded border">
-                <span class="text-slate-500 block text-[9px] font-bold uppercase">1. Association Définitions</span>
+                <span class="text-slate-500 block text-[9px] font-bold uppercase">1. Association</span>
                 <strong id="modalScoreLexiqueAssoc" class="text-emerald-700 font-black text-sm">0/10</strong>
               </div>
               <div class="p-2 bg-white rounded border">
-                <span class="text-slate-500 block text-[9px] font-bold uppercase">2. Vocabulaire en Contexte</span>
+                <span class="text-slate-500 block text-[9px] font-bold uppercase">2. Contexte</span>
                 <strong id="modalScoreLexiqueContext" class="text-emerald-700 font-black text-sm">0/10</strong>
+              </div>
+              <div class="p-2 bg-white rounded border">
+                <span class="text-slate-500 block text-[9px] font-bold uppercase">3. Audio QCM</span>
+                <strong id="modalScoreAudioAct1" class="text-oif-blue font-black text-sm">0/6</strong>
+              </div>
+              <div class="p-2 bg-white rounded border">
+                <span class="text-slate-500 block text-[9px] font-bold uppercase">4. Audio V/F</span>
+                <strong id="modalScoreAudioAct2" class="text-oif-blue font-black text-sm">0/6</strong>
               </div>
             </div>
           </div>
@@ -248,7 +397,7 @@
       <div style="border: 3px solid #002B49; border-radius: 12px; padding: 24px; font-family: sans-serif; max-width: 800px; margin: 0 auto;">
         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #FFD100; padding-bottom: 12px; margin-bottom: 16px;">
           <div>
-            <h2 style="color: #002B49; font-size: 20px; font-weight: bold; margin: 0;">ATTESTATION FLE A2 • LEXIQUE DE LA FAMILLE</h2>
+            <h2 style="color: #002B49; font-size: 20px; font-weight: bold; margin: 0;">ATTESTATION FLE A2 • LEXIQUE DE LA FAMILLE & AUDIO</h2>
             <p style="color: #64748b; font-size: 13px; margin: 4px 0 0 0;">Inspire 2 • Unité 2 (p. 26-27)</p>
           </div>
           <div style="text-align: right;"><span style="font-size: 12px; color: #64748b;" id="printDate"></span></div>
@@ -259,12 +408,13 @@
         </div>
         <div style="margin-bottom: 20px; text-align: center; padding: 16px; background: #f8fafc; border: 2px dashed #009639; border-radius: 10px;">
           <span style="font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: #64748b;">Résultat obtenu</span>
-          <div style="font-size: 28px; font-weight: 900; color: #002B49; margin: 4px 0;" id="printGrandTotal">0 / 20 (0%)</div>
+          <div style="font-size: 28px; font-weight: 900; color: #002B49; margin: 4px 0;" id="printGrandTotal">0 / 32 (0%)</div>
           <p style="font-size: 12px; color: #009639; margin: 0; font-weight: bold;" id="printStatusMention">Module complété</p>
         </div>
         <table style="width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 20px;">
           <thead>
             <tr style="background-color: #f1f5f9; text-align: left;">
+              <th style="padding: 6px; border: 1px solid #cbd5e1;">Module</th>
               <th style="padding: 6px; border: 1px solid #cbd5e1;">Activité</th>
               <th style="padding: 6px; border: 1px solid #cbd5e1; text-align: center;">Score</th>
             </tr>
@@ -286,12 +436,29 @@
         <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
         <span class="font-bold text-slate-700">Méthode Inspire 2 • Unité 2 (p. 26-27)</span>
       </div>
-      <p class="text-slate-400">Ressource autocorrective interactive pour le vocabulaire de la famille</p>
+      <p class="text-slate-400">Ressource autocorrective interactive pour le vocabulaire de la famille et l'écoute</p>
+    </div>
+    <div class="mt-2 text-[11px] text-slate-400 flex items-center justify-center gap-1">
+      <span>Conception pédagogique : Nadia Aguilar Neri</span>
+      <span>•</span>
+      <span class="inline-flex items-center gap-1">
+        <svg class="w-3 h-3 text-blue-500 inline-block" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/>
+        </svg>
+        Développé via Gemini by Google
+      </span>
     </div>
   </footer>
 
   <script>
-    const scores = { lexiqueAssoc: 0, lexiqueContext: 0 };
+    const scores = {
+      lexiqueAssoc: 0,
+      lexiqueContext: 0,
+      audioAct1: 0,
+      audioAct2: 0
+    };
+
+    let audioVerified = false;
 
     function showToast(title, message, isSuccess = true) {
       const toast = document.getElementById('toastMessage');
@@ -322,6 +489,23 @@
       setTimeout(() => toast.classList.add('hidden'), 200);
     }
 
+    function switchTab(tabId) {
+      const tabs = ['tab-lexique', 'tab-audio'];
+      tabs.forEach(id => {
+        const section = document.getElementById(id);
+        const btn = document.getElementById('btn-' + id);
+        if (id === tabId) {
+          section.classList.remove('hidden');
+          btn.classList.add('tab-active');
+        } else {
+          section.classList.add('hidden');
+          btn.classList.remove('tab-active');
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // --- ACTIVITÉ A & B : LEXIQUE ---
     const lexiqueAssocData = [
       { id: 1, word: "Une famille recomposée", correctId: "def-1", feedback: "Couple vivant avec des enfants nés d'une précédente union." },
       { id: 2, word: "Une fratrie", correctId: "def-2", feedback: "L'ensemble des frères et sœurs d'une même famille." },
@@ -420,7 +604,7 @@
       scores.lexiqueAssoc = score;
       document.getElementById('score-lexique-assoc').textContent = `Score : ${score}/10`;
       updateTotals();
-      showToast("Activité vérifiée", `Vous avez obtenu ${score}/10 sur le lexique.`);
+      showToast("Activité vérifiée", `Vous avez obtenu ${score}/10 sur l'association de définitions.`);
     }
 
     function checkLexiqueContext() {
@@ -447,22 +631,171 @@
       showToast("Activité vérifiée", `Vous avez obtenu ${score}/10 en contexte.`);
     }
 
-    function updateTotals() {
-      const grandTotal = scores.lexiqueAssoc + scores.lexiqueContext;
-      const percentage = Math.round((grandTotal / 20) * 100);
+    // --- ONGLET AUDIO : ACTIVITÉS 1 ET 2 ---
+    const audioAct1Data = [
+      { id: 'a', question: "a. Qui a une quasi-sœur ?", options: ["Nathan", "Alexia", "Pablo"], answer: "Nathan", feedback: "Nathan dit : « J'adore ma quasi-sœur, Yasmine. »" },
+      { id: 'b', question: "b. Qui vit avec son père ?", options: ["Nathan", "Alexia", "Pablo"], answer: "Pablo", feedback: "Pablo dit : « j'habite avec mon père et sa nouvelle famille. »" },
+      { id: 'c', question: "c. Qui a un frère biologique ?", options: ["Nathan", "Alexia", "Pablo"], answer: "Pablo", feedback: "Pablo dit : « J'ai un grand frère de 16 ans. »" },
+      { id: 'd', question: "d. Qui a une demi-sœur ?", options: ["Nathan", "Alexia", "Pablo"], answer: "Pablo", feedback: "Pablo dit : « et une demi-sœur, qui a 5 ans. »" },
+      { id: 'e', question: "e. Qui a un demi-frère ?", options: ["Nathan", "Alexia", "Pablo"], answer: "Nathan", feedback: "Nathan dit : « J'ai un demi-frère de 10 ans, Joël. »" },
+      { id: 'f', question: "f. Qui est enfant unique ?", options: ["Nathan", "Alexia", "Pablo"], answer: "Alexia", feedback: "Alexia dit : « je suis fille unique. »" }
+    ];
 
-      document.getElementById('total-score-lexique').textContent = `Score total : ${grandTotal} / 20`;
-      document.getElementById('globalScoreText').textContent = `${grandTotal} / 20 réussites`;
+    function renderAudioAct1() {
+      const container = document.getElementById('container-audio-act1');
+      container.innerHTML = audioAct1Data.map(item => `
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-3" id="audio-act1-card-${item.id}">
+          <p class="font-bold text-slate-800 text-sm sm:text-base">${item.question}</p>
+          <div class="flex items-center gap-2 shrink-0">
+            ${item.options.map(opt => `
+              <label class="px-3 py-1.5 rounded-lg border bg-white hover:bg-blue-50 cursor-pointer text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition-colors">
+                <input type="radio" name="audio_act1_${item.id}" value="${opt}" class="text-oif-blue">
+                <span>${opt}</span>
+              </label>
+            `).join('')}
+          </div>
+          <div id="audio-act1-fb-${item.id}" class="hidden w-full mt-2 p-2 rounded-lg text-xs leading-relaxed"></div>
+        </div>
+      `).join('');
+    }
+
+    const audioAct2Data = [
+      { id: 'a', statement: "a. Nathan habite avec sa mère.", answer: "Vrai", feedback: "Vrai : Nathan déclare « Je vis avec ma mère et son nouveau compagnon. »" },
+      { id: 'b', statement: "b. Nathan se dispute souvent avec Joël.", answer: "Faux", feedback: "Faux : Nathan dit au contraire « On s'aime bien et on s'amuse bien ! »" },
+      { id: 'c', statement: "c. Nathan s'entend bien avec Yasmine.", answer: "Vrai", feedback: "Vrai : Il déclare « J'adore ma quasi-sœur, Yasmine [...] elle est très sympa. »" },
+      { id: 'd', statement: "d. Les parents d'Alexia ont divorcé.", answer: "Vrai", feedback: "Vrai : Alexia dit « L'année dernière, mes parents ont divorcé. »" },
+      { id: 'e', statement: "e. Alexia ne s'entend pas avec la nouvelle famille de son père.", answer: "Faux", feedback: "Faux : Alexia dit « On a de bonnes relations et on se respecte. »" },
+      { id: 'f', statement: "f. Pablo joue beaucoup avec sa petite sœur.", answer: "Faux", feedback: "Faux : Pablo précise « je n'ai pas d'affinités avec elle, elle est petite ! »" }
+    ];
+
+    function renderAudioAct2() {
+      const container = document.getElementById('container-audio-act2');
+      container.innerHTML = audioAct2Data.map(item => `
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-3" id="audio-act2-card-${item.id}">
+          <p class="font-medium text-slate-800 text-sm sm:text-base">${item.statement}</p>
+          <div class="flex items-center gap-2 shrink-0">
+            <label class="px-3.5 py-1.5 rounded-lg border bg-white hover:bg-emerald-50 cursor-pointer text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-colors">
+              <input type="radio" name="audio_act2_${item.id}" value="Vrai" class="text-emerald-600">
+              <span>Vrai</span>
+            </label>
+            <label class="px-3.5 py-1.5 rounded-lg border bg-white hover:bg-rose-50 cursor-pointer text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-colors">
+              <input type="radio" name="audio_act2_${item.id}" value="Faux" class="text-rose-600">
+              <span>Faux</span>
+            </label>
+          </div>
+          <div id="audio-act2-fb-${item.id}" class="hidden w-full mt-2 p-2 rounded-lg text-xs leading-relaxed"></div>
+        </div>
+      `).join('');
+    }
+
+    function unlockTranscript() {
+      if (audioVerified) return;
+      audioVerified = true;
+      const btn = document.getElementById('btn-toggle-transcript');
+      const icon = document.getElementById('icon-transcript-lock');
+      const status = document.getElementById('transcript-status');
+
+      btn.disabled = false;
+      btn.className = "bg-oif-blue hover:bg-blue-700 text-white font-bold text-xs px-3.5 py-2 rounded-lg transition-all flex items-center gap-2 shadow-sm cursor-pointer";
+      icon.className = "fa-solid fa-lock-open text-oif-yellow";
+      status.textContent = "Débloquée ! Cliquez sur le bouton pour l'afficher.";
+      status.className = "text-[11px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-md";
+    }
+
+    function toggleTranscript() {
+      const box = document.getElementById('transcript-box');
+      const btn = document.getElementById('btn-toggle-transcript');
+      if (box.classList.contains('hidden')) {
+        box.classList.remove('hidden');
+        btn.innerHTML = '<i class="fa-solid fa-eye-slash"></i> <span>Masquer la transcription</span>';
+      } else {
+        box.classList.add('hidden');
+        btn.innerHTML = '<i class="fa-solid fa-file-lines"></i> <span>Consulter la transcription</span>';
+      }
+    }
+
+    function checkAudioAct1() {
+      let score = 0;
+      audioAct1Data.forEach(item => {
+        const selected = document.querySelector(`input[name="audio_act1_${item.id}"]:checked`);
+        const card = document.getElementById(`audio-act1-card-${item.id}`);
+        const fb = document.getElementById(`audio-act1-fb-${item.id}`);
+        fb.classList.remove('hidden');
+
+        if (selected && selected.value === item.answer) {
+          score++;
+          card.className = "p-4 rounded-xl border border-emerald-300 bg-emerald-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-3";
+          fb.className = "w-full mt-2 p-2 rounded-lg text-xs bg-emerald-100 text-emerald-900 border border-emerald-200";
+          fb.innerHTML = `<strong><i class="fa-solid fa-check mr-1"></i> Exact !</strong> ${item.feedback}`;
+        } else {
+          card.className = "p-4 rounded-xl border border-rose-300 bg-rose-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-3";
+          fb.className = "w-full mt-2 p-2 rounded-lg text-xs bg-rose-100 text-rose-900 border border-rose-200";
+          fb.innerHTML = `<strong><i class="fa-solid fa-xmark mr-1"></i> Erreur.</strong> Réponse attendue : <strong class="text-emerald-800 underline">${item.answer}</strong>. ${item.feedback}`;
+        }
+      });
+
+      scores.audioAct1 = score;
+      document.getElementById('score-audio-act1').textContent = `Score : ${score}/6`;
+      unlockTranscript();
+      updateTotals();
+      showToast("Activité 1 vérifiée", `Vous avez obtenu ${score}/6. La transcription est maintenant accessible.`);
+    }
+
+    function checkAudioAct2() {
+      let score = 0;
+      audioAct2Data.forEach(item => {
+        const selected = document.querySelector(`input[name="audio_act2_${item.id}"]:checked`);
+        const card = document.getElementById(`audio-act2-card-${item.id}`);
+        const fb = document.getElementById(`audio-act2-fb-${item.id}`);
+        fb.classList.remove('hidden');
+
+        if (selected && selected.value === item.answer) {
+          score++;
+          card.className = "p-4 rounded-xl border border-emerald-300 bg-emerald-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-3";
+          fb.className = "w-full mt-2 p-2 rounded-lg text-xs bg-emerald-100 text-emerald-900 border border-emerald-200";
+          fb.innerHTML = `<strong><i class="fa-solid fa-check mr-1"></i> Bravo !</strong> ${item.feedback}`;
+        } else {
+          card.className = "p-4 rounded-xl border border-rose-300 bg-rose-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-3";
+          fb.className = "w-full mt-2 p-2 rounded-lg text-xs bg-rose-100 text-rose-900 border border-rose-200";
+          fb.innerHTML = `<strong><i class="fa-solid fa-xmark mr-1"></i> Erreur.</strong> Réponse : <strong class="text-emerald-800 underline">${item.answer}</strong>. ${item.feedback}`;
+        }
+      });
+
+      scores.audioAct2 = score;
+      document.getElementById('score-audio-act2').textContent = `Score : ${score}/6`;
+      unlockTranscript();
+      updateTotals();
+      showToast("Activité 2 vérifiée", `Vous avez obtenu ${score}/6. La transcription est débloquée.`);
+    }
+
+    // --- GESTION DES SCORES GLOBAUX ---
+    function updateTotals() {
+      const totalLexique = scores.lexiqueAssoc + scores.lexiqueContext; // max 20
+      const totalAudio = scores.audioAct1 + scores.audioAct2; // max 12
+      const grandTotal = totalLexique + totalAudio; // max 32
+      const percentage = Math.round((grandTotal / 32) * 100);
+
+      document.getElementById('total-score-lexique').textContent = `Score total : ${totalLexique} / 20`;
+      document.getElementById('badge-tab-lexique').textContent = `${totalLexique}/20`;
+
+      document.getElementById('total-score-audio').textContent = `Score total : ${totalAudio} / 12`;
+      document.getElementById('badge-tab-audio').textContent = `${totalAudio}/12`;
+
+      document.getElementById('globalScoreText').textContent = `${grandTotal} / 32 réussites`;
       document.getElementById('globalPercentText').textContent = `${percentage}%`;
     }
 
     function openExportModal() {
-      const grandTotal = scores.lexiqueAssoc + scores.lexiqueContext;
-      const percent = Math.round((grandTotal / 20) * 100);
+      const totalLexique = scores.lexiqueAssoc + scores.lexiqueContext;
+      const totalAudio = scores.audioAct1 + scores.audioAct2;
+      const grandTotal = totalLexique + totalAudio;
+      const percent = Math.round((grandTotal / 32) * 100);
 
-      document.getElementById('modalScoreDisplay').textContent = `${grandTotal} / 20 (${percent}%)`;
+      document.getElementById('modalScoreDisplay').textContent = `${grandTotal} / 32 (${percent}%)`;
       document.getElementById('modalScoreLexiqueAssoc').textContent = `${scores.lexiqueAssoc}/10`;
       document.getElementById('modalScoreLexiqueContext').textContent = `${scores.lexiqueContext}/10`;
+      document.getElementById('modalScoreAudioAct1').textContent = `${scores.audioAct1}/6`;
+      document.getElementById('modalScoreAudioAct2').textContent = `${scores.audioAct2}/6`;
 
       document.getElementById('exportModal').classList.remove('hidden');
     }
@@ -476,17 +809,22 @@
       const group = document.getElementById('studentGroup').value.trim() || 'Non spécifié';
       const teacher = document.getElementById('teacherEmail').value.trim() || '';
       const dateStr = new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
-      const grandTotal = scores.lexiqueAssoc + scores.lexiqueContext;
-      const percent = Math.round((grandTotal / 20) * 100);
-      return { name, group, teacher, dateStr, grandTotal, percent };
+
+      const totalLexique = scores.lexiqueAssoc + scores.lexiqueContext;
+      const totalAudio = scores.audioAct1 + scores.audioAct2;
+      const grandTotal = totalLexique + totalAudio;
+      const percent = Math.round((grandTotal / 32) * 100);
+
+      return { name, group, teacher, dateStr, totalLexique, totalAudio, grandTotal, percent };
     }
 
     function exportToPDF() {
       const data = prepareReportData();
+
       document.getElementById('printStudentName').textContent = data.name;
       document.getElementById('printStudentGroup').textContent = data.group;
       document.getElementById('printDate').textContent = data.dateStr;
-      document.getElementById('printGrandTotal').textContent = `${data.grandTotal} / 20 (${data.percent}%)`;
+      document.getElementById('printGrandTotal').textContent = `${data.grandTotal} / 32 (${data.percent}%)`;
 
       let mention = "Validation réussie - Félicitations !";
       if (data.percent < 50) mention = "Module à consolider";
@@ -495,24 +833,34 @@
 
       const tbody = document.getElementById('printScoresTableBody');
       tbody.innerHTML = `
-        <tr><td style="padding:5px;border:1px solid #cbd5e1;">Association Mots & Définitions</td><td style="padding:5px;border:1px solid #cbd5e1;text-align:center;">${scores.lexiqueAssoc}/10</td></tr>
-        <tr><td style="padding:5px;border:1px solid #cbd5e1;">Vocabulaire en contexte</td><td style="padding:5px;border:1px solid #cbd5e1;text-align:center;">${scores.lexiqueContext}/10</td></tr>
+        <tr><td style="padding:5px;border:1px solid #cbd5e1;">Lexique Famille</td><td style="padding:5px;border:1px solid #cbd5e1;">Association Mots & Définitions</td><td style="padding:5px;border:1px solid #cbd5e1;text-align:center;">${scores.lexiqueAssoc}/10</td></tr>
+        <tr><td style="padding:5px;border:1px solid #cbd5e1;">Lexique Famille</td><td style="padding:5px;border:1px solid #cbd5e1;">Vocabulaire en contexte</td><td style="padding:5px;border:1px solid #cbd5e1;text-align:center;">${scores.lexiqueContext}/10</td></tr>
+        <tr style="background:#f8fafc;font-weight:bold;"><td colspan="2" style="padding:5px;border:1px solid #cbd5e1;">Sous-total Lexique</td><td style="padding:5px;border:1px solid #cbd5e1;text-align:center;">${data.totalLexique}/20</td></tr>
+        <tr><td style="padding:5px;border:1px solid #cbd5e1;">Laboratoire Audio</td><td style="padding:5px;border:1px solid #cbd5e1;">Activité 1 : Identification du personnage</td><td style="padding:5px;border:1px solid #cbd5e1;text-align:center;">${scores.audioAct1}/6</td></tr>
+        <tr><td style="padding:5px;border:1px solid #cbd5e1;">Laboratoire Audio</td><td style="padding:5px;border:1px solid #cbd5e1;">Activité 2 : Vrai ou Faux</td><td style="padding:5px;border:1px solid #cbd5e1;text-align:center;">${scores.audioAct2}/6</td></tr>
+        <tr style="background:#f8fafc;font-weight:bold;"><td colspan="2" style="padding:5px;border:1px solid #cbd5e1;">Sous-total Audio</td><td style="padding:5px;border:1px solid #cbd5e1;text-align:center;">${data.totalAudio}/12</td></tr>
       `;
+
       closeExportModal();
       window.print();
     }
 
     function copyResultsText() {
       const data = prepareReportData();
-      const reportText = `[BILAN FLE A2 - LEXIQUE DE LA FAMILLE]
+      const reportText = `[BILAN FLE A2 - LEXIQUE DE LA FAMILLE & AUDIO]
 Étudiant(e) : ${data.name}
 Groupe / Classe : ${data.group}
 Date : ${data.dateStr}
 --------------------------------------------------
-SCORE TOTAL : ${data.grandTotal} / 20 (${data.percent}%)
+SCORE TOTAL : ${data.grandTotal} / 32 (${data.percent}%)
 --------------------------------------------------
-• Association définitions : ${scores.lexiqueAssoc}/10
-• Vocabulaire en contexte : ${scores.lexiqueContext}/10
+1. LEXIQUE DE LA FAMILLE : ${data.totalLexique} / 20
+   • Association définitions : ${scores.lexiqueAssoc}/10
+   • Vocabulaire en contexte : ${scores.lexiqueContext}/10
+
+2. LABORATOIRE AUDIO : ${data.totalAudio} / 12
+   • Activité 1 (Personnages) : ${scores.audioAct1}/6
+   • Activité 2 (Vrai / Faux) : ${scores.audioAct2}/6
 --------------------------------------------------
 Inspire 2 • Hachette FLE`;
 
@@ -534,17 +882,18 @@ Inspire 2 • Hachette FLE`;
 
     function sendViaEmail() {
       const data = prepareReportData();
-      const subject = encodeURIComponent(`Bilan FLE A2 Lexique - ${data.name} (${data.group})`);
+      const subject = encodeURIComponent(`Bilan FLE A2 Lexique & Audio - ${data.name} (${data.group})`);
       const body = encodeURIComponent(`Bonjour,
 
-Voici mon bilan pour le module sur le Lexique de la famille (Inspire 2, p. 26-27) :
+Voici mon bilan pour le module Lexique de la famille & Laboratoire Audio (Inspire 2, p. 26-27) :
 Nom : ${data.name}
 Groupe : ${data.group}
 Date : ${data.dateStr}
 
-SCORE LEXIQUE : ${data.grandTotal} / 20 (${data.percent}%)
-- Association : ${scores.lexiqueAssoc}/10
-- En contexte : ${scores.lexiqueContext}/10
+SCORE GLOBAL : ${data.grandTotal} / 32 (${data.percent}%)
+- Lexique (Assoc & Contexte) : ${data.totalLexique}/20
+- Audio Activité 1 : ${scores.audioAct1}/6
+- Audio Activité 2 : ${scores.audioAct2}/6
 
 Cordialement,
 ${data.name}`);
@@ -555,6 +904,8 @@ ${data.name}`);
     window.onload = function() {
       renderLexiqueAssoc();
       renderLexiqueContext();
+      renderAudioAct1();
+      renderAudioAct2();
       updateTotals();
     };
   </script>
