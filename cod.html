@@ -47,24 +47,36 @@
   <header class="bg-oif-navy text-white shadow-md border-b-4 border-oif-yellow sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col sm:flex-row justify-between items-center py-3 sm:py-4 gap-3">
-        <div class="flex items-center space-x-3 text-center sm:text-left">
-          <div class="flex items-center space-x-1">
-            <span class="w-3.5 h-3.5 rounded-full bg-[#0072CE] inline-block shadow-sm"></span>
-            <span class="w-3.5 h-3.5 rounded-full bg-[#009639] inline-block shadow-sm"></span>
-            <span class="w-3.5 h-3.5 rounded-full bg-[#FFD100] inline-block shadow-sm"></span>
-            <span class="w-3.5 h-3.5 rounded-full bg-[#DA291C] inline-block shadow-sm"></span>
-            <span class="w-3.5 h-3.5 rounded-full bg-[#782F40] inline-block shadow-sm"></span>
-          </div>
-          <div>
-            <h1 class="text-xl sm:text-2xl font-black tracking-tight flex items-center gap-2">
-              <span>Français Langue Étrangère</span>
-              <span class="text-xs bg-oif-blue px-2 py-0.5 rounded-full font-bold uppercase tracking-wider text-white">Niveau A2</span>
-            </h1>
-            <p class="text-xs sm:text-sm text-slate-300">Inspire 2 (Unité 2, p. 26-27) • Leçon 5 : Les Pronoms COD</p>
+        
+        <!-- 1. GAUCHE : Bouton Retour au sommaire + Titres -->
+        <div class="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left w-full sm:w-auto">
+          <!-- Bouton placé à l'extrême gauche -->
+          <a href="index.html" class="inline-flex items-center gap-2 px-3.5 py-2.5 bg-white/10 hover:bg-white/20 active:scale-95 text-white border border-white/20 rounded-xl font-bold text-xs sm:text-sm transition shadow-sm shrink-0 self-start sm:self-auto">
+            <i class="fa-solid fa-arrow-left text-oif-yellow"></i>
+            <span>Retour au sommaire</span>
+          </a>
+
+          <!-- Anneaux emblématiques et Titre -->
+          <div class="flex items-center space-x-3">
+            <div class="flex items-center space-x-1 shrink-0">
+              <span class="w-3.5 h-3.5 rounded-full bg-[#0072CE] inline-block shadow-sm"></span>
+              <span class="w-3.5 h-3.5 rounded-full bg-[#009639] inline-block shadow-sm"></span>
+              <span class="w-3.5 h-3.5 rounded-full bg-[#FFD100] inline-block shadow-sm"></span>
+              <span class="w-3.5 h-3.5 rounded-full bg-[#DA291C] inline-block shadow-sm"></span>
+              <span class="w-3.5 h-3.5 rounded-full bg-[#782F40] inline-block shadow-sm"></span>
+            </div>
+            <div>
+              <h1 class="text-xl sm:text-2xl font-black tracking-tight flex items-center gap-2">
+                <span>Français Langue Étrangère</span>
+                <span class="text-xs bg-oif-blue px-2 py-0.5 rounded-full font-bold uppercase tracking-wider text-white">Niveau A2</span>
+              </h1>
+              <p class="text-xs sm:text-sm text-slate-300">Inspire 2 (Unité 2, p. 26-27) • Leçon 5 : Les Pronoms COD</p>
+            </div>
           </div>
         </div>
 
-        <div class="flex flex-wrap items-center justify-center sm:justify-end gap-2 sm:gap-3">
+        <!-- 2. DROITE : Progression globale et bouton d'exportation -->
+        <div class="flex flex-wrap items-center justify-center sm:justify-end gap-2 sm:gap-3 shrink-0">
           <div class="flex items-center gap-2 sm:gap-3 bg-white/10 px-3 py-1.5 rounded-xl border border-white/10 text-xs sm:text-sm">
             <div class="text-right">
               <span class="text-slate-300 block text-[11px] uppercase font-semibold">Progression COD</span>
@@ -74,16 +86,13 @@
               0%
             </div>
           </div>
-            <a href="index.html" class="bg-white/10 hover:bg-white/20 active:scale-95 text-white font-bold text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border border-white/20 transition-all flex items-center gap-2 shadow-sm">
-              <i class="fa-solid fa-arrow-left text-oif-yellow"></i>
-              <span>Retour au sommaire</span>
-            </a>
-          
+
           <button onclick="openExportModal()" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-black text-xs sm:text-sm px-3.5 py-2.5 rounded-xl shadow-lg transition-all flex items-center gap-2 border border-amber-200 transform active:scale-95">
             <i class="fa-solid fa-file-export text-slate-900"></i>
             <span>Exporter mon bilan</span>
           </button>
         </div>
+
       </div>
     </div>
   </header>
