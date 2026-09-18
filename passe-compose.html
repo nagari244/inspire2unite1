@@ -1299,20 +1299,20 @@
     // --- SECTION 3 : LOGIQUE EXERCICES AUXILIAIRE ÊTRE OU AVOIR ---
     const epfEx1Data = [
       { id: 1, sentence: "Hier, j' (marcher) _______ pendant des heures.", expected: "ai marché", accepted: ["ai marché", "ai marche"], aux: "avoir" },
-      { id: 2, sentence: "Tu (manger) _______ quelque chose ce midi ?", expected: "as mangé", accepted: ["as mangé", "as mange"], aux: "avoir" },
-      { id: 3, sentence: "Hier soir, ils (aller) _______ au restaurant.", expected: "sont allés", accepted: ["sont allés", "sont alles"], aux: "être" },
+      { id: 2, sentence: "Tu (manger) _______ quelque chose ce midi ?", expected: "as mangé", accepted: ["as mangé"], aux: "avoir" },
+      { id: 3, sentence: "Hier soir, ils (aller) _______ au restaurant.", expected: "sont allés", accepted: ["sont allés"], aux: "être" },
       { id: 4, sentence: "Elle n' (pas répondre) _______ à mon message.", expected: "a pas répondu", accepted: ["a pas répondu", "a pas repondu", "n'a pas répondu"], aux: "avoir" },
-      { id: 5, sentence: "Ils ne (pas encore arriver) _______.", expected: "sont pas encore arrivés", accepted: ["sont pas encore arrivés", "sont pas encore arrives"], aux: "être" },
+      { id: 5, sentence: "Ils ne (pas encore arriver) _______.", expected: "sont pas encore arrivés", accepted: ["sont pas encore arrivés"], aux: "être" },
       { id: 6, sentence: "Vous (sortir) _______ samedi soir ?", expected: "êtes sortis", accepted: ["êtes sortis", "etes sortis", "êtes sorti", "êtes sortie", "êtes sorties"], aux: "être" },
-      { id: 7, sentence: "Ma sœur (naître) _______ le 15 octobre.", expected: "est née", accepted: ["est née", "est nee"], aux: "être" },
+      { id: 7, sentence: "Ma sœur (naître) _______ le 15 octobre.", expected: "est née", accepted: ["est née"], aux: "être" },
       { id: 8, sentence: "Elles (rester) _______ finalement à la maison.", expected: "sont restées", accepted: ["sont restées", "sont restees"], aux: "être" },
       { id: 9, sentence: "Pierre (descendre) _______ avec toutes nos valises.", expected: "est descendu", accepted: ["est descendu"], aux: "être" },
       { id: 10, sentence: "Hier, il (pleuvoir) _______ toute la journée.", expected: "a plu", accepted: ["a plu"], aux: "avoir" },
       { id: 11, sentence: "Qu'est-ce que tu (faire) _______ pendant le weekend ?", expected: "as fait", accepted: ["as fait"], aux: "avoir" },
       { id: 12, sentence: "Nous (boire) _______ trop de café ce matin.", expected: "avons bu", accepted: ["avons bu"], aux: "avoir" },
-      { id: 13, sentence: "En quelle année Édith Piaf (mourir) __________ ?", expected: "est", extra: "morte", accepted: ["est"], aux: "être" },
-      { id: 14, sentence: "Ces gosses (devenir) _______ insupportables !", expected: "sont devenus", accepted: ["sont devenus"], aux: "être" },
-      { id: 15, sentence: "Je n' (pas prendre) _______ un jour de congé.", expected: "ai pas pris", accepted: ["ai pas pris", "n'ai pas pris"], aux: "avoir" }
+      { id: 13, sentence: "En quelle année Édith Piaf (mourir) __________ ?", expected: "est morte", accepted: ["est morte"], aux: "être" },
+      { id: 14, sentence: "Ces garçons (devenir) _______ insupportables !", expected: "sont devenus", accepted: ["sont devenus"], aux: "être" },
+      { id: 15, sentence: "Je n' (pas prendre) _______ le train.", expected: "ai pas pris", accepted: ["ai pas pris", "n'ai pas pris"], aux: "avoir" }
     ];
 
     function renderEPFEx1() {
