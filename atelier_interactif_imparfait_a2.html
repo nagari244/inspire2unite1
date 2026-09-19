@@ -1,1493 +1,1262 @@
 <!DOCTYPE html>
-<html lang="fr" class="h-full">
+<html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Inspire 2 • L'Imparfait (Niveau A2) - Activités Interactives</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts: Inter & Outfit -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            display: ['Outfit', 'sans-serif']
-          },
-          colors: {
-            /* Palette solide inspirée directement du manuel Inspire 2 */
-            inspire: {
-              green: '#279362',        /* Vert dynamique des bandeaux titres */
-              greenDark: '#1a6844',    /* Vert profond pour accents & textes */
-              greenLight: '#eaf5ef',   /* Fond vert pastel très doux */
-              greenBorder: '#a9dcbe',  /* Bordures des encadrés d'activités */
-              red: '#cb3535',          /* Rouge accent pour 'Ma famille' et alertes */
-              redLight: '#faecec',     /* Fond rosé d'alerte ou exception */
-              slate: '#1e293b',        /* Texte principal haute lisibilité */
-              cream: '#f8faf9',        /* Fond d'application doux */
-              card: '#ffffff'          /* Cartes blanches contrastées */
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atelier Interactif : L'Imparfait (Niveau A2) - Inspire 2</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        inspireGreen: '#279362',
+                        inspireDarkGreen: '#1a6844',
+                        inspireLightGreen: '#eaf5ef',
+                        inspireRed: '#cb3535',
+                        inspireDark: '#1e293b',
+                        inspireBg: '#f8faf9',
+                    }
+                }
             }
-          }
         }
-      }
-    }
-  </script>
-
-  <style>
-    /* Empêche le zoom indésirable sur iOS Safari lors du focus des champs */
-    input[type="text"], select, textarea {
-      font-size: 16px !important;
-    }
-    @media (min-width: 640px) {
-      input[type="text"], select, textarea {
-        font-size: 0.875rem !important; /* 14px sur tablette/ordinateur */
-      }
-    }
-    
-    /* Touch target minimal 44px sur mobile */
-    .touch-btn {
-      min-height: 44px;
-      min-width: 44px;
-      touch-action: manipulation;
-    }
-
-    /* Scrollbars douces pour navigation horizontale sur mobile */
-    .scrollbar-hide::-webkit-scrollbar { display: none; }
-    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-  </style>
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #f8faf9;
+            color: #1e293b;
+        }
+        /* Mobile touch optimization */
+        .touch-btn {
+            min-height: 44px;
+            min-width: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        input, select, textarea {
+            font-size: 16px !important; /* Prevents auto-zoom on iOS */
+        }
+        .tab-btn.active {
+            background-color: #279362;
+            color: #ffffff;
+            border-color: #279362;
+            font-weight: 700;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
 </head>
-<body class="bg-inspire-cream text-inspire-slate font-sans min-h-full flex flex-col antialiased">
+<body class="min-h-screen flex flex-col selection:bg-emerald-100 selection:text-inspireDarkGreen">
 
-  <header class="bg-inspire-green text-white shadow-md sticky top-0 z-50">
-    <div class="max-w-5xl mx-auto px-3.5 sm:px-6 pt-3.5 pb-2.5">
-      <!-- Barre utilitaire : Bouton Retour au sommaire -->
-      <div class="flex items-center justify-between pb-2 mb-2 border-b border-white/20">
-        <a href="index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-inspire-greenDark/80 hover:bg-inspire-greenDark active:scale-95 text-white text-xs sm:text-sm font-bold border border-white/30 shadow-sm transition touch-btn" title="Retourner au sommaire principal">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-          <span>Retour au sommaire</span>
-        </a>
-        <span class="text-[11px] font-medium text-white/80 hidden sm:inline">Module A2 • L'imparfait</span>
-      </div>
-
-      <div class="flex items-center justify-between gap-2">
-        
-        <!-- Badge Unité 2 & Titre -->
-        <div class="flex items-center gap-2.5">
-          <div class="bg-white text-inspire-green font-extrabold font-display px-2.5 py-1 rounded-md text-sm sm:text-base tracking-wider uppercase shadow-sm shrink-0">
-            UNITÉ 2
-          </div>
-          <div>
-            <div class="flex items-center gap-1.5 flex-wrap">
-              <span class="bg-inspire-greenDark text-white text-[11px] font-bold px-2 py-0.5 rounded tracking-wide uppercase">
-                BILAN • A2
-              </span>
-              <span class="text-xs text-white/90 hidden sm:inline">Inspire 2 Méthode de français</span>
+    <!-- En-tête supérieur avec bouton Retour au sommaire -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="h-2 w-full flex">
+            <div class="w-1/4 bg-[#005FA3]"></div>
+            <div class="w-1/4 bg-inspireGreen"></div>
+            <div class="w-1/4 bg-[#FFC800]"></div>
+            <div class="w-1/4 bg-inspireRed"></div>
+        </div>
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div class="flex items-center gap-3 w-full sm:w-auto">
+                <a href="index.html" class="touch-btn px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold text-xs sm:text-sm border border-slate-300 transition-all flex items-center gap-2 flex-shrink-0" title="Retourner au menu principal">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    <span>Sommaire</span>
+                </a>
+                <div class="min-w-0">
+                    <span class="inline-block text-[10px] sm:text-xs font-bold tracking-wider uppercase text-inspireDarkGreen bg-inspireLightGreen px-2.5 py-0.5 rounded-full border border-emerald-200">
+                        Inspire 2 • Unité 2 • Bilan A2
+                    </span>
+                    <h1 class="text-base sm:text-xl md:text-2xl font-black text-slate-900 leading-tight truncate">
+                        11. Décrire le passé : L'imparfait
+                    </h1>
+                </div>
             </div>
-            <h1 class="text-lg sm:text-2xl font-bold font-display tracking-tight text-white mt-0.5 leading-tight">
-              Décrire le passé : l'imparfait
-            </h1>
-          </div>
-        </div>
-
-        <!-- Vitesse audio compacte pour mobile -->
-        <div class="flex items-center bg-inspire-greenDark/80 rounded-lg px-2 py-1.5 border border-white/25 shrink-0 text-xs">
-          <span class="hidden sm:inline mr-1.5 font-medium text-white/90">Vitesse :</span>
-          <span class="sm:hidden mr-1">⚡</span>
-          <select id="audioRateSelect" class="bg-white text-inspire-greenDark rounded font-bold px-1.5 py-0.5 text-xs outline-none cursor-pointer">
-            <option value="0.8">0.8x</option>
-            <option value="1.0" selected>1.0x</option>
-            <option value="1.15">1.15x</option>
-          </select>
-        </div>
-      </div>
-
-      <nav class="flex space-x-1.5 mt-3 overflow-x-auto pb-1 scrollbar-hide text-xs sm:text-sm font-semibold border-t border-white/20 pt-2.5" aria-label="Navigation des activités">
-        <button onclick="switchTab('tab1')" id="tabBtn-tab1" class="tab-btn touch-btn px-3 py-2 rounded-lg transition flex items-center gap-1.5 whitespace-nowrap bg-white text-inspire-greenDark shadow-sm font-bold">
-          <span class="w-5 h-5 rounded bg-inspire-greenLight text-inspire-greenDark flex items-center justify-center text-xs font-bold">1</span>
-          Formation
-        </button>
-        <button onclick="switchTab('tab2')" id="tabBtn-tab2" class="tab-btn touch-btn px-3 py-2 rounded-lg transition flex items-center gap-1.5 whitespace-nowrap text-white/90 hover:bg-white/15">
-          <span class="w-5 h-5 rounded bg-white/20 text-white flex items-center justify-center text-xs font-bold">2</span>
-          FR / ES
-        </button>
-        <button onclick="switchTab('tab3')" id="tabBtn-tab3" class="tab-btn touch-btn px-3 py-2 rounded-lg transition flex items-center gap-1.5 whitespace-nowrap text-white/90 hover:bg-white/15">
-          <span class="w-5 h-5 rounded bg-white/20 text-white flex items-center justify-center text-xs font-bold">3</span>
-          Exercices
-        </button>
-        <button onclick="switchTab('tab4')" id="tabBtn-tab4" class="tab-btn touch-btn px-3 py-2 rounded-lg transition flex items-center gap-1.5 whitespace-nowrap text-white/90 hover:bg-white/15">
-          <span class="w-5 h-5 rounded bg-white/20 text-white flex items-center justify-center text-xs font-bold">4</span>
-          Immigration et Récit
-        </button>
-      </nav>
-    </div>
-  </header>
-
-  <main class="flex-grow max-w-5xl w-full mx-auto px-3.5 sm:px-6 py-5">
-    <!-- Toast flottant optimisé mobile -->
-    <div id="toastMessage" class="hidden fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:w-96 z-50 px-4 py-3 rounded-xl shadow-xl text-sm font-semibold flex items-center gap-2 border"></div>
-
-    <!-- ======================================================== -->
-    <!-- ONGLET 1 : FORMATION, CONJUGAISONS & PHONÉTIQUE [ɛ]      -->
-    <!-- ======================================================== -->
-    <section id="tab1" class="tab-content space-y-5">
-      
-      <!-- En-tête de section type Inspire 2 -->
-      <div class="bg-white rounded-xl p-4 sm:p-5 border-2 border-inspire-greenBorder shadow-sm">
-        <div class="flex items-center gap-2.5 mb-3">
-          <div class="w-8 h-8 rounded-lg bg-inspire-green text-white flex items-center justify-center font-bold text-base shrink-0">
-            A
-          </div>
-          <div>
-            <h2 class="text-base sm:text-xl font-bold font-display text-inspire-greenDark">
-              Formation de l'imparfait
-            </h2>
-            <p class="text-xs sm:text-sm text-slate-600">Règle unique pour tous les verbes (sauf <em>être</em>).</p>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-4 text-xs sm:text-sm">
-          <div class="bg-inspire-greenLight border border-inspire-greenBorder p-3 rounded-lg">
-            <span class="font-extrabold text-inspire-greenDark block text-[11px] uppercase tracking-wider">1. Base</span>
-            <p class="text-slate-800 mt-0.5">Présent avec <strong>NOUS</strong> :</p>
-            <p class="font-bold text-inspire-greenDark mt-0.5">nous <span class="underline">parl</span>ons</p>
-          </div>
-          <div class="bg-amber-50 border border-amber-200 p-3 rounded-lg">
-            <span class="font-extrabold text-amber-800 block text-[11px] uppercase tracking-wider">2. Radical</span>
-            <p class="text-slate-800 mt-0.5">On enlève <strong>-ONS</strong> :</p>
-            <p class="font-mono font-bold text-amber-900 mt-0.5 bg-white px-1.5 py-0.5 rounded inline-block border border-amber-300">parl-</p>
-          </div>
-          <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-lg">
-            <span class="font-extrabold text-emerald-800 block text-[11px] uppercase tracking-wider">3. Terminaisons</span>
-            <p class="text-slate-800 mt-0.5">Mêmes pour tous les verbes :</p>
-            <p class="font-mono font-bold text-emerald-800 mt-0.5 text-xs">-ais, -ais, -ait, -ions, -iez, -aient</p>
-          </div>
-        </div>
-
-        <!-- Exemples de verbes détaillés avec radical -->
-        <div class="mt-4 pt-4 border-t border-slate-200">
-          <h3 class="text-xs sm:text-sm font-bold text-inspire-greenDark uppercase tracking-wide mb-2 flex items-center gap-1.5">
-            <span>📋</span> Exemples de verbes que vous pouvez écouter dans la section suivante :
-          </h3>
-          <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 space-y-2 text-xs sm:text-sm">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
-              <div class="p-2 bg-white rounded border border-slate-200">
-                <span class="font-bold text-slate-900">Aller</span> ➔ nous <span class="text-inspire-greenDark font-bold">all</span>ons ➔ <code class="bg-slate-100 px-1 py-0.5 rounded font-bold text-inspire-greenDark">all-</code> <span class="text-slate-500">(radical)</span> + <span class="font-mono text-slate-700">-ais, -ais, -ait, -ions, -iez, -aient</span>
-              </div>
-              <div class="p-2 bg-white rounded border border-slate-200">
-                <span class="font-bold text-slate-900">Prendre</span> ➔ nous <span class="text-inspire-greenDark font-bold">pren</span>ons ➔ <code class="bg-slate-100 px-1 py-0.5 rounded font-bold text-inspire-greenDark">pren-</code> <span class="text-slate-500">(radical)</span> + <span class="font-mono text-slate-700">-ais, -ais, -ait, -ions, -iez, -aient</span>
-              </div>
-              <div class="p-2 bg-white rounded border border-slate-200">
-                <span class="font-bold text-slate-900">Lire</span> ➔ nous <span class="text-inspire-greenDark font-bold">lis</span>ons ➔ <code class="bg-slate-100 px-1 py-0.5 rounded font-bold text-inspire-greenDark">lis-</code> <span class="text-slate-500">(radical)</span> + <span class="font-mono text-slate-700">-ais, -ais, -ait, -ions, -iez, -aient</span>
-              </div>
-              <div class="p-2 bg-white rounded border border-slate-200">
-                <span class="font-bold text-slate-900">Connaître</span> ➔ nous <span class="text-inspire-greenDark font-bold">connaiss</span>ons ➔ <code class="bg-slate-100 px-1 py-0.5 rounded font-bold text-inspire-greenDark">connaiss-</code> <span class="text-slate-500">(radical)</span> + <span class="font-mono text-slate-700">-ais, -ais, -ait, -ions, -iez, -aient</span>
-              </div>
-              <div class="p-2 bg-white rounded border border-slate-200">
-                <span class="font-bold text-slate-900">Faire</span> ➔ nous <span class="text-inspire-greenDark font-bold">fais</span>ons ➔ <code class="bg-slate-100 px-1 py-0.5 rounded font-bold text-inspire-greenDark">fais-</code> <span class="text-slate-500">(radical)</span> + <span class="font-mono text-slate-700">-ais, -ais, -ait, -ions, -iez, -aient</span>
-              </div>
-              <div class="p-2 bg-white rounded border border-slate-200">
-                <span class="font-bold text-slate-900">Devoir</span> ➔ nous <span class="text-inspire-greenDark font-bold">dev</span>ons ➔ <code class="bg-slate-100 px-1 py-0.5 rounded font-bold text-inspire-greenDark">dev-</code> <span class="text-slate-500">(radical)</span> + <span class="font-mono text-slate-700">-ais, -ais, -ait, -ions, -iez, -aient</span>
-              </div>
-              <div class="p-2 bg-white rounded border border-slate-200">
-                <span class="font-bold text-slate-900">Savoir</span> ➔ nous <span class="text-inspire-greenDark font-bold">sav</span>ons ➔ <code class="bg-slate-100 px-1 py-0.5 rounded font-bold text-inspire-greenDark">sav-</code> <span class="text-slate-500">(radical)</span> + <span class="font-mono text-slate-700">-ais, -ais, -ait, -ions, -iez, -aient</span>
-              </div>
-              <div class="p-2 bg-white rounded border border-slate-200">
-                <span class="font-bold text-slate-900">Pouvoir</span> ➔ nous <span class="text-inspire-greenDark font-bold">pouv</span>ons ➔ <code class="bg-slate-100 px-1 py-0.5 rounded font-bold text-inspire-greenDark">pouv-</code> <span class="text-slate-500">(radical)</span> + <span class="font-mono text-slate-700">-ais, -ais, -ait, -ions, -iez, -aient</span>
-              </div>
-              <div class="p-2 bg-white rounded border border-slate-200">
-                <span class="font-bold text-slate-900">Finir</span> ➔ nous <span class="text-inspire-greenDark font-bold">finiss</span>ons ➔ <code class="bg-slate-100 px-1 py-0.5 rounded font-bold text-inspire-greenDark">finiss-</code> <span class="text-slate-500">(radical)</span> + <span class="font-mono text-slate-700">-ais, -ais, -ait, -ions, -iez, -aient</span>
-              </div>
-              <div class="p-2 bg-white rounded border border-slate-200">
-                <span class="font-bold text-slate-900">Choisir</span> ➔ nous <span class="text-inspire-greenDark font-bold">choisiss</span>ons ➔ <code class="bg-slate-100 px-1 py-0.5 rounded font-bold text-inspire-greenDark">choisiss-</code> <span class="text-slate-500">(radical)</span> + <span class="font-mono text-slate-700">-ais, -ais, -ait, -ions, -iez, -aient</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tableau synthétique mobile et bureau -->
-        <div class="overflow-x-auto rounded-lg border border-slate-200 mt-4">
-          <table class="w-full text-left text-xs sm:text-sm">
-            <thead class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
-              <tr>
-                <th class="py-2.5 px-3">Sujet</th>
-                <th class="py-2.5 px-3">Terminaison</th>
-                <th class="py-2.5 px-3">Exemple (Parler)</th>
-                <th class="py-2.5 px-3 text-right">Audio</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100 text-slate-800">
-              <tr>
-                <td class="py-2 px-3 font-semibold">Je / J'</td>
-                <td class="py-2 px-3 font-mono font-bold text-inspire-greenDark">-ais</td>
-                <td class="py-2 px-3">Je parl<strong class="text-inspire-greenDark">ais</strong></td>
-                <td class="py-2 px-3 text-right">
-                  <button onclick="speakFrench('Je parlais')" class="touch-btn px-2.5 py-1.5 bg-inspire-greenLight hover:bg-inspire-greenBorder text-inspire-greenDark rounded font-bold inline-flex items-center gap-1 text-xs">
-                    🔊 <span class="hidden sm:inline">Écouter</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td class="py-2 px-3 font-semibold">Tu</td>
-                <td class="py-2 px-3 font-mono font-bold text-inspire-greenDark">-ais</td>
-                <td class="py-2 px-3">Tu parl<strong class="text-inspire-greenDark">ais</strong></td>
-                <td class="py-2 px-3 text-right">
-                  <button onclick="speakFrench('Tu parlais')" class="touch-btn px-2.5 py-1.5 bg-inspire-greenLight hover:bg-inspire-greenBorder text-inspire-greenDark rounded font-bold inline-flex items-center gap-1 text-xs">
-                    🔊 <span class="hidden sm:inline">Écouter</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td class="py-2 px-3 font-semibold">Il / Elle / On</td>
-                <td class="py-2 px-3 font-mono font-bold text-inspire-greenDark">-ait</td>
-                <td class="py-2 px-3">Elle parl<strong class="text-inspire-greenDark">ait</strong></td>
-                <td class="py-2 px-3 text-right">
-                  <button onclick="speakFrench('Elle parlait')" class="touch-btn px-2.5 py-1.5 bg-inspire-greenLight hover:bg-inspire-greenBorder text-inspire-greenDark rounded font-bold inline-flex items-center gap-1 text-xs">
-                    🔊 <span class="hidden sm:inline">Écouter</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td class="py-2 px-3 font-semibold">Nous</td>
-                <td class="py-2 px-3 font-mono font-bold text-inspire-greenDark">-ions</td>
-                <td class="py-2 px-3">Nous parl<strong class="text-inspire-greenDark">ions</strong></td>
-                <td class="py-2 px-3 text-right">
-                  <button onclick="speakFrench('Nous parlions')" class="touch-btn px-2.5 py-1.5 bg-inspire-greenLight hover:bg-inspire-greenBorder text-inspire-greenDark rounded font-bold inline-flex items-center gap-1 text-xs">
-                    🔊 <span class="hidden sm:inline">Écouter</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td class="py-2 px-3 font-semibold">Vous</td>
-                <td class="py-2 px-3 font-mono font-bold text-inspire-greenDark">-iez</td>
-                <td class="py-2 px-3">Vous parl<strong class="text-inspire-greenDark">iez</strong></td>
-                <td class="py-2 px-3 text-right">
-                  <button onclick="speakFrench('Vous parliez')" class="touch-btn px-2.5 py-1.5 bg-inspire-greenLight hover:bg-inspire-greenBorder text-inspire-greenDark rounded font-bold inline-flex items-center gap-1 text-xs">
-                    🔊 <span class="hidden sm:inline">Écouter</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td class="py-2 px-3 font-semibold">Ils / Elles</td>
-                <td class="py-2 px-3 font-mono font-bold text-inspire-greenDark">-aient</td>
-                <td class="py-2 px-3">Ils parl<strong class="text-inspire-greenDark">aient</strong></td>
-                <td class="py-2 px-3 text-right">
-                  <button onclick="speakFrench('Ils parlaient')" class="touch-btn px-2.5 py-1.5 bg-inspire-greenLight hover:bg-inspire-greenBorder text-inspire-greenDark rounded font-bold inline-flex items-center gap-1 text-xs">
-                    🔊 <span class="hidden sm:inline">Écouter</span>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-xl p-4 sm:p-5 border-2 border-slate-200 shadow-sm">
-        <div class="flex items-center justify-between pb-3 border-b border-slate-200 mb-4 flex-wrap gap-2">
-          <div>
-            <h3 class="text-base sm:text-lg font-bold font-display text-inspire-slate">
-              Conjugaisons fondamentales (avec synthèse vocale)
-            </h3>
-            <p class="text-xs text-slate-500">Touchez l'icône 🔊 pour écouter la prononciation exacte de chaque forme.</p>
-          </div>
-          <span class="bg-inspire-redLight text-inspire-red text-xs font-bold px-2.5 py-1 rounded border border-inspire-red/20">
-            Être = seul radical irrégulier (<code class="font-bold">ét-</code>)
-          </span>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          
-          <!-- Verbe AVOIR -->
-          <div class="border-2 border-inspire-greenBorder rounded-lg p-3 bg-inspire-greenLight/40">
-            <div class="flex items-center justify-between pb-2 border-b border-inspire-greenBorder mb-2">
-              <span class="font-extrabold text-inspire-greenDark font-display text-sm sm:text-base">Avoir</span>
-              <button onclick="speakFrench('J\'avais, Tu avais, Elle avait, Nous avions, Vous aviez, Elles avaient')" class="touch-btn text-xs bg-inspire-green text-white px-2 py-1 rounded font-semibold hover:bg-inspire-greenDark transition">
-                Tout lire
-              </button>
-            </div>
-            <ul class="space-y-1.5 text-xs sm:text-sm">
-              <li class="flex items-center justify-between p-1 rounded hover:bg-white/80 transition">
-                <span>J'<strong class="text-inspire-greenDark font-bold">avais</strong></span>
-                <button onclick="speakFrench('J\'avais')" class="touch-btn px-2.5 py-1 bg-white border border-slate-200 rounded font-semibold text-inspire-greenDark hover:border-inspire-green">🔊</button>
-              </li>
-              <li class="flex items-center justify-between p-1 rounded hover:bg-white/80 transition">
-                <span>Tu <strong class="text-inspire-greenDark font-bold">avais</strong></span>
-                <button onclick="speakFrench('Tu avais')" class="touch-btn px-2.5 py-1 bg-white border border-slate-200 rounded font-semibold text-inspire-greenDark hover:border-inspire-green">🔊</button>
-              </li>
-              <li class="flex items-center justify-between p-1 rounded hover:bg-white/80 transition">
-                <span>Elle <strong class="text-inspire-greenDark font-bold">avait</strong></span>
-                <button onclick="speakFrench('Elle avait')" class="touch-btn px-2.5 py-1 bg-white border border-slate-200 rounded font-semibold text-inspire-greenDark hover:border-inspire-green">🔊</button>
-              </li>
-              <li class="flex items-center justify-between p-1 rounded hover:bg-white/80 transition">
-                <span>Nous <strong class="text-inspire-greenDark font-bold">avions</strong></span>
-                <button onclick="speakFrench('Nous avions')" class="touch-btn px-2.5 py-1 bg-white border border-slate-200 rounded font-semibold text-inspire-greenDark hover:border-inspire-green">🔊</button>
-              </li>
-              <li class="flex items-center justify-between p-1 rounded hover:bg-white/80 transition">
-                <span>Vous <strong class="text-inspire-greenDark font-bold">aviez</strong></span>
-                <button onclick="speakFrench('Vous aviez')" class="touch-btn px-2.5 py-1 bg-white border border-slate-200 rounded font-semibold text-inspire-greenDark hover:border-inspire-green">🔊</button>
-              </li>
-              <li class="flex items-center justify-between p-1 rounded hover:bg-white/80 transition">
-                <span>Elles <strong class="text-inspire-greenDark font-bold">avaient</strong></span>
-                <button onclick="speakFrench('Elles avaient')" class="touch-btn px-2.5 py-1 bg-white border border-slate-200 rounded font-semibold text-inspire-greenDark hover:border-inspire-green">🔊</button>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Verbe ÊTRE -->
-          <div class="border-2 border-inspire-red/30 rounded-lg p-3 bg-inspire-redLight/40">
-            <div class="flex items-center justify-between pb-2 border-b border-inspire-red/20 mb-2">
-              <span class="font-extrabold text-inspire-red font-display text-sm sm:text-base">Être <span class="text-[11px] font-normal text-slate-600">(ét-)</span></span>
-              <button onclick="speakFrench('J\'étais, Tu étais, Il était, Nous étions, Vous étiez, Ils étaient')" class="touch-btn text-xs bg-inspire-red text-white px-2 py-1 rounded font-semibold hover:bg-red-700 transition">
-                Tout lire
-              </button>
-            </div>
-            <ul class="space-y-1.5 text-xs sm:text-sm">
-              <li class="flex items-center justify-between p-1 rounded hover:bg-white/80 transition">
-                <span>J'<strong class="text-inspire-red font-bold">étais</strong></span>
-                <button onclick="speakFrench('J\'étais')" class="touch-btn px-2.5 py-1 bg-white border border-slate-200 rounded font-semibold text-inspire-red hover:border-inspire-red">🔊</button>
-              </li>
-              <li class="flex items-center justify-between p-1 rounded hover:bg-white/80 transition">
-                <span>Tu <strong class="text-inspire-red font-bold">étais</strong></span>
-                <button onclick="speakFrench('Tu étais')" class="touch-btn px-2.5 py-1 bg-white border border-slate-200 rounded font-semibold text-inspire-red hover:border-inspire-red">🔊</button>
-              </li>
-              <li class="flex items-center justify-between p-1 rounded hover:bg-white/80 transition">
-                <span>Il <strong class="text-inspire-red font-bold">était</strong></span>
-                <button onclick="speakFrench('Il était')" class="touch-btn px-2.5 py-1 bg-white border border-slate-200 rounded font-semibold text-inspire-red hover:border-inspire-red">🔊</button>
-              </li>
-              <li class="flex items-center justify-between p-1 rounded hover:bg-white/80 transition">
-                <span>Nous <strong class="text-inspire-red font-bold">étions</strong></span>
-                <button onclick="speakFrench('Nous étions')" class="touch-btn px-2.5 py-1 bg-white border border-slate-200 rounded font-semibold text-inspire-red hover:border-inspire-red">🔊</button>
-              </li>
-              <li class="flex items-center justify-between p-1 rounded hover:bg-white/80 transition">
-                <span>Vous <strong class="text-inspire-red font-bold">étiez</strong></span>
-                <button onclick="speakFrench('Vous étiez')" class="touch-btn px-2.5 py-1 bg-white border border-slate-200 rounded font-semibold text-inspire-red hover:border-inspire-red">🔊</button>
-              </li>
-              <li class="flex items-center justify-between p-1 rounded hover:bg-white/80 transition">
-                <span>Ils <strong class="text-inspire-red font-bold">étaient</strong></span>
-                <button onclick="speakFrench('Ils étaient')" class="touch-btn px-2.5 py-1 bg-white border border-slate-200 rounded font-semibold text-inspire-red hover:border-inspire-red">🔊</button>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Verbes essentiels (sélecteur tactile & réactif) -->
-          <div class="border-2 border-slate-200 rounded-lg p-3 bg-slate-50 md:col-span-2 lg:col-span-1">
-            <label for="verbSelector" class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1.5">
-              Explorer les 10 autres verbes :
-            </label>
-            <select id="verbSelector" onchange="displaySelectedVerb()" class="w-full bg-white border-2 border-inspire-greenBorder rounded-lg p-2 font-bold text-inspire-greenDark outline-none">
-              <option value="aller">Aller (nous allons)</option>
-              <option value="prendre">Prendre (nous prenons)</option>
-              <option value="lire">Lire (nous lisons)</option>
-              <option value="connaitre">Connaître (nous connaissons)</option>
-              <option value="faire">Faire (nous faisons)</option>
-              <option value="devoir">Devoir (nous devons)</option>
-              <option value="savoir">Savoir (nous savons)</option>
-              <option value="pouvoir">Pouvoir (nous pouvons)</option>
-              <option value="finir">Finir (nous finissons)</option>
-              <option value="choisir">Choisir (nous choisissons)</option>
-            </select>
-
-            <div id="dynamicVerbContainer" class="mt-2.5">
-              <!-- Rempli par JavaScript -->
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="bg-white rounded-xl p-4 sm:p-5 border-2 border-inspire-green shadow-sm">
-        <div class="flex items-start gap-3">
-          <div class="w-10 h-10 rounded-lg bg-inspire-green text-white flex items-center justify-center font-mono font-bold text-lg shrink-0">
-            [ɛ]
-          </div>
-          <div>
-            <h3 class="text-base sm:text-lg font-bold font-display text-inspire-greenDark">
-              Tableau Spécial : Phonétique et Piège Orthographique
-            </h3>
-            <p class="text-xs sm:text-sm text-slate-700 mt-1 leading-relaxed">
-              <strong>Vous avez compris ?</strong> Les terminaisons <span class="font-bold bg-inspire-greenLight text-inspire-greenDark px-1.5 py-0.5 rounded border border-inspire-greenBorder">-ais</span>, <span class="font-bold bg-inspire-greenLight text-inspire-greenDark px-1.5 py-0.5 rounded border border-inspire-greenBorder">-ais</span>, <span class="font-bold bg-inspire-greenLight text-inspire-greenDark px-1.5 py-0.5 rounded border border-inspire-greenBorder">-ait</span>, <span class="font-bold bg-inspire-greenLight text-inspire-greenDark px-1.5 py-0.5 rounded border border-inspire-greenBorder">-aient</span> se prononcent toutes les quatre <strong>[ɛ]</strong>.
-            </p>
-            <div class="mt-2.5 bg-inspire-greenLight p-3 rounded-lg border-l-4 border-inspire-green text-xs text-inspire-greenDark font-medium">
-              💡 <strong>Règle d'or :</strong> À l'oral, <em>je chantais</em>, <em>tu chantais</em>, <em>il chantait</em> et <em>ils chantaient</em> s'entendent exactement pareil. Pour écrire correctement, il est <strong>absolument indispensable de bien identifier le sujet</strong> !
-            </div>
-          </div>
-        </div>
-
-        <!-- Boutons d'écoute des 4 homophones avec synthèse vocale -->
-        <div class="mt-3.5 pt-3 border-t border-slate-200 flex flex-wrap items-center gap-2">
-          <span class="text-xs font-bold text-slate-600">Écoutez les homophones :</span>
-          <button onclick="speakFrench('je travaillais')" class="touch-btn px-2.5 py-1.5 bg-white border border-slate-300 rounded text-xs font-semibold text-slate-800 hover:border-inspire-green">
-            🔊 je travaill<strong class="text-inspire-greenDark">ais</strong> [ɛ]
-          </button>
-          <button onclick="speakFrench('tu travaillais')" class="touch-btn px-2.5 py-1.5 bg-white border border-slate-300 rounded text-xs font-semibold text-slate-800 hover:border-inspire-green">
-            🔊 tu travaill<strong class="text-inspire-greenDark">ais</strong> [ɛ]
-          </button>
-          <button onclick="speakFrench('elle travaillait')" class="touch-btn px-2.5 py-1.5 bg-white border border-slate-300 rounded text-xs font-semibold text-slate-800 hover:border-inspire-green">
-            🔊 elle travaill<strong class="text-inspire-greenDark">ait</strong> [ɛ]
-          </button>
-          <button onclick="speakFrench('elles travaillaient')" class="touch-btn px-2.5 py-1.5 bg-white border border-slate-300 rounded text-xs font-semibold text-slate-800 hover:border-inspire-green">
-            🔊 elles travaill<strong class="text-inspire-greenDark">aient</strong> [ɛ]
-          </button>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-xl p-4 sm:p-5 border-2 border-slate-200 shadow-sm">
-        <div class="flex items-center justify-between pb-3 border-b border-slate-200 flex-wrap gap-2">
-          <div>
-            <h3 class="text-base sm:text-lg font-bold font-display text-inspire-slate">
-              Activité de pratique : Écoutez et tapez le verbe à l'imparfait
-            </h3>
-            <p class="text-xs text-slate-500">Écoutez le verbe prononcé, identifiez le sujet, et écrivez la terminaison exacte (<span class="font-mono">-ais</span>, <span class="font-mono">-ait</span>, ou <span class="font-mono">-aient</span>).</p>
-          </div>
-          <span id="phoneticScoreBadge" class="bg-inspire-greenLight text-inspire-greenDark font-extrabold text-xs px-3 py-1.5 rounded-lg border border-inspire-greenBorder">
-            Score : 0 / 10
-          </span>
-        </div>
-
-        <div id="phoneticExercisesList" class="space-y-3 mt-4">
-          <!-- Inséré dynamiquement avec ergonomie responsive -->
-        </div>
-
-        <div class="mt-5 pt-3 border-t border-slate-200 flex flex-wrap gap-2.5 items-center justify-between">
-          <button onclick="checkPhoneticPractice()" class="touch-btn px-4 py-2 bg-inspire-green hover:bg-inspire-greenDark text-white rounded-lg font-bold text-xs sm:text-sm shadow-sm transition">
-            Vérifier mes 10 réponses
-          </button>
-          <button onclick="resetPhoneticPractice()" class="touch-btn px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg font-medium text-xs transition">
-            Réinitialiser
-          </button>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- ======================================================== -->
-    <!-- ONGLET 4 : IMMIGRATION ET RÉCITS DE VIE (INSPIRE 2)      -->
-    <!-- ======================================================== -->
-    <section id="tab4" class="tab-content hidden space-y-5">
-      
-      <!-- En-tête Culturel Solide -->
-      <div class="bg-inspire-green rounded-xl p-4 text-white shadow-sm">
-        <div class="flex items-center gap-2">
-          <span class="bg-white text-inspire-green text-xs font-extrabold px-2 py-0.5 rounded uppercase">DOC. 1 & 2</span>
-          <span class="text-xs font-semibold uppercase tracking-wider text-white/90">Mémoire & Société</span>
-        </div>
-        <h2 class="text-lg sm:text-xl font-bold font-display mt-1">
-          Un Français sur quatre est issu de l'immigration
-        </h2>
-        <p class="text-xs sm:text-sm text-white/90 mt-1 leading-relaxed">
-          À travers les documents d'<em>Inspire 2</em>, découvrez comment l'imparfait sert à raconter l'histoire d'une famille, les conditions de vie passées et les parcours de migration.
-        </p>
-      </div>
-
-      <div class="bg-white rounded-xl p-4 sm:p-5 border-2 border-slate-200 shadow-sm">
-        <div class="flex items-center justify-between pb-3 border-b border-slate-200 mb-3 flex-wrap gap-2">
-          <div class="flex items-center gap-2">
-            <span class="bg-inspire-greenDark text-white text-xs font-bold px-2 py-0.5 rounded uppercase">DOC. 2</span>
-            <h3 class="text-base sm:text-lg font-bold font-display text-slate-800">
-              « La photo d'enfance de Lucilia Campos »
-            </h3>
-          </div>
-          <button onclick="speakFrench(`Lucilia Campos se souvient de ses parents, immigrés portugais. C'étaient des gens modestes mais toujours élégants. C'était au début des années soixante. Ma mère travaillait comme employée de maison et mon père était maçon. Sur cette photo, ils posent pour un photographe ambulant qu'il y avait au Sacré-Cœur, à Paris. Il faisait beau. Nous n'avions pas d'appareil photo. Mon père avait vingt-huit ans et ma mère vingt-sept. Ils avaient toujours des vêtements élégants. Ils étaient beaux. Mon père était réservé. Ma mère était toujours souriante. Elle était très courageuse, elle avait beaucoup d'énergie. Ils ne parlaient pas encore bien français. Nous allions souvent visiter des monuments le week-end. J'adore cette photo. Moi, j'avais cinq ans : je n'étais pas avec eux ce jour-là.`)" class="touch-btn text-xs bg-inspire-green text-white px-3 py-1.5 rounded-lg font-bold flex items-center gap-1.5 hover:bg-inspire-greenDark transition">
-            🔊 Écouter l'article complet
-          </button>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 text-xs sm:text-sm">
-          <!-- Colonne texte témoignage -->
-          <div class="lg:col-span-7 bg-slate-50 p-4 rounded-lg border border-slate-200 space-y-2.5 text-slate-700 leading-relaxed">
-            <p class="font-semibold text-slate-900">
-              Lucilia Campos se souvient de ses parents, <strong>immigrés portugais</strong>. <em>C'<span class="text-inspire-greenDark font-bold">étaient</span> des gens modestes mais toujours élégants.</em>
-            </p>
-            <p>
-              « C'<span class="text-inspire-greenDark font-bold">était</span> au début des années 60. Ma mère <span class="text-inspire-greenDark font-bold">travaillait</span> comme employée de maison et mon père <span class="text-inspire-greenDark font-bold">était</span> maçon. Sur cette photo, ils posent pour un photographe ambulant qu'il y <span class="text-inspire-greenDark font-bold">avait</span> au Sacré-Cœur, à Paris. Il <span class="text-inspire-greenDark font-bold">faisait</span> beau. Nous n'<span class="text-inspire-greenDark font-bold">avions</span> pas d'appareil photo. Mon père <span class="text-inspire-greenDark font-bold">avait</span> 28 ans et ma mère 27. Ils <span class="text-inspire-greenDark font-bold">avaient</span> toujours des vêtements élégants. Ils <span class="text-inspire-greenDark font-bold">étaient</span> beaux.
-            </p>
-            <p>
-              Mon père <span class="text-inspire-greenDark font-bold">était</span> réservé. Ma mère <span class="text-inspire-greenDark font-bold">était</span> toujours souriante. Elle <span class="text-inspire-greenDark font-bold">était</span> très courageuse, elle <span class="text-inspire-greenDark font-bold">avait</span> beaucoup d'énergie. Ils ne <span class="text-inspire-greenDark font-bold">parlaient</span> pas encore bien français. Nous <span class="text-inspire-greenDark font-bold">allions</span> souvent visiter des monuments le week-end. J'adore cette photo. Moi, j'<span class="text-inspire-greenDark font-bold">avais</span> 5 ans : je n'<span class="text-inspire-greenDark font-bold">étais</span> pas avec eux ce jour-là. »
-            </p>
-          </div>
-
-          <!-- Colonne quiz document 1 -->
-          <div class="lg:col-span-5 space-y-3">
-            <h4 class="font-bold text-slate-900 text-xs sm:text-sm">Questions de compréhension :</h4>
             
-            <div class="space-y-2.5 text-xs" id="doc1Quiz">
-              <div class="p-2.5 bg-white rounded border border-slate-200">
-                <p class="font-semibold text-slate-800 mb-1.5">1. Quels étaient les métiers des parents de Lucilia ?</p>
-                <label class="block mb-1 cursor-pointer"><input type="radio" name="d1q1" value="wrong" class="mr-1.5"> Professeure et médecin</label>
-                <label class="block cursor-pointer"><input type="radio" name="d1q1" value="correct" class="mr-1.5"> Employée de maison et maçon</label>
-              </div>
+            <!-- Sélecteur d'onglets pour mobile & desktop -->
+            <div class="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0 hide-scrollbar">
+                <button onclick="switchTab('tab1')" id="btn-tab1" class="tab-btn active px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 whitespace-nowrap transition-all touch-btn">
+                    1. Formation
+                </button>
+                <button onclick="switchTab('tab2')" id="btn-tab2" class="tab-btn bg-white hover:bg-slate-100 text-slate-700 px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 whitespace-nowrap transition-all touch-btn">
+                    2. Réflexion FR/ES
+                </button>
+                <button onclick="switchTab('tab3')" id="btn-tab3" class="tab-btn bg-white hover:bg-slate-100 text-slate-700 px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 whitespace-nowrap transition-all touch-btn">
+                    3. Exercices
+                </button>
+                <button onclick="switchTab('tab4')" id="btn-tab4" class="tab-btn bg-white hover:bg-slate-100 text-slate-700 px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 whitespace-nowrap transition-all touch-btn">
+                    4. Immigration & Récit
+                </button>
+            </div>
+        </div>
+    </header>
 
-              <div class="p-2.5 bg-white rounded border border-slate-200">
-                <p class="font-semibold text-slate-800 mb-1.5">2. Pourquoi ont-ils posé pour un photographe ambulant ?</p>
-                <label class="block mb-1 cursor-pointer"><input type="radio" name="d1q2" value="correct" class="mr-1.5"> Parce qu'ils n'avaient pas d'appareil photo</label>
-                <label class="block cursor-pointer"><input type="radio" name="d1q2" value="wrong" class="mr-1.5"> Pour un journal de mode</label>
-              </div>
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8 flex-grow w-full space-y-6">
 
-              <div class="p-2.5 bg-white rounded border border-slate-200">
-                <p class="font-semibold text-slate-800 mb-1.5">3. Pour faire des descriptions au passé, on utilise :</p>
-                <label class="block mb-1 cursor-pointer"><input type="radio" name="d1q3" value="correct" class="mr-1.5"> L'imparfait</label>
-                <label class="block cursor-pointer"><input type="radio" name="d1q3" value="wrong" class="mr-1.5"> Le futur simple</label>
-              </div>
+        <!-- =================================================================== -->
+        <!-- ONGLET 1 : FORMATION DE L'IMPARFAIT                                -->
+        <!-- =================================================================== -->
+        <section id="tab1" class="space-y-6">
+            
+            <!-- Introduction / Règle de base -->
+            <div class="bg-white border-2 border-inspireGreen rounded-2xl p-5 sm:p-7 shadow-sm">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="w-8 h-8 rounded-lg bg-inspireGreen text-white font-black flex items-center justify-center text-sm shadow">1</span>
+                    <h2 class="text-lg sm:text-2xl font-bold text-slate-900">Règle fondamentale de formation</h2>
+                </div>
+                
+                <div class="bg-inspireLightGreen border border-emerald-200 p-4 rounded-xl text-slate-800 text-sm sm:text-base leading-relaxed mb-6">
+                    <p class="font-bold text-inspireDarkGreen mb-1">Formule mathématique de l'imparfait :</p>
+                    <p class="text-sm sm:text-lg">
+                        <strong>Radical du verbe avec <em>NOUS</em> au présent</strong> + 
+                        <span class="text-inspireRed font-black"> -ais, -ais, -ait, -ions, -iez, -aient</span>
+                    </p>
+                </div>
+
+                <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-3 flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-inspireGreen inline-block"></span>
+                    Exemples de dérivation (10 verbes fréquents)
+                </h3>
+                <div class="overflow-x-auto border border-slate-200 rounded-xl mb-6">
+                    <table class="w-full text-left text-xs sm:text-sm bg-white">
+                        <thead class="bg-slate-100 border-b border-slate-200 text-slate-700 font-bold uppercase tracking-wider text-[11px]">
+                            <tr>
+                                <th class="p-3">Infinitif</th>
+                                <th class="p-3">Présent (Nous)</th>
+                                <th class="p-3">Radical extrait</th>
+                                <th class="p-3">Terminaisons ajoutées</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 font-mono text-slate-800">
+                            <tr class="hover:bg-slate-50"><td class="p-3 font-sans font-bold text-inspireDarkGreen">aller</td><td class="p-3">nous all<span class="text-slate-400">ons</span></td><td class="p-3 text-inspireRed font-bold">all-</td><td class="p-3 text-slate-600">+ -ais, -ais, -ait, -ions, -iez, -aient</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="p-3 font-sans font-bold text-inspireDarkGreen">prendre</td><td class="p-3">nous pren<span class="text-slate-400">ons</span></td><td class="p-3 text-inspireRed font-bold">pren-</td><td class="p-3 text-slate-600">+ -ais, -ais, -ait, -ions, -iez, -aient</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="p-3 font-sans font-bold text-inspireDarkGreen">lire</td><td class="p-3">nous lis<span class="text-slate-400">ons</span></td><td class="p-3 text-inspireRed font-bold">lis-</td><td class="p-3 text-slate-600">+ -ais, -ais, -ait, -ions, -iez, -aient</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="p-3 font-sans font-bold text-inspireDarkGreen">connaître</td><td class="p-3">nous connaiss<span class="text-slate-400">ons</span></td><td class="p-3 text-inspireRed font-bold">connaiss-</td><td class="p-3 text-slate-600">+ -ais, -ais, -ait, -ions, -iez, -aient</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="p-3 font-sans font-bold text-inspireDarkGreen">faire</td><td class="p-3">nous fais<span class="text-slate-400">ons</span></td><td class="p-3 text-inspireRed font-bold">fais-</td><td class="p-3 text-slate-600">+ -ais, -ais, -ait, -ions, -iez, -aient</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="p-3 font-sans font-bold text-inspireDarkGreen">devoir</td><td class="p-3">nous dev<span class="text-slate-400">ons</span></td><td class="p-3 text-inspireRed font-bold">dev-</td><td class="p-3 text-slate-600">+ -ais, -ais, -ait, -ions, -iez, -aient</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="p-3 font-sans font-bold text-inspireDarkGreen">savoir</td><td class="p-3">nous sav<span class="text-slate-400">ons</span></td><td class="p-3 text-inspireRed font-bold">sav-</td><td class="p-3 text-slate-600">+ -ais, -ais, -ait, -ions, -iez, -aient</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="p-3 font-sans font-bold text-inspireDarkGreen">pouvoir</td><td class="p-3">nous pouv<span class="text-slate-400">ons</span></td><td class="p-3 text-inspireRed font-bold">pouv-</td><td class="p-3 text-slate-600">+ -ais, -ais, -ait, -ions, -iez, -aient</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="p-3 font-sans font-bold text-inspireDarkGreen">finir</td><td class="p-3">nous finiss<span class="text-slate-400">ons</span></td><td class="p-3 text-inspireRed font-bold">finiss-</td><td class="p-3 text-slate-600">+ -ais, -ais, -ait, -ions, -iez, -aient</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="p-3 font-sans font-bold text-inspireDarkGreen">choisir</td><td class="p-3">nous choisiss<span class="text-slate-400">ons</span></td><td class="p-3 text-inspireRed font-bold">choisiss-</td><td class="p-3 text-slate-600">+ -ais, -ais, -ait, -ions, -iez, -aient</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6">
+                    <!-- AVOIR -->
+                    <div class="border border-slate-200 rounded-2xl p-4 sm:p-5 bg-white shadow-sm">
+                        <div class="flex items-center justify-between border-b pb-3 mb-3">
+                            <h4 class="font-bold text-lg text-slate-900">Verbe AVOIR <span class="text-xs font-normal text-slate-500">(Régulier : nous av-ons)</span></h4>
+                            <span class="text-xs font-semibold px-2 py-0.5 bg-blue-50 text-blue-700 rounded-full">Radical : av-</span>
+                        </div>
+                        <ul class="space-y-2 text-sm sm:text-base">
+                            <li class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50">
+                                <span>J'<strong>avais</strong></span>
+                                <button onclick="speakFrench('J\'avais')" class="touch-btn p-2 text-inspireGreen hover:bg-emerald-50 rounded-lg text-lg" title="Écouter">🔊</button>
+                            </li>
+                            <li class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50">
+                                <span>Tu <strong>avais</strong></span>
+                                <button onclick="speakFrench('Tu avais')" class="touch-btn p-2 text-inspireGreen hover:bg-emerald-50 rounded-lg text-lg" title="Écouter">🔊</button>
+                            </li>
+                            <li class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50">
+                                <span>Elle <strong>avait</strong></span>
+                                <button onclick="speakFrench('Elle avait')" class="touch-btn p-2 text-inspireGreen hover:bg-emerald-50 rounded-lg text-lg" title="Écouter">🔊</button>
+                            </li>
+                            <li class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50">
+                                <span>Nous <strong>avions</strong></span>
+                                <button onclick="speakFrench('Nous avions')" class="touch-btn p-2 text-inspireGreen hover:bg-emerald-50 rounded-lg text-lg" title="Écouter">🔊</button>
+                            </li>
+                            <li class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50">
+                                <span>Vous <strong>aviez</strong></span>
+                                <button onclick="speakFrench('Vous aviez')" class="touch-btn p-2 text-inspireGreen hover:bg-emerald-50 rounded-lg text-lg" title="Écouter">🔊</button>
+                            </li>
+                            <li class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50">
+                                <span>Elles <strong>avaient</strong></span>
+                                <button onclick="speakFrench('Elles avaient')" class="touch-btn p-2 text-inspireGreen hover:bg-emerald-50 rounded-lg text-lg" title="Écouter">🔊</button>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- ÊTRE -->
+                    <div class="border-2 border-inspireRed/30 rounded-2xl p-4 sm:p-5 bg-white shadow-sm">
+                        <div class="flex items-center justify-between border-b pb-3 mb-3">
+                            <h4 class="font-bold text-lg text-slate-900">Verbe ÊTRE <span class="text-xs font-bold text-inspireRed">(Seul verbe irrégulier !)</span></h4>
+                            <span class="text-xs font-semibold px-2 py-0.5 bg-red-50 text-inspireRed rounded-full">Radical : ét-</span>
+                        </div>
+                        <ul class="space-y-2 text-sm sm:text-base">
+                            <li class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50">
+                                <span>J'<strong>étais</strong></span>
+                                <button onclick="speakFrench('J\'étais')" class="touch-btn p-2 text-inspireRed hover:bg-red-50 rounded-lg text-lg" title="Écouter">🔊</button>
+                            </li>
+                            <li class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50">
+                                <span>Tu <strong>étais</strong></span>
+                                <button onclick="speakFrench('Tu étais')" class="touch-btn p-2 text-inspireRed hover:bg-red-50 rounded-lg text-lg" title="Écouter">🔊</button>
+                            </li>
+                            <li class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50">
+                                <span>Il <strong>était</strong></span>
+                                <button onclick="speakFrench('Il était')" class="touch-btn p-2 text-inspireRed hover:bg-red-50 rounded-lg text-lg" title="Écouter">🔊</button>
+                            </li>
+                            <li class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50">
+                                <span>Nous <strong>étions</strong></span>
+                                <button onclick="speakFrench('Nous étions')" class="touch-btn p-2 text-inspireRed hover:bg-red-50 rounded-lg text-lg" title="Écouter">🔊</button>
+                            </li>
+                            <li class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50">
+                                <span>Vous <strong>étiez</strong></span>
+                                <button onclick="speakFrench('Vous étiez')" class="touch-btn p-2 text-inspireRed hover:bg-red-50 rounded-lg text-lg" title="Écouter">🔊</button>
+                            </li>
+                            <li class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50">
+                                <span>Ils <strong>étaient</strong></span>
+                                <button onclick="speakFrench('Ils étaient')" class="touch-btn p-2 text-inspireRed hover:bg-red-50 rounded-lg text-lg" title="Écouter">🔊</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-5">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-base sm:text-lg">Explorer les 10 autres verbes avec synthèse vocale</h4>
+                            <p class="text-xs sm:text-sm text-slate-500">Choisissez un verbe pour écouter et observer l'intégralité de sa conjugaison :</p>
+                        </div>
+                        <select id="verbSelector" onchange="renderSelectedVerb()" class="border-2 border-inspireGreen text-slate-800 rounded-xl px-3 py-2 text-sm font-semibold bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-inspireGreen">
+                            <option value="aller">aller (all-)</option>
+                            <option value="prendre">prendre (pren-)</option>
+                            <option value="lire">lire (lis-)</option>
+                            <option value="connaitre">connaître (connaiss-)</option>
+                            <option value="faire">faire (fais-)</option>
+                            <option value="devoir">devoir (dev-)</option>
+                            <option value="savoir">savoir (sav-)</option>
+                            <option value="pouvoir">pouvoir (pouv-)</option>
+                            <option value="finir">finir (finiss-)</option>
+                            <option value="choisir">choisir (choisiss-)</option>
+                        </select>
+                    </div>
+
+                    <div id="verbDisplayArea" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                        <!-- Rempli par JavaScript -->
+                    </div>
+                </div>
             </div>
 
-            <button onclick="checkDoc1Quiz()" class="w-full touch-btn py-2 bg-inspire-green hover:bg-inspire-greenDark text-white font-bold rounded-lg text-xs transition">
-              Valider le questionnaire (Doc 2)
-            </button>
-            <div id="doc1Feedback" class="hidden text-xs font-semibold p-2 rounded"></div>
-          </div>
-        </div>
-      </div>
+            <!-- Tableau Spécial : Phonétique et Piège Orthographique -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-7 shadow-sm">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="w-8 h-8 rounded-lg bg-amber-500 text-white font-black flex items-center justify-center text-sm shadow">👂</span>
+                    <h2 class="text-lg sm:text-xl font-bold text-slate-900">Tableau Spécial : Phonétique et Piège Orthographique</h2>
+                </div>
 
-      <div class="bg-white rounded-xl p-4 sm:p-5 border-2 border-slate-200 shadow-sm">
-        <div class="flex items-center justify-between pb-3 border-b border-slate-200 mb-3 flex-wrap gap-2">
-          <div class="flex items-center gap-2">
-            <span class="bg-inspire-greenDark text-white text-xs font-bold px-2 py-0.5 rounded uppercase">C'EST L'ACTU</span>
-            <h3 class="text-base sm:text-lg font-bold font-display text-slate-800">
-              Compréhension orale : « Joséphine se raconte... »
-            </h3>
-          </div>
-          <!-- Zone conditionnelle pour la transcription -->
-          <div id="transcriptionUnlockZone">
-            <span class="text-[11px] text-slate-500 italic bg-slate-100 px-2.5 py-1 rounded">
-              🔒 Réalisez et vérifiez les 2 activités pour débloquer la transcription
-            </span>
-          </div>
-        </div>
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 sm:p-5 mb-5 text-slate-800 text-xs sm:text-sm leading-relaxed space-y-2">
+                    <p class="font-bold text-amber-900 text-sm sm:text-base">Le phonème [ɛ] :</p>
+                    <p>
+                        Vous avez compris ? Les terminaisons <strong>-ais, -ais, -ait, -aient</strong> se prononcent toutes les quatre <span class="bg-amber-200 px-2 py-0.5 rounded font-mono font-bold text-amber-950">[ɛ]</span>.
+                    </p>
+                    <p class="p-3 bg-white rounded-lg border border-amber-300 font-semibold text-slate-900">
+                        ⚡ <strong>Règle d'or :</strong> À l'oral, <em>je chantais</em>, <em>tu chantais</em>, <em>il chantait</em> et <em>ils chantaient</em> s'entendent exactement pareil. Pour écrire correctement, il est absolument indispensable de bien identifier le sujet !
+                    </p>
+                </div>
 
-        <!-- Lecteur audio adapté Inspire 2 avec fichier audio martiniquaise.mp3 -->
-        <div class="bg-inspire-greenLight p-3.5 rounded-lg border border-inspire-greenBorder flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div class="flex items-center gap-3">
-            <audio id="martiniquaiseAudio" src="martiniquaise.mp3" preload="metadata" onended="onAudioEnded()"></audio>
-            <button onclick="toggleAudioPlayback()" id="btnPlayJosephine" class="touch-btn w-12 h-12 rounded-lg bg-inspire-green hover:bg-inspire-greenDark text-white font-bold text-xl flex items-center justify-center shrink-0 shadow-sm transition" title="Lire ou mettre en pause l'audio">
-              ▶
-            </button>
-            <div>
-              <p class="text-xs sm:text-sm font-bold text-inspire-greenDark">Audio : L'enfance de Joséphine à la Martinique et son arrivée à Paris</p>
-              <p class="text-[11px] text-slate-600">Document audio officiel (martiniquaise.mp3) • 6 questions Vrai/Faux</p>
-              <span id="audioSourceIndicator" class="text-[10px] text-slate-500 font-mono">Prêt à la lecture</span>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+                    <button onclick="speakFrench('je travaillais')" class="p-3 bg-slate-50 hover:bg-emerald-50 border border-slate-200 rounded-xl text-center transition-all touch-btn flex flex-col items-center">
+                        <span class="text-xs text-slate-500">1re pers. sing.</span>
+                        <span class="font-bold text-slate-900 mt-0.5">je travaillais</span>
+                        <span class="text-[11px] text-inspireGreen font-mono font-bold">[ɛ] 🔊</span>
+                    </button>
+                    <button onclick="speakFrench('tu travaillais')" class="p-3 bg-slate-50 hover:bg-emerald-50 border border-slate-200 rounded-xl text-center transition-all touch-btn flex flex-col items-center">
+                        <span class="text-xs text-slate-500">2e pers. sing.</span>
+                        <span class="font-bold text-slate-900 mt-0.5">tu travaillais</span>
+                        <span class="text-[11px] text-inspireGreen font-mono font-bold">[ɛ] 🔊</span>
+                    </button>
+                    <button onclick="speakFrench('elle travaillait')" class="p-3 bg-slate-50 hover:bg-emerald-50 border border-slate-200 rounded-xl text-center transition-all touch-btn flex flex-col items-center">
+                        <span class="text-xs text-slate-500">3e pers. sing.</span>
+                        <span class="font-bold text-slate-900 mt-0.5">elle travaillait</span>
+                        <span class="text-[11px] text-inspireGreen font-mono font-bold">[ɛ] 🔊</span>
+                    </button>
+                    <button onclick="speakFrench('elles travaillaient')" class="p-3 bg-slate-50 hover:bg-emerald-50 border border-slate-200 rounded-xl text-center transition-all touch-btn flex flex-col items-center">
+                        <span class="text-xs text-slate-500">3e pers. plur.</span>
+                        <span class="font-bold text-slate-900 mt-0.5">elles travaillaient</span>
+                        <span class="text-[11px] text-inspireGreen font-mono font-bold">[ɛ] 🔊</span>
+                    </button>
+                </div>
+
+                <!-- Activité de pratique : Écoutez et tapez le verbe à l'imparfait -->
+                <div class="border border-slate-200 rounded-2xl p-4 sm:p-5 bg-slate-50">
+                    <h3 class="font-bold text-slate-900 text-sm sm:text-base mb-1">Activité de pratique : Écoutez et tapez le verbe à l'imparfait</h3>
+                    <p class="text-xs sm:text-sm text-slate-500 mb-4">Repérez le sujet, cliquez sur le haut-parleur pour écouter le verbe, puis écrivez-le avec la terminaison exacte :</p>
+                    
+                    <div id="phoneticPracticeList" class="space-y-3">
+                        <!-- Généré par JS : 10 phrases demandées -->
+                    </div>
+
+                    <div class="mt-5 flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-slate-200">
+                        <button onclick="checkPhoneticPractice()" class="w-full sm:w-auto touch-btn px-6 py-2.5 bg-inspireGreen hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-all shadow-sm">
+                            Vérifier mes 10 réponses
+                        </button>
+                        <div id="phoneticPracticeScore" class="font-bold text-sm text-slate-700"></div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="flex items-center gap-2 shrink-0">
-            <span class="text-xs font-medium text-inspire-greenDark">Vitesse audio :</span>
-            <select id="martiniqueRateSelect" onchange="changeMartiniqueAudioRate()" class="bg-white border border-inspire-greenBorder text-inspire-greenDark rounded font-bold px-2 py-1 text-xs outline-none cursor-pointer">
-              <option value="0.8">0.8x</option>
-              <option value="1.0" selected>1.0x</option>
-              <option value="1.15">1.15x</option>
-            </select>
-          </div>
-        </div>
 
-        <div id="josephineScriptBox" class="hidden mt-3 p-3.5 bg-slate-50 border-2 border-inspire-greenBorder rounded-lg text-xs text-slate-700 leading-relaxed shadow-inner">
-          <div class="flex items-center justify-between pb-2 border-b border-slate-200 mb-2">
-            <strong class="text-inspire-greenDark font-bold text-xs uppercase tracking-wide">Transcription du document audio :</strong>
-            <button onclick="speakFrench(josephineFullScript)" class="text-xs bg-inspire-greenLight text-inspire-greenDark px-2 py-0.5 rounded font-bold border border-inspire-greenBorder">
-              🔊 Réécouter la voix synthétique
-            </button>
-          </div>
-          « Je suis née à la Martinique en 1973. Mes parents étaient modestes, ils n'avaient pas d'argent. Ma mère travaillait dans un magasin. Mon père était ouvrier, il était réservé mais généreux. On habitait un petit village. À la maison, il y avait mon petit frère Gabriel et Zoé. Zoé, c'était la fille de mon père et de sa première femme. Zoé et moi, on se disputait tout le temps ! Ma mère était très souriante, elle avait beaucoup d'énergie, elle adorait s'amuser. Avec mon père, on allait au marché le samedi. On achetait du poisson et on le mangeait avec des petits légumes frais, c'était délicieux ! À cette époque-là, c'était agréable, nous connaissions tout le monde dans le village. Quand j'avais dix ans, nous avons déménagé. Nous sommes venus à Paris. C'était dur, il faisait froid et bien sûr... il n'y avait pas la mer ! »
-        </div>
+        </section>
 
-        <div class="mt-4 space-y-2.5 text-xs" id="audioQuestionsList">
-          <!-- Rempli par JavaScript -->
-        </div>
+        <!-- =================================================================== -->
+        <!-- ONGLET 2 : RÉFLEXION LINGUISTIQUE (FR / ES)                        -->
+        <!-- =================================================================== -->
+        <section id="tab2" class="hidden space-y-6">
 
-        <button onclick="checkAudioQuiz()" class="mt-4 touch-btn px-4 py-2 bg-inspire-green hover:bg-inspire-greenDark text-white font-bold rounded-lg text-xs transition">
-          Valider la compréhension orale
-        </button>
-        <div id="audioQuizFeedback" class="hidden mt-2 text-xs font-semibold p-2 rounded"></div>
-      </div>
+            <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-7 shadow-sm">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="w-8 h-8 rounded-lg bg-blue-600 text-white font-black flex items-center justify-center text-sm shadow">2</span>
+                    <h2 class="text-lg sm:text-2xl font-bold text-slate-900">Et l'imparfait, à quoi ça sert ?</h2>
+                </div>
 
-      <div class="bg-white rounded-xl p-4 sm:p-5 border-2 border-slate-200 shadow-sm">
-        <div class="flex items-center gap-2 pb-3 border-b border-slate-200 mb-3">
-          <span class="bg-inspire-greenDark text-white text-xs font-bold px-2 py-0.5 rounded uppercase">PRODUCTION ÉCRITE</span>
-          <h3 class="text-base sm:text-lg font-bold font-display text-slate-800">
-            Raconter le passé à l'imparfait
-          </h3>
-        </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div class="bg-blue-50 border border-blue-200 p-4 rounded-xl">
+                        <h3 class="font-bold text-blue-900 text-base mb-1">1. Exprimer des habitudes passées</h3>
+                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                            Pour raconter ce qu'on avait l'habitude de faire régulièrement dans le passé, des rituels ou des répétitions (souvent avec <em>avant, à cette époque, tous les jours, le week-end</em>).
+                        </p>
+                    </div>
+                    <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl">
+                        <h3 class="font-bold text-inspireDarkGreen text-base mb-1">2. Décrire une situation passée</h3>
+                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                            Pour décrire le décor, le paysage, la météo, l'âge, l'état physique ou psychologique des personnes dans le passé sans préciser de début ni de fin.
+                        </p>
+                    </div>
+                </div>
 
-        <!-- A) Paragraphe Modèle (Style bandeau rouge Inspire 2 'Ma famille') -->
-        <div class="rounded-lg overflow-hidden border-2 border-inspire-red mb-4">
-          <div class="bg-inspire-red text-white px-3.5 py-1.5 font-bold text-xs sm:text-sm font-display uppercase tracking-wide">
-            A) Paragraphe Modèle à analyser
-          </div>
-          <div class="p-3.5 bg-inspire-redLight/30 text-xs sm:text-sm text-slate-800 leading-relaxed space-y-2">
-            <p>
-              « Quand j'<strong class="text-inspire-red">étais</strong> plus jeune, j'<strong class="text-inspire-red">habitais</strong> dans un petit village au Portugal. Nous <strong class="text-inspire-red">avions</strong> une maison modeste et la vie <strong class="text-inspire-red">était</strong> difficile. Mon père <strong class="text-inspire-red">travaillait</strong> dans les champs pendant de longues heures, mais il <strong class="text-inspire-red">gagnait</strong> très peu d'argent. Pourtant, ma famille <strong class="text-inspire-red">gardait</strong> toujours espoir. Aujourd'hui, je vis en France et la situation est différente. »
-            </p>
-            <p class="text-xs text-slate-600 border-t border-inspire-red/20 pt-1.5">
-              📌 <strong>Structure type :</strong> 1. Décor et enfance (imparfait) ➔ 2. Travail et difficultés passées (imparfait) ➔ 3. Transition vers aujourd'hui (présent).
-            </p>
-          </div>
-        </div>
+                <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-3">Réflexions comparatives avec la langue espagnole</h3>
+                <div class="space-y-4 text-xs sm:text-sm">
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1.5">
+                        <div class="font-semibold text-slate-900 flex items-center gap-2">
+                            <span class="px-2 py-0.5 bg-amber-100 text-amber-900 rounded text-xs font-bold">Exemple 1</span>
+                            <em>« Cuando tenía cinco años, andaba en bicicleta toda la tarde. »</em>
+                        </div>
+                        <p class="text-slate-600">
+                            <strong>Analyse :</strong> La phrase espagnole nous présente une habitude dans le passé, une idée semblable à <em>solía andar en bicicleta</em>. En français, la logique est identique :
+                        </p>
+                        <p class="text-inspireDarkGreen font-bold bg-white p-2.5 rounded-lg border border-emerald-200">
+                            🇫🇷 « Quand j'avais cinq ans, je faisais du vélo toute l'après-midi. »
+                        </p>
+                    </div>
 
-        <!-- B & C) Consignes et rédaction de l'histoire de Sadi -->
-        <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-lg text-xs sm:text-sm space-y-3">
-          <div>
-            <span class="font-extrabold text-inspire-greenDark text-xs uppercase tracking-wider block">B & C) Votre Production : Racontez l'histoire de Sadi</span>
-            <p class="text-slate-700 mt-1">Reprenez la structure du modèle pour rédiger le texte de Sadi :</p>
-          </div>
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1.5">
+                        <div class="font-semibold text-slate-900 flex items-center gap-2">
+                            <span class="px-2 py-0.5 bg-amber-100 text-amber-900 rounded text-xs font-bold">Exemple 2</span>
+                            <em>« Antes, los días eran menos calurosos y la lluvia duraba un día entero. »</em>
+                        </div>
+                        <p class="text-slate-600">
+                            <strong>Analyse :</strong> Ici, nous combinons une description du climat et la durée sans limite précise :
+                        </p>
+                        <p class="text-inspireDarkGreen font-bold bg-white p-2.5 rounded-lg border border-emerald-200">
+                            🇫🇷 « Avant, les journées étaient moins chaudes et la pluie durait un jour tout entier. »
+                        </p>
+                    </div>
 
-          <!-- Fiche Sadi -->
-          <div class="bg-white p-3 rounded border border-slate-300 text-xs space-y-1">
-            <p class="font-bold text-slate-900">📋 Fiche d'informations :</p>
-            <p>• <strong>Identité :</strong> Sadi, 24 ans, malien.</p>
-            <p>• <strong>Au Mali (imparfait) :</strong> <em>habiter</em> au Mali • <em>avoir</em> une vie difficile • <em>travailler</em> dans une usine 14 heures par jour pour seulement 2 euros.</p>
-            <p>• <strong>Aujourd'hui (présent) :</strong> <em>habiter</em> en France • <em>avoir</em> un travail régulier • <em>être</em> heureux.</p>
-          </div>
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1.5">
+                        <div class="font-semibold text-slate-900 flex items-center gap-2">
+                            <span class="px-2 py-0.5 bg-amber-100 text-amber-900 rounded text-xs font-bold">Exemple 3</span>
+                            <em>« Anteriormente nos reuníamos en familia y cantábamos toda la noche. »</em>
+                        </div>
+                        <p class="text-slate-600">
+                            <strong>Analyse :</strong> Description d'une scène d'ambiance et souvenir d'enfance régulier :
+                        </p>
+                        <p class="text-inspireDarkGreen font-bold bg-white p-2.5 rounded-lg border border-emerald-200">
+                            🇫🇷 « Avant, on se réunissait en famille et on chantait toute la nuit. »
+                        </p>
+                    </div>
+                </div>
 
-          <!-- Zone de saisie tactile -->
-          <div>
-            <label for="sadiStoryInput" class="block font-bold text-slate-700 mb-1">Votre texte :</label>
-            <textarea id="sadiStoryInput" rows="5" placeholder="Avant, Sadi habitait au Mali. Il avait..." class="w-full p-3 bg-white border-2 border-slate-300 rounded-lg focus:border-inspire-green outline-none text-slate-800 leading-relaxed"></textarea>
-          </div>
+                <div class="mt-8 border-t border-slate-200 pt-6">
+                    <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-2">Exercice d'association : Espagnol (Mexique) et Français</h3>
+                    <p class="text-xs sm:text-sm text-slate-500 mb-4">Associez chaque expression mexicaine à son équivalent exact en français :</p>
+                    
+                    <div id="matchingPairsContainer" class="space-y-3">
+                        <!-- Généré par JS -->
+                    </div>
 
-          <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
-            <div class="flex flex-wrap gap-2">
-              <button onclick="analyzeWritingProduction()" class="touch-btn px-3.5 py-2 bg-inspire-green hover:bg-inspire-greenDark text-white font-bold text-xs rounded-lg transition">
-                Vérifier les verbes à l'imparfait
-              </button>
-              <button onclick="showModelCorrection()" class="touch-btn px-3 py-2 bg-slate-200 hover:bg-slate-300 text-slate-800 font-medium text-xs rounded-lg transition">
-                Voir la proposition type
-              </button>
+                    <div class="mt-5 flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-slate-200">
+                        <button onclick="checkMatching()" class="w-full sm:w-auto touch-btn px-6 py-2.5 bg-inspireGreen hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-all shadow-sm">
+                            Vérifier l'association
+                        </button>
+                        <div id="matchingScore" class="font-bold text-sm text-slate-700"></div>
+                    </div>
+                </div>
             </div>
-            <span id="wordCountLabel" class="text-xs text-slate-500 font-medium">0 mot</span>
-          </div>
 
-          <div id="writingFeedbackBox" class="hidden p-3 rounded-lg text-xs leading-relaxed"></div>
-        </div>
-      </div>
+        </section>
 
-    </section>
+        <!-- =================================================================== -->
+        <!-- ONGLET 3 : EXERCICES DE SYSTÉMATISATION                            -->
+        <!-- =================================================================== -->
+        <section id="tab3" class="hidden space-y-6">
 
-  </main>
-
-  <footer class="bg-inspire-slate text-white/80 text-xs py-5 mt-auto border-t border-slate-700">
-    <div class="max-w-5xl mx-auto px-4 text-center space-y-2.5">
-      <div>
-        <a href="index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-semibold transition border border-slate-600 touch-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-          <span>Retour au sommaire</span>
-        </a>
-      </div>
-      <p class="font-bold text-white">Inspire 2 • Méthode de français (Niveau A2) • Dossier L'Imparfait</p>
-      <p class="text-slate-400">Activités autocorrectives avec synthèse vocale intégrée pour apprenants hispanophones.</p>
-    </div>
-  </footer>
-
-  <script>
-    /* ==========================================================================
-       1. SYNTHÈSE VOCALE (Web Speech API)
-       ========================================================================== */
-    function speakFrench(text) {
-      if (!('speechSynthesis' in window)) {
-        showToast("La synthèse vocale n'est pas disponible sur votre appareil.", "warning");
-        return;
-      }
-      
-      window.speechSynthesis.cancel();
-      
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'fr-FR';
-      
-      const rateSelect = document.getElementById('audioRateSelect');
-      utterance.rate = rateSelect ? parseFloat(rateSelect.value) || 1.0 : 1.0;
-      
-      const voices = window.speechSynthesis.getVoices();
-      const frenchVoice = voices.find(v => v.lang && (v.lang.startsWith('fr') || v.lang.includes('FR')));
-      if (frenchVoice) {
-        utterance.voice = frenchVoice;
-      }
-
-      window.speechSynthesis.speak(utterance);
-    }
-
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.onvoiceschanged = () => {
-        window.speechSynthesis.getVoices();
-      };
-    }
-
-    function showToast(message, type = "info") {
-      const toast = document.getElementById('toastMessage');
-      if (!toast) return;
-
-      toast.className = "fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:w-96 z-50 px-4 py-3 rounded-xl shadow-xl text-xs sm:text-sm font-semibold flex items-center gap-2 border transition-all duration-300";
-      
-      if (type === 'success') {
-        toast.classList.add('bg-inspire-greenDark', 'text-white', 'border-inspire-greenBorder');
-        toast.innerHTML = `✅ ${message}`;
-      } else if (type === 'error') {
-        toast.classList.add('bg-inspire-red', 'text-white', 'border-red-400');
-        toast.innerHTML = `❌ ${message}`;
-      } else if (type === 'warning') {
-        toast.classList.add('bg-amber-600', 'text-white', 'border-amber-400');
-        toast.innerHTML = `⚠️ ${message}`;
-      } else {
-        toast.classList.add('bg-slate-800', 'text-white', 'border-slate-700');
-        toast.innerHTML = `ℹ️ ${message}`;
-      }
-
-      toast.classList.remove('hidden');
-      setTimeout(() => {
-        toast.classList.add('hidden');
-      }, 3500);
-    }
-
-    /* ==========================================================================
-       2. GESTION DES ONGLETS
-       ========================================================================== */
-    function switchTab(tabId) {
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-      const activeEl = document.getElementById(tabId);
-      if (activeEl) activeEl.classList.remove('hidden');
-
-      document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('bg-white', 'text-inspire-greenDark', 'shadow-sm', 'font-bold');
-        btn.classList.add('text-white/90', 'hover:bg-white/15');
-      });
-
-      const activeBtn = document.getElementById(`tabBtn-${tabId}`);
-      if (activeBtn) {
-        activeBtn.classList.remove('text-white/90', 'hover:bg-white/15');
-        activeBtn.classList.add('bg-white', 'text-inspire-greenDark', 'shadow-sm', 'font-bold');
-      }
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    /* ==========================================================================
-       3. CONJUGAISONS DYNAMIQUES DU SÉLECTEUR (10 VERBES)
-       ========================================================================== */
-    const dynamicVerbsData = {
-      aller: {
-        forms: [
-          { p: "J'allais", a: "J'allais" },
-          { p: "Tu allais", a: "Tu allais" },
-          { p: "Il allait", a: "Il allait" },
-          { p: "Nous allions", a: "Nous allions" },
-          { p: "Vous alliez", a: "Vous alliez" },
-          { p: "Ils allaient", a: "Ils allaient" }
-        ]
-      },
-      prendre: {
-        forms: [
-          { p: "Je prenais", a: "Je prenais" },
-          { p: "Tu prenais", a: "Tu prenais" },
-          { p: "Elle prenait", a: "Elle prenait" },
-          { p: "Nous prenions", a: "Nous prenions" },
-          { p: "Vous preniez", a: "Vous preniez" },
-          { p: "Elles prenaient", a: "Elles prenaient" }
-        ]
-      },
-      lire: {
-        forms: [
-          { p: "Je lisais", a: "Je lisais" },
-          { p: "Tu lisais", a: "Tu lisais" },
-          { p: "Il lisait", a: "Il lisait" },
-          { p: "Nous lisions", a: "Nous lisions" },
-          { p: "Vous lisiez", a: "Vous lisiez" },
-          { p: "Ils lisaient", a: "Ils lisaient" }
-        ]
-      },
-      connaitre: {
-        forms: [
-          { p: "Je connaissais", a: "Je connaissais" },
-          { p: "Tu connaissais", a: "Tu connaissais" },
-          { p: "Elle connaissait", a: "Elle connaissait" },
-          { p: "Nous connaissions", a: "Nous connaissions" },
-          { p: "Vous connaissiez", a: "Vous connaissiez" },
-          { p: "Elles connaissaient", a: "Elles connaissaient" }
-        ]
-      },
-      faire: {
-        forms: [
-          { p: "Je faisais", a: "Je faisais" },
-          { p: "Tu faisais", a: "Tu faisais" },
-          { p: "Il faisait", a: "Il faisait" },
-          { p: "Nous faisions", a: "Nous faisions" },
-          { p: "Vous faisiez", a: "Vous faisiez" },
-          { p: "Ils faisaient", a: "Ils faisaient" }
-        ]
-      },
-      devoir: {
-        forms: [
-          { p: "Je devais", a: "Je devais" },
-          { p: "Tu devais", a: "Tu devais" },
-          { p: "Elle devait", a: "Elle devait" },
-          { p: "Nous devions", a: "Nous devions" },
-          { p: "Vous deviez", a: "Vous deviez" },
-          { p: "Elles devaient", a: "Elles devaient" }
-        ]
-      },
-      savoir: {
-        forms: [
-          { p: "Je savais", a: "Je savais" },
-          { p: "Tu savais", a: "Tu savais" },
-          { p: "Il savait", a: "Il savait" },
-          { p: "Nous savions", a: "Nous savions" },
-          { p: "Vous saviez", a: "Vous saviez" },
-          { p: "Ils savaient", a: "Ils savaient" }
-        ]
-      },
-      pouvoir: {
-        forms: [
-          { p: "Je pouvais", a: "Je pouvais" },
-          { p: "Tu pouvais", a: "Tu pouvais" },
-          { p: "Elle pouvait", a: "Elle pouvait" },
-          { p: "Nous pouvions", a: "Nous pouvions" },
-          { p: "Vous pouviez", a: "Vous pouviez" },
-          { p: "Elles pouvaient", a: "Elles pouvaient" }
-        ]
-      },
-      finir: {
-        forms: [
-          { p: "Je finissais", a: "Je finissais" },
-          { p: "Tu finissais", a: "Tu finissais" },
-          { p: "Il finissait", a: "Il finissait" },
-          { p: "Nous finissions", a: "Nous finissions" },
-          { p: "Vous finissiez", a: "Vous finissiez" },
-          { p: "Ils finissaient", a: "Ils finissaient" }
-        ]
-      },
-      choisir: {
-        forms: [
-          { p: "Je choisissais", a: "Je choisissais" },
-          { p: "Tu choisissais", a: "Tu choisissais" },
-          { p: "Elle choisissait", a: "Elle choisissait" },
-          { p: "Nous choisissions", a: "Nous choisissions" },
-          { p: "Vous choisissiez", a: "Vous choisissiez" },
-          { p: "Elles choisissaient", a: "Elles choisissaient" }
-        ]
-      }
-    };
-
-    function displaySelectedVerb() {
-      const verb = document.getElementById('verbSelector').value;
-      const data = dynamicVerbsData[verb];
-      const container = document.getElementById('dynamicVerbContainer');
-      if (!data || !container) return;
-
-      let html = `<ul class="space-y-1 bg-white p-2.5 rounded border border-slate-200 text-xs sm:text-sm">`;
-      data.forms.forEach(item => {
-        html += `
-          <li class="flex items-center justify-between p-1 rounded hover:bg-slate-50 transition">
-            <span class="font-medium text-slate-800">${item.p}</span>
-            <button onclick="speakFrench('${item.a}')" class="touch-btn px-2 py-0.5 bg-inspire-greenLight text-inspire-greenDark rounded font-bold border border-inspire-greenBorder">
-              🔊
-            </button>
-          </li>
-        `;
-      });
-      html += `</ul>`;
-      container.innerHTML = html;
-    }
-
-    /* ==========================================================================
-       4. ACTIVITÉ PHONÉTIQUE (10 QUESTIONS ADAPTÉES MOBILE)
-       ========================================================================== */
-    const phoneticItems = [
-      { id: "ph1", subject: "1. Les enfants", word: "jouaient", hint: "ils -> -aient", post: "dans la cour." },
-      { id: "ph2", subject: "2. Avant, ma mère", word: "travaillait", hint: "elle -> -ait", post: "dans un magasin." },
-      { id: "ph3", subject: "3. Mon grand-père", word: "était", hint: "il -> était", post: "très gentil." },
-      { id: "ph4", subject: "4. J'", word: "avais", hint: "je -> avais", post: "un grand chien." },
-      { id: "ph5", subject: "5. Le chien", word: "adorait", hint: "il -> -ait", post: "courir dans le parc." },
-      { id: "ph6", subject: "6. Quand tu", word: "avais", hint: "tu -> avais", post: "dix ans..." },
-      { id: "ph7", subject: "7. ...tu", word: "allais", hint: "tu -> -ais", post: "souvent à la plage." },
-      { id: "ph8", subject: "8. Tous les soirs, ils", word: "faisaient", hint: "ils -> -aient", post: "la fête." },
-      { id: "ph9", subject: "9. À cette époque, je", word: "lisais", hint: "je -> -ais", post: "beaucoup." },
-      { id: "ph10", subject: "10. La directrice", word: "choisissait", hint: "elle -> -ait", post: "les délégués." }
-    ];
-
-    function renderPhoneticPractice() {
-      const container = document.getElementById('phoneticExercisesList');
-      if (!container) return;
-      container.innerHTML = phoneticItems.map(item => `
-        <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg text-xs sm:text-sm">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <div class="flex items-center gap-2 flex-wrap">
-              <span class="font-bold text-slate-800">${item.subject}</span>
-              <button onclick="speakFrench('${item.word}')" class="touch-btn px-2.5 py-1 bg-inspire-green text-white text-xs font-bold rounded flex items-center gap-1">
-                🔊 Verbe
-              </button>
-              <input type="text" id="input-${item.id}" placeholder="tapez ici..." class="w-32 sm:w-36 px-2.5 py-1 bg-white border border-slate-300 rounded font-semibold text-slate-800 outline-none focus:border-inspire-green" />
-              <span class="text-slate-600">${item.post}</span>
+            <!-- En-tête des exercices -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-lg sm:text-2xl font-bold text-slate-900">3 Ateliers de Pratique Systématique</h2>
+                    <p class="text-xs sm:text-sm text-slate-500">Variez les modes : QCM grammatical, phrases à trous et dictée auditive vocale.</p>
+                </div>
+                <div class="text-center sm:text-right bg-emerald-50 border border-emerald-200 px-4 py-2.5 rounded-xl w-full sm:w-auto">
+                    <span class="text-xs text-slate-600 block">Score Global Onglet 3 :</span>
+                    <span id="globalTab3Score" class="text-xl sm:text-2xl font-black text-inspireDarkGreen">0 / 26</span>
+                </div>
             </div>
-            <div id="feedback-${item.id}" class="font-bold shrink-0"></div>
-          </div>
+
+            <!-- EXERCICE 1 : QCM (8 questions) -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm space-y-4">
+                <div class="flex items-center justify-between border-b pb-3">
+                    <h3 class="font-bold text-base sm:text-lg text-slate-900 flex items-center gap-2">
+                        <span class="px-2.5 py-0.5 bg-blue-100 text-blue-800 text-xs rounded-md font-bold">Activité 1</span>
+                        QCM : Choisissez la forme correcte à l'imparfait
+                    </h3>
+                    <span id="scoreEx1" class="text-xs sm:text-sm font-bold text-slate-600">Score : -/8</span>
+                </div>
+
+                <div id="qcmList" class="space-y-4">
+                    <!-- Généré par JS (8 questions) -->
+                </div>
+
+                <div class="pt-2">
+                    <button onclick="checkQCM()" class="touch-btn px-6 py-2.5 bg-inspireGreen hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-all shadow-sm">
+                        Valider le QCM
+                    </button>
+                </div>
+            </div>
+
+            <!-- EXERCICE 2 : Phrases à trous (9 verbes à conjuguer) -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm space-y-4">
+                <div class="flex items-center justify-between border-b pb-3">
+                    <h3 class="font-bold text-base sm:text-lg text-slate-900 flex items-center gap-2">
+                        <span class="px-2.5 py-0.5 bg-amber-100 text-amber-800 text-xs rounded-md font-bold">Activité 2</span>
+                        Phrases à trous : Conjuguez les verbes entre parenthèses
+                    </h3>
+                    <span id="scoreEx2" class="text-xs sm:text-sm font-bold text-slate-600">Score : -/9</span>
+                </div>
+
+                <div id="fillBlanksList" class="space-y-3">
+                    <!-- Généré par JS (9 questions) -->
+                </div>
+
+                <div class="pt-2">
+                    <button onclick="checkFillBlanks()" class="touch-btn px-6 py-2.5 bg-inspireGreen hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-all shadow-sm">
+                        Valider les phrases à trous
+                    </button>
+                </div>
+            </div>
+
+            <!-- EXERCICE 3 : Dictée auditive (9 phrases avec synthèse vocale) -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm space-y-4">
+                <div class="flex items-center justify-between border-b pb-3">
+                    <h3 class="font-bold text-base sm:text-lg text-slate-900 flex items-center gap-2">
+                        <span class="px-2.5 py-0.5 bg-purple-100 text-purple-800 text-xs rounded-md font-bold">Activité 3</span>
+                        Dictée auditive : Écoutez la phrase et écrivez le verbe manquant
+                    </h3>
+                    <span id="scoreEx3" class="text-xs sm:text-sm font-bold text-slate-600">Score : -/9</span>
+                </div>
+
+                <p class="text-xs sm:text-sm text-slate-500">
+                    Cliquez sur l'icône 🔊 pour écouter la phrase entière prononcée en français, puis écrivez le verbe à l'imparfait dans la boîte de texte :
+                </p>
+
+                <div id="dictationList" class="space-y-3">
+                    <!-- Généré par JS (9 phrases incluant les correctifs de n'avions et l'histoire) -->
+                </div>
+
+                <div class="pt-2">
+                    <button onclick="checkDictation()" class="touch-btn px-6 py-2.5 bg-inspireGreen hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-all shadow-sm">
+                        Valider la dictée
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- =================================================================== -->
+        <!-- ONGLET 4 : IMMIGRATION ET RÉCIT                                    -->
+        <!-- =================================================================== -->
+        <section id="tab4" class="hidden space-y-6">
+
+            <!-- Document 1 : Témoignage de Lucilia Campos (Inspire 2, Unité 2) -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-7 shadow-sm">
+                <div class="flex items-center justify-between flex-wrap gap-2 mb-4">
+                    <div class="flex items-center gap-2.5">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-inspireDarkGreen font-bold text-xs rounded-md">DOC 1 • Lecture & Repérage</span>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900">La photo d'enfance de Lucilia Campos</h3>
+                    </div>
+                    <span class="text-xs text-slate-400">Inspire 2, Livre p. 28</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div class="md:col-span-1 bg-slate-100 rounded-xl p-4 border border-slate-200 flex flex-col items-center justify-center text-center">
+                        <div class="w-20 h-20 rounded-full bg-emerald-200 text-inspireDarkGreen flex items-center justify-center text-3xl mb-3 shadow-inner">
+                            📷
+                        </div>
+                        <h4 class="font-bold text-sm text-slate-900 mb-1">Paris, début des années 60</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            « Un Français sur quatre est issu de l'immigration. »<br>
+                            Musée National de l'Histoire de l'Immigration, Paris.
+                        </p>
+                    </div>
+
+                    <div class="md:col-span-2 bg-inspireLightGreen border border-emerald-200 rounded-xl p-4 sm:p-5 text-slate-800 text-xs sm:text-sm leading-relaxed space-y-2.5">
+                        <p class="font-bold text-inspireDarkGreen">
+                            Lucilia Campos se souvient de ses parents, immigrés portugais. C'étaient des gens modestes mais toujours élégants.
+                        </p>
+                        <p>
+                            « C'<strong>était</strong> au début des années 60. Ma mère <strong>travaillait</strong> comme employée de maison et mon père <strong>était</strong> maçon. Sur cette photo, ils posent pour un photographe ambulant qu'il y <strong>avait</strong> au Sacré-Cœur, à Paris. Il <strong>faisait</strong> beau. Nous n'<strong>avions</strong> pas d'appareil photo. Mon père <strong>avait</strong> 28 ans et ma mère 27. Ils <strong>avaient</strong> toujours des vêtements élégants. Ils <strong>étaient</strong> beaux. Mon père <strong>était</strong> réservé. Ma mère <strong>était</strong> toujours souriante. Elle <strong>était</strong> très courageuse, elle <strong>avait</strong> beaucoup d'énergie. Ils ne <strong>parlaient</strong> pas encore bien français. Nous <strong>allions</strong> souvent visiter des monuments le week-end. J'adore cette photo. Moi, j'<strong>avais</strong> 5 ans : je n'<strong>étais</strong> pas avec eux ce jour-là. »
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Questions sur Doc 1 -->
+                <div class="border-t border-slate-200 pt-4 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-sm sm:text-base">Compréhension du document 1 :</h4>
+                    
+                    <div class="space-y-3 text-xs sm:text-sm" id="doc1Questions">
+                        <div class="p-3 bg-slate-50 rounded-xl">
+                            <p class="font-semibold text-slate-800 mb-2">1. Quels étaient les métiers des parents de Lucilia ?</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <label class="flex items-center gap-2 p-2 bg-white rounded-lg border border-slate-200 cursor-pointer">
+                                    <input type="radio" name="d1q1" value="bad" class="text-inspireGreen">
+                                    <span>Père professeur et mère commerçante</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2 bg-white rounded-lg border border-slate-200 cursor-pointer">
+                                    <input type="radio" name="d1q1" value="good" class="text-inspireGreen">
+                                    <span>Père maçon et mère employée de maison</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="p-3 bg-slate-50 rounded-xl">
+                            <p class="font-semibold text-slate-800 mb-2">2. Pourquoi ont-ils posé pour un photographe ambulant ?</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <label class="flex items-center gap-2 p-2 bg-white rounded-lg border border-slate-200 cursor-pointer">
+                                    <input type="radio" name="d1q2" value="good" class="text-inspireGreen">
+                                    <span>Parce qu'ils n'avaient pas d'appareil photo</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2 bg-white rounded-lg border border-slate-200 cursor-pointer">
+                                    <input type="radio" name="d1q2" value="bad" class="text-inspireGreen">
+                                    <span>Parce que c'était interdit d'avoir un appareil</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="checkDoc1()" class="touch-btn px-5 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-xl text-xs sm:text-sm font-semibold transition-all">
+                        Vérifier le Document 1
+                    </button>
+                    <span id="doc1Feedback" class="ml-3 text-xs sm:text-sm font-bold"></span>
+                </div>
+            </div>
+
+            <!-- Document 2 : Compréhension Orale (L'enfance de Joséphine) -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-7 shadow-sm">
+                <div class="flex items-center justify-between flex-wrap gap-2 mb-4">
+                    <div class="flex items-center gap-2.5">
+                        <span class="px-2.5 py-1 bg-purple-100 text-purple-900 font-bold text-xs rounded-md">DOC 2 • Compréhension Orale</span>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900">Joséphine se raconte : Enfance et Famille</h3>
+                    </div>
+                    <span class="text-xs text-slate-400">Inspire 2, Bilan p. 31</span>
+                </div>
+
+                <!-- Lecteur Audio HTML5 avec repli et contrôle de la vitesse -->
+                <div class="bg-slate-100 border border-slate-300 rounded-2xl p-4 sm:p-5 mb-6">
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center gap-3 w-full sm:w-auto">
+                            <button id="audioPlayBtn" onclick="toggleAudioPlayer()" class="touch-btn w-12 h-12 rounded-full bg-inspireGreen hover:bg-emerald-700 text-white font-bold text-xl flex items-center justify-center shadow transition-all">
+                                ▶
+                            </button>
+                            <div>
+                                <h4 class="font-bold text-sm text-slate-900">martiniquaise.mp3</h4>
+                                <p id="audioStatusText" class="text-xs text-slate-500">Prêt pour l'écoute</p>
+                            </div>
+                        </div>
+
+                        <!-- Contrôle de vitesse -->
+                        <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+                            <span class="text-xs text-slate-600 font-semibold">Vitesse :</span>
+                            <button onclick="setPlaybackSpeed(0.8)" id="spd-08" class="touch-btn px-2.5 py-1 text-xs font-bold rounded-lg border border-slate-300 bg-white hover:bg-slate-50">0.8x</button>
+                            <button onclick="setPlaybackSpeed(1.0)" id="spd-10" class="touch-btn px-2.5 py-1 text-xs font-bold rounded-lg border border-inspireGreen bg-inspireGreen text-white">1.0x</button>
+                            <button onclick="setPlaybackSpeed(1.2)" id="spd-12" class="touch-btn px-2.5 py-1 text-xs font-bold rounded-lg border border-slate-300 bg-white hover:bg-slate-50">1.2x</button>
+                        </div>
+                    </div>
+
+                    <!-- Balise audio HTML5 standard -->
+                    <audio id="realAudio" src="martiniquaise.mp3" preload="metadata" class="hidden"></audio>
+                </div>
+
+                <!-- Questionnaire sur l'interview de Joséphine -->
+                <div class="space-y-3 mb-6" id="audioQuestionsList">
+                    <h4 class="font-bold text-slate-900 text-sm sm:text-base">Questions d'écoute :</h4>
+                    
+                    <div class="p-3 bg-slate-50 rounded-xl space-y-2 text-xs sm:text-sm">
+                        <p class="font-semibold text-slate-800">1. Où Joséphine a-t-elle passé son enfance avant d'arriver à Paris ?</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <label class="flex items-center gap-2 p-2 bg-white rounded-lg border border-slate-200 cursor-pointer">
+                                <input type="radio" name="aq1" value="good" class="text-inspireGreen">
+                                <span>À la Martinique, dans un petit village</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-2 bg-white rounded-lg border border-slate-200 cursor-pointer">
+                                <input type="radio" name="aq1" value="bad" class="text-inspireGreen">
+                                <span>À Marseille, dans le sud de la France</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="p-3 bg-slate-50 rounded-xl space-y-2 text-xs sm:text-sm">
+                        <p class="font-semibold text-slate-800">2. Comment étaient ses parents et sa maison ?</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <label class="flex items-center gap-2 p-2 bg-white rounded-lg border border-slate-200 cursor-pointer">
+                                <input type="radio" name="aq2" value="bad" class="text-inspireGreen">
+                                <span>Ils étaient très riches et voyageaient tout le temps</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-2 bg-white rounded-lg border border-slate-200 cursor-pointer">
+                                <input type="radio" name="aq2" value="good" class="text-inspireGreen">
+                                <span>Ils étaient modestes, le père était ouvrier et généreux</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="p-3 bg-slate-50 rounded-xl space-y-2 text-xs sm:text-sm">
+                        <p class="font-semibold text-slate-800">3. Pourquoi la vie à Paris était-elle difficile pour elle au début ?</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <label class="flex items-center gap-2 p-2 bg-white rounded-lg border border-slate-200 cursor-pointer">
+                                <input type="radio" name="aq3" value="good" class="text-inspireGreen">
+                                <span>Il faisait froid et il n'y avait pas la mer</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-2 bg-white rounded-lg border border-slate-200 cursor-pointer">
+                                <input type="radio" name="aq3" value="bad" class="text-inspireGreen">
+                                <span>Elle ne voulait pas aller à l'école de danse</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <button onclick="checkAudioQuestions()" class="touch-btn px-5 py-2.5 bg-inspireGreen hover:bg-emerald-700 text-white rounded-xl text-xs sm:text-sm font-semibold transition-all shadow-sm">
+                        Vérifier les réponses audio
+                    </button>
+                    <span id="audioFeedback" class="text-xs sm:text-sm font-bold"></span>
+                </div>
+
+                <!-- Bouton de transcription verrouillé jusqu'à validation -->
+                <div id="transcriptionUnlockArea" class="mt-6 pt-5 border-t border-slate-200">
+                    <div id="transcriptionLockedMsg" class="p-3.5 bg-slate-100 rounded-xl text-xs text-slate-500 flex items-center gap-2">
+                        <span>🔒</span>
+                        <span>La transcription s'affichera ici dès que vous aurez vérifié les questions du <strong>Doc 1</strong> et du <strong>Doc 2</strong>.</span>
+                    </div>
+
+                    <div id="transcriptionContent" class="hidden space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-100 px-2.5 py-1 rounded-full">
+                                🔓 Transcription Complète Débloquée
+                            </span>
+                            <button onclick="speakTranscription()" class="touch-btn px-3 py-1 bg-slate-200 hover:bg-slate-300 rounded-lg text-xs font-semibold">
+                                🔊 Réécouter vocalement
+                            </button>
+                        </div>
+                        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
+                            <p class="font-bold text-slate-900 mb-1">Interview : « Joséphine se raconte... »</p>
+                            <p>
+                                « Je suis née à la Martinique en 1973. Mes parents <em>étaient</em> modestes, ils n'<em>avaient</em> pas d'argent. Ma mère <em>travaillait</em> dans un magasin. Mon père <em>était</em> ouvrier, il <em>était</em> réservé mais généreux. On <em>habitait</em> un petit village. À la maison, il y <em>avait</em> mon petit frère Gabriel, et Zoé. Zoé, c'<em>était</em> la fille de mon père et de sa première femme. Zoé et moi, on se disputait tout le temps ! Ma mère <em>était</em> très souriante, elle <em>avait</em> beaucoup d'énergie, elle adorait s'amuser. Avec mon père, on <em>allait</em> au marché le samedi. On <em>achetait</em> du poisson et on le <em>mangeait</em> avec des petits légumes frais, c'<em>était</em> délicieux ! À cette époque-là, c'<em>était</em> agréable, nous <em>connaissions</em> tout le monde dans le village. <br><br>
+                                Quand j'avais dix ans, nous avons déménagé. Nous sommes venus à Paris. C'<em>était</em> dur, il <em>faisait</em> froid et bien sûr... il n'y <em>avait</em> pas la mer ! Heureusement, je faisais toujours de la danse... »
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION ATELIER D'ÉCRITURE GUIDÉE -->
+            <div class="bg-white border-2 border-slate-300 rounded-2xl p-5 sm:p-7 shadow-sm space-y-6">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-inspireRed text-white font-black flex items-center justify-center text-sm shadow">✍️</span>
+                    <div>
+                        <h3 class="text-lg sm:text-2xl font-bold text-slate-900">Atelier de Production Écrite : Raconter à l'imparfait</h3>
+                        <p class="text-xs sm:text-sm text-slate-500">Structurez le passé d'une personne (imparfait) et sa vie actuelle (présent).</p>
+                    </div>
+                </div>
+
+                <!-- Modèle décortiqué -->
+                <div class="bg-red-50/70 border border-red-200 rounded-xl p-4 sm:p-5">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="px-2.5 py-0.5 bg-inspireRed text-white font-bold text-xs rounded">A) Modèle pour s'inspirer</span>
+                        <span class="text-xs text-slate-500">Exemple Yasmina</span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                        « Avant, mes parents <strong>habitaient</strong> à Casablanca au Maroc. Mon père <strong>travaillait</strong> dans un hôtel et ma mère <strong>était</strong> couturière. Ils <strong>avaient</strong> une vie simple et <strong>aimaient</strong> se promener au bord de la mer le dimanche. Mais en 1975, ils ont décidé d'immigrer. <strong>Aujourd'hui, nous habitons en France</strong>, mon père est à la retraite et nous sommes très heureux. »
+                    </p>
+                </div>
+
+                <!-- Sujet guidé : Sadi, 24 ans, malien -->
+                <div class="border border-slate-200 rounded-xl p-4 sm:p-5 bg-slate-50 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <h4 class="font-bold text-slate-900 text-sm sm:text-base">B) Votre mission d'écriture : L'histoire de Sadi</h4>
+                        <span class="text-xs font-semibold px-2.5 py-1 bg-amber-100 text-amber-900 rounded-full">Sujet guidé</span>
+                    </div>
+                    
+                    <p class="text-xs sm:text-sm text-slate-600">
+                        À partir des éléments ci-dessous, écrivez un court récit d'au moins 50 mots en utilisant <strong>l'imparfait pour décrire sa vie au Mali</strong> et <strong>le présent pour sa vie actuelle en France</strong> :
+                    </p>
+
+                    <div class="p-3 bg-white rounded-lg border border-slate-200 text-xs sm:text-sm space-y-1 font-mono text-slate-800">
+                        <p>👤 <strong>Identité :</strong> Sadi, 24 ans, originaire du Mali.</p>
+                        <p>🇲🇱 <strong>Au Mali (Imparfait) :</strong> habiter au Mali • avoir une vie difficile • travailler dans une usine 14 heures par jour • gagner seulement 2 euros.</p>
+                        <p>🇫🇷 <strong>Aujourd'hui (Présent) :</strong> vivre en France • apprendre le français • travailler comme cuisinier • avoir des amis.</p>
+                    </div>
+
+                    <!-- Zone de rédaction -->
+                    <div class="space-y-2">
+                        <label for="writingTextarea" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Votre texte :</label>
+                        <textarea id="writingTextarea" oninput="analyzeWriting()" rows="6" placeholder="Avant, Sadi habitait au Mali. Il avait..." class="w-full p-3.5 border-2 border-slate-300 rounded-xl focus:border-inspireGreen focus:outline-none text-slate-800 text-sm leading-relaxed"></textarea>
+                    </div>
+
+                    <!-- Statistiques en direct -->
+                    <div class="flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm pt-1">
+                        <div class="flex items-center gap-3">
+                            <span class="text-slate-600">Mots : <strong id="wordCount">0</strong> / 50</span>
+                            <span class="text-slate-600">Verbes à l'imparfait détectés : <strong id="imparfaitCount" class="text-inspireDarkGreen font-bold">0</strong></span>
+                        </div>
+                        <button onclick="showExampleCorrection()" class="touch-btn px-3 py-1.5 bg-slate-200 hover:bg-slate-300 rounded-lg font-semibold text-slate-700 text-xs transition-all">
+                            Voir une proposition modèle
+                        </button>
+                    </div>
+
+                    <!-- Modèle caché -->
+                    <div id="exampleCorrectionBox" class="hidden p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl text-xs sm:text-sm text-slate-800">
+                        <p class="font-bold text-inspireDarkGreen mb-1">Exemple de rédaction attendue :</p>
+                        <p class="italic">
+                            « Avant, Sadi <strong>habitait</strong> au Mali avec sa famille. Il <strong>avait</strong> une vie très difficile. Tous les jours, il <strong>travaillait</strong> dans une usine pendant 14 heures et il <strong>gagnait</strong> seulement 2 euros par jour. Il <strong>était</strong> fatigué mais il <strong>gardait</strong> l'espoir. Aujourd'hui, Sadi vit en France. Il étudie le français à l'alliance, travaille comme cuisinier dans un restaurant et a beaucoup de nouveaux amis. »
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Pied de page -->
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 mt-auto">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col items-center justify-center gap-2">
+            <a href="index.html" class="touch-btn px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs border border-slate-300 transition-all flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                <span>Retour au sommaire principal</span>
+            </a>
+            <p class="font-medium text-slate-700">Inspire 2, Unité 2 • Activité 11 : Décrire le passé avec l'imparfait</p>
+            <p class="text-slate-400 text-[11px]">Conception pédagogique FLE A2 • Audio, Phonétique & Autocorrection</p>
         </div>
-      `).join('');
-    }
+    </footer>
 
-    function checkPhoneticPractice() {
-      let score = 0;
-      phoneticItems.forEach(item => {
-        const input = document.getElementById(`input-${item.id}`);
-        const feedback = document.getElementById(`feedback-${item.id}`);
-        const val = input ? input.value.trim().toLowerCase() : "";
+    <script>
+        // ===================================================================
+        // 1. SYNTHÈSE VOCALE SÉCURISÉE & AUDIO
+        // ===================================================================
+        let speechSpeed = 1.0;
 
-        if (val === item.word.toLowerCase()) {
-          score++;
-          feedback.innerHTML = `<span class="text-inspire-greenDark">✓ Bravo !</span>`;
-          input.className = "w-32 sm:w-36 px-2.5 py-1 bg-inspire-greenLight border-2 border-inspire-green rounded font-bold text-inspire-greenDark";
-        } else {
-          feedback.innerHTML = `<span class="text-inspire-red">✗ ${item.word} <span class="text-slate-500 font-normal">(${item.hint})</span></span>`;
-          input.className = "w-32 sm:w-36 px-2.5 py-1 bg-inspire-redLight border-2 border-inspire-red rounded text-inspire-red";
+        function speakFrench(text) {
+            if (!('speechSynthesis' in window)) {
+                console.warn("La synthèse vocale n'est pas supportée.");
+                return;
+            }
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'fr-FR';
+            utterance.rate = speechSpeed;
+            window.speechSynthesis.speak(utterance);
         }
-      });
-      document.getElementById('phoneticScoreBadge').innerText = `Score : ${score} / 10`;
-      if (score === 10) showToast("Parfait ! 10/10 sur la phonétique et les terminaisons !", "success");
-    }
 
-    function resetPhoneticPractice() {
-      phoneticItems.forEach(item => {
-        const input = document.getElementById(`input-${item.id}`);
-        const feedback = document.getElementById(`feedback-${item.id}`);
-        if (input) {
-          input.value = "";
-          input.className = "w-32 sm:w-36 px-2.5 py-1 bg-white border border-slate-300 rounded font-semibold text-slate-800 outline-none";
+        function setPlaybackSpeed(spd) {
+            speechSpeed = spd;
+            const audio = document.getElementById('realAudio');
+            if (audio) {
+                audio.playbackRate = spd;
+            }
+            ['spd-08', 'spd-10', 'spd-12'].forEach(id => {
+                const btn = document.getElementById(id);
+                btn.className = 'touch-btn px-2.5 py-1 text-xs font-bold rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-slate-700';
+            });
+            const activeId = spd === 0.8 ? 'spd-08' : (spd === 1.0 ? 'spd-10' : 'spd-12');
+            const activeBtn = document.getElementById(activeId);
+            if (activeBtn) {
+                activeBtn.className = 'touch-btn px-2.5 py-1 text-xs font-bold rounded-lg border border-inspireGreen bg-inspireGreen text-white';
+            }
         }
-        if (feedback) feedback.innerHTML = "";
-      });
-      document.getElementById('phoneticScoreBadge').innerText = `Score : 0 / 10`;
-    }
 
-    /* ==========================================================================
-       5. ASSOCIATIONS ESPAGNOL DU MEXIQUE / FRANÇAIS
-       ========================================================================== */
-    const matchingData = [
-      {
-        id: "m1",
-        es: "De niño, me gustaba ir al tianguis los domingos con mis abuelos.",
-        fr: "Quand j'étais enfant, j'aimais aller au marché le dimanche avec mes grands-parents."
-      },
-      {
-        id: "m2",
-        es: "En esa época no había celulares y la gente platicaba más en la calle.",
-        fr: "À cette époque, il n'y avait pas de portables et les gens parlaient plus dans la rue."
-      },
-      {
-        id: "m3",
-        es: "Cada vacaciones íbamos a Acapulco porque mi tío tenía una casa allá.",
-        fr: "À chaque vacances, nous allions à Acapulco car mon oncle avait une maison là-bas."
-      },
-      {
-        id: "m4",
-        es: "Hacía muchísimo calor y siempre teníamos sed después del partido.",
-        fr: "Il faisait très chaud et nous avions toujours soif après le match."
-      },
-      {
-        id: "m5",
-        es: "Mi mamá siempre preparaba chocolate caliente cuando llovía toda la tarde.",
-        fr: "Ma mère préparait toujours du chocolat chaud quand il pleuvait toute l'après-midi."
-      }
-    ];
+        // Lecteur pour martiniquaise.mp3 avec bascule lecture / fallback
+        function toggleAudioPlayer() {
+            const audio = document.getElementById('realAudio');
+            const playBtn = document.getElementById('audioPlayBtn');
+            const status = document.getElementById('audioStatusText');
 
-    function renderMatchingExercise() {
-      const container = document.getElementById('matchingContainer');
-      if (!container) return;
+            if (!audio) return;
 
-      const frOptions = [...matchingData].map(d => d.fr).sort(() => 0.5 - Math.random());
-
-      container.innerHTML = matchingData.map((item, idx) => `
-        <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-lg space-y-2 text-xs sm:text-sm">
-          <p class="font-bold text-slate-800">
-            <span class="bg-inspire-greenDark text-white px-1.5 py-0.5 rounded text-[11px] mr-1">🇲🇽 ${idx + 1}</span>
-            « ${item.es} »
-          </p>
-          <div class="flex flex-col sm:flex-row sm:items-center gap-2 pt-1">
-            <label for="match-select-${item.id}" class="font-bold text-inspire-greenDark whitespace-nowrap">Équivalent français :</label>
-            <select id="match-select-${item.id}" class="w-full bg-white border border-slate-300 rounded p-1.5 text-xs text-slate-800 outline-none focus:border-inspire-green">
-              <option value="">-- Choisissez la bonne traduction --</option>
-              ${frOptions.map(fr => `<option value="${encodeURIComponent(fr)}">${fr}</option>`).join('')}
-            </select>
-          </div>
-          <div id="match-feedback-${item.id}" class="text-xs font-bold pt-1"></div>
-        </div>
-      `).join('');
-    }
-
-    function checkMatchingExercise() {
-      let score = 0;
-      matchingData.forEach(item => {
-        const select = document.getElementById(`match-select-${item.id}`);
-        const fb = document.getElementById(`match-feedback-${item.id}`);
-        const val = select ? decodeURIComponent(select.value) : "";
-
-        if (val === item.fr) {
-          score++;
-          fb.innerHTML = `<span class="text-inspire-greenDark">✓ Correspondance exacte !</span>`;
-          select.className = "w-full bg-inspire-greenLight border-2 border-inspire-green rounded p-1.5 text-xs text-inspire-greenDark font-bold";
-        } else {
-          fb.innerHTML = `<span class="text-inspire-red">✗ Réponse : « ${item.fr} »</span>`;
-          select.className = "w-full bg-inspire-redLight border-2 border-inspire-red rounded p-1.5 text-xs text-inspire-red";
+            if (audio.paused) {
+                audio.play().then(() => {
+                    playBtn.innerHTML = '⏸';
+                    status.innerText = 'Lecture du fichier MP3...';
+                }).catch(() => {
+                    // Fallback si le fichier MP3 n'est pas encore présent dans le dossier
+                    status.innerText = 'Lecture vocale automatique (fallback)...';
+                    speakTranscription();
+                    playBtn.innerHTML = '⏸';
+                    setTimeout(() => { playBtn.innerHTML = '▶'; status.innerText = 'Écoute terminée'; }, 18000);
+                });
+            } else {
+                audio.pause();
+                playBtn.innerHTML = '▶';
+                status.innerText = 'En pause';
+            }
         }
-      });
-      document.getElementById('matchingScoreBadge').innerText = `Score : ${score} / 5`;
-      if (score === 5) showToast("Excellent ! Correspondances 5/5 validées.", "success");
-    }
 
-    function resetMatchingExercise() {
-      matchingData.forEach(item => {
-        const select = document.getElementById(`match-select-${item.id}`);
-        const fb = document.getElementById(`match-feedback-${item.id}`);
-        if (select) {
-          select.value = "";
-          select.className = "w-full bg-white border border-slate-300 rounded p-1.5 text-xs text-slate-800 outline-none";
+        const realAudioElem = document.getElementById('realAudio');
+        if (realAudioElem) {
+            realAudioElem.onended = function() {
+                document.getElementById('audioPlayBtn').innerHTML = '▶';
+                document.getElementById('audioStatusText').innerText = 'Écoute terminée';
+            };
         }
-        if (fb) fb.innerHTML = "";
-      });
-      document.getElementById('matchingScoreBadge').innerText = `Score : 0 / 5`;
-    }
 
-    /* ==========================================================================
-       6. EXERCICES DE SYSTÉMATISATION (QCM, PHRASES À TROUS, DICTÉES)
-       ========================================================================== */
-    const qcmQuestions = [
-      {
-        q: "Quand j'étais petit, nous (habiter) dans un petit village.",
-        choices: [
-          { text: "habitions", correct: true },
-          { text: "habitaient", correct: false },
-          { text: "habitiez", correct: false }
-        ]
-      },
-      {
-        q: "Mon père (être) maçon au début des années 60.",
-        choices: [
-          { text: "était", correct: true },
-          { text: "étiez", correct: false },
-          { text: "été", correct: false }
-        ]
-      },
-      {
-        q: "Est-ce que vous (connaître) déjà vos voisins à l'époque ?",
-        choices: [
-          { text: "connaissiez", correct: true },
-          { text: "connaissions", correct: false },
-          { text: "connaissait", correct: false }
-        ]
-      },
-      {
-        q: "Elles (prendre) le métro tous les matins pour travailler.",
-        choices: [
-          { text: "prenaient", correct: true },
-          { text: "prenait", correct: false },
-          { text: "prenions", correct: false }
-        ]
-      },
-      {
-        q: "Tu (faire) du vélo tous les après-midis.",
-        choices: [
-          { text: "faisais", correct: true },
-          { text: "faisait", correct: false },
-          { text: "faisiez", correct: false }
-        ]
-      },
-      {
-        q: "Nous (devoir) travailler de longues heures.",
-        choices: [
-          { text: "devions", correct: true },
-          { text: "devaient", correct: false },
-          { text: "deviez", correct: false }
-        ]
-      },
-      {
-        q: "La famille (avoir) une maison très modeste.",
-        choices: [
-          { text: "avait", correct: true },
-          { text: "avaient", correct: false },
-          { text: "avais", correct: false }
-        ]
-      },
-      {
-        q: "Je ne (savoir) pas encore bien parler français.",
-        choices: [
-          { text: "savais", correct: true },
-          { text: "savait", correct: false },
-          { text: "savaient", correct: false }
-        ]
-      }
-    ];
-
-    function renderQCM() {
-      const container = document.getElementById('qcmList');
-      if (!container) return;
-      container.innerHTML = qcmQuestions.map((item, qIdx) => `
-        <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg space-y-2 text-xs sm:text-sm">
-          <p class="font-bold text-slate-800">${qIdx + 1}. ${item.q}</p>
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-            ${item.choices.map(c => `
-              <label class="flex items-center gap-2 p-2 bg-white border border-slate-300 rounded cursor-pointer hover:border-inspire-green">
-                <input type="radio" name="qcm-${qIdx}" value="${c.correct ? '1' : '0'}" class="text-inspire-green">
-                <span class="font-semibold text-slate-800">${c.text}</span>
-              </label>
-            `).join('')}
-          </div>
-          <div id="qcm-feedback-${qIdx}" class="font-bold text-xs"></div>
-        </div>
-      `).join('');
-    }
-
-    function checkQCM() {
-      let score = 0;
-      qcmQuestions.forEach((item, qIdx) => {
-        const checked = document.querySelector(`input[name="qcm-${qIdx}"]:checked`);
-        const fb = document.getElementById(`qcm-feedback-${qIdx}`);
-        if (checked && checked.value === "1") {
-          score++;
-          fb.innerHTML = `<span class="text-inspire-greenDark">✓ Correct !</span>`;
-        } else {
-          const correctChoice = item.choices.find(c => c.correct).text;
-          fb.innerHTML = `<span class="text-inspire-red">✗ Réponse : ${correctChoice}</span>`;
+        function speakTranscription() {
+            const script = "Je suis née à la Martinique en 1973. Mes parents étaient modestes, ils n'avaient pas d'argent. Ma mère travaillait dans un magasin. Mon père était ouvrier, il était réservé mais généreux. On habitait un petit village. À la maison, il y avait mon petit frère Gabriel, et Zoé. Zoé, c'était la fille de mon père et de sa première femme. Zoé et moi, on se disputait tout le temps ! Ma mère était très souriante, elle avait beaucoup d'énergie, elle adorait s'amuser. Avec mon père, on allait au marché le samedi. On achetait du poisson et on le mangeait avec des petits légumes frais, c'était délicieux ! À cette époque-là, c'était agréable, nous connaissions tout le monde dans le village. Quand j'avais dix ans, nous avons déménagé. Nous sommes venus à Paris. C'était dur, il faisait froid et bien sûr... il n'y avait pas la mer !";
+            speakFrench(script);
         }
-      });
-      document.getElementById('ex1Score').innerText = `${score} / 8`;
-      updateTotalSystematisation();
-    }
 
-    const fillQuestions = [
-      { pre: "Autrefois, mes parents", v: "habiter", post: "à Paris.", ans: "habitaient" },
-      { pre: "Pendant son enfance, Joséphine", v: "adorer", post: "la danse.", ans: "adorait" },
-      { pre: "Vous", v: "finir", post: "toujours vos devoirs à l'heure.", ans: "finissiez" },
-      { pre: "Nous", v: "choisir", post: "des livres passionnants.", ans: "choisissions" },
-      { pre: "Tous les soirs, je", v: "lire", post: "un roman.", ans: "lisais" },
-      { pre: "Les ouvriers", v: "devoir", post: "partir tôt.", ans: "devaient" },
-      { pre: "Mon frère et moi,", v: "faire", post: "du sport.", ans: "faisions" },
-      { pre: "Elle", v: "pouvoir", post: "parler trois langues.", ans: "pouvait" },
-      { pre: "Tu", v: "aller", post: "au cinéma chaque week-end.", ans: "allais" }
-    ];
-
-    function renderFillBlanks() {
-      const container = document.getElementById('fillBlanksList');
-      if (!container) return;
-      container.innerHTML = fillQuestions.map((item, idx) => `
-        <div class="p-2.5 bg-slate-50 border border-slate-200 rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs sm:text-sm">
-          <div class="flex items-center gap-1.5 flex-wrap">
-            <span class="font-bold text-slate-800">${idx + 1}.</span>
-            <span>${item.pre}</span>
-            <span class="font-bold text-inspire-greenDark">(${item.v})</span>
-            <input type="text" id="fill-input-${idx}" class="w-32 px-2.5 py-1 bg-white border border-slate-300 rounded font-semibold text-slate-800 outline-none focus:border-inspire-green" placeholder="forme..." />
-            <span>${item.post}</span>
-          </div>
-          <div id="fill-feedback-${idx}" class="font-bold text-xs shrink-0"></div>
-        </div>
-      `).join('');
-    }
-
-    function checkFillBlanks() {
-      let score = 0;
-      fillQuestions.forEach((item, idx) => {
-        const input = document.getElementById(`fill-input-${idx}`);
-        const fb = document.getElementById(`fill-feedback-${idx}`);
-        const val = input ? input.value.trim().toLowerCase() : "";
-
-        if (val === item.ans.toLowerCase()) {
-          score++;
-          fb.innerHTML = `<span class="text-inspire-greenDark">✓ Bravo !</span>`;
-          input.className = "w-32 px-2.5 py-1 bg-inspire-greenLight border-2 border-inspire-green rounded font-bold text-inspire-greenDark";
-        } else {
-          fb.innerHTML = `<span class="text-inspire-red">✗ ${item.ans}</span>`;
-          input.className = "w-32 px-2.5 py-1 bg-inspire-redLight border-2 border-inspire-red rounded text-inspire-red";
+        // ===================================================================
+        // 2. GESTION DES ONGLETS
+        // ===================================================================
+        function switchTab(tabId) {
+            ['tab1', 'tab2', 'tab3', 'tab4'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+                const btn = document.getElementById('btn-' + id);
+                btn.className = 'tab-btn bg-white hover:bg-slate-100 text-slate-700 px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 whitespace-nowrap transition-all touch-btn';
+            });
+            document.getElementById(tabId).classList.remove('hidden');
+            const activeBtn = document.getElementById('btn-' + tabId);
+            activeBtn.className = 'tab-btn active px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 whitespace-nowrap transition-all touch-btn';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-      });
-      document.getElementById('ex2Score').innerText = `${score} / 9`;
-      updateTotalSystematisation();
-    }
 
-    const audioQuestions = [
-      { audio: "Mon père travaillait comme maçon.", ans: "travaillait", pre: "Mon père", post: "comme maçon." },
-      { audio: "Nous n'avions pas d'appareil photo.", ans: "avions", pre: "Nous n'", post: "pas d'appareil photo." },
-      { audio: "À cette époque, ils étaient très jeunes.", ans: "étaient", pre: "À cette époque, ils", post: "très jeunes." },
-      { audio: "Ma mère était toujours souriante.", ans: "était", pre: "Ma mère", post: "toujours souriante." },
-      { audio: "Nous allions souvent visiter des musées.", ans: "allions", pre: "Nous", post: "souvent visiter des musées." },
-      { audio: "Ils ne parlaient pas bien la langue.", ans: "parlaient", pre: "Ils ne", post: "pas bien la langue." },
-      { audio: "Tu prenais le bus à six heures.", ans: "prenais", pre: "Tu", post: "le bus à six heures." },
-      { audio: "Vous saviez toute l'histoire.", ans: "saviez", pre: "Vous", post: "toute l'histoire." },
-      { audio: "Je finissais mon service tard.", ans: "finissais", pre: "Je", post: "mon service tard." }
-    ];
+        // ===================================================================
+        // 3. SÉLECTEUR DES 10 AUTRES VERBES (ONGLET 1)
+        // ===================================================================
+        const VERB_DATA = {
+            aller: { radical: "all-", forms: ["j'allais", "tu allais", "il/elle allait", "nous allions", "vous alliez", "ils/elles allaient"] },
+            prendre: { radical: "pren-", forms: ["je prenais", "tu prenais", "il/elle prenait", "nous prenions", "vous preniez", "ils/elles prenaient"] },
+            lire: { radical: "lis-", forms: ["je lisais", "tu lisais", "il/elle lisait", "nous lisions", "vous lisiez", "ils/elles lisaient"] },
+            connaitre: { radical: "connaiss-", forms: ["je connaissais", "tu connaissais", "il/elle connaissait", "nous connaissions", "vous connaissiez", "ils/elles connaissaient"] },
+            faire: { radical: "fais-", forms: ["je faisais", "tu faisais", "il/elle faisait", "nous faisions", "vous faisiez", "ils/elles faisaient"] },
+            devoir: { radical: "dev-", forms: ["je devais", "tu devais", "il/elle devait", "nous devions", "vous deviez", "ils/elles devaient"] },
+            savoir: { radical: "sav-", forms: ["je savais", "tu savais", "il/elle savait", "nous savions", "vous saviez", "ils/elles savaient"] },
+            pouvoir: { radical: "pouv-", forms: ["je pouvais", "tu pouvais", "il/elle pouvait", "nous pouvions", "vous pouviez", "ils/elles pouvaient"] },
+            finir: { radical: "finiss-", forms: ["je finissais", "tu finissais", "il/elle finissait", "nous finissions", "vous finissiez", "ils/elles finissaient"] },
+            choisir: { radical: "choisiss-", forms: ["je choisissais", "tu choisissais", "il/elle choisissait", "nous choisissions", "vous choisissiez", "ils/elles choisissaient"] }
+        };
 
-    function playDictationAudio(idx) {
-      if (audioQuestions[idx] && audioQuestions[idx].audio) {
-        speakFrench(audioQuestions[idx].audio);
-      }
-    }
+        function renderSelectedVerb() {
+            const verbKey = document.getElementById('verbSelector').value;
+            const data = VERB_DATA[verbKey];
+            const container = document.getElementById('verbDisplayArea');
+            container.innerHTML = '';
 
-    function renderAudioFill() {
-      const container = document.getElementById('audioFillList');
-      if (!container) return;
-      container.innerHTML = audioQuestions.map((item, idx) => `
-        <div class="p-2.5 bg-slate-50 border border-slate-200 rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs sm:text-sm">
-          <div class="flex items-center gap-1.5 flex-wrap">
-            <span class="font-bold text-slate-800">${idx + 1}.</span>
-            <button onclick="playDictationAudio(${idx})" class="touch-btn px-2 py-0.5 bg-inspire-green text-white text-xs font-bold rounded flex items-center gap-1">
-              🔊
-            </button>
-            <span>${item.pre}</span>
-            <input type="text" id="audio-input-${idx}" class="w-32 px-2.5 py-1 bg-white border border-slate-300 rounded font-semibold text-slate-800 outline-none focus:border-inspire-green" placeholder="verbe..." />
-            <span>${item.post}</span>
-          </div>
-          <div id="audio-feedback-${idx}" class="font-bold text-xs shrink-0"></div>
-        </div>
-      `).join('');
-    }
-
-    function checkAudioFill() {
-      let score = 0;
-      audioQuestions.forEach((item, idx) => {
-        const input = document.getElementById(`audio-input-${idx}`);
-        const fb = document.getElementById(`audio-feedback-${idx}`);
-        const val = input ? input.value.trim().toLowerCase() : "";
-
-        if (val === item.ans.toLowerCase()) {
-          score++;
-          fb.innerHTML = `<span class="text-inspire-greenDark">✓ Bravo !</span>`;
-          input.className = "w-32 px-2.5 py-1 bg-inspire-greenLight border-2 border-inspire-green rounded font-bold text-inspire-greenDark";
-        } else {
-          fb.innerHTML = `<span class="text-inspire-red">✗ ${item.ans}</span>`;
-          input.className = "w-32 px-2.5 py-1 bg-inspire-redLight border-2 border-inspire-red rounded text-inspire-red";
+            data.forms.forEach(form => {
+                const card = document.createElement('div');
+                card.className = 'bg-white p-2.5 rounded-xl border border-slate-200 flex items-center justify-between shadow-xs';
+                card.innerHTML = `
+                    <span class="font-medium text-slate-800 text-xs sm:text-sm">${form}</span>
+                    <button onclick="speakFrench('${form.replace(/'/g, "\\'")}')" class="touch-btn p-1 text-inspireGreen hover:bg-emerald-50 rounded-lg text-base" title="Écouter">🔊</button>
+                `;
+                container.appendChild(card);
+            });
         }
-      });
-      document.getElementById('ex3Score').innerText = `${score} / 9`;
-      updateTotalSystematisation();
-    }
 
-    function updateTotalSystematisation() {
-      const s1 = parseInt(document.getElementById('ex1Score').innerText) || 0;
-      const s2 = parseInt(document.getElementById('ex2Score').innerText) || 0;
-      const s3 = parseInt(document.getElementById('ex3Score').innerText) || 0;
-      document.getElementById('totalExerciseScore').innerText = `Score total : ${s1 + s2 + s3} / 26`;
-    }
+        // ===================================================================
+        // 4. PHONÉTIQUE : PRATIQUE 10 PHRASES
+        // ===================================================================
+        const PHONETIC_ITEMS = [
+            { id: 1, pre: "1. Les enfants", target: "jouaient", post: "dans le jardin.", spoken: "jouaient" },
+            { id: 2, pre: "2. Avant, ma mère", target: "travaillait", post: "à l'usine.", spoken: "travaillait" },
+            { id: 3, pre: "3. Mon grand-père", target: "était", post: "très gentil.", spoken: "était" },
+            { id: 4, pre: "4. J'", target: "avais", post: "un chien fidèle.", spoken: "avais" },
+            { id: 5, pre: "5. Quand tu", target: "avais", post: "10 ans...", spoken: "avais" },
+            { id: 6, pre: "6. Nous", target: "prenions", post: "le train de nuit.", spoken: "prenions" },
+            { id: 7, pre: "7. Vous", target: "lisiez", post: "ce journal chaque matin.", spoken: "lisiez" },
+            { id: 8, pre: "8. Ils", target: "faisaient", post: "leurs devoirs.", spoken: "faisaient" },
+            { id: 9, pre: "9. Elle", target: "savait", post: "toujours la réponse.", spoken: "savait" },
+            { id: 10, pre: "10. À cette époque, nous", target: "finissions", post: "à 17 heures.", spoken: "finissions" }
+        ];
 
-    /* ==========================================================================
-       7. DOCUMENTS CULTURELS & ATELIER D'ÉCRITURE GUIDÉ
-       ========================================================================== */
-    let doc1Checked = false;
-    let doc2Checked = false;
-
-    function checkDoc1Quiz() {
-      let score = 0;
-      for (let i = 1; i <= 3; i++) {
-        const checked = document.querySelector(`input[name="d1q${i}"]:checked`);
-        if (checked && checked.value === "correct") score++;
-      }
-      doc1Checked = true;
-      const fb = document.getElementById('doc1Feedback');
-      fb.classList.remove('hidden', 'bg-inspire-greenLight', 'text-inspire-greenDark', 'bg-amber-100', 'text-amber-900');
-      if (score === 3) {
-        fb.classList.add('bg-inspire-greenLight', 'text-inspire-greenDark');
-        fb.innerText = "Excellent ! 3/3. Vous comprenez très bien l'article de Lucilia Campos.";
-      } else {
-        fb.classList.add('bg-amber-100', 'text-amber-900');
-        fb.innerText = `Score : ${score} / 3. Relisez attentivement le texte pour repérer les détails.`;
-      }
-      updateTranscriptionUnlockStatus();
-    }
-
-    const josephineFullScript = "Je suis née à la Martinique en 1973. Mes parents étaient modestes, ils n'avaient pas d'argent. Ma mère travaillait dans un magasin. Mon père était ouvrier, il était réservé mais généreux. On habitait un petit village. À la maison, il y avait mon petit frère Gabriel et Zoé. Zoé, c'était la fille de mon père et de sa première femme. Zoé et moi, on se disputait tout le temps ! Ma mère était très souriante, elle avait beaucoup d'énergie, elle adorait s'amuser. Avec mon père, on allait au marché le samedi. On achetait du poisson et on le mangeait avec des petits légumes frais, c'était délicieux ! À cette époque-là, c'était agréable, nous connaissions tout le monde dans le village. Quand j'avais dix ans, nous avons déménagé. Nous sommes venus à Paris. C'était dur, il faisait froid et bien sûr... il n'y avait pas la mer !";
-
-    let isAudioPlaying = false;
-
-    function toggleAudioPlayback() {
-      const audioEl = document.getElementById('martiniquaiseAudio');
-      const btn = document.getElementById('btnPlayJosephine');
-      const indicator = document.getElementById('audioSourceIndicator');
-
-      if (!audioEl) return;
-
-      if (!audioEl.paused && !audioEl.ended) {
-        audioEl.pause();
-        isAudioPlaying = false;
-        if (btn) btn.innerText = "▶";
-        if (indicator) indicator.innerText = "Audio en pause";
-      } else {
-        // Appliquer la vitesse choisie
-        const rateSelect = document.getElementById('martiniqueRateSelect');
-        const rate = rateSelect ? parseFloat(rateSelect.value) || 1.0 : 1.0;
-        audioEl.playbackRate = rate;
-
-        const playPromise = audioEl.play();
-        if (playPromise !== undefined) {
-          playPromise.then(() => {
-            isAudioPlaying = true;
-            if (btn) btn.innerText = "⏸";
-            if (indicator) indicator.innerText = `Lecture : martiniquaise.mp3 (${rate}x)`;
-          }).catch(() => {
-            // Repli gracieux sur la synthèse vocale si le fichier n'est pas trouvé dans le répertoire
-            if (indicator) indicator.innerText = "Fichier local non trouvé • Repli sur synthèse vocale";
-            speakFrench(josephineFullScript);
-            if (btn) btn.innerText = "⏹";
-            const timer = setInterval(() => {
-              if (!window.speechSynthesis.speaking) {
-                if (btn) btn.innerText = "▶";
-                clearInterval(timer);
-              }
-            }, 500);
-          });
+        function renderPhoneticPractice() {
+            const container = document.getElementById('phoneticPracticeList');
+            container.innerHTML = '';
+            PHONETIC_ITEMS.forEach(item => {
+                const row = document.createElement('div');
+                row.className = 'flex flex-wrap sm:flex-nowrap items-center gap-2 bg-white p-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm';
+                row.innerHTML = `
+                    <span class="font-medium text-slate-800">${item.pre}</span>
+                    <button onclick="speakFrench('${item.spoken}')" class="touch-btn px-2 py-1 bg-emerald-50 text-inspireDarkGreen hover:bg-emerald-100 rounded-lg text-sm border border-emerald-200" title="Écouter le verbe">🔊 Écouter</button>
+                    <input type="text" id="ph-input-${item.id}" placeholder="verbe" class="w-32 px-2.5 py-1.5 border border-slate-300 rounded-lg focus:outline-none focus:border-inspireGreen text-slate-800 font-semibold text-center">
+                    <span class="text-slate-600">${item.post}</span>
+                    <span id="ph-feedback-${item.id}" class="ml-auto font-bold text-xs"></span>
+                `;
+                container.appendChild(row);
+            });
         }
-      }
-    }
 
-    function onAudioEnded() {
-      isAudioPlaying = false;
-      const btn = document.getElementById('btnPlayJosephine');
-      const indicator = document.getElementById('audioSourceIndicator');
-      if (btn) btn.innerText = "▶";
-      if (indicator) indicator.innerText = "Lecture terminée";
-    }
+        function checkPhoneticPractice() {
+            let correct = 0;
+            PHONETIC_ITEMS.forEach(item => {
+                const input = document.getElementById(`ph-input-${item.id}`);
+                const feedback = document.getElementById(`ph-feedback-${item.id}`);
+                const val = input.value.trim().toLowerCase();
 
-    function changeMartiniqueAudioRate() {
-      const audioEl = document.getElementById('martiniquaiseAudio');
-      const rateSelect = document.getElementById('martiniqueRateSelect');
-      if (audioEl && rateSelect) {
-        audioEl.playbackRate = parseFloat(rateSelect.value) || 1.0;
-      }
-    }
+                if (val === item.target.toLowerCase()) {
+                    correct++;
+                    feedback.innerHTML = '<span class="text-emerald-600">✓ Exact</span>';
+                    input.className = 'w-32 px-2.5 py-1.5 border-2 border-emerald-500 bg-emerald-50 rounded-lg text-slate-800 font-bold text-center';
+                } else {
+                    feedback.innerHTML = `<span class="text-red-600">✗ (${item.target})</span>`;
+                    input.className = 'w-32 px-2.5 py-1.5 border-2 border-red-400 bg-red-50 rounded-lg text-slate-800 font-bold text-center';
+                }
+            });
+            document.getElementById('phoneticPracticeScore').innerText = `Score : ${correct} / 10`;
+        }
 
-    function updateTranscriptionUnlockStatus() {
-      const unlockZone = document.getElementById('transcriptionUnlockZone');
-      if (!unlockZone) return;
+        // ===================================================================
+        // 5. ASSOCIATION MEXIQUE / FRANCE (ONGLET 2)
+        // ===================================================================
+        const MATCHING_DATA = [
+            { id: 1, es: "1. Cuando era chavo, jugaba fútbol en la calle.", frCorrect: "Quand j'étais jeune, je jouais au foot dans la rue." },
+            { id: 2, es: "2. Antes, mi abuelita cocinaba frijoles todos los domingos.", frCorrect: "Avant, ma grand-mère cuisinait des haricots tous les dimanches." },
+            { id: 3, es: "3. Hacía un calor tremendo en las tardes.", frCorrect: "Il faisait une chaleur terrible l'après-midi." },
+            { id: 4, es: "4. No teníamos coche, así que caminábamos mucho.", frCorrect: "Nous n'avions pas de voiture, donc nous marchions beaucoup." },
+            { id: 5, es: "5. ¿Qué hacías cuando vivías en Guadalajara?", frCorrect: "Qu'est-ce que tu faisais quand tu habitais à Guadalajara ?" }
+        ];
 
-      if (doc1Checked && doc2Checked) {
-        unlockZone.innerHTML = `
-          <button onclick="toggleScriptText()" class="touch-btn px-3 py-1.5 bg-inspire-green text-white text-xs font-bold rounded-lg hover:bg-inspire-greenDark shadow-sm transition flex items-center gap-1.5 animate-pulse">
-            <span>🔓</span> Consulter la transcription
-          </button>
-        `;
-        showToast("Félicitations ! Les 2 activités sont vérifiées : transcription débloquée.", "success");
-      } else {
-        const remaining = (!doc1Checked && !doc2Checked) ? "les 2 activités" : (!doc1Checked ? "le Doc 2" : "la compréhension orale");
-        unlockZone.innerHTML = `
-          <span class="text-[11px] text-slate-500 italic bg-slate-100 px-2.5 py-1 rounded">
-            🔒 Vérifiez ${remaining} pour débloquer la transcription
-          </span>
-        `;
-      }
-    }
+        const ALL_FR_OPTIONS = [
+            "Qu'est-ce que tu faisais quand tu habitais à Guadalajara ?",
+            "Quand j'étais jeune, je jouais au foot dans la rue.",
+            "Il faisait une chaleur terrible l'après-midi.",
+            "Nous n'avions pas de voiture, donc nous marchions beaucoup.",
+            "Avant, ma grand-mère cuisinait des haricots tous les dimanches."
+        ];
 
-    function toggleScriptText() {
-      const box = document.getElementById('josephineScriptBox');
-      if (box) box.classList.toggle('hidden');
-    }
+        function renderMatching() {
+            const container = document.getElementById('matchingPairsContainer');
+            container.innerHTML = '';
+            MATCHING_DATA.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'p-3 bg-slate-50 rounded-xl border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs sm:text-sm';
+                
+                let selectOptions = '<option value="">-- Choisir la traduction française correspondante --</option>';
+                ALL_FR_OPTIONS.forEach(opt => {
+                    selectOptions += `<option value="${opt}">${opt}</option>`;
+                });
 
-    const audioTFQuestions = [
-      { q: "Joséphine est née à Paris en 1973.", ans: "faux" },
-      { q: "Ses parents étaient modestes et n'avaient pas d'argent.", ans: "vrai" },
-      { q: "Sa mère travaillait dans un magasin.", ans: "vrai" },
-      { q: "Avec Zoé, elle ne se disputait jamais.", ans: "faux" },
-      { q: "Le samedi, elle allait au marché avec son père.", ans: "vrai" },
-      { q: "À Paris, il faisait chaud et il y avait la mer.", ans: "faux" }
-    ];
+                div.innerHTML = `
+                    <div class="font-medium text-slate-800 md:w-1/2">
+                        <span class="text-amber-700 font-bold">🇲🇽</span> ${item.es}
+                    </div>
+                    <div class="md:w-1/2 flex items-center gap-2">
+                        <select id="match-select-${item.id}" class="w-full p-2 border border-slate-300 rounded-lg text-xs sm:text-sm bg-white focus:outline-none focus:ring-1 focus:ring-inspireGreen">
+                            ${selectOptions}
+                        </select>
+                        <span id="match-fb-${item.id}" class="font-bold text-xs whitespace-nowrap"></span>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
 
-    function renderAudioQuestions() {
-      const container = document.getElementById('audioQuestionsList');
-      if (!container) return;
-      container.innerHTML = audioTFQuestions.map((item, idx) => `
-        <div class="p-2.5 bg-slate-50 border border-slate-200 rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-          <span class="font-medium text-slate-800">${idx + 1}. ${item.q}</span>
-          <div class="flex items-center gap-3 shrink-0 font-bold">
-            <label class="flex items-center gap-1 cursor-pointer">
-              <input type="radio" name="tf-${idx}" value="vrai" class="text-inspire-green">
-              <span class="text-inspire-greenDark">Vrai</span>
-            </label>
-            <label class="flex items-center gap-1 cursor-pointer">
-              <input type="radio" name="tf-${idx}" value="faux" class="text-inspire-red">
-              <span class="text-inspire-red">Faux</span>
-            </label>
-          </div>
-        </div>
-      `).join('');
-    }
+        function checkMatching() {
+            let count = 0;
+            MATCHING_DATA.forEach(item => {
+                const select = document.getElementById(`match-select-${item.id}`);
+                const fb = document.getElementById(`match-fb-${item.id}`);
+                if (select.value === item.frCorrect) {
+                    count++;
+                    fb.innerHTML = '<span class="text-emerald-600">✓ Exact</span>';
+                    select.className = 'w-full p-2 border-2 border-emerald-500 bg-emerald-50 rounded-lg text-xs sm:text-sm';
+                } else {
+                    fb.innerHTML = '<span class="text-red-600">✗ Erreur</span>';
+                    select.className = 'w-full p-2 border-2 border-red-400 bg-red-50 rounded-lg text-xs sm:text-sm';
+                }
+            });
+            document.getElementById('matchingScore').innerText = `Score : ${count} / 5`;
+        }
 
-    function checkAudioQuiz() {
-      let score = 0;
-      audioTFQuestions.forEach((item, idx) => {
-        const checked = document.querySelector(`input[name="tf-${idx}"]:checked`);
-        if (checked && checked.value === item.ans) score++;
-      });
-      doc2Checked = true;
-      const fb = document.getElementById('audioQuizFeedback');
-      fb.classList.remove('hidden', 'bg-inspire-greenLight', 'text-inspire-greenDark', 'bg-amber-100', 'text-amber-900');
-      if (score >= 5) {
-        fb.classList.add('bg-inspire-greenLight', 'text-inspire-greenDark');
-        fb.innerText = `Bravo ! Score : ${score} / 6. Excellente compréhension orale.`;
-      } else {
-        fb.classList.add('bg-amber-100', 'text-amber-900');
-        fb.innerText = `Score : ${score} / 6. Réécoutez l'enregistrement audio ou vérifiez vos réponses.`;
-      }
-      updateTranscriptionUnlockStatus();
-    }
+        // ===================================================================
+        // 6. EXERCICES DE SYSTÉMATISATION (ONGLET 3)
+        // ===================================================================
+        const QCM_DATA = [
+            { id: 1, q: "1. Quand nous (être) petits, nous adorions la mer.", options: ["étions", "étiez", "étaient"], ans: "étions" },
+            { id: 2, q: "2. Tu (prendre) souvent le métro à 8h ?", options: ["prenait", "prenais", "preniez"], ans: "prenais" },
+            { id: 3, q: "3. Mes grands-parents (avoir) une maison à la campagne.", options: ["avions", "avait", "avaient"], ans: "avaient" },
+            { id: 4, q: "4. Vous (faire) du sport le samedi matin ?", options: ["faisiez", "faisions", "faisaient"], ans: "faisiez" },
+            { id: 5, q: "5. À cette époque, elle (finir) son travail tard.", options: ["finissait", "finissais", "finissaient"], ans: "finissait" },
+            { id: 6, q: "6. Je ne (connaître) pas encore cette ville.", options: ["connaissait", "connaissais", "connaissions"], ans: "connaissais" },
+            { id: 7, q: "7. Ils (devoir) se lever très tôt.", options: ["devait", "devions", "devaient"], ans: "devaient" },
+            { id: 8, q: "8. On (lire) beaucoup d'histoires le soir.", options: ["lisait", "lisais", "lisions"], ans: "lisait" }
+        ];
 
-    function analyzeWritingProduction() {
-      const text = document.getElementById('sadiStoryInput').value.trim();
-      const fb = document.getElementById('writingFeedbackBox');
-      fb.classList.remove('hidden', 'bg-inspire-redLight', 'text-inspire-red', 'bg-inspire-greenLight', 'text-inspire-greenDark', 'bg-slate-100', 'text-slate-800');
+        function renderQCM() {
+            const container = document.getElementById('qcmList');
+            container.innerHTML = '';
+            QCM_DATA.forEach(item => {
+                const box = document.createElement('div');
+                box.className = 'p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm space-y-2';
+                
+                let optHtml = '<div class="grid grid-cols-1 sm:grid-cols-3 gap-2">';
+                item.options.forEach(opt => {
+                    optHtml += `
+                        <label class="flex items-center gap-2 p-2 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                            <input type="radio" name="qcm-${item.id}" value="${opt}" class="text-inspireGreen">
+                            <span>${opt}</span>
+                        </label>
+                    `;
+                });
+                optHtml += '</div>';
 
-      if (text.length < 35) {
-        fb.classList.add('bg-inspire-redLight', 'text-inspire-red');
-        fb.innerText = "Votre texte est un peu court. Racontez le passé de Sadi au Mali (imparfait) puis terminez par sa vie aujourd'hui en France (présent).";
-        return;
-      }
+                box.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="font-semibold text-slate-800">${item.q}</span>
+                        <span id="qcm-fb-${item.id}" class="text-xs font-bold"></span>
+                    </div>
+                    ${optHtml}
+                `;
+                container.appendChild(box);
+            });
+        }
 
-      const hasHabitait = /habitait/i.test(text);
-      const hasAvait = /avait/i.test(text);
-      const hasTravaillait = /travaillait/i.test(text);
-      const hasPresent = /(aujourd'hui|maintenant|vit|habite|est|travaille)/i.test(text);
+        let scoreQCMVal = 0;
+        function checkQCM() {
+            scoreQCMVal = 0;
+            QCM_DATA.forEach(item => {
+                const selected = document.querySelector(`input[name="qcm-${item.id}"]:checked`);
+                const fb = document.getElementById(`qcm-fb-${item.id}`);
+                if (selected && selected.value === item.ans) {
+                    scoreQCMVal++;
+                    fb.innerHTML = '<span class="text-emerald-600">✓ Correct</span>';
+                } else {
+                    fb.innerHTML = `<span class="text-red-600">✗ (${item.ans})</span>`;
+                }
+            });
+            document.getElementById('scoreEx1').innerText = `Score : ${scoreQCMVal}/8`;
+            updateTotalTab3();
+        }
 
-      let found = [hasHabitait, hasAvait, hasTravaillait].filter(Boolean).length;
+        // Exercice 2 : Fill in the blanks
+        const BLANKS_DATA = [
+            { id: 1, pre: "1. En 2010, vous (habiter)", target: "habitiez", post: "en Espagne." },
+            { id: 2, pre: "2. Nous (choisir)", target: "choisissions", post: "toujours le même plat." },
+            { id: 3, pre: "3. Il ne (pouvoir)", target: "pouvait", post: "pas venir à la fête." },
+            { id: 4, pre: "4. Ma sœur (aimer)", target: "aimait", post: "peindre le dimanche." },
+            { id: 5, pre: "5. Tu (savoir)", target: "savais", post: "jouer de la guitare ?" },
+            { id: 6, pre: "6. Ils (aller)", target: "allaient", post: "à la plage tous les étés." },
+            { id: 7, pre: "7. J' (attendre)", target: "attendais", post: "mon ami devant le cinéma." },
+            { id: 8, pre: "8. Le professeur (parler)", target: "parlait", post: "lentement et clairement." },
+            { id: 9, pre: "9. On (prendre)", target: "prenait", post: "un café ensemble." }
+        ];
 
-      if (found >= 2 && hasPresent) {
-        fb.classList.add('bg-inspire-greenLight', 'text-inspire-greenDark');
-        fb.innerHTML = `
-          <strong>🎉 Très bonne production !</strong><br>
-          Vous avez bien combiné l'imparfait pour évoquer les conditions de vie au Mali et le présent pour sa vie actuelle en France.
-        `;
-      } else {
-        fb.classList.add('bg-slate-100', 'text-slate-800');
-        fb.innerHTML = `
-          <strong>Conseils de révision :</strong><br>
-          • Utilisez bien la 3e personne singulier à l'imparfait (<em>il habitait, il avait, il travaillait</em> avec <strong>-ait</strong>).<br>
-          • N'oubliez pas d'utiliser le présent pour la fin (<em>Aujourd'hui, il habite en France...</em>).
-        `;
-      }
-    }
+        function renderFillBlanks() {
+            const container = document.getElementById('fillBlanksList');
+            container.innerHTML = '';
+            BLANKS_DATA.forEach(item => {
+                const row = document.createElement('div');
+                row.className = 'flex flex-wrap sm:flex-nowrap items-center gap-2 p-2.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm';
+                row.innerHTML = `
+                    <span class="font-medium text-slate-800">${item.pre}</span>
+                    <input type="text" id="blank-input-${item.id}" placeholder="verbe" class="w-36 px-2.5 py-1 border border-slate-300 rounded-lg text-center font-semibold text-slate-800 focus:outline-none focus:border-inspireGreen">
+                    <span class="text-slate-700">${item.post}</span>
+                    <span id="blank-fb-${item.id}" class="ml-auto font-bold text-xs"></span>
+                `;
+                container.appendChild(row);
+            });
+        }
 
-    function showModelCorrection() {
-      const fb = document.getElementById('writingFeedbackBox');
-      fb.classList.remove('hidden', 'bg-inspire-redLight', 'text-inspire-red', 'bg-inspire-greenLight', 'text-inspire-greenDark');
-      fb.classList.add('bg-inspire-greenLight', 'text-inspire-greenDark', 'border', 'border-inspire-greenBorder');
-      fb.innerHTML = `
-        <strong class="block mb-1 font-bold">💡 Exemple de rédaction guidée :</strong>
-        « Avant, Sadi <strong>habitait</strong> au Mali. Il <strong>avait</strong> une vie difficile et il <strong>travaillait</strong> dans une usine 14 heures par jour pour seulement 2 euros. Il <strong>gardait</strong> pourtant l'espoir d'une vie meilleure. Aujourd'hui, Sadi a 24 ans, il <strong>habite</strong> en France et il <strong>a</strong> un emploi régulier. »
-      `;
-    }
+        let scoreBlanksVal = 0;
+        function checkFillBlanks() {
+            scoreBlanksVal = 0;
+            BLANKS_DATA.forEach(item => {
+                const input = document.getElementById(`blank-input-${item.id}`);
+                const fb = document.getElementById(`blank-fb-${item.id}`);
+                if (input.value.trim().toLowerCase() === item.target.toLowerCase()) {
+                    scoreBlanksVal++;
+                    fb.innerHTML = '<span class="text-emerald-600">✓ Exact</span>';
+                    input.className = 'w-36 px-2.5 py-1 border-2 border-emerald-500 bg-emerald-50 rounded-lg text-center font-bold text-slate-800';
+                } else {
+                    fb.innerHTML = `<span class="text-red-600">✗ (${item.target})</span>`;
+                    input.className = 'w-36 px-2.5 py-1 border-2 border-red-400 bg-red-50 rounded-lg text-center font-bold text-slate-800';
+                }
+            });
+            document.getElementById('scoreEx2').innerText = `Score : ${scoreBlanksVal}/9`;
+            updateTotalTab3();
+        }
 
-    // Compteur de mots et initialisation
-    document.addEventListener('DOMContentLoaded', () => {
-      const textarea = document.getElementById('sadiStoryInput');
-      if (textarea) {
-        textarea.addEventListener('input', () => {
-          const txt = textarea.value.trim();
-          const count = txt === "" ? 0 : txt.split(/\s+/).length;
-          document.getElementById('wordCountLabel').innerText = `${count} mot${count > 1 ? 's' : ''}`;
+        // Exercice 3 : Audio dictation (Corrected safely with index player)
+        const DICTATION_ITEMS = [
+            { id: 1, fullAudio: "Quand j'étais petit, je mangeais beaucoup de chocolat.", pre: "Quand j'étais petit, je", target: "mangeais", post: "beaucoup de chocolat." },
+            { id: 2, fullAudio: "Nous n'avions pas d'appareil photo.", pre: "Nous n'", target: "avions", post: "pas d'appareil photo." },
+            { id: 3, fullAudio: "Ils faisaient du vélo tous les soirs.", pre: "Ils", target: "faisaient", post: "du vélo tous les soirs." },
+            { id: 4, fullAudio: "Ma mère était toujours très souriante.", pre: "Ma mère", target: "était", post: "toujours très souriante." },
+            { id: 5, fullAudio: "Tu savais déjà parler anglais.", pre: "Tu", target: "savais", post: "déjà parler anglais." },
+            { id: 6, fullAudio: "Ils ne parlaient pas encore français.", pre: "Ils ne", target: "parlaient", post: "pas encore français." },
+            { id: 7, fullAudio: "Elle avait beaucoup d'énergie.", pre: "Elle", target: "avait", post: "beaucoup d'énergie." },
+            { id: 8, fullAudio: "Vous connaissiez toute l'histoire.", pre: "Vous", target: "connaissiez", post: "toute l'histoire." },
+            { id: 9, fullAudio: "Nous allions au marché le samedi.", pre: "Nous", target: "allions", post: "au marché le samedi." }
+        ];
+
+        function playDictationAudio(index) {
+            if (DICTATION_ITEMS[index]) {
+                speakFrench(DICTATION_ITEMS[index].fullAudio);
+            }
+        }
+
+        function renderDictation() {
+            const container = document.getElementById('dictationList');
+            container.innerHTML = '';
+            DICTATION_ITEMS.forEach((item, index) => {
+                const row = document.createElement('div');
+                row.className = 'flex flex-wrap sm:flex-nowrap items-center gap-2 p-2.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm';
+                row.innerHTML = `
+                    <button onclick="playDictationAudio(${index})" class="touch-btn px-2.5 py-1 bg-purple-100 hover:bg-purple-200 text-purple-900 rounded-lg text-xs font-bold border border-purple-200" title="Écouter la phrase entière">
+                        🔊 Phrase ${item.id}
+                    </button>
+                    <span class="text-slate-800">${item.pre}</span>
+                    <input type="text" id="dict-input-${item.id}" placeholder="verbe" class="w-32 px-2.5 py-1 border border-slate-300 rounded-lg text-center font-semibold text-slate-800 focus:outline-none focus:border-inspireGreen">
+                    <span class="text-slate-800">${item.post}</span>
+                    <span id="dict-fb-${item.id}" class="ml-auto font-bold text-xs"></span>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        let scoreDictVal = 0;
+        function checkDictation() {
+            scoreDictVal = 0;
+            DICTATION_ITEMS.forEach(item => {
+                const input = document.getElementById(`dict-input-${item.id}`);
+                const fb = document.getElementById(`dict-fb-${item.id}`);
+                if (input.value.trim().toLowerCase() === item.target.toLowerCase()) {
+                    scoreDictVal++;
+                    fb.innerHTML = '<span class="text-emerald-600">✓ Exact</span>';
+                    input.className = 'w-32 px-2.5 py-1 border-2 border-emerald-500 bg-emerald-50 rounded-lg text-center font-bold text-slate-800';
+                } else {
+                    fb.innerHTML = `<span class="text-red-600">✗ (${item.target})</span>`;
+                    input.className = 'w-32 px-2.5 py-1 border-2 border-red-400 bg-red-50 rounded-lg text-center font-bold text-slate-800';
+                }
+            });
+            document.getElementById('scoreEx3').innerText = `Score : ${scoreDictVal}/9`;
+            updateTotalTab3();
+        }
+
+        function updateTotalTab3() {
+            const total = scoreQCMVal + scoreBlanksVal + scoreDictVal;
+            document.getElementById('globalTab3Score').innerText = `${total} / 26`;
+        }
+
+        // ===================================================================
+        // 7. COMPRÉHENSION DOC 1 & DOC 2 (ONGLET 4) & DÉBLOCAGE
+        // ===================================================================
+        let isDoc1Checked = false;
+        let isDoc2Checked = false;
+
+        function checkDoc1() {
+            const q1 = document.querySelector('input[name="d1q1"]:checked');
+            const q2 = document.querySelector('input[name="d1q2"]:checked');
+            const fb = document.getElementById('doc1Feedback');
+
+            if (!q1 || !q2) {
+                fb.className = "ml-3 text-xs sm:text-sm font-bold text-amber-600";
+                fb.innerText = "Veuillez répondre aux deux questions.";
+                return;
+            }
+
+            if (q1.value === 'good' && q2.value === 'good') {
+                fb.className = "ml-3 text-xs sm:text-sm font-bold text-emerald-600";
+                fb.innerText = "✓ Excellent ! Réponses exactes.";
+                isDoc1Checked = true;
+            } else {
+                fb.className = "ml-3 text-xs sm:text-sm font-bold text-red-600";
+                fb.innerText = "Revoir certaines réponses.";
+                isDoc1Checked = true;
+            }
+            tryUnlockTranscription();
+        }
+
+        function checkAudioQuestions() {
+            const q1 = document.querySelector('input[name="aq1"]:checked');
+            const q2 = document.querySelector('input[name="aq2"]:checked');
+            const q3 = document.querySelector('input[name="aq3"]:checked');
+            const fb = document.getElementById('audioFeedback');
+
+            if (!q1 || !q2 || !q3) {
+                fb.className = "text-xs sm:text-sm font-bold text-amber-600";
+                fb.innerText = "Répondez aux trois questions.";
+                return;
+            }
+
+            let correct = 0;
+            if (q1.value === 'good') correct++;
+            if (q2.value === 'good') correct++;
+            if (q3.value === 'good') correct++;
+
+            fb.className = correct === 3 ? "text-xs sm:text-sm font-bold text-emerald-600" : "text-xs sm:text-sm font-bold text-amber-600";
+            fb.innerText = `Score audio : ${correct}/3.`;
+            isDoc2Checked = true;
+            tryUnlockTranscription();
+        }
+
+        function tryUnlockTranscription() {
+            if (isDoc1Checked && isDoc2Checked) {
+                document.getElementById('transcriptionLockedMsg').classList.add('hidden');
+                document.getElementById('transcriptionContent').classList.remove('hidden');
+            }
+        }
+
+        // ===================================================================
+        // 8. ATELIER D'ÉCRITURE GUIDÉE (ANALYSE EN DIRECT)
+        // ===================================================================
+        function analyzeWriting() {
+            const text = document.getElementById('writingTextarea').value.trim();
+            const words = text.length === 0 ? 0 : text.split(/\s+/).length;
+            document.getElementById('wordCount').innerText = words;
+
+            // Détection heuristique des terminaisons de l'imparfait
+            const imparfaitRegex = /\b\w+(ais|ait|ions|iez|aient)\b/gi;
+            const matches = text.match(imparfaitRegex) || [];
+            document.getElementById('imparfaitCount').innerText = matches.length;
+        }
+
+        function showExampleCorrection() {
+            const box = document.getElementById('exampleCorrectionBox');
+            box.classList.toggle('hidden');
+        }
+
+        // ===================================================================
+        // INITIALISATION AUTOMATIQUE
+        // ===================================================================
+        window.addEventListener('DOMContentLoaded', () => {
+            renderSelectedVerb();
+            renderPhoneticPractice();
+            renderMatching();
+            renderQCM();
+            renderFillBlanks();
+            renderDictation();
         });
-      }
-
-      displaySelectedVerb();
-      renderPhoneticPractice();
-      renderMatchingExercise();
-      renderQCM();
-      renderFillBlanks();
-      renderAudioFill();
-      renderAudioQuestions();
-    });
-  </script>
+    </script>
 </body>
 </html>
