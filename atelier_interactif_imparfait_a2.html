@@ -84,7 +84,7 @@
                 </div>
             </div>
             
-            <!-- Sélecteur d'onglets pour mobile & desktop -->
+            <!-- Sélecteur d'onglets pour mobile et desktop -->
             <div class="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0 hide-scrollbar">
                 <button onclick="switchTab('tab1')" id="btn-tab1" class="tab-btn active px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 whitespace-nowrap transition-all touch-btn">
                     1. Formation
@@ -96,7 +96,7 @@
                     3. Exercices
                 </button>
                 <button onclick="switchTab('tab4')" id="btn-tab4" class="tab-btn bg-white hover:bg-slate-100 text-slate-700 px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 whitespace-nowrap transition-all touch-btn">
-                    4. Immigration & Récit
+                    4. Immigration et Récit
                 </button>
             </div>
         </div>
@@ -491,78 +491,143 @@
             <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-7 shadow-sm">
                 <div class="flex items-center justify-between flex-wrap gap-2 mb-4">
                     <div class="flex items-center gap-2.5">
-                        <span class="px-2.5 py-1 bg-emerald-100 text-inspireDarkGreen font-bold text-xs rounded-md">DOC 1 • Lecture & Repérage</span>
+                        <span class="px-2.5 py-1 bg-emerald-100 text-inspireDarkGreen font-bold text-xs rounded-md">DOC 1 • Lecture et Compréhension Écrite</span>
                         <h3 class="text-lg sm:text-xl font-bold text-slate-900">La photo d'enfance de Lucilia Campos</h3>
                     </div>
                     <span class="text-xs text-slate-400">Inspire 2, Livre p. 28</span>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                    <div class="md:col-span-1 bg-slate-100 rounded-xl p-4 border border-slate-200 flex flex-col items-center justify-center text-center">
-                        <div class="w-20 h-20 rounded-full bg-emerald-200 text-inspireDarkGreen flex items-center justify-center text-3xl mb-3 shadow-inner">
-                            📷
+                <!-- Encadré culturel et texte du témoignage -->
+                <div class="space-y-4 mb-6">
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div>
+                            <span class="font-bold text-slate-900">Musée National de l'Histoire de l'Immigration (Paris)</span> : 
+                            <em>« Un Français sur quatre est issu de l'immigration. »</em>
                         </div>
-                        <h4 class="font-bold text-sm text-slate-900 mb-1">Paris, début des années 60</h4>
-                        <p class="text-xs text-slate-600 leading-relaxed">
-                            « Un Français sur quatre est issu de l'immigration. »<br>
-                            Musée National de l'Histoire de l'Immigration, Paris.
-                        </p>
+                        <span class="text-[11px] bg-blue-100 text-blue-800 font-bold px-2.5 py-1 rounded-full whitespace-nowrap">Contexte historique</span>
                     </div>
 
-                    <div class="md:col-span-2 bg-inspireLightGreen border border-emerald-200 rounded-xl p-4 sm:p-5 text-slate-800 text-xs sm:text-sm leading-relaxed space-y-2.5">
-                        <p class="font-bold text-inspireDarkGreen">
+                    <div class="bg-inspireLightGreen border border-emerald-200 rounded-xl p-5 sm:p-6 text-slate-800 text-sm sm:text-base leading-relaxed space-y-3">
+                        <p class="font-bold text-inspireDarkGreen text-base">
                             Lucilia Campos se souvient de ses parents, immigrés portugais. C'étaient des gens modestes mais toujours élégants.
                         </p>
-                        <p>
+                        <p class="italic text-slate-700">
                             « C'<strong>était</strong> au début des années 60. Ma mère <strong>travaillait</strong> comme employée de maison et mon père <strong>était</strong> maçon. Sur cette photo, ils posent pour un photographe ambulant qu'il y <strong>avait</strong> au Sacré-Cœur, à Paris. Il <strong>faisait</strong> beau. Nous n'<strong>avions</strong> pas d'appareil photo. Mon père <strong>avait</strong> 28 ans et ma mère 27. Ils <strong>avaient</strong> toujours des vêtements élégants. Ils <strong>étaient</strong> beaux. Mon père <strong>était</strong> réservé. Ma mère <strong>était</strong> toujours souriante. Elle <strong>était</strong> très courageuse, elle <strong>avait</strong> beaucoup d'énergie. Ils ne <strong>parlaient</strong> pas encore bien français. Nous <strong>allions</strong> souvent visiter des monuments le week-end. J'adore cette photo. Moi, j'<strong>avais</strong> 5 ans : je n'<strong>étais</strong> pas avec eux ce jour-là. »
                         </p>
                     </div>
                 </div>
 
-                <!-- Questions sur Doc 1 -->
-                <div class="border-t border-slate-200 pt-4 space-y-3">
-                    <h4 class="font-bold text-slate-900 text-sm sm:text-base">Compréhension du document 1 :</h4>
+                <!-- Questionnaire approfondi Niveau A2 (6 questions) -->
+                <div class="border-t border-slate-200 pt-5 space-y-4">
+                    <div class="flex items-center justify-between flex-wrap gap-2">
+                        <h4 class="font-bold text-slate-900 text-sm sm:text-base">Activités de compréhension du texte (Niveau A2) :</h4>
+                        <span class="text-xs text-slate-500 font-medium">6 questions à choix multiples</span>
+                    </div>
                     
-                    <div class="space-y-3 text-xs sm:text-sm" id="doc1Questions">
-                        <div class="p-3 bg-slate-50 rounded-xl">
-                            <p class="font-semibold text-slate-800 mb-2">1. Quels étaient les métiers des parents de Lucilia ?</p>
+                    <div class="space-y-4 text-xs sm:text-sm" id="doc1Questions">
+                        <!-- Q1 : Affiche et contexte -->
+                        <div class="p-3.5 bg-slate-50 rounded-xl space-y-2">
+                            <p class="font-semibold text-slate-900">1. Selon l'affiche du musée, quelle affirmation est correcte ?</p>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                <label class="flex items-center gap-2 p-2 bg-white rounded-lg border border-slate-200 cursor-pointer">
+                                <label class="flex items-center gap-2 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
                                     <input type="radio" name="d1q1" value="bad" class="text-inspireGreen">
-                                    <span>Père professeur et mère commerçante</span>
+                                    <span>40 % des Français sont issus de l'immigration</span>
                                 </label>
-                                <label class="flex items-center gap-2 p-2 bg-white rounded-lg border border-slate-200 cursor-pointer">
+                                <label class="flex items-center gap-2 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
                                     <input type="radio" name="d1q1" value="good" class="text-inspireGreen">
-                                    <span>Père maçon et mère employée de maison</span>
+                                    <span>25 % (un quart) des Français sont issus de l'immigration</span>
                                 </label>
                             </div>
                         </div>
 
-                        <div class="p-3 bg-slate-50 rounded-xl">
-                            <p class="font-semibold text-slate-800 mb-2">2. Pourquoi ont-ils posé pour un photographe ambulant ?</p>
+                        <!-- Q2 : Métiers -->
+                        <div class="p-3.5 bg-slate-50 rounded-xl space-y-2">
+                            <p class="font-semibold text-slate-900">2. Quelles étaient les professions respectives des parents de Lucilia à Paris ?</p>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                <label class="flex items-center gap-2 p-2 bg-white rounded-lg border border-slate-200 cursor-pointer">
+                                <label class="flex items-center gap-2 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
                                     <input type="radio" name="d1q2" value="good" class="text-inspireGreen">
-                                    <span>Parce qu'ils n'avaient pas d'appareil photo</span>
+                                    <span>Le père était maçon et la mère employée de maison</span>
                                 </label>
-                                <label class="flex items-center gap-2 p-2 bg-white rounded-lg border border-slate-200 cursor-pointer">
+                                <label class="flex items-center gap-2 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
                                     <input type="radio" name="d1q2" value="bad" class="text-inspireGreen">
-                                    <span>Parce que c'était interdit d'avoir un appareil</span>
+                                    <span>Le père était photographe et la mère cuisinière</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Q3 : Photographe ambulant -->
+                        <div class="p-3.5 bg-slate-50 rounded-xl space-y-2">
+                            <p class="font-semibold text-slate-900">3. Pourquoi ont-ils posé devant un photographe ambulant au Sacré-Cœur ?</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <label class="flex items-center gap-2 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                                    <input type="radio" name="d1q3" value="bad" class="text-inspireGreen">
+                                    <span>Parce que c'était obligatoire pour obtenir leurs papiers</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                                    <input type="radio" name="d1q3" value="good" class="text-inspireGreen">
+                                    <span>Parce que la famille ne possédait pas d'appareil photo</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Q4 : Équivalences lexicales (livre p. 28) -->
+                        <div class="p-3.5 bg-slate-50 rounded-xl space-y-2">
+                            <p class="font-semibold text-slate-900">4. Lexique : Dans le texte, que signifient respectivement les adjectifs « modestes », « élégants » et « courageuse » ?</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <label class="flex items-center gap-2 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                                    <input type="radio" name="d1q4" value="good" class="text-inspireGreen">
+                                    <span>Simples • Chics • Travailleuse</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                                    <input type="radio" name="d1q4" value="bad" class="text-inspireGreen">
+                                    <span>Riches • Sévères • Triste</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Q5 : Habitudes passées -->
+                        <div class="p-3.5 bg-slate-50 rounded-xl space-y-2">
+                            <p class="font-semibold text-slate-900">5. Quelle habitude familiale régulière à l'imparfait est mentionnée dans le récit ?</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <label class="flex items-center gap-2 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                                    <input type="radio" name="d1q5" value="good" class="text-inspireGreen">
+                                    <span>Ils allaient souvent visiter des monuments le week-end</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                                    <input type="radio" name="d1q5" value="bad" class="text-inspireGreen">
+                                    <span>Ils rentraient tous les mois au Portugal en train</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Q6 : La langue française -->
+                        <div class="p-3.5 bg-slate-50 rounded-xl space-y-2">
+                            <p class="font-semibold text-slate-900">6. Quelle difficulté d'intégration liée à la langue les parents rencontraient-ils à cette époque ?</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <label class="flex items-center gap-2 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                                    <input type="radio" name="d1q6" value="good" class="text-inspireGreen">
+                                    <span>Ils ne parlaient pas encore bien le français</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                                    <input type="radio" name="d1q6" value="bad" class="text-inspireGreen">
+                                    <span>Ils refusaient d'apprendre la langue française</span>
                                 </label>
                             </div>
                         </div>
                     </div>
 
-                    <button onclick="checkDoc1()" class="touch-btn px-5 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-xl text-xs sm:text-sm font-semibold transition-all">
-                        Vérifier le Document 1
-                    </button>
-                    <span id="doc1Feedback" class="ml-3 text-xs sm:text-sm font-bold"></span>
+                    <div class="flex items-center gap-3 pt-2">
+                        <button onclick="checkDoc1()" class="touch-btn px-6 py-2.5 bg-inspireGreen hover:bg-emerald-700 text-white rounded-xl text-xs sm:text-sm font-bold transition-all shadow-sm">
+                            Vérifier la Compréhension Écrite (Doc 1)
+                        </button>
+                        <span id="doc1Feedback" class="text-xs sm:text-sm font-bold"></span>
+                    </div>
                 </div>
             </div>
 
             <!-- Document 2 : Compréhension Orale (L'enfance de Joséphine) -->
-            <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-7 shadow-sm">
-                <div class="flex items-center justify-between flex-wrap gap-2 mb-4">
+            <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-7 shadow-sm space-y-6">
+                <div class="flex items-center justify-between flex-wrap gap-2">
                     <div class="flex items-center gap-2.5">
                         <span class="px-2.5 py-1 bg-purple-100 text-purple-900 font-bold text-xs rounded-md">DOC 2 • Compréhension Orale</span>
                         <h3 class="text-lg sm:text-xl font-bold text-slate-900">Joséphine se raconte : Enfance et Famille</h3>
@@ -571,7 +636,7 @@
                 </div>
 
                 <!-- Lecteur Audio HTML5 avec repli et contrôle de la vitesse -->
-                <div class="bg-slate-100 border border-slate-300 rounded-2xl p-4 sm:p-5 mb-6">
+                <div class="bg-slate-100 border border-slate-300 rounded-2xl p-4 sm:p-5">
                     <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
                         <div class="flex items-center gap-3 w-full sm:w-auto">
                             <button id="audioPlayBtn" onclick="toggleAudioPlayer()" class="touch-btn w-12 h-12 rounded-full bg-inspireGreen hover:bg-emerald-700 text-white font-bold text-xl flex items-center justify-center shadow transition-all">
@@ -579,7 +644,7 @@
                             </button>
                             <div>
                                 <h4 class="font-bold text-sm text-slate-900">martiniquaise.mp3</h4>
-                                <p id="audioStatusText" class="text-xs text-slate-500">Prêt pour l'écoute</p>
+                                <p id="audioStatusText" class="text-xs text-slate-500">Cliquez pour écouter l'interview</p>
                             </div>
                         </div>
 
@@ -596,78 +661,227 @@
                     <audio id="realAudio" src="martiniquaise.mp3" preload="metadata" class="hidden"></audio>
                 </div>
 
-                <!-- Questionnaire sur l'interview de Joséphine -->
-                <div class="space-y-3 mb-6" id="audioQuestionsList">
-                    <h4 class="font-bold text-slate-900 text-sm sm:text-base">Questions d'écoute :</h4>
-                    
-                    <div class="p-3 bg-slate-50 rounded-xl space-y-2 text-xs sm:text-sm">
-                        <p class="font-semibold text-slate-800">1. Où Joséphine a-t-elle passé son enfance avant d'arriver à Paris ?</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            <label class="flex items-center gap-2 p-2 bg-white rounded-lg border border-slate-200 cursor-pointer">
-                                <input type="radio" name="aq1" value="good" class="text-inspireGreen">
-                                <span>À la Martinique, dans un petit village</span>
-                            </label>
-                            <label class="flex items-center gap-2 p-2 bg-white rounded-lg border border-slate-200 cursor-pointer">
-                                <input type="radio" name="aq1" value="bad" class="text-inspireGreen">
-                                <span>À Marseille, dans le sud de la France</span>
-                            </label>
+                <!-- SOUS-ACTIVITÉ 2.1 : COMPRÉHENSION GÉNÉRALE ET DÉTAILLÉE -->
+                <div class="border border-slate-200 rounded-xl p-4 sm:p-5 bg-slate-50 space-y-4">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                        <div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-purple-800 bg-purple-100 px-2.5 py-0.5 rounded-full">Partie A</span>
+                            <h4 class="font-bold text-slate-900 text-sm sm:text-base mt-1">Compréhension générale et détaillée de l'interview</h4>
+                        </div>
+                        <span id="scoreAudioGen" class="text-xs sm:text-sm font-bold text-slate-600">Score : -/6</span>
+                    </div>
+
+                    <div class="space-y-3 text-xs sm:text-sm" id="audioQuestionsGeneral">
+                        <!-- Q1 -->
+                        <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-2">
+                            <p class="font-semibold text-slate-800">1. Où Joséphine a-t-elle passé sa petite enfance ?</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                                    <input type="radio" name="ag_q1" value="good" class="text-inspireGreen">
+                                    <span>À la Martinique, dans un petit village</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                                    <input type="radio" name="ag_q1" value="bad" class="text-inspireGreen">
+                                    <span>Dans le centre de la ville de Marseille</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Q2 -->
+                        <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-2">
+                            <p class="font-semibold text-slate-800">2. Qui était Zoé et quelle relation avait-elle avec Joséphine ?</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                                    <input type="radio" name="ag_q2" value="good" class="text-inspireGreen">
+                                    <span>Sa demi-sœur, et elles se disputaient tout le temps</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                                    <input type="radio" name="ag_q2" value="bad" class="text-inspireGreen">
+                                    <span>Sa cousine préférée, avec qui elle s'entendait très bien</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Q3 -->
+                        <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-2">
+                            <p class="font-semibold text-slate-800">3. Comment était la personnalité de la mère de Joséphine ?</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                                    <input type="radio" name="ag_q3" value="good" class="text-inspireGreen">
+                                    <span>Très souriante, pleine d'énergie et aimant s'amuser</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                                    <input type="radio" name="ag_q3" value="bad" class="text-inspireGreen">
+                                    <span>Très silencieuse, stricte et sévère</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Q4 -->
+                        <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-2">
+                            <p class="font-semibold text-slate-800">4. Que faisait régulièrement Joséphine avec son père le samedi ?</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                                    <input type="radio" name="ag_q4" value="good" class="text-inspireGreen">
+                                    <span>Ils allaient au marché et achetaient du poisson frais</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                                    <input type="radio" name="ag_q4" value="bad" class="text-inspireGreen">
+                                    <span>Ils prenaient l'avion pour visiter d'autres îles</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Q5 -->
+                        <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-2">
+                            <p class="font-semibold text-slate-800">5. Pourquoi la vie au village était-elle considérée comme agréable ?</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                                    <input type="radio" name="ag_q5" value="good" class="text-inspireGreen">
+                                    <span>Parce que la famille connaissait tout le monde dans le village</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                                    <input type="radio" name="ag_q5" value="bad" class="text-inspireGreen">
+                                    <span>Parce qu'il n'y avait pas besoin de travailler</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Q6 -->
+                        <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-2">
+                            <p class="font-semibold text-slate-800">6. Quelles difficultés ont marqué son arrivée à Paris à l'âge de 10 ans ?</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                                    <input type="radio" name="ag_q6" value="good" class="text-inspireGreen">
+                                    <span>C'était dur : il faisait froid et il n'y avait pas la mer</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                                    <input type="radio" name="ag_q6" value="bad" class="text-inspireGreen">
+                                    <span>Elle a dû arrêter définitivement de danser</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="p-3 bg-slate-50 rounded-xl space-y-2 text-xs sm:text-sm">
-                        <p class="font-semibold text-slate-800">2. Comment étaient ses parents et sa maison ?</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            <label class="flex items-center gap-2 p-2 bg-white rounded-lg border border-slate-200 cursor-pointer">
-                                <input type="radio" name="aq2" value="bad" class="text-inspireGreen">
-                                <span>Ils étaient très riches et voyageaient tout le temps</span>
-                            </label>
-                            <label class="flex items-center gap-2 p-2 bg-white rounded-lg border border-slate-200 cursor-pointer">
-                                <input type="radio" name="aq2" value="good" class="text-inspireGreen">
-                                <span>Ils étaient modestes, le père était ouvrier et généreux</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="p-3 bg-slate-50 rounded-xl space-y-2 text-xs sm:text-sm">
-                        <p class="font-semibold text-slate-800">3. Pourquoi la vie à Paris était-elle difficile pour elle au début ?</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            <label class="flex items-center gap-2 p-2 bg-white rounded-lg border border-slate-200 cursor-pointer">
-                                <input type="radio" name="aq3" value="good" class="text-inspireGreen">
-                                <span>Il faisait froid et il n'y avait pas la mer</span>
-                            </label>
-                            <label class="flex items-center gap-2 p-2 bg-white rounded-lg border border-slate-200 cursor-pointer">
-                                <input type="radio" name="aq3" value="bad" class="text-inspireGreen">
-                                <span>Elle ne voulait pas aller à l'école de danse</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex items-center gap-3">
-                    <button onclick="checkAudioQuestions()" class="touch-btn px-5 py-2.5 bg-inspireGreen hover:bg-emerald-700 text-white rounded-xl text-xs sm:text-sm font-semibold transition-all shadow-sm">
-                        Vérifier les réponses audio
+                    <button onclick="checkAudioGeneral()" class="touch-btn px-5 py-2.5 bg-inspireGreen hover:bg-emerald-700 text-white rounded-xl text-xs sm:text-sm font-bold transition-all shadow-sm">
+                        Valider la Compréhension Générale (Partie A)
                     </button>
-                    <span id="audioFeedback" class="text-xs sm:text-sm font-bold"></span>
                 </div>
 
-                <!-- Bouton de transcription verrouillé jusqu'à validation -->
-                <div id="transcriptionUnlockArea" class="mt-6 pt-5 border-t border-slate-200">
-                    <div id="transcriptionLockedMsg" class="p-3.5 bg-slate-100 rounded-xl text-xs text-slate-500 flex items-center gap-2">
-                        <span>🔒</span>
-                        <span>La transcription s'affichera ici dès que vous aurez vérifié les questions du <strong>Doc 1</strong> et du <strong>Doc 2</strong>.</span>
+                <!-- SOUS-ACTIVITÉ 2.2 : ANALYSE CIBLÉE SUR LA GRAMMAIRE -->
+                <div class="border border-slate-200 rounded-xl p-4 sm:p-5 bg-slate-50 space-y-4">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                        <div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-blue-800 bg-blue-100 px-2.5 py-0.5 rounded-full">Partie B</span>
+                            <h4 class="font-bold text-slate-900 text-sm sm:text-base mt-1">Analyse ciblée sur la grammaire de l'imparfait dans l'interview</h4>
+                        </div>
+                        <span id="scoreAudioGram" class="text-xs sm:text-sm font-bold text-slate-600">Score : -/4</span>
                     </div>
 
-                    <div id="transcriptionContent" class="hidden space-y-3">
+                    <div class="space-y-3 text-xs sm:text-sm" id="audioQuestionsGrammar">
+                        <!-- Grammaire Q1 -->
+                        <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-2">
+                            <p class="font-semibold text-slate-800">
+                                1. Dans la phrase <em>« Mon père était ouvrier, il était réservé mais généreux »</em>, quelle est la valeur de l'imparfait ?
+                            </p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                                    <input type="radio" name="agr_q1" value="good" class="text-inspireGreen">
+                                    <span>Une description physique ou morale d'une personne dans le passé</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                                    <input type="radio" name="agr_q1" value="bad" class="text-inspireGreen">
+                                    <span>Une action soudaine et terminée à un moment précis</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Grammaire Q2 -->
+                        <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-2">
+                            <p class="font-semibold text-slate-800">
+                                2. Dans la phrase <em>« Avec mon père, on allait au marché le samedi. On achetait du poisson... »</em>, l'imparfait exprime :
+                            </p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                                    <input type="radio" name="agr_q2" value="good" class="text-inspireGreen">
+                                    <span>Une habitude répétée dans le passé</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                                    <input type="radio" name="agr_q2" value="bad" class="text-inspireGreen">
+                                    <span>Une décision future immédiate</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Grammaire Q3 -->
+                        <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-2">
+                            <p class="font-semibold text-slate-800">
+                                3. Observez l'opposition : <em>« Quand j'_____ (avoir) dix ans, nous _____ (déménager) à Paris. »</em> Quelles sont les formes verbales exactes ?
+                            </p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                                    <input type="radio" name="agr_q3" value="good" class="text-inspireGreen">
+                                    <span>j'avais (imparfait, état/âge) • nous avons déménagé (passé composé, fait ponctuel)</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                                    <input type="radio" name="agr_q3" value="bad" class="text-inspireGreen">
+                                    <span>j'ai eu (passé composé) • nous déménagions (imparfait)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Grammaire Q4 -->
+                        <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-2">
+                            <p class="font-semibold text-slate-800">
+                                4. Pourquoi Joséphine dit-elle <em>« il faisait froid »</em> et <em>« il n'y avait pas la mer »</em> à l'imparfait ?
+                            </p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                                    <input type="radio" name="agr_q4" value="good" class="text-inspireGreen">
+                                    <span>Pour poser le décor, le climat et les circonstances d'une situation passée</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                                    <input type="radio" name="agr_q4" value="bad" class="text-inspireGreen">
+                                    <span>Parce que c'est une action qui a duré seulement une seconde</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="checkAudioGrammar()" class="touch-btn px-5 py-2.5 bg-inspireGreen hover:bg-emerald-700 text-white rounded-xl text-xs sm:text-sm font-bold transition-all shadow-sm">
+                        Valider l'Analyse Grammaticale (Partie B)
+                    </button>
+                </div>
+
+                <!-- ZONE DÉVERROUILLAGE : BOUTON « CONSULTER LA TRANSCRIPTION » -->
+                <div class="mt-6 pt-5 border-t border-slate-200">
+                    <div id="transcriptionLockedMsg" class="p-4 bg-slate-100 rounded-xl text-xs sm:text-sm text-slate-600 flex items-center gap-2">
+                        <span class="text-base">🔒</span>
+                        <span>
+                            Le bouton <strong>« Consulter la transcription »</strong> apparaîtra dès que vous aurez vérifié la <strong>Compréhension Écrite (Doc 1)</strong> et les deux parties de la <strong>Compréhension Orale (Parties A et B)</strong>.
+                        </span>
+                    </div>
+
+                    <!-- Bouton qui apparaît quand tout est validé -->
+                    <div id="transcriptionButtonContainer" class="hidden">
+                        <button onclick="toggleTranscriptionView()" id="btnToggleTranscription" class="touch-btn px-6 py-3 bg-slate-900 hover:bg-black text-white font-bold text-sm rounded-xl transition-all shadow-sm flex items-center gap-2">
+                            <span>👁️</span>
+                            <span>Consulter la transcription</span>
+                        </button>
+                    </div>
+
+                    <!-- Contenu de la transcription -->
+                    <div id="transcriptionContent" class="hidden mt-4 space-y-3">
                         <div class="flex items-center justify-between">
-                            <span class="text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-100 px-2.5 py-1 rounded-full">
-                                🔓 Transcription Complète Débloquée
+                            <span class="text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full">
+                                🔓 Transcription de l'enregistrement (martiniquaise.mp3)
                             </span>
-                            <button onclick="speakTranscription()" class="touch-btn px-3 py-1 bg-slate-200 hover:bg-slate-300 rounded-lg text-xs font-semibold">
+                            <button onclick="speakTranscription()" class="touch-btn px-3 py-1.5 bg-slate-200 hover:bg-slate-300 rounded-lg text-xs font-semibold text-slate-800">
                                 🔊 Réécouter vocalement
                             </button>
                         </div>
-                        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
-                            <p class="font-bold text-slate-900 mb-1">Interview : « Joséphine se raconte... »</p>
+                        <div class="p-5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-700 leading-relaxed font-sans space-y-2">
+                            <p class="font-bold text-slate-900">Journaliste : « Joséphine se raconte... »</p>
                             <p>
                                 « Je suis née à la Martinique en 1973. Mes parents <em>étaient</em> modestes, ils n'<em>avaient</em> pas d'argent. Ma mère <em>travaillait</em> dans un magasin. Mon père <em>était</em> ouvrier, il <em>était</em> réservé mais généreux. On <em>habitait</em> un petit village. À la maison, il y <em>avait</em> mon petit frère Gabriel, et Zoé. Zoé, c'<em>était</em> la fille de mon père et de sa première femme. Zoé et moi, on se disputait tout le temps ! Ma mère <em>était</em> très souriante, elle <em>avait</em> beaucoup d'énergie, elle adorait s'amuser. Avec mon père, on <em>allait</em> au marché le samedi. On <em>achetait</em> du poisson et on le <em>mangeait</em> avec des petits légumes frais, c'<em>était</em> délicieux ! À cette époque-là, c'<em>était</em> agréable, nous <em>connaissions</em> tout le monde dans le village. <br><br>
                                 Quand j'avais dix ans, nous avons déménagé. Nous sommes venus à Paris. C'<em>était</em> dur, il <em>faisait</em> froid et bien sûr... il n'y <em>avait</em> pas la mer ! Heureusement, je faisais toujours de la danse... »
@@ -763,467 +977,588 @@
 
     <script>
         // ===================================================================
-        // 1. SYNTHÈSE VOCALE SÉCURISÉE & AUDIO
+        // 1. GESTION DE LA NAVIGATION PAR ONGLETS
         // ===================================================================
-        let speechSpeed = 1.0;
+        function switchTab(tabId) {
+            const tabs = ['tab1', 'tab2', 'tab3', 'tab4'];
+            tabs.forEach(t => {
+                const el = document.getElementById(t);
+                const btn = document.getElementById('btn-' + t);
+                if (el && btn) {
+                    if (t === tabId) {
+                        el.classList.remove('hidden');
+                        btn.classList.add('active', 'bg-inspireGreen', 'text-white', 'border-inspireGreen');
+                        btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-200');
+                    } else {
+                        el.classList.add('hidden');
+                        btn.classList.remove('active', 'bg-inspireGreen', 'text-white', 'border-inspireGreen');
+                        btn.classList.add('bg-white', 'text-slate-700', 'border-slate-200');
+                    }
+                }
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ===================================================================
+        // 2. SYNTHÈSE VOCALE SÉCURISÉE (WEB SPEECH API)
+        // ===================================================================
+        let speechRate = 1.0;
 
         function speakFrench(text) {
             if (!('speechSynthesis' in window)) {
-                console.warn("La synthèse vocale n'est pas supportée.");
                 return;
             }
             window.speechSynthesis.cancel();
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = 'fr-FR';
-            utterance.rate = speechSpeed;
+            utterance.rate = speechRate;
+
+            const voices = window.speechSynthesis.getVoices();
+            const frVoice = voices.find(v => v.lang && (v.lang.startsWith('fr') || v.lang.includes('FR')));
+            if (frVoice) {
+                utterance.voice = frVoice;
+            }
             window.speechSynthesis.speak(utterance);
         }
 
-        function setPlaybackSpeed(spd) {
-            speechSpeed = spd;
-            const audio = document.getElementById('realAudio');
-            if (audio) {
-                audio.playbackRate = spd;
-            }
-            ['spd-08', 'spd-10', 'spd-12'].forEach(id => {
-                const btn = document.getElementById(id);
-                btn.className = 'touch-btn px-2.5 py-1 text-xs font-bold rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-slate-700';
-            });
-            const activeId = spd === 0.8 ? 'spd-08' : (spd === 1.0 ? 'spd-10' : 'spd-12');
-            const activeBtn = document.getElementById(activeId);
-            if (activeBtn) {
-                activeBtn.className = 'touch-btn px-2.5 py-1 text-xs font-bold rounded-lg border border-inspireGreen bg-inspireGreen text-white';
-            }
-        }
-
-        // Lecteur pour martiniquaise.mp3 avec bascule lecture / fallback
-        function toggleAudioPlayer() {
-            const audio = document.getElementById('realAudio');
-            const playBtn = document.getElementById('audioPlayBtn');
-            const status = document.getElementById('audioStatusText');
-
-            if (!audio) return;
-
-            if (audio.paused) {
-                audio.play().then(() => {
-                    playBtn.innerHTML = '⏸';
-                    status.innerText = 'Lecture du fichier MP3...';
-                }).catch(() => {
-                    // Fallback si le fichier MP3 n'est pas encore présent dans le dossier
-                    status.innerText = 'Lecture vocale automatique (fallback)...';
-                    speakTranscription();
-                    playBtn.innerHTML = '⏸';
-                    setTimeout(() => { playBtn.innerHTML = '▶'; status.innerText = 'Écoute terminée'; }, 18000);
-                });
-            } else {
-                audio.pause();
-                playBtn.innerHTML = '▶';
-                status.innerText = 'En pause';
-            }
-        }
-
-        const realAudioElem = document.getElementById('realAudio');
-        if (realAudioElem) {
-            realAudioElem.onended = function() {
-                document.getElementById('audioPlayBtn').innerHTML = '▶';
-                document.getElementById('audioStatusText').innerText = 'Écoute terminée';
-            };
-        }
-
-        function speakTranscription() {
-            const script = "Je suis née à la Martinique en 1973. Mes parents étaient modestes, ils n'avaient pas d'argent. Ma mère travaillait dans un magasin. Mon père était ouvrier, il était réservé mais généreux. On habitait un petit village. À la maison, il y avait mon petit frère Gabriel, et Zoé. Zoé, c'était la fille de mon père et de sa première femme. Zoé et moi, on se disputait tout le temps ! Ma mère était très souriante, elle avait beaucoup d'énergie, elle adorait s'amuser. Avec mon père, on allait au marché le samedi. On achetait du poisson et on le mangeait avec des petits légumes frais, c'était délicieux ! À cette époque-là, c'était agréable, nous connaissions tout le monde dans le village. Quand j'avais dix ans, nous avons déménagé. Nous sommes venus à Paris. C'était dur, il faisait froid et bien sûr... il n'y avait pas la mer !";
-            speakFrench(script);
-        }
-
         // ===================================================================
-        // 2. GESTION DES ONGLETS
-        // ===================================================================
-        function switchTab(tabId) {
-            ['tab1', 'tab2', 'tab3', 'tab4'].forEach(id => {
-                document.getElementById(id).classList.add('hidden');
-                const btn = document.getElementById('btn-' + id);
-                btn.className = 'tab-btn bg-white hover:bg-slate-100 text-slate-700 px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 whitespace-nowrap transition-all touch-btn';
-            });
-            document.getElementById(tabId).classList.remove('hidden');
-            const activeBtn = document.getElementById('btn-' + tabId);
-            activeBtn.className = 'tab-btn active px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 whitespace-nowrap transition-all touch-btn';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // ===================================================================
-        // 3. SÉLECTEUR DES 10 AUTRES VERBES (ONGLET 1)
+        // 3. EXPLORATEUR DE CONJUGAISON (ONGLET 1)
         // ===================================================================
         const VERB_DATA = {
-            aller: { radical: "all-", forms: ["j'allais", "tu allais", "il/elle allait", "nous allions", "vous alliez", "ils/elles allaient"] },
-            prendre: { radical: "pren-", forms: ["je prenais", "tu prenais", "il/elle prenait", "nous prenions", "vous preniez", "ils/elles prenaient"] },
-            lire: { radical: "lis-", forms: ["je lisais", "tu lisais", "il/elle lisait", "nous lisions", "vous lisiez", "ils/elles lisaient"] },
-            connaitre: { radical: "connaiss-", forms: ["je connaissais", "tu connaissais", "il/elle connaissait", "nous connaissions", "vous connaissiez", "ils/elles connaissaient"] },
-            faire: { radical: "fais-", forms: ["je faisais", "tu faisais", "il/elle faisait", "nous faisions", "vous faisiez", "ils/elles faisaient"] },
-            devoir: { radical: "dev-", forms: ["je devais", "tu devais", "il/elle devait", "nous devions", "vous deviez", "ils/elles devaient"] },
-            savoir: { radical: "sav-", forms: ["je savais", "tu savais", "il/elle savait", "nous savions", "vous saviez", "ils/elles savaient"] },
-            pouvoir: { radical: "pouv-", forms: ["je pouvais", "tu pouvais", "il/elle pouvait", "nous pouvions", "vous pouviez", "ils/elles pouvaient"] },
-            finir: { radical: "finiss-", forms: ["je finissais", "tu finissais", "il/elle finissait", "nous finissions", "vous finissiez", "ils/elles finissaient"] },
-            choisir: { radical: "choisiss-", forms: ["je choisissais", "tu choisissais", "il/elle choisissait", "nous choisissions", "vous choisissiez", "ils/elles choisissaient"] }
+            aller: { inf: 'aller', nous: 'allons', rad: 'all-', forms: ['j\'allais', 'tu allais', 'il/elle allait', 'nous allions', 'vous alliez', 'ils/elles allaient'] },
+            prendre: { inf: 'prendre', nous: 'prenons', rad: 'pren-', forms: ['je prenais', 'tu prenais', 'il/elle prenait', 'nous prenions', 'vous preniez', 'ils/elles prenaient'] },
+            lire: { inf: 'lire', nous: 'lisons', rad: 'lis-', forms: ['je lisais', 'tu lisais', 'il/elle lisait', 'nous lisions', 'vous lisiez', 'ils/elles lisaient'] },
+            connaitre: { inf: 'connaître', nous: 'connaissons', rad: 'connaiss-', forms: ['je connaissais', 'tu connaissais', 'il/elle connaissait', 'nous connaissions', 'vous connaissiez', 'ils/elles connaissaient'] },
+            faire: { inf: 'faire', nous: 'faisons', rad: 'fais-', forms: ['je faisais', 'tu faisais', 'il/elle faisait', 'nous faisions', 'vous faisiez', 'ils/elles faisaient'] },
+            devoir: { inf: 'devoir', nous: 'devons', rad: 'dev-', forms: ['je devais', 'tu devais', 'il/elle devait', 'nous devions', 'vous deviez', 'ils/elles devaient'] },
+            savoir: { inf: 'savoir', nous: 'savons', rad: 'sav-', forms: ['je savais', 'tu savais', 'il/elle savait', 'nous savions', 'vous saviez', 'ils/elles savaient'] },
+            pouvoir: { inf: 'pouvoir', nous: 'pouvons', rad: 'pouv-', forms: ['je pouvais', 'tu pouvais', 'il/elle pouvait', 'nous pouvions', 'vous pouviez', 'ils/elles pouvaient'] },
+            finir: { inf: 'finir', nous: 'finissons', rad: 'finiss-', forms: ['je finissais', 'tu finissais', 'il/elle finissait', 'nous finissions', 'vous finissiez', 'ils/elles finissaient'] },
+            choisir: { inf: 'choisir', nous: 'choisissons', rad: 'choisiss-', forms: ['je choisissais', 'tu choisissais', 'il/elle choisissait', 'nous choisissions', 'vous choisissiez', 'ils/elles choisissaient'] }
         };
 
         function renderSelectedVerb() {
-            const verbKey = document.getElementById('verbSelector').value;
-            const data = VERB_DATA[verbKey];
-            const container = document.getElementById('verbDisplayArea');
-            container.innerHTML = '';
+            const sel = document.getElementById('verbSelector');
+            const target = document.getElementById('verbDisplayArea');
+            if (!sel || !target) return;
 
-            data.forms.forEach(form => {
-                const card = document.createElement('div');
-                card.className = 'bg-white p-2.5 rounded-xl border border-slate-200 flex items-center justify-between shadow-xs';
-                card.innerHTML = `
-                    <span class="font-medium text-slate-800 text-xs sm:text-sm">${form}</span>
-                    <button onclick="speakFrench('${form.replace(/'/g, "\\'")}')" class="touch-btn p-1 text-inspireGreen hover:bg-emerald-50 rounded-lg text-base" title="Écouter">🔊</button>
+            const v = VERB_DATA[sel.value] || VERB_DATA.aller;
+            let html = '';
+            v.forms.forEach(item => {
+                const cleanText = item.replace(/[\/\\]/g, ' ');
+                html += `
+                    <div class="flex items-center justify-between p-2.5 bg-white rounded-xl border border-slate-200 shadow-sm">
+                        <span class="text-sm font-semibold text-slate-800">${item}</span>
+                        <button type="button" onclick="speakFrench('${cleanText.replace(/'/g, "\\'")}')" class="touch-btn p-2 text-inspireGreen hover:bg-emerald-50 rounded-lg text-base" title="Écouter">
+                            🔊
+                        </button>
+                    </div>
                 `;
-                container.appendChild(card);
             });
+            target.innerHTML = html;
         }
 
         // ===================================================================
-        // 4. PHONÉTIQUE : PRATIQUE 10 PHRASES
+        // 4. PHONÉTIQUE ET PIÈGE ORTHOGRAPHIQUE (ONGLET 1)
         // ===================================================================
         const PHONETIC_ITEMS = [
-            { id: 1, pre: "1. Les enfants", target: "jouaient", post: "dans le jardin.", spoken: "jouaient" },
-            { id: 2, pre: "2. Avant, ma mère", target: "travaillait", post: "à l'usine.", spoken: "travaillait" },
-            { id: 3, pre: "3. Mon grand-père", target: "était", post: "très gentil.", spoken: "était" },
-            { id: 4, pre: "4. J'", target: "avais", post: "un chien fidèle.", spoken: "avais" },
-            { id: 5, pre: "5. Quand tu", target: "avais", post: "10 ans...", spoken: "avais" },
-            { id: 6, pre: "6. Nous", target: "prenions", post: "le train de nuit.", spoken: "prenions" },
-            { id: 7, pre: "7. Vous", target: "lisiez", post: "ce journal chaque matin.", spoken: "lisiez" },
-            { id: 8, pre: "8. Ils", target: "faisaient", post: "leurs devoirs.", spoken: "faisaient" },
-            { id: 9, pre: "9. Elle", target: "savait", post: "toujours la réponse.", spoken: "savait" },
-            { id: 10, pre: "10. À cette époque, nous", target: "finissions", post: "à 17 heures.", spoken: "finissions" }
+            { id: 1, prompt: "Les enfants", audio: "jouaient", suffix: "dans le jardin.", answer: "jouaient" },
+            { id: 2, prompt: "Avant, ma mère", audio: "travaillait", suffix: "à l'hôpital.", answer: "travaillait" },
+            { id: 3, prompt: "Mon grand-père", audio: "était", suffix: "gentil.", answer: "était" },
+            { id: 4, prompt: "J'", audio: "avais", suffix: "un chien fidèle.", answer: "avais" },
+            { id: 5, prompt: "Quand tu", audio: "avais", suffix: "10 ans...", answer: "avais" },
+            { id: 6, prompt: "...tu", audio: "allais", suffix: "au parc tous les samedis.", answer: "allais" },
+            { id: 7, prompt: "À cette époque, nous", audio: "prenions", suffix: "le train tôt.", answer: "prenions" },
+            { id: 8, prompt: "Tous les soirs, vous", audio: "lisiez", suffix: "un roman.", answer: "lisiez" },
+            { id: 9, prompt: "En hiver, il", audio: "faisait", suffix: "très froid.", answer: "faisait" },
+            { id: 10, prompt: "Mes cousines", audio: "pouvaient", suffix: "venir nous voir.", answer: "pouvaient" }
         ];
 
         function renderPhoneticPractice() {
             const container = document.getElementById('phoneticPracticeList');
-            container.innerHTML = '';
-            PHONETIC_ITEMS.forEach(item => {
-                const row = document.createElement('div');
-                row.className = 'flex flex-wrap sm:flex-nowrap items-center gap-2 bg-white p-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm';
-                row.innerHTML = `
-                    <span class="font-medium text-slate-800">${item.pre}</span>
-                    <button onclick="speakFrench('${item.spoken}')" class="touch-btn px-2 py-1 bg-emerald-50 text-inspireDarkGreen hover:bg-emerald-100 rounded-lg text-sm border border-emerald-200" title="Écouter le verbe">🔊 Écouter</button>
-                    <input type="text" id="ph-input-${item.id}" placeholder="verbe" class="w-32 px-2.5 py-1.5 border border-slate-300 rounded-lg focus:outline-none focus:border-inspireGreen text-slate-800 font-semibold text-center">
-                    <span class="text-slate-600">${item.post}</span>
-                    <span id="ph-feedback-${item.id}" class="ml-auto font-bold text-xs"></span>
+            if (!container) return;
+
+            let html = '';
+            PHONETIC_ITEMS.forEach((it, idx) => {
+                html += `
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 bg-white rounded-xl border border-slate-200">
+                        <div class="flex items-center gap-2 flex-wrap text-sm text-slate-800">
+                            <span class="font-bold text-slate-500 w-5">${idx + 1}.</span>
+                            <span>${it.prompt}</span>
+                            <button type="button" onclick="speakFrench('${it.audio}')" class="touch-btn p-1.5 px-2 bg-emerald-50 hover:bg-emerald-100 text-inspireDarkGreen rounded-lg border border-emerald-200 text-xs font-bold" title="Écouter le verbe">
+                                🔊 Écouter
+                            </button>
+                            <input type="text" id="ph_input_${idx}" class="w-32 sm:w-36 px-2.5 py-1.5 border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-inspireGreen" placeholder="tapez ici...">
+                            <span>${it.suffix}</span>
+                        </div>
+                        <div id="ph_fb_${idx}" class="text-xs font-bold sm:self-center"></div>
+                    </div>
                 `;
-                container.appendChild(row);
             });
+            container.innerHTML = html;
         }
 
         function checkPhoneticPractice() {
             let correct = 0;
-            PHONETIC_ITEMS.forEach(item => {
-                const input = document.getElementById(`ph-input-${item.id}`);
-                const feedback = document.getElementById(`ph-feedback-${item.id}`);
-                const val = input.value.trim().toLowerCase();
+            PHONETIC_ITEMS.forEach((it, idx) => {
+                const inp = document.getElementById(`ph_input_${idx}`);
+                const fb = document.getElementById(`ph_fb_${idx}`);
+                if (!inp || !fb) return;
 
-                if (val === item.target.toLowerCase()) {
+                const val = inp.value.trim().toLowerCase();
+                if (val === it.answer.toLowerCase()) {
                     correct++;
-                    feedback.innerHTML = '<span class="text-emerald-600">✓ Exact</span>';
-                    input.className = 'w-32 px-2.5 py-1.5 border-2 border-emerald-500 bg-emerald-50 rounded-lg text-slate-800 font-bold text-center';
+                    fb.innerHTML = '<span class="text-emerald-600">✓ Correct</span>';
+                    inp.className = 'w-32 sm:w-36 px-2.5 py-1.5 border border-emerald-500 bg-emerald-50 rounded-lg text-sm text-slate-900';
                 } else {
-                    feedback.innerHTML = `<span class="text-red-600">✗ (${item.target})</span>`;
-                    input.className = 'w-32 px-2.5 py-1.5 border-2 border-red-400 bg-red-50 rounded-lg text-slate-800 font-bold text-center';
+                    fb.innerHTML = `<span class="text-red-600">✗ (${it.answer})</span>`;
+                    inp.className = 'w-32 sm:w-36 px-2.5 py-1.5 border border-red-400 bg-red-50 rounded-lg text-sm text-slate-900';
                 }
             });
-            document.getElementById('phoneticPracticeScore').innerText = `Score : ${correct} / 10`;
+
+            const scoreDisplay = document.getElementById('phoneticPracticeScore');
+            if (scoreDisplay) {
+                scoreDisplay.innerText = `Score : ${correct} / 10`;
+                scoreDisplay.className = correct === 10 ? 'font-black text-sm text-emerald-600' : 'font-black text-sm text-slate-800';
+            }
         }
 
         // ===================================================================
-        // 5. ASSOCIATION MEXIQUE / FRANCE (ONGLET 2)
+        // 5. ASSOCIATIONS ESPAGNOL DU MEXIQUE ET FRANÇAIS (ONGLET 2)
         // ===================================================================
-        const MATCHING_DATA = [
-            { id: 1, es: "1. Cuando era chavo, jugaba fútbol en la calle.", frCorrect: "Quand j'étais jeune, je jouais au foot dans la rue." },
-            { id: 2, es: "2. Antes, mi abuelita cocinaba frijoles todos los domingos.", frCorrect: "Avant, ma grand-mère cuisinait des haricots tous les dimanches." },
-            { id: 3, es: "3. Hacía un calor tremendo en las tardes.", frCorrect: "Il faisait une chaleur terrible l'après-midi." },
-            { id: 4, es: "4. No teníamos coche, así que caminábamos mucho.", frCorrect: "Nous n'avions pas de voiture, donc nous marchions beaucoup." },
-            { id: 5, es: "5. ¿Qué hacías cuando vivías en Guadalajara?", frCorrect: "Qu'est-ce que tu faisais quand tu habitais à Guadalajara ?" }
-        ];
-
-        const ALL_FR_OPTIONS = [
-            "Qu'est-ce que tu faisais quand tu habitais à Guadalajara ?",
-            "Quand j'étais jeune, je jouais au foot dans la rue.",
-            "Il faisait une chaleur terrible l'après-midi.",
-            "Nous n'avions pas de voiture, donc nous marchions beaucoup.",
-            "Avant, ma grand-mère cuisinait des haricots tous les dimanches."
+        const MATCHING_PAIRS = [
+            { es: "Antes, mi abuelita cocinaba bien rico los domingos.", fr: "Avant, ma grand-mère cuisinait super bien le dimanche." },
+            { es: "Cuando estábamos morros, jugábamos en la calle.", fr: "Quand on était gamins, on jouait dans la rue." },
+            { es: "En ese tiempo, no había tanto tráfico en la ciudad.", fr: "À cette époque-là, il n'y avait pas autant de circulation en ville." },
+            { es: "Cada fin de semana nos íbamos de paseo.", fr: "Chaque week-end, on partait se promener." },
+            { es: "Siempre le echaban muchas ganas a la escuela.", fr: "Ils faisaient toujours beaucoup d'efforts à l'école." }
         ];
 
         function renderMatching() {
             const container = document.getElementById('matchingPairsContainer');
-            container.innerHTML = '';
-            MATCHING_DATA.forEach(item => {
-                const div = document.createElement('div');
-                div.className = 'p-3 bg-slate-50 rounded-xl border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs sm:text-sm';
-                
-                let selectOptions = '<option value="">-- Choisir la traduction française correspondante --</option>';
-                ALL_FR_OPTIONS.forEach(opt => {
-                    selectOptions += `<option value="${opt}">${opt}</option>`;
+            if (!container) return;
+
+            const shuffledFr = [...MATCHING_PAIRS].map(p => p.fr).sort(() => 0.5 - Math.random());
+
+            let html = '';
+            MATCHING_PAIRS.forEach((item, idx) => {
+                let optionsHtml = '<option value="">-- Choisissez la traduction française --</option>';
+                shuffledFr.forEach(frText => {
+                    optionsHtml += `<option value="${encodeURIComponent(frText)}">${frText}</option>`;
                 });
 
-                div.innerHTML = `
-                    <div class="font-medium text-slate-800 md:w-1/2">
-                        <span class="text-amber-700 font-bold">🇲🇽</span> ${item.es}
-                    </div>
-                    <div class="md:w-1/2 flex items-center gap-2">
-                        <select id="match-select-${item.id}" class="w-full p-2 border border-slate-300 rounded-lg text-xs sm:text-sm bg-white focus:outline-none focus:ring-1 focus:ring-inspireGreen">
-                            ${selectOptions}
-                        </select>
-                        <span id="match-fb-${item.id}" class="font-bold text-xs whitespace-nowrap"></span>
+                html += `
+                    <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+                        <div class="font-semibold text-slate-800 text-xs sm:text-sm">
+                            🇲🇽 <em>« ${item.es} »</em>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                            <select id="match_sel_${idx}" class="w-full text-xs sm:text-sm p-2 border border-slate-300 rounded-lg bg-white text-slate-800 focus:ring-2 focus:ring-inspireGreen focus:outline-none">
+                                ${optionsHtml}
+                            </select>
+                            <span id="match_fb_${idx}" class="text-xs font-bold whitespace-nowrap"></span>
+                        </div>
                     </div>
                 `;
-                container.appendChild(div);
             });
+            container.innerHTML = html;
         }
 
         function checkMatching() {
-            let count = 0;
-            MATCHING_DATA.forEach(item => {
-                const select = document.getElementById(`match-select-${item.id}`);
-                const fb = document.getElementById(`match-fb-${item.id}`);
-                if (select.value === item.frCorrect) {
-                    count++;
+            let correct = 0;
+            MATCHING_PAIRS.forEach((item, idx) => {
+                const sel = document.getElementById(`match_sel_${idx}`);
+                const fb = document.getElementById(`match_fb_${idx}`);
+                if (!sel || !fb) return;
+
+                const chosen = decodeURIComponent(sel.value || '');
+                if (chosen === item.fr) {
+                    correct++;
                     fb.innerHTML = '<span class="text-emerald-600">✓ Exact</span>';
-                    select.className = 'w-full p-2 border-2 border-emerald-500 bg-emerald-50 rounded-lg text-xs sm:text-sm';
+                    sel.classList.add('border-emerald-500', 'bg-emerald-50');
+                    sel.classList.remove('border-red-400', 'bg-red-50');
                 } else {
-                    fb.innerHTML = '<span class="text-red-600">✗ Erreur</span>';
-                    select.className = 'w-full p-2 border-2 border-red-400 bg-red-50 rounded-lg text-xs sm:text-sm';
+                    fb.innerHTML = '<span class="text-red-600">✗ Incorrect</span>';
+                    sel.classList.add('border-red-400', 'bg-red-50');
+                    sel.classList.remove('border-emerald-500', 'bg-emerald-50');
                 }
             });
-            document.getElementById('matchingScore').innerText = `Score : ${count} / 5`;
+
+            const scoreDisplay = document.getElementById('matchingScore');
+            if (scoreDisplay) {
+                scoreDisplay.innerText = `Score : ${correct} / 5`;
+                scoreDisplay.className = correct === 5 ? 'font-black text-sm text-emerald-600' : 'font-black text-sm text-slate-800';
+            }
         }
 
         // ===================================================================
-        // 6. EXERCICES DE SYSTÉMATISATION (ONGLET 3)
+        // 6. SYSTÉMATISATION (ONGLET 3) : QCM, PHRASES À TROUS, DICTÉE
         // ===================================================================
+        let scoreTab3 = { qcm: 0, blanks: 0, dictation: 0 };
+
+        function updateGlobalTab3Score() {
+            const total = scoreTab3.qcm + scoreTab3.blanks + scoreTab3.dictation;
+            const el = document.getElementById('globalTab3Score');
+            if (el) el.innerText = `${total} / 26`;
+        }
+
+        // --- Activité 1 : QCM (8 questions) ---
         const QCM_DATA = [
-            { id: 1, q: "1. Quand nous (être) petits, nous adorions la mer.", options: ["étions", "étiez", "étaient"], ans: "étions" },
-            { id: 2, q: "2. Tu (prendre) souvent le métro à 8h ?", options: ["prenait", "prenais", "preniez"], ans: "prenais" },
-            { id: 3, q: "3. Mes grands-parents (avoir) une maison à la campagne.", options: ["avions", "avait", "avaient"], ans: "avaient" },
-            { id: 4, q: "4. Vous (faire) du sport le samedi matin ?", options: ["faisiez", "faisions", "faisaient"], ans: "faisiez" },
-            { id: 5, q: "5. À cette époque, elle (finir) son travail tard.", options: ["finissait", "finissais", "finissaient"], ans: "finissait" },
-            { id: 6, q: "6. Je ne (connaître) pas encore cette ville.", options: ["connaissait", "connaissais", "connaissions"], ans: "connaissais" },
-            { id: 7, q: "7. Ils (devoir) se lever très tôt.", options: ["devait", "devions", "devaient"], ans: "devaient" },
-            { id: 8, q: "8. On (lire) beaucoup d'histoires le soir.", options: ["lisait", "lisais", "lisions"], ans: "lisait" }
+            { q: "Quand j'étais enfant, je _____ toujours du vélo.", options: ["faisait", "faisais", "faisions"], ans: 1 },
+            { q: "Autrefois, mes grands-parents _____ dans une grande ferme.", options: ["habitaient", "habitait", "habitais"], ans: 0 },
+            { q: "Nous _____ beaucoup de livres pendant les vacances.", options: ["lisaient", "lisiez", "lisions"], ans: 2 },
+            { q: "Tu _____ toujours tes devoirs avant le dîner ?", options: ["finissais", "finissait", "finissaient"], ans: 0 },
+            { q: "En 1980, vous _____ souvent au cinéma le samedi.", options: ["alliez", "allions", "allaient"], ans: 0 },
+            { q: "Il _____ beau et les oiseaux chantaient.", options: ["faisait", "faisais", "faisaient"], ans: 0 },
+            { q: "Elles ne _____ pas encore parler français.", options: ["savions", "savaient", "savait"], ans: 1 },
+            { q: "À cette époque, qui _____ le directeur de l'école ?", options: ["étaient", "étais", "était"], ans: 2 }
         ];
 
         function renderQCM() {
             const container = document.getElementById('qcmList');
-            container.innerHTML = '';
-            QCM_DATA.forEach(item => {
-                const box = document.createElement('div');
-                box.className = 'p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm space-y-2';
-                
-                let optHtml = '<div class="grid grid-cols-1 sm:grid-cols-3 gap-2">';
-                item.options.forEach(opt => {
-                    optHtml += `
-                        <label class="flex items-center gap-2 p-2 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
-                            <input type="radio" name="qcm-${item.id}" value="${opt}" class="text-inspireGreen">
-                            <span>${opt}</span>
-                        </label>
-                    `;
-                });
-                optHtml += '</div>';
+            if (!container) return;
 
-                box.innerHTML = `
-                    <div class="flex items-center justify-between">
-                        <span class="font-semibold text-slate-800">${item.q}</span>
-                        <span id="qcm-fb-${item.id}" class="text-xs font-bold"></span>
+            let html = '';
+            QCM_DATA.forEach((item, idx) => {
+                html += `
+                    <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-xl space-y-2 text-xs sm:text-sm">
+                        <p class="font-semibold text-slate-800">${idx + 1}. ${item.q}</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                            ${item.options.map((opt, optIdx) => `
+                                <label class="flex items-center gap-2 p-2 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100">
+                                    <input type="radio" name="qcm_${idx}" value="${optIdx}" class="text-inspireGreen">
+                                    <span>${opt}</span>
+                                </label>
+                            `).join('')}
+                        </div>
+                        <div id="qcm_fb_${idx}" class="text-xs font-bold pt-1"></div>
                     </div>
-                    ${optHtml}
                 `;
-                container.appendChild(box);
             });
+            container.innerHTML = html;
         }
 
-        let scoreQCMVal = 0;
         function checkQCM() {
-            scoreQCMVal = 0;
-            QCM_DATA.forEach(item => {
-                const selected = document.querySelector(`input[name="qcm-${item.id}"]:checked`);
-                const fb = document.getElementById(`qcm-fb-${item.id}`);
-                if (selected && selected.value === item.ans) {
-                    scoreQCMVal++;
-                    fb.innerHTML = '<span class="text-emerald-600">✓ Correct</span>';
+            let correct = 0;
+            QCM_DATA.forEach((item, idx) => {
+                const checked = document.querySelector(`input[name="qcm_${idx}"]:checked`);
+                const fb = document.getElementById(`qcm_fb_${idx}`);
+                if (!fb) return;
+
+                if (!checked) {
+                    fb.innerHTML = '<span class="text-amber-600">Choisissez une réponse</span>';
+                    return;
+                }
+
+                if (parseInt(checked.value) === item.ans) {
+                    correct++;
+                    fb.innerHTML = '<span class="text-emerald-600">✓ Bonne réponse !</span>';
                 } else {
-                    fb.innerHTML = `<span class="text-red-600">✗ (${item.ans})</span>`;
+                    fb.innerHTML = `<span class="text-red-600">✗ Faux (Réponse : ${item.options[item.ans]})</span>`;
                 }
             });
-            document.getElementById('scoreEx1').innerText = `Score : ${scoreQCMVal}/8`;
-            updateTotalTab3();
+
+            scoreTab3.qcm = correct;
+            const scoreDisplay = document.getElementById('scoreEx1');
+            if (scoreDisplay) scoreDisplay.innerText = `Score : ${correct}/8`;
+            updateGlobalTab3Score();
         }
 
-        // Exercice 2 : Fill in the blanks
+        // --- Activité 2 : Phrases à trous (9 verbes) ---
         const BLANKS_DATA = [
-            { id: 1, pre: "1. En 2010, vous (habiter)", target: "habitiez", post: "en Espagne." },
-            { id: 2, pre: "2. Nous (choisir)", target: "choisissions", post: "toujours le même plat." },
-            { id: 3, pre: "3. Il ne (pouvoir)", target: "pouvait", post: "pas venir à la fête." },
-            { id: 4, pre: "4. Ma sœur (aimer)", target: "aimait", post: "peindre le dimanche." },
-            { id: 5, pre: "5. Tu (savoir)", target: "savais", post: "jouer de la guitare ?" },
-            { id: 6, pre: "6. Ils (aller)", target: "allaient", post: "à la plage tous les étés." },
-            { id: 7, pre: "7. J' (attendre)", target: "attendais", post: "mon ami devant le cinéma." },
-            { id: 8, pre: "8. Le professeur (parler)", target: "parlait", post: "lentement et clairement." },
-            { id: 9, pre: "9. On (prendre)", target: "prenait", post: "un café ensemble." }
+            { pre: "Avant, nous", verb: "prendre", post: "le bus chaque matin.", ans: "prenions" },
+            { pre: "Tu", verb: "connaître", post: "déjà ce monument ?", ans: "connaissais" },
+            { pre: "Elle", verb: "avoir", post: "toujours un sourire chaleureux.", ans: "avait" },
+            { pre: "Vous", verb: "devoir", post: "partir tôt à cette époque ?", ans: "deviez" },
+            { pre: "Ils", verb: "être", post: "très contents de leur voyage.", ans: "étaient" },
+            { pre: "Je", verb: "pouvoir", post: "courir pendant une heure sans m'arrêter.", ans: "pouvais" },
+            { pre: "Mon père", verb: "lire", post: "le journal tous les dimanches.", ans: "lisait" },
+            { pre: "Nous", verb: "choisir", post: "souvent le même plat.", ans: "choisissions" },
+            { pre: "Les élèves", verb: "savoir", post: "la leçon par cœur.", ans: "savaient" }
         ];
 
         function renderFillBlanks() {
             const container = document.getElementById('fillBlanksList');
-            container.innerHTML = '';
-            BLANKS_DATA.forEach(item => {
-                const row = document.createElement('div');
-                row.className = 'flex flex-wrap sm:flex-nowrap items-center gap-2 p-2.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm';
-                row.innerHTML = `
-                    <span class="font-medium text-slate-800">${item.pre}</span>
-                    <input type="text" id="blank-input-${item.id}" placeholder="verbe" class="w-36 px-2.5 py-1 border border-slate-300 rounded-lg text-center font-semibold text-slate-800 focus:outline-none focus:border-inspireGreen">
-                    <span class="text-slate-700">${item.post}</span>
-                    <span id="blank-fb-${item.id}" class="ml-auto font-bold text-xs"></span>
+            if (!container) return;
+
+            let html = '';
+            BLANKS_DATA.forEach((item, idx) => {
+                html += `
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm">
+                        <div class="flex items-center gap-1.5 flex-wrap text-slate-800">
+                            <span class="font-bold text-slate-500 w-5">${idx + 1}.</span>
+                            <span>${item.pre}</span>
+                            <input type="text" id="blank_${idx}" class="w-32 px-2.5 py-1 border border-slate-300 rounded-lg text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-inspireGreen" placeholder="(${item.verb})">
+                            <span>${item.post}</span>
+                        </div>
+                        <div id="blank_fb_${idx}" class="text-xs font-bold sm:self-center"></div>
+                    </div>
                 `;
-                container.appendChild(row);
             });
+            container.innerHTML = html;
         }
 
-        let scoreBlanksVal = 0;
         function checkFillBlanks() {
-            scoreBlanksVal = 0;
-            BLANKS_DATA.forEach(item => {
-                const input = document.getElementById(`blank-input-${item.id}`);
-                const fb = document.getElementById(`blank-fb-${item.id}`);
-                if (input.value.trim().toLowerCase() === item.target.toLowerCase()) {
-                    scoreBlanksVal++;
-                    fb.innerHTML = '<span class="text-emerald-600">✓ Exact</span>';
-                    input.className = 'w-36 px-2.5 py-1 border-2 border-emerald-500 bg-emerald-50 rounded-lg text-center font-bold text-slate-800';
+            let correct = 0;
+            BLANKS_DATA.forEach((item, idx) => {
+                const inp = document.getElementById(`blank_${idx}`);
+                const fb = document.getElementById(`blank_fb_${idx}`);
+                if (!inp || !fb) return;
+
+                const val = inp.value.trim().toLowerCase();
+                if (val === item.ans.toLowerCase()) {
+                    correct++;
+                    fb.innerHTML = '<span class="text-emerald-600">✓ Correct</span>';
+                    inp.className = 'w-32 px-2.5 py-1 border border-emerald-500 bg-emerald-50 rounded-lg text-xs sm:text-sm text-slate-900';
                 } else {
-                    fb.innerHTML = `<span class="text-red-600">✗ (${item.target})</span>`;
-                    input.className = 'w-36 px-2.5 py-1 border-2 border-red-400 bg-red-50 rounded-lg text-center font-bold text-slate-800';
+                    fb.innerHTML = `<span class="text-red-600">✗ (${item.ans})</span>`;
+                    inp.className = 'w-32 px-2.5 py-1 border border-red-400 bg-red-50 rounded-lg text-xs sm:text-sm text-slate-900';
                 }
             });
-            document.getElementById('scoreEx2').innerText = `Score : ${scoreBlanksVal}/9`;
-            updateTotalTab3();
+
+            scoreTab3.blanks = correct;
+            const scoreDisplay = document.getElementById('scoreEx2');
+            if (scoreDisplay) scoreDisplay.innerText = `Score : ${correct}/9`;
+            updateGlobalTab3Score();
         }
 
-        // Exercice 3 : Audio dictation (Corrected safely with index player)
-        const DICTATION_ITEMS = [
-            { id: 1, fullAudio: "Quand j'étais petit, je mangeais beaucoup de chocolat.", pre: "Quand j'étais petit, je", target: "mangeais", post: "beaucoup de chocolat." },
-            { id: 2, fullAudio: "Nous n'avions pas d'appareil photo.", pre: "Nous n'", target: "avions", post: "pas d'appareil photo." },
-            { id: 3, fullAudio: "Ils faisaient du vélo tous les soirs.", pre: "Ils", target: "faisaient", post: "du vélo tous les soirs." },
-            { id: 4, fullAudio: "Ma mère était toujours très souriante.", pre: "Ma mère", target: "était", post: "toujours très souriante." },
-            { id: 5, fullAudio: "Tu savais déjà parler anglais.", pre: "Tu", target: "savais", post: "déjà parler anglais." },
-            { id: 6, fullAudio: "Ils ne parlaient pas encore français.", pre: "Ils ne", target: "parlaient", post: "pas encore français." },
-            { id: 7, fullAudio: "Elle avait beaucoup d'énergie.", pre: "Elle", target: "avait", post: "beaucoup d'énergie." },
-            { id: 8, fullAudio: "Vous connaissiez toute l'histoire.", pre: "Vous", target: "connaissiez", post: "toute l'histoire." },
-            { id: 9, fullAudio: "Nous allions au marché le samedi.", pre: "Nous", target: "allions", post: "au marché le samedi." }
+        // --- Activité 3 : Dictée auditive (9 phrases) ---
+        const DICTATION_DATA = [
+            { text: "J'avais beaucoup d'amis.", pre: "J'", post: "beaucoup d'amis.", verb: "avais" },
+            { text: "Nous n'avions pas d'appareil photo.", pre: "Nous n'", post: "pas d'appareil photo.", verb: "avions" },
+            { text: "Il était très tard.", pre: "Il", post: "très tard.", verb: "était" },
+            { text: "Elles faisaient de la danse.", pre: "Elles", post: "de la danse.", verb: "faisaient" },
+            { text: "Tu prenais toujours le train.", pre: "Tu", post: "toujours le train.", verb: "prenais" },
+            { text: "Je lisais ce livre chaque soir.", pre: "Je", post: "ce livre chaque soir.", verb: "lisais" },
+            { text: "On allait à la mer en été.", pre: "On", post: "à la mer en été.", verb: "allait" },
+            { text: "Vous connaissiez toute l'histoire.", pre: "Vous", post: "toute l'histoire.", verb: "connaissiez" },
+            { text: "Ils finissaient leurs cours à midi.", pre: "Ils", post: "leurs cours à midi.", verb: "finissaient" }
         ];
 
-        function playDictationAudio(index) {
-            if (DICTATION_ITEMS[index]) {
-                speakFrench(DICTATION_ITEMS[index].fullAudio);
+        function playDictationAudio(idx) {
+            if (DICTATION_DATA[idx]) {
+                speakFrench(DICTATION_DATA[idx].text);
             }
         }
 
         function renderDictation() {
             const container = document.getElementById('dictationList');
-            container.innerHTML = '';
-            DICTATION_ITEMS.forEach((item, index) => {
-                const row = document.createElement('div');
-                row.className = 'flex flex-wrap sm:flex-nowrap items-center gap-2 p-2.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm';
-                row.innerHTML = `
-                    <button onclick="playDictationAudio(${index})" class="touch-btn px-2.5 py-1 bg-purple-100 hover:bg-purple-200 text-purple-900 rounded-lg text-xs font-bold border border-purple-200" title="Écouter la phrase entière">
-                        🔊 Phrase ${item.id}
-                    </button>
-                    <span class="text-slate-800">${item.pre}</span>
-                    <input type="text" id="dict-input-${item.id}" placeholder="verbe" class="w-32 px-2.5 py-1 border border-slate-300 rounded-lg text-center font-semibold text-slate-800 focus:outline-none focus:border-inspireGreen">
-                    <span class="text-slate-800">${item.post}</span>
-                    <span id="dict-fb-${item.id}" class="ml-auto font-bold text-xs"></span>
+            if (!container) return;
+
+            let html = '';
+            DICTATION_DATA.forEach((item, idx) => {
+                html += `
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm">
+                        <div class="flex items-center gap-2 flex-wrap text-slate-800">
+                            <span class="font-bold text-slate-500 w-5">${idx + 1}.</span>
+                            <button type="button" onclick="playDictationAudio(${idx})" class="touch-btn p-1.5 px-2.5 bg-purple-50 hover:bg-purple-100 text-purple-800 border border-purple-200 rounded-lg text-xs font-bold" title="Écouter la phrase">
+                                🔊 Écouter
+                            </button>
+                            <span>${item.pre}</span>
+                            <input type="text" id="dict_${idx}" class="w-32 px-2.5 py-1 border border-slate-300 rounded-lg text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-inspireGreen" placeholder="verbe manquant...">
+                            <span>${item.post}</span>
+                        </div>
+                        <div id="dict_fb_${idx}" class="text-xs font-bold sm:self-center"></div>
+                    </div>
                 `;
-                container.appendChild(row);
             });
+            container.innerHTML = html;
         }
 
-        let scoreDictVal = 0;
         function checkDictation() {
-            scoreDictVal = 0;
-            DICTATION_ITEMS.forEach(item => {
-                const input = document.getElementById(`dict-input-${item.id}`);
-                const fb = document.getElementById(`dict-fb-${item.id}`);
-                if (input.value.trim().toLowerCase() === item.target.toLowerCase()) {
-                    scoreDictVal++;
+            let correct = 0;
+            DICTATION_DATA.forEach((item, idx) => {
+                const inp = document.getElementById(`dict_${idx}`);
+                const fb = document.getElementById(`dict_fb_${idx}`);
+                if (!inp || !fb) return;
+
+                const val = inp.value.trim().toLowerCase();
+                if (val === item.verb.toLowerCase()) {
+                    correct++;
                     fb.innerHTML = '<span class="text-emerald-600">✓ Exact</span>';
-                    input.className = 'w-32 px-2.5 py-1 border-2 border-emerald-500 bg-emerald-50 rounded-lg text-center font-bold text-slate-800';
+                    inp.className = 'w-32 px-2.5 py-1 border border-emerald-500 bg-emerald-50 rounded-lg text-xs sm:text-sm text-slate-900';
                 } else {
-                    fb.innerHTML = `<span class="text-red-600">✗ (${item.target})</span>`;
-                    input.className = 'w-32 px-2.5 py-1 border-2 border-red-400 bg-red-50 rounded-lg text-center font-bold text-slate-800';
+                    fb.innerHTML = `<span class="text-red-600">✗ (${item.verb})</span>`;
+                    inp.className = 'w-32 px-2.5 py-1 border border-red-400 bg-red-50 rounded-lg text-xs sm:text-sm text-slate-900';
                 }
             });
-            document.getElementById('scoreEx3').innerText = `Score : ${scoreDictVal}/9`;
-            updateTotalTab3();
-        }
 
-        function updateTotalTab3() {
-            const total = scoreQCMVal + scoreBlanksVal + scoreDictVal;
-            document.getElementById('globalTab3Score').innerText = `${total} / 26`;
+            scoreTab3.dictation = correct;
+            const scoreDisplay = document.getElementById('scoreEx3');
+            if (scoreDisplay) scoreDisplay.innerText = `Score : ${correct}/9`;
+            updateGlobalTab3Score();
         }
 
         // ===================================================================
-        // 7. COMPRÉHENSION DOC 1 & DOC 2 (ONGLET 4) & DÉBLOCAGE
+        // 7. LECTEUR AUDIO MP3 ET COMPRÉHENSION (ONGLET 4)
         // ===================================================================
+        let isPlayingAudio = false;
+
+        function toggleAudioPlayer() {
+            const audio = document.getElementById('realAudio');
+            const playBtn = document.getElementById('audioPlayBtn');
+            const status = document.getElementById('audioStatusText');
+            if (!audio) return;
+
+            if (audio.paused) {
+                audio.play().then(() => {
+                    isPlayingAudio = true;
+                    if (playBtn) playBtn.innerText = '❚❚';
+                    if (status) status.innerText = 'Lecture en cours de martiniquaise.mp3...';
+                }).catch(() => {
+                    // Repli par synthèse vocale en cas d'absence du fichier local martiniquaise.mp3
+                    speakTranscription();
+                    if (status) status.innerText = 'Lecture par synthèse vocale...';
+                });
+            } else {
+                audio.pause();
+                isPlayingAudio = false;
+                if (playBtn) playBtn.innerText = '▶';
+                if (status) status.innerText = 'Lecture en pause.';
+            }
+
+            audio.onended = () => {
+                isPlayingAudio = false;
+                if (playBtn) playBtn.innerText = '▶';
+                if (status) status.innerText = 'Lecture terminée. Cliquez pour réécouter.';
+            };
+        }
+
+        function setPlaybackSpeed(speed) {
+            speechRate = speed;
+            const audio = document.getElementById('realAudio');
+            if (audio) {
+                audio.playbackRate = speed;
+            }
+
+            ['08', '10', '12'].forEach(s => {
+                const btn = document.getElementById(`spd-${s}`);
+                if (btn) {
+                    btn.classList.remove('bg-inspireGreen', 'text-white', 'border-inspireGreen');
+                    btn.classList.add('bg-white', 'border-slate-300');
+                }
+            });
+
+            const activeBtn = document.getElementById(`spd-${String(speed).replace('.', '')}`);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-inspireGreen', 'text-white', 'border-inspireGreen');
+                activeBtn.classList.remove('bg-white', 'border-slate-300');
+            }
+        }
+
+        function speakTranscription() {
+            const transcriptText = "Journaliste : Joséphine se raconte... Je suis née à la Martinique en 1973. Mes parents étaient modestes, ils n'avaient pas d'argent. Ma mère travaillait dans un magasin. Mon père était ouvrier, il était réservé mais généreux. On habitait un petit village. À la maison, il y avait mon petit frère Gabriel, et Zoé. Zoé, c'était la fille de mon père et de sa première femme. Zoé et moi, on se disputait tout le temps ! Ma mère était très souriante, elle avait beaucoup d'énergie, elle adorait s'amuser. Avec mon père, on allait au marché le samedi. On achetait du poisson et on le mangeait avec des petits légumes frais, c'était délicieux ! À cette époque-là, c'était agréable, nous connaissions tout le monde dans le village. Quand j'avais dix ans, nous avons déménagé. Nous sommes venus à Paris. C'était dur, il faisait froid et bien sûr... il n'y avait pas la mer ! Heureusement, je faisais toujours de la danse.";
+            speakFrench(transcriptText);
+        }
+
         let isDoc1Checked = false;
-        let isDoc2Checked = false;
+        let isDoc2GeneralChecked = false;
+        let isDoc2GrammarChecked = false;
 
         function checkDoc1() {
-            const q1 = document.querySelector('input[name="d1q1"]:checked');
-            const q2 = document.querySelector('input[name="d1q2"]:checked');
+            const keys = ['d1q1', 'd1q2', 'd1q3', 'd1q4', 'd1q5', 'd1q6'];
+            let allAnswered = true;
+            let score = 0;
+
+            keys.forEach(k => {
+                const sel = document.querySelector(`input[name="${k}"]:checked`);
+                if (!sel) allAnswered = false;
+                else if (sel.value === 'good') score++;
+            });
+
             const fb = document.getElementById('doc1Feedback');
-
-            if (!q1 || !q2) {
-                fb.className = "ml-3 text-xs sm:text-sm font-bold text-amber-600";
-                fb.innerText = "Veuillez répondre aux deux questions.";
+            if (!allAnswered) {
+                if (fb) {
+                    fb.className = "text-xs sm:text-sm font-bold text-amber-600";
+                    fb.innerText = "Veuillez répondre aux 6 questions.";
+                }
                 return;
             }
 
-            if (q1.value === 'good' && q2.value === 'good') {
-                fb.className = "ml-3 text-xs sm:text-sm font-bold text-emerald-600";
-                fb.innerText = "✓ Excellent ! Réponses exactes.";
-                isDoc1Checked = true;
+            if (fb) {
+                fb.className = score === 6 ? "text-xs sm:text-sm font-bold text-emerald-600" : "text-xs sm:text-sm font-bold text-slate-700";
+                fb.innerText = `Score Doc 1 : ${score} / 6.`;
+            }
+            isDoc1Checked = true;
+            checkAllPrerequisites();
+        }
+
+        function checkAudioGeneral() {
+            const keys = ['ag_q1', 'ag_q2', 'ag_q3', 'ag_q4', 'ag_q5', 'ag_q6'];
+            let allAnswered = true;
+            let score = 0;
+
+            keys.forEach(k => {
+                const sel = document.querySelector(`input[name="${k}"]:checked`);
+                if (!sel) allAnswered = false;
+                else if (sel.value === 'good') score++;
+            });
+
+            const scoreDisplay = document.getElementById('scoreAudioGen');
+            if (!allAnswered) {
+                if (scoreDisplay) {
+                    scoreDisplay.innerText = "Répondez aux 6 questions !";
+                    scoreDisplay.className = "text-xs sm:text-sm font-bold text-amber-600";
+                }
+                return;
+            }
+
+            if (scoreDisplay) {
+                scoreDisplay.innerText = `Score : ${score}/6`;
+                scoreDisplay.className = score === 6 ? "text-xs sm:text-sm font-bold text-emerald-600" : "text-xs sm:text-sm font-bold text-slate-700";
+            }
+            isDoc2GeneralChecked = true;
+            checkAllPrerequisites();
+        }
+
+        function checkAudioGrammar() {
+            const keys = ['agr_q1', 'agr_q2', 'agr_q3', 'agr_q4'];
+            let allAnswered = true;
+            let score = 0;
+
+            keys.forEach(k => {
+                const sel = document.querySelector(`input[name="${k}"]:checked`);
+                if (!sel) allAnswered = false;
+                else if (sel.value === 'good') score++;
+            });
+
+            const scoreDisplay = document.getElementById('scoreAudioGram');
+            if (!allAnswered) {
+                if (scoreDisplay) {
+                    scoreDisplay.innerText = "Répondez aux 4 questions !";
+                    scoreDisplay.className = "text-xs sm:text-sm font-bold text-amber-600";
+                }
+                return;
+            }
+
+            if (scoreDisplay) {
+                scoreDisplay.innerText = `Score : ${score}/4`;
+                scoreDisplay.className = score === 4 ? "text-xs sm:text-sm font-bold text-emerald-600" : "text-xs sm:text-sm font-bold text-slate-700";
+            }
+            isDoc2GrammarChecked = true;
+            checkAllPrerequisites();
+        }
+
+        function checkAllPrerequisites() {
+            if (isDoc1Checked && isDoc2GeneralChecked && isDoc2GrammarChecked) {
+                const lockMsg = document.getElementById('transcriptionLockedMsg');
+                const btnContainer = document.getElementById('transcriptionButtonContainer');
+                if (lockMsg) lockMsg.classList.add('hidden');
+                if (btnContainer) btnContainer.classList.remove('hidden');
+            }
+        }
+
+        function toggleTranscriptionView() {
+            const content = document.getElementById('transcriptionContent');
+            const btn = document.getElementById('btnToggleTranscription');
+            if (!content || !btn) return;
+
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                btn.innerHTML = '<span>✕</span><span>Masquer la transcription</span>';
             } else {
-                fb.className = "ml-3 text-xs sm:text-sm font-bold text-red-600";
-                fb.innerText = "Revoir certaines réponses.";
-                isDoc1Checked = true;
-            }
-            tryUnlockTranscription();
-        }
-
-        function checkAudioQuestions() {
-            const q1 = document.querySelector('input[name="aq1"]:checked');
-            const q2 = document.querySelector('input[name="aq2"]:checked');
-            const q3 = document.querySelector('input[name="aq3"]:checked');
-            const fb = document.getElementById('audioFeedback');
-
-            if (!q1 || !q2 || !q3) {
-                fb.className = "text-xs sm:text-sm font-bold text-amber-600";
-                fb.innerText = "Répondez aux trois questions.";
-                return;
-            }
-
-            let correct = 0;
-            if (q1.value === 'good') correct++;
-            if (q2.value === 'good') correct++;
-            if (q3.value === 'good') correct++;
-
-            fb.className = correct === 3 ? "text-xs sm:text-sm font-bold text-emerald-600" : "text-xs sm:text-sm font-bold text-amber-600";
-            fb.innerText = `Score audio : ${correct}/3.`;
-            isDoc2Checked = true;
-            tryUnlockTranscription();
-        }
-
-        function tryUnlockTranscription() {
-            if (isDoc1Checked && isDoc2Checked) {
-                document.getElementById('transcriptionLockedMsg').classList.add('hidden');
-                document.getElementById('transcriptionContent').classList.remove('hidden');
+                content.classList.add('hidden');
+                btn.innerHTML = '<span>👁️</span><span>Consulter la transcription</span>';
             }
         }
 
@@ -1231,19 +1566,23 @@
         // 8. ATELIER D'ÉCRITURE GUIDÉE (ANALYSE EN DIRECT)
         // ===================================================================
         function analyzeWriting() {
-            const text = document.getElementById('writingTextarea').value.trim();
-            const words = text.length === 0 ? 0 : text.split(/\s+/).length;
-            document.getElementById('wordCount').innerText = words;
+            const textarea = document.getElementById('writingTextarea');
+            if (!textarea) return;
 
-            // Détection heuristique des terminaisons de l'imparfait
+            const text = textarea.value.trim();
+            const words = text.length === 0 ? 0 : text.split(/\s+/).length;
+            const wordCountEl = document.getElementById('wordCount');
+            if (wordCountEl) wordCountEl.innerText = words;
+
             const imparfaitRegex = /\b\w+(ais|ait|ions|iez|aient)\b/gi;
             const matches = text.match(imparfaitRegex) || [];
-            document.getElementById('imparfaitCount').innerText = matches.length;
+            const impCountEl = document.getElementById('imparfaitCount');
+            if (impCountEl) impCountEl.innerText = matches.length;
         }
 
         function showExampleCorrection() {
             const box = document.getElementById('exampleCorrectionBox');
-            box.classList.toggle('hidden');
+            if (box) box.classList.toggle('hidden');
         }
 
         // ===================================================================
