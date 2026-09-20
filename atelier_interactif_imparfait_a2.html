@@ -567,11 +567,11 @@
                 <!-- 7 Questions sur l'enfance -->
                 <div class="space-y-3 pt-2">
                     <div class="flex items-center justify-between">
-                        <h4 class="font-bold text-slate-900 text-sm sm:text-base">1. Répondez aux questions avec l'imparfait (comme dans le modèle) :</h4>
+                        <h4 class="font-bold text-slate-900 text-sm sm:text-base">1. Répondez aux questions avec l'imparfait (comme dans la vidéo) :</h4>
                         <span id="childhoodScore" class="text-xs sm:text-sm font-bold text-slate-600">Score : -/7</span>
                     </div>
                     <p class="text-xs text-slate-500 italic">
-                        💡 Modèle : <em>« Quand l'enfant avait deux ans, il ne pleurait jamais ? »</em> ➔ <strong>« Non, il pleurait souvent / tout le temps. »</strong>
+                        💡 Consigne : Répondez aux questions d'après les informations entendues dans la vidéo (veillez à conjuguer correctement le verbe à l'imparfait).
                     </p>
 
                     <div id="childhoodQuestionsList" class="space-y-3">
@@ -1580,38 +1580,138 @@
         const CHILDHOOD_QUESTIONS = [
             {
                 q: "1. Quand l'enfant avait deux ans, il ne pleurait jamais ?",
-                hint: "Non, il pleurait souvent / toujours.",
-                keywords: ["pleurait"]
+                hint: "Non, il pleurait beaucoup / souvent.",
+                verbRequired: "pleurait",
+                wrongVerbs: ["pleuré", "pleurais", "pleurent", "pleure", "pleurai"],
+                checkFn: function(val) {
+                    const norm = val.toLowerCase();
+                    if (CHILDHOOD_QUESTIONS[0].wrongVerbs.some(w => norm.includes(w))) {
+                        return { ok: false, msg: "Erreur de conjugaison : écrivez « il pleurait » (-ait)." };
+                    }
+                    if (!norm.includes("pleurait")) {
+                        return { ok: false, msg: "Verbe manquant ou mal orthographié : « pleurait » attendu." };
+                    }
+                    if (norm.includes("beaucoup") || norm.includes("souvent") || norm.includes("non") || norm.includes("tout le temps")) {
+                        return { ok: true, msg: "✓ Exact : « Non, il pleurait beaucoup / souvent. »" };
+                    }
+                    return { ok: true, msg: "✓ Bonne utilisation de l'imparfait (« pleurait »)." };
+                }
             },
             {
-                q: "2. Quand il était petit, il dormait toute la nuit sans se réveiller ?",
-                hint: "Non, il se réveillait souvent / il ne dormait pas bien.",
-                keywords: ["dormait", "réveillait"]
+                q: "2. L’enfant faisait des caprices ?",
+                hint: "Oui, il faisait des caprices.",
+                verbRequired: "faisait",
+                wrongVerbs: ["faisais", "fait", "faisez", "faisaient", "faisé"],
+                checkFn: function(val) {
+                    const norm = val.toLowerCase();
+                    if (CHILDHOOD_QUESTIONS[1].wrongVerbs.some(w => norm.includes(w))) {
+                        return { ok: false, msg: "Erreur de conjugaison : écrivez « il faisait » (-ait)." };
+                    }
+                    if (!norm.includes("faisait")) {
+                        return { ok: false, msg: "Verbe manquant : utilisez le verbe « faisait »." };
+                    }
+                    if (norm.includes("caprice")) {
+                        return { ok: true, msg: "✓ Bravo : « Oui, il faisait des caprices. »" };
+                    }
+                    return { ok: true, msg: "✓ Bonne utilisation de « faisait »." };
+                }
             },
             {
-                q: "3. À cinq ans, il était toujours sage avec ses parents ?",
-                hint: "Non, il faisait souvent des bêtises / il n'était pas toujours sage.",
-                keywords: ["faisait", "était"]
+                q: "3. Quel type de bêtise il faisait ?",
+                hint: "Il adorait mettre les mains (et les pieds) dans l’eau du chien.",
+                verbRequired: "adorait",
+                wrongVerbs: ["adoré", "adorais", "adore", "mettais", "metté"],
+                checkFn: function(val) {
+                    const norm = val.toLowerCase();
+                    if (CHILDHOOD_QUESTIONS[2].wrongVerbs.some(w => norm.includes(w))) {
+                        return { ok: false, msg: "Vérifiez l'imparfait : « il adorait » (-ait) ou « il mettait »." };
+                    }
+                    const hasVerb = norm.includes("adorait") || norm.includes("mettait");
+                    const hasContext = norm.includes("eau") || norm.includes("chien") || norm.includes("main");
+                    if (!hasVerb) {
+                        return { ok: false, msg: "Conjuguez à l'imparfait : « Il adorait mettre... » ou « Il mettait... »" };
+                    }
+                    if (hasContext) {
+                        return { ok: true, msg: "✓ Très bien : « Il adorait mettre les mains dans l’eau du chien. »" };
+                    }
+                    return { ok: false, msg: "Précisez la bêtise : l'eau du chien." };
+                }
             },
             {
-                q: "4. Quand il était petit, il n'aimait pas du tout jouer ?",
-                hint: "Non, il adorait jouer / il jouait tout le temps.",
-                keywords: ["jouait", "adorait", "aimait"]
+                q: "4. La mère lui donnait des fessées ?",
+                hint: "Non, elle ne lui donnait jamais de fessées.",
+                verbRequired: "donnait",
+                wrongVerbs: ["donné", "donnais", "donne", "donnent", "donnai"],
+                checkFn: function(val) {
+                    const norm = val.toLowerCase();
+                    if (CHILDHOOD_QUESTIONS[3].wrongVerbs.some(w => norm.includes(w))) {
+                        return { ok: false, msg: "Erreur de conjugaison : écrivez « elle donnait » (-ait)." };
+                    }
+                    if (!norm.includes("donnait")) {
+                        return { ok: false, msg: "Verbe manquant : conjuguez « donner » à l'imparfait (donnait)." };
+                    }
+                    if (norm.includes("non") || norm.includes("jamais") || norm.includes("pas")) {
+                        return { ok: true, msg: "✓ Exact : « Non, elle ne lui donnait jamais de fessées. »" };
+                    }
+                    return { ok: true, msg: "✓ Bonne utilisation de l'imparfait « donnait »." };
+                }
             },
             {
-                q: "5. À l'école maternelle, il n'avait aucun ami ?",
-                hint: "Non, il avait beaucoup d'amis / de copains.",
-                keywords: ["avait"]
+                q: "5. Comment est-ce que la mère punissait son enfant ?",
+                hint: "Elle le mettait au coin pendant quelques minutes.",
+                verbRequired: "mettait",
+                wrongVerbs: ["mettais", "metté", "met", "mettent", "punis"],
+                checkFn: function(val) {
+                    const norm = val.toLowerCase();
+                    if (CHILDHOOD_QUESTIONS[4].wrongVerbs.some(w => norm.includes(w))) {
+                        return { ok: false, msg: "Erreur de conjugaison : écrivez « elle (le) mettait » (-ait)." };
+                    }
+                    const hasVerb = norm.includes("mettait") || norm.includes("punissait") || norm.includes("envoyait");
+                    const hasCoin = norm.includes("coin");
+                    if (!hasVerb) {
+                        return { ok: false, msg: "Verbe manquant : « Elle le mettait au coin... »" };
+                    }
+                    if (hasCoin) {
+                        return { ok: true, msg: "✓ Exact : « Elle le mettait au coin pendant quelques minutes. »" };
+                    }
+                    return { ok: false, msg: "Où le mettait-elle ? N'oubliez pas « au coin »." };
+                }
             },
             {
-                q: "6. Quand il mangeait, il ne faisait jamais de caprices ?",
-                hint: "Non, il faisait souvent des caprices.",
-                keywords: ["faisait"]
+                q: "6. Quand l’enfant était au coin, il restait silencieux ?",
+                hint: "Non, il pleurait et quelquefois il criait.",
+                verbRequired: "pleurait",
+                wrongVerbs: ["pleuré", "pleurais", "crié", "criais", "resté", "restais"],
+                checkFn: function(val) {
+                    const norm = val.toLowerCase();
+                    if (CHILDHOOD_QUESTIONS[5].wrongVerbs.some(w => norm.includes(w))) {
+                        return { ok: false, msg: "Erreur de terminaison : écrivez « il pleurait » et « il criait » (-ait)." };
+                    }
+                    const hasVerb = norm.includes("pleurait") || norm.includes("criait") || (norm.includes("ne restait pas") || norm.includes("restait"));
+                    if (!hasVerb) {
+                        return { ok: false, msg: "Conjuguez à l'imparfait : « il pleurait », « il criait »." };
+                    }
+                    if (norm.includes("pleurait") || norm.includes("criait")) {
+                        return { ok: true, msg: "✓ Parfait : « Non, il pleurait et quelquefois il criait. »" };
+                    }
+                    return { ok: true, msg: "✓ Bonne négation à l'imparfait." };
+                }
             },
             {
-                q: "7. Le soir, il n'avait jamais peur du noir ?",
-                hint: "Non, il avait souvent peur du noir.",
-                keywords: ["avait"]
+                q: "7. À la fin, la maman pardonnait son enfant ?",
+                hint: "Oui, elle le pardonnait.",
+                verbRequired: "pardonnait",
+                wrongVerbs: ["pardonné", "pardonnais", "pardonne", "pardonent"],
+                checkFn: function(val) {
+                    const norm = val.toLowerCase();
+                    if (CHILDHOOD_QUESTIONS[6].wrongVerbs.some(w => norm.includes(w))) {
+                        return { ok: false, msg: "Erreur de terminaison : avec « elle », écrivez « pardonnait » (-ait)." };
+                    }
+                    if (!norm.includes("pardonnait")) {
+                        return { ok: false, msg: "Verbe manquant : utilisez « elle le pardonnait »." };
+                    }
+                    return { ok: true, msg: "✓ Bravo : « Oui, elle le pardonnait. »" };
+                }
             }
         ];
 
@@ -1625,10 +1725,9 @@
                     <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1.5 text-xs sm:text-sm">
                         <p class="font-semibold text-slate-800">${item.q}</p>
                         <div class="flex flex-col sm:flex-row sm:items-center gap-2">
-                            <input type="text" id="ch_ans_${idx}" class="flex-grow p-2 border border-slate-300 rounded-lg text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-inspireGreen" placeholder="Votre réponse (ex: Non, il pleurait souvent...)">
+                            <input type="text" id="ch_ans_${idx}" class="flex-grow p-2 border border-slate-300 rounded-lg text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-inspireGreen" placeholder="Tapez votre réponse...">
                             <span id="ch_fb_${idx}" class="text-xs font-bold whitespace-nowrap"></span>
                         </div>
-                        <p class="text-[11px] text-slate-400">Exemple attendu : <em>« ${item.hint} »</em></p>
                     </div>
                 `;
             });
@@ -1642,18 +1741,20 @@
                 const fb = document.getElementById(`ch_fb_${idx}`);
                 if (!input || !fb) return;
 
-                const val = input.value.trim().toLowerCase();
-                const hasKeyword = item.keywords.some(k => val.includes(k));
+                const val = input.value.trim();
+                if (val.length === 0) {
+                    fb.innerHTML = '<span class="text-red-500">Réponse obligatoire</span>';
+                    input.className = 'flex-grow p-2 border border-red-400 bg-red-50 rounded-lg text-xs sm:text-sm text-slate-900';
+                    return;
+                }
 
-                if (val.length >= 8 && (hasKeyword || val.startsWith("non"))) {
+                const result = item.checkFn(val);
+                if (result.ok) {
                     correct++;
-                    fb.innerHTML = '<span class="text-emerald-600">✓ Bien formulé</span>';
+                    fb.innerHTML = `<span class="text-emerald-600">${result.msg}</span>`;
                     input.className = 'flex-grow p-2 border border-emerald-500 bg-emerald-50 rounded-lg text-xs sm:text-sm text-slate-900';
-                } else if (val.length > 0) {
-                    fb.innerHTML = `<span class="text-amber-600">Pensez à l'imparfait : ${item.hint}</span>`;
-                    input.className = 'flex-grow p-2 border border-amber-400 bg-amber-50 rounded-lg text-xs sm:text-sm text-slate-900';
                 } else {
-                    fb.innerHTML = '<span class="text-red-500">Réponse attendue</span>';
+                    fb.innerHTML = `<span class="text-red-600">${result.msg}</span>`;
                     input.className = 'flex-grow p-2 border border-red-400 bg-red-50 rounded-lg text-xs sm:text-sm text-slate-900';
                 }
             });
