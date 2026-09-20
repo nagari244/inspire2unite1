@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pratiquer l'imparfait - Jeu de société interactif</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Tone.js for game sounds without external audio assets -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+  
+  <!-- Canvas Confetti for celebratory victory effect -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <!-- Google Fonts: Fredoka & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .font-game {
+      font-family: 'Fredoka', cursive, sans-serif;
+    }
+
+    /* Input font size for mobile iOS prevent auto-zoom */
+    @media (max-width: 640px) {
+      input[type="text"] {
+        font-size: 16px !important;
+      }
+    }
+
+    /* 3D Dice Perspective Scene */
+    .dice-scene {
+      perspective: 700px;
+      width: 64px;
+      height: 64px;
+    }
+
+    @media (min-width: 640px) {
+      .dice-scene {
+        width: 70px;
+        height: 70px;
+      }
+    }
+
+    .cube {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 1.2s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+    }
+
+    .cube-face {
+      position: absolute;
+      width: 64px;
+      height: 64px;
+      border-radius: 12px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      padding: 6px;
+      box-sizing: border-box;
+      box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.15), 0 3px 8px rgba(0, 0, 0, 0.12);
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      user-select: none;
+    }
+
+    @media (min-width: 640px) {
+      .cube-face {
+        width: 70px;
+        height: 70px;
+        border-radius: 14px;
+        padding: 7px;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0, 0, 0, 0.12);
+      }
+    }
+
+    /* Dice Faces positions */
+    .cube-face-1 { transform: rotateY(0deg) translateZ(32px); }
+    .cube-face-2 { transform: rotateY(90deg) translateZ(32px); }
+    .cube-face-3 { transform: rotateX(-90deg) translateZ(32px); }
+    .cube-face-4 { transform: rotateX(90deg) translateZ(32px); }
+    .cube-face-5 { transform: rotateY(-90deg) translateZ(32px); }
+    .cube-face-6 { transform: rotateY(180deg) translateZ(32px); }
+
+    @media (min-width: 640px) {
+      .cube-face-1 { transform: rotateY(0deg) translateZ(35px); }
+      .cube-face-2 { transform: rotateY(90deg) translateZ(35px); }
+      .cube-face-3 { transform: rotateX(-90deg) translateZ(35px); }
+      .cube-face-4 { transform: rotateX(90deg) translateZ(35px); }
+      .cube-face-5 { transform: rotateY(-90deg) translateZ(35px); }
+      .cube-face-6 { transform: rotateY(180deg) translateZ(35px); }
+    }
+
+    /* Dice pip dots */
+    .pip {
+      width: 10px;
+      height: 10px;
+      background-color: currentColor;
+      border-radius: 50%;
+      align-self: center;
+      justify-self: center;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.4);
+    }
+
+    @media (min-width: 640px) {
+      .pip {
+        width: 12px;
+        height: 12px;
+      }
+    }
+
+    /* Target Rotations for 3D Faces */
+    .show-1 { transform: rotateX(0deg) rotateY(0deg); }
+    .show-2 { transform: rotateX(0deg) rotateY(-90deg); }
+    .show-3 { transform: rotateX(90deg) rotateY(0deg); }
+    .show-4 { transform: rotateX(-90deg) rotateY(0deg); }
+    .show-5 { transform: rotateX(0deg) rotateY(90deg); }
+    .show-6 { transform: rotateX(0deg) rotateY(-180deg); }
+
+    /* Rolling shake animation */
+    @keyframes rollShake {
+      0% { transform: rotateX(15deg) rotateY(45deg) scale(0.9); }
+      25% { transform: rotateX(720deg) rotateY(360deg) scale(1.1); }
+      50% { transform: rotateX(1080deg) rotateY(720deg) scale(0.95); }
+      75% { transform: rotateX(1440deg) rotateY(1080deg) scale(1.05); }
+      100% { transform: rotateX(1800deg) rotateY(1440deg) scale(1); }
+    }
+
+    .is-rolling {
+      animation: rollShake 0.9s ease-in-out infinite;
+    }
+
+    /* Active board case pulse */
+    .active-case {
+      border: 3px solid #ef4444 !important;
+      transform: scale(1.03);
+      box-shadow: 0 0 16px rgba(239, 68, 68, 0.45);
+      z-index: 10;
+    }
+
+    /* Golden pulse for Arrivée case */
+    .arrival-tile {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #f59e0b 100%);
+      border-color: #d97706 !important;
+      animation: pulseArrival 2.5s infinite;
+    }
+
+    @keyframes pulseArrival {
+      0%, 100% { box-shadow: 0 0 10px rgba(245, 158, 11, 0.4); }
+      50% { box-shadow: 0 0 22px rgba(245, 158, 11, 0.85); transform: scale(1.02); }
+    }
+  </style>
+</head>
+<body class="bg-amber-50 text-slate-800 min-h-screen pb-12 antialiased">
+
+  <header class="bg-gradient-to-r from-orange-600 via-amber-600 to-rose-600 text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3">
+        <span class="text-3xl">🎲</span>
+        <div>
+          <h1 class="font-game text-2xl font-bold tracking-wide">Pratiquer l'imparfait</h1>
+          <p class="text-xs text-amber-100 font-medium">Jeu de société pour la classe FLE - Conjugaison en contexte</p>
+        </div>
+      </div>
+      
+      <div class="flex items-center gap-2">
+        <button id="soundToggleBtn" class="px-3 py-1.5 rounded-lg bg-white/20 hover:bg-white/30 text-xs font-semibold backdrop-blur transition flex items-center gap-1">
+          <span id="soundIcon">🔊</span> <span id="soundLabel">Son : Activé</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+    <!-- LEFT COLUMN: The Interactive Board (Tablero de verbos) -->
+    <section class="lg:col-span-7 flex flex-col gap-4">
+      
+      <!-- 5 PLAYERS / PAWNS BAR (Barre des 5 pions) -->
+      <div class="bg-white rounded-2xl shadow-sm border border-amber-200 p-3 sm:p-3.5 flex flex-col gap-2">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-1.5">
+            <span class="text-base">👥</span>
+            <span class="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-700">Pions des élèves :</span>
+          </div>
+          <span class="text-[10px] sm:text-[11px] text-slate-500 font-medium text-right">
+            💡 Touchez un pion pour le déplacer
+          </span>
+        </div>
+
+        <!-- Player Badges list: 2 cols on mobile, 3 on tablet, 5 on desktop -->
+        <div id="playersListContainer" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-1.5 sm:gap-2">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- DYNAMIC INTERACTIVE GRID BOARD -->
+      <div id="interactiveBoardContainer" class="bg-white rounded-2xl sm:rounded-3xl shadow-md border-2 sm:border-4 border-amber-300 p-2.5 sm:p-5 relative transition-all">
+        <div class="text-center mb-2.5 sm:mb-3">
+          <h2 class="font-game text-xl sm:text-3xl font-bold text-orange-600 tracking-wide uppercase">
+            🎲 Pratiquer l'imparfait
+          </h2>
+          <p class="text-[11px] sm:text-sm text-slate-600 font-medium max-w-xl mx-auto mt-0.5 sm:mt-1 leading-snug">
+            <strong>Consigne :</strong> Lancez les 2 dés. Construisez une phrase complète avec : 
+            <span class="text-rose-600 font-bold">1 expression temporelle</span> + 
+            <span class="text-indigo-600 font-bold">le pronom (Dé 2)</span> + 
+            <span class="text-orange-600 font-bold">le verbe à l'imparfait (Dé 1)</span> + 
+            <span class="text-emerald-700 font-bold">1 complément</span>.
+          </p>
+        </div>
+
+        <!-- 5x5 Matrix Board Simulation of the poster -->
+        <div id="boardTilesGrid" class="grid grid-cols-4 sm:grid-cols-5 gap-1.5 sm:gap-2.5 text-center">
+          <!-- Populated via JavaScript for full interactivity -->
+        </div>
+
+        <!-- EXPRESSIONS TEMPORELLES & PRONOUN LEGEND -->
+        <div class="mt-3 sm:mt-4 pt-2.5 sm:pt-3 border-t border-amber-100 flex flex-col gap-2.5 sm:gap-3">
+          
+          <!-- Visual Box: Expressions Temporelles Pyramid -->
+          <div class="bg-gradient-to-b from-rose-50 to-amber-50 rounded-2xl p-3 border border-rose-200">
+            <h3 class="text-center text-xs font-bold uppercase tracking-wider text-rose-700 mb-2 flex items-center justify-center gap-1">
+              <span>⏳</span> Expressions temporelles (à utiliser obligatoirement) :
+            </h3>
+            <div id="temporalChipsContainer" class="flex flex-wrap justify-center gap-1.5 text-center text-xs">
+              <!-- Rendered via JS with clickable convenience -->
+            </div>
+          </div>
+
+          <!-- Pronoun Color Legend (bottom of board matching the original poster) -->
+          <div>
+            <h3 class="text-center text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">
+              Correspondance du 2<sup>e</sup> dé (Sujets)
+            </h3>
+            <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 text-center text-xs font-medium">
+              <div class="p-1.5 rounded-xl border-2 border-amber-500 bg-amber-50 text-amber-900">
+                <span class="font-bold text-sm">⚀ 1</span><br><span class="font-semibold text-orange-600">je / j'</span>
+              </div>
+              <div class="p-1.5 rounded-xl border-2 border-yellow-400 bg-yellow-50 text-yellow-900">
+                <span class="font-bold text-sm">⚁ 2</span><br><span class="font-semibold text-yellow-700">tu</span>
+              </div>
+              <div class="p-1.5 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-900">
+                <span class="font-bold text-sm">⚂ 3</span><br><span class="font-semibold text-emerald-700">il / elle / on</span>
+              </div>
+              <div class="p-1.5 rounded-xl border-2 border-blue-500 bg-blue-50 text-blue-900">
+                <span class="font-bold text-sm">⚃ 4</span><br><span class="font-semibold text-blue-700">nous</span>
+              </div>
+              <div class="p-1.5 rounded-xl border-2 border-purple-500 bg-purple-50 text-purple-900">
+                <span class="font-bold text-sm">⚄ 5</span><br><span class="font-semibold text-purple-700">vous</span>
+              </div>
+              <div class="p-1.5 rounded-xl border-2 border-pink-500 bg-pink-50 text-pink-900">
+                <span class="font-bold text-sm">⚅ 6</span><br><span class="font-semibold text-pink-700">ils / elles</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+    <!-- RIGHT COLUMN: Dice and Verb challenge -->
+    <section class="lg:col-span-5 flex flex-col gap-4">
+      
+      <!-- DICE CONSOLE (Dados Virtuales 3D) -->
+      <div class="bg-white rounded-3xl shadow-md border border-amber-200 p-5">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-game text-xl font-bold text-slate-800 flex items-center gap-2">
+            <span>🎲</span> Lanceur de Dés Virtuels
+          </h3>
+          <span id="activePlayerTurnBadge" class="text-xs bg-rose-100 text-rose-800 font-bold px-2.5 py-1 rounded-full border border-rose-200">
+            Tour : 🦁 Joueur 1
+          </span>
+        </div>
+
+        <!-- 3D Dice Display Stage -->
+        <div class="bg-gradient-to-b from-amber-100/70 to-orange-50 rounded-2xl p-5 border border-amber-200 flex items-center justify-around">
+          
+          <!-- DÉ 1: DÉPLACEMENT / CASILLES -->
+          <div class="flex flex-col items-center gap-2">
+            <div class="text-xs font-bold uppercase tracking-wider text-orange-800">
+              Dé 1 : Cases (+1 à 6)
+            </div>
+            <div class="dice-scene">
+              <div id="dice1" class="cube show-1">
+                <div class="cube-face cube-face-1 bg-white text-orange-600">
+                  <div></div><div></div><div></div><div></div><div class="pip"></div><div></div><div></div><div></div><div></div>
+                </div>
+                <div class="cube-face cube-face-2 bg-white text-orange-600">
+                  <div class="pip"></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div class="pip"></div>
+                </div>
+                <div class="cube-face cube-face-3 bg-white text-orange-600">
+                  <div class="pip"></div><div></div><div></div><div></div><div class="pip"></div><div></div><div></div><div></div><div class="pip"></div>
+                </div>
+                <div class="cube-face cube-face-4 bg-white text-orange-600">
+                  <div class="pip"></div><div></div><div class="pip"></div><div></div><div></div><div></div><div class="pip"></div><div></div><div class="pip"></div>
+                </div>
+                <div class="cube-face cube-face-5 bg-white text-orange-600">
+                  <div class="pip"></div><div></div><div class="pip"></div><div></div><div class="pip"></div><div></div><div class="pip"></div><div></div><div class="pip"></div>
+                </div>
+                <div class="cube-face cube-face-6 bg-white text-orange-600">
+                  <div class="pip"></div><div></div><div class="pip"></div><div class="pip"></div><div></div><div class="pip"></div><div class="pip"></div><div></div><div class="pip"></div>
+                </div>
+              </div>
+            </div>
+            <div id="dice1ValueBadge" class="text-xs font-extrabold text-orange-700 bg-white/80 px-2 py-0.5 rounded-md shadow-xs">
+              Valeur : 1
+            </div>
+          </div>
+
+          <!-- DÉ 2: PERSONNE (SUJET) -->
+          <div class="flex flex-col items-center gap-2">
+            <div class="text-xs font-bold uppercase tracking-wider text-indigo-900">
+              Dé 2 : Personne (Sujet)
+            </div>
+            <div class="dice-scene">
+              <div id="dice2" class="cube show-1">
+                <div class="cube-face cube-face-1 bg-orange-50 text-orange-500 border-orange-300">
+                  <div></div><div></div><div></div><div></div><div class="pip"></div><div></div><div></div><div></div><div></div>
+                </div>
+                <div class="cube-face cube-face-2 bg-yellow-50 text-yellow-500 border-yellow-300">
+                  <div class="pip"></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div class="pip"></div>
+                </div>
+                <div class="cube-face cube-face-3 bg-emerald-50 text-emerald-600 border-emerald-300">
+                  <div class="pip"></div><div></div><div></div><div></div><div class="pip"></div><div></div><div></div><div></div><div class="pip"></div>
+                </div>
+                <div class="cube-face cube-face-4 bg-blue-50 text-blue-600 border-blue-300">
+                  <div class="pip"></div><div></div><div class="pip"></div><div></div><div></div><div></div><div class="pip"></div><div></div><div class="pip"></div>
+                </div>
+                <div class="cube-face cube-face-5 bg-purple-50 text-purple-600 border-purple-300">
+                  <div class="pip"></div><div></div><div class="pip"></div><div></div><div class="pip"></div><div></div><div class="pip"></div><div></div><div class="pip"></div>
+                </div>
+                <div class="cube-face cube-face-6 bg-pink-50 text-pink-600 border-pink-300">
+                  <div class="pip"></div><div></div><div class="pip"></div><div class="pip"></div><div></div><div class="pip"></div><div class="pip"></div><div></div><div class="pip"></div>
+                </div>
+              </div>
+            </div>
+            <div id="dice2ValueBadge" class="text-xs font-extrabold text-indigo-700 bg-white/80 px-2 py-0.5 rounded-md shadow-xs">
+              je / j'
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ROLL BUTTON & SOUNDS -->
+        <div class="mt-4 flex flex-col sm:flex-row gap-2">
+          <button id="rollDiceBtn" class="flex-1 py-3.5 px-6 rounded-2xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 active:scale-[0.98] text-white font-game text-lg font-bold shadow-lg shadow-orange-500/25 transition-all flex items-center justify-center gap-2">
+            <span>🎲</span> Lancer les 2 dés !
+          </button>
+          <button id="resetGameBtn" class="py-3 px-4 rounded-2xl border border-slate-200 text-slate-600 hover:bg-slate-50 font-medium text-xs transition">
+            🔄 Recommencer
+          </button>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow-md border border-amber-200 p-5 flex flex-col gap-4">
+        
+        <div class="flex items-center justify-between border-b border-amber-100 pb-3">
+          <h3 class="font-game text-xl font-bold text-slate-800 flex items-center gap-2">
+            <span>✍️</span> Mission de conjugaison
+          </h3>
+          <span id="scoreCounter" class="text-xs font-bold bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full">
+            Score : 0 point(s)
+          </span>
+        </div>
+
+        <!-- Active challenge parameters card -->
+        <div class="bg-amber-50/70 border border-amber-200 rounded-2xl p-4 flex flex-col gap-3">
+          
+          <div class="grid grid-cols-2 gap-3 text-center">
+            <div class="bg-white p-2.5 rounded-xl shadow-xs border border-amber-100">
+              <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Verbe obtenu</span>
+              <span id="targetVerbDisplay" class="font-game text-xl sm:text-2xl font-bold text-orange-600 uppercase">AVOIR</span>
+              <span id="targetVerbNumber" class="text-[11px] text-slate-500 block">Case #1</span>
+            </div>
+            
+            <div class="bg-white p-2.5 rounded-xl shadow-xs border border-amber-100">
+              <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Sujet imposé</span>
+              <span id="targetPronounDisplay" class="font-game text-xl sm:text-2xl font-bold text-indigo-700">je / j'</span>
+              <span id="targetPronounDie" class="text-[11px] text-slate-500 block">Dé n° 1</span>
+            </div>
+          </div>
+
+          <!-- Suggested temporal expression from the list -->
+          <div class="bg-white/90 p-2.5 rounded-xl border border-rose-200 flex items-start gap-2 text-xs">
+            <span class="text-base mt-0.5">⏳</span>
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <span class="text-rose-600 font-bold uppercase text-[10px]">Expression temporelle suggérée :</span>
+                <button type="button" id="changeExpressionBtn" class="text-[10px] text-slate-500 hover:text-orange-600 underline">Changer ⟳</button>
+              </div>
+              <span id="targetExpressionDisplay" class="font-bold text-slate-800 text-sm block mt-0.5">Quand j'avais 10 ans...</span>
+            </div>
+          </div>
+
+          <!-- Suggested Complements for this verb -->
+          <div class="bg-white/90 p-2.5 rounded-xl border border-emerald-200 flex flex-col gap-1.5 text-xs">
+            <div class="flex items-center gap-1 text-emerald-800 font-bold text-[11px] uppercase tracking-wider">
+              <span>🎯</span> Choisissez un complément pour votre phrase :
+            </div>
+            <div id="complementsChipsContainer" class="flex flex-wrap gap-1.5">
+              <!-- Populated dynamically per verb -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Form for conjugation input -->
+        <form id="conjugationForm" class="flex flex-col gap-2.5 sm:gap-3">
+          <label for="verbAnswerInput" class="text-xs font-bold text-slate-700">
+            Formulez votre phrase complète à l'imparfait (ou conjuguez le verbe) :
+          </label>
+          <div class="flex flex-col sm:flex-row gap-2">
+            <input 
+              type="text" 
+              id="verbAnswerInput" 
+              placeholder="Ex : Quand j'avais 10 ans, j'avais un animal..." 
+              autocomplete="off"
+              class="flex-1 px-3.5 py-3 rounded-xl border-2 border-slate-200 focus:border-orange-500 focus:outline-none font-medium text-slate-800 text-base sm:text-sm transition"
+            >
+            <button 
+              type="submit" 
+              class="w-full sm:w-auto px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 active:scale-98 text-white font-bold text-sm transition shadow-sm touch-manipulation"
+            >
+              Vérifier
+            </button>
+          </div>
+
+          <!-- Quick accent helpers with touch-friendly padding (min 38px height) -->
+          <div class="flex items-center gap-1.5 flex-wrap text-xs text-slate-500">
+            <span class="text-[11px] font-semibold">Accents rapides :</span>
+            <button type="button" class="accent-btn min-w-[36px] min-h-[36px] px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 active:bg-orange-100 text-slate-700 font-bold transition flex items-center justify-center">é</button>
+            <button type="button" class="accent-btn min-w-[36px] min-h-[36px] px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 active:bg-orange-100 text-slate-700 font-bold transition flex items-center justify-center">è</button>
+            <button type="button" class="accent-btn min-w-[36px] min-h-[36px] px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 active:bg-orange-100 text-slate-700 font-bold transition flex items-center justify-center">ê</button>
+            <button type="button" class="accent-btn min-w-[36px] min-h-[36px] px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 active:bg-orange-100 text-slate-700 font-bold transition flex items-center justify-center">î</button>
+            <button type="button" class="accent-btn min-w-[36px] min-h-[36px] px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 active:bg-orange-100 text-slate-700 font-bold transition flex items-center justify-center">à</button>
+            <button type="button" class="accent-btn min-w-[36px] min-h-[36px] px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 active:bg-orange-100 text-slate-700 font-bold transition flex items-center justify-center">ç</button>
+          </div>
+        </form>
+
+        <!-- Feedback message area -->
+        <div id="feedbackBox" class="hidden p-3.5 rounded-xl text-xs font-medium transition-all"></div>
+
+        <!-- Cheat-sheet modal / toggle for imparfait endings -->
+        <div class="border-t border-slate-100 pt-3">
+          <details class="text-xs text-slate-600 group">
+            <summary class="cursor-pointer font-bold text-orange-600 hover:text-orange-700 flex items-center justify-between">
+              <span>📖 Rappel : Les terminaisons de l'imparfait</span>
+              <span class="group-open:rotate-180 transition-transform">▼</span>
+            </summary>
+            <div class="mt-2 bg-slate-50 p-3 rounded-xl space-y-1 text-slate-700">
+              <p>On prend le radical de <strong>nous</strong> au présent + terminaisons :</p>
+              <div class="grid grid-cols-2 gap-1 font-mono text-[11px] font-semibold text-slate-800 mt-1">
+                <div>• je : <strong>-ais</strong></div>
+                <div>• nous : <strong>-ions</strong></div>
+                <div>• tu : <strong>-ais</strong></div>
+                <div>• vous : <strong>-iez</strong></div>
+                <div>• il / elle / on : <strong>-ait</strong></div>
+                <div>• ils / elles : <strong>-aient</strong></div>
+              </div>
+              <p class="text-[10px] text-slate-500 italic mt-1">Seule exception de radical : <em>Être</em> ➔ radical <strong>ét-</strong> (j'étais).</p>
+            </div>
+          </details>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- VICTORY / ARRIVÉE MODAL -->
+  <div id="victoryModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 transition-all duration-300">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 text-center shadow-2xl border-4 border-amber-400 relative overflow-hidden transform scale-95 transition-transform duration-300" id="victoryCard">
+      <!-- Decorative background glow -->
+      <div class="absolute -top-20 -left-20 w-48 h-48 bg-amber-300/40 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-20 -right-20 w-48 h-48 bg-rose-300/40 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="text-6xl sm:text-7xl mb-2 animate-bounce">🏆</div>
+      <div class="inline-block bg-gradient-to-r from-amber-500 to-orange-500 text-white font-game text-xs uppercase font-extrabold tracking-widest px-3 py-1 rounded-full mb-3 shadow-sm">
+        Arrivée franchie !
+      </div>
+      
+      <h2 id="victoryPlayerName" class="font-game text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight mb-2">
+        Bravo Élève !
+      </h2>
+      
+      <p class="text-sm text-slate-600 font-medium mb-4 leading-relaxed">
+        🎉 <strong>Félicitations !</strong> Tu as parcouru tout le plateau et maîtrisé la conjugaison de l'imparfait !
+      </p>
+
+      <div class="bg-amber-50 border border-amber-200 rounded-2xl p-3.5 mb-5 text-xs text-amber-900 text-left space-y-1">
+        <p class="font-bold flex items-center gap-1 text-amber-800">
+          <span>🌟</span> Défi final de célébration :
+        </p>
+        <p class="italic text-slate-700">
+          « Raconte à haute voix à la classe ton plus beau souvenir d'enfance en utilisant au moins 2 verbes à l'imparfait ! »
+        </p>
+      </div>
+
+      <div class="flex gap-2 justify-center">
+        <button id="relaunchConfettiBtn" class="py-2.5 px-4 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold text-xs transition flex items-center gap-1.5 shadow-xs">
+          <span>🎊</span> Encore des confettis !
+        </button>
+        <button id="closeVictoryModalBtn" class="py-2.5 px-6 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 text-white font-game font-bold text-sm transition shadow-md shadow-orange-500/20">
+          Continuer 🚀
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- 1. GAME DATA (Verbs, Conjugations, Temporal Expressions & Complements) ---
+    const VERBS_DATA = [
+      { 
+        id: 1, verb: "AVOIR", icon: "🤲", stem: "av", 
+        complements: ["faim / soif", "un animal de compagnie", "peur du noir"],
+        fullConjugations: { 1: "avais", 2: "avais", 3: "avait", 4: "avions", 5: "aviez", 6: "avaient" } 
+      },
+      { 
+        id: 2, verb: "ALLER", icon: "🎒", stem: "all", 
+        complements: ["à l'école à vélo", "chez mes grands-parents", "à la plage en été"],
+        fullConjugations: { 1: "allais", 2: "allais", 3: "allait", 4: "allions", 5: "alliez", 6: "allaient" } 
+      },
+      { 
+        id: 3, verb: "ÊTRE", icon: "🧘", stem: "ét", 
+        complements: ["très timide", "toujours de bonne humeur", "en vacances"],
+        fullConjugations: { 1: "étais", 2: "étais", 3: "était", 4: "étions", 5: "étiez", 6: "étaient" } 
+      },
+      { 
+        id: 4, verb: "DANSER", icon: "💃", stem: "dans", 
+        complements: ["la salsa", "avec mes amis aux fêtes", "dans le salon"],
+        fullConjugations: { 1: "dansais", 2: "dansais", 3: "dansait", 4: "dansions", 5: "dansiez", 6: "dansaient" } 
+      },
+      { 
+        id: 5, verb: "PARLER", icon: "🗣️", stem: "parl", 
+        complements: ["français en classe", "des heures au téléphone", "avec mes voisins"],
+        fullConjugations: { 1: "parlais", 2: "parlais", 3: "parlait", 4: "parlions", 5: "parliez", 6: "parlaient" } 
+      },
+      { 
+        id: 6, verb: "ÉCOUTER", icon: "🎧", stem: "écout", 
+        complements: ["de la musique classique", "la radio le matin", "les histoires de papy"],
+        fullConjugations: { 1: "écoutais", 2: "écoutais", 3: "écoutait", 4: "écoutions", 5: "écoutiez", 6: "écoutaient" } 
+      },
+      { 
+        id: 7, verb: "JOUER", icon: "🎸", stem: "jou", 
+        complements: ["aux jeux vidéo", "de la guitare", "au football dans la cour"],
+        fullConjugations: { 1: "jouais", 2: "jouais", 3: "jouait", 4: "jouions", 5: "jouiez", 6: "jouaient" } 
+      },
+      { 
+        id: 8, verb: "REGARDER", icon: "📺", stem: "regard", 
+        complements: ["des dessins animés", "la télévision le soir", "les étoiles par la fenêtre"],
+        fullConjugations: { 1: "regardais", 2: "regardais", 3: "regardait", 4: "regardions", 5: "regardiez", 6: "regardaient" } 
+      },
+      { 
+        id: 9, verb: "LIRE", icon: "📖", stem: "lis", 
+        complements: ["des bandes dessinées (BD)", "un roman avant de dormir", "le journal le dimanche"],
+        fullConjugations: { 1: "lisais", 2: "lisais", 3: "lisait", 4: "lisions", 5: "lisiez", 6: "lisaient" } 
+      },
+      { 
+        id: 10, verb: "FAIRE", icon: "💻", stem: "fais", 
+        complements: ["du vélo le week-end", "la cuisine avec maman", "mes devoirs après l'école"],
+        fullConjugations: { 1: "faisais", 2: "faisais", 3: "faisait", 4: "faisions", 5: "faisiez", 6: "faisaient" } 
+      },
+      { 
+        id: 11, verb: "PRENDRE", icon: "🫳", stem: "pren", 
+        complements: ["le bus pour aller en ville", "un chocolat chaud au goûter", "mon temps"],
+        fullConjugations: { 1: "prenais", 2: "prenais", 3: "prenait", 4: "prenions", 5: "preniez", 6: "prenaient" } 
+      },
+      { 
+        id: 12, verb: "VENIR", icon: "🚪", stem: "ven", 
+        complements: ["nous rendre visite", "à pied tous les jours", "manger le dimanche"],
+        fullConjugations: { 1: "venais", 2: "venais", 3: "venait", 4: "venions", 5: "veniez", 6: "venaient" } 
+      },
+      { 
+        id: 13, verb: "DEVOIR", icon: "🧍", stem: "dev", 
+        complements: ["me coucher tôt", "ranger ma chambre", "aider mes parents"],
+        fullConjugations: { 1: "devais", 2: "devais", 3: "devait", 4: "devions", 5: "deviez", 6: "devaient" } 
+      },
+      { 
+        id: 14, verb: "DIRE", icon: "👥", stem: "dis", 
+        complements: ["la vérité", "bonjour à tout le monde", "des bêtises"],
+        fullConjugations: { 1: "disais", 2: "disais", 3: "disait", 4: "disions", 5: "disiez", 6: "disaient" } 
+      },
+      { 
+        id: 15, verb: "POUVOIR", icon: "💪", stem: "pouv", 
+        complements: ["sortir jouer dehors", "dormir tard le samedi", "nager pendant des heures"],
+        fullConjugations: { 1: "pouvais", 2: "pouvais", 3: "pouvait", 4: "pouvions", 5: "pouviez", 6: "pouvaient" } 
+      },
+      { 
+        id: 16, verb: "CROIRE", icon: "🙏", stem: "croy", 
+        complements: ["au Père Noël", "aux monstres sous le lit", "à toutes les histoires"],
+        fullConjugations: { 1: "croyais", 2: "croyais", 3: "croyait", 4: "croyions", 5: "croyiez", 6: "croyaient" } 
+      },
+      { 
+        id: 17, verb: "ÉCRIRE", icon: "✍️", stem: "écriv", 
+        complements: ["des lettres à mes cousins", "dans mon journal intime", "des poèmes"],
+        fullConjugations: { 1: "écrivais", 2: "écrivais", 3: "écrivait", 4: "écrivions", 5: "écriviez", 6: "écrivaient" } 
+      },
+      { 
+        id: 18, verb: "FINIR", icon: "📑", stem: "finiss", 
+        complements: ["mes devoirs avant le dîner", "mon assiette", "les cours à 16 heures"],
+        fullConjugations: { 1: "finissais", 2: "finissais", 3: "finissait", 4: "finissions", 5: "finissiez", 6: "finissaient" } 
+      },
+      { 
+        id: 19, verb: "SAVOIR", icon: "🤷", stem: "sav", 
+        complements: ["jouer du piano", "bien nager", "parler un peu anglais"],
+        fullConjugations: { 1: "savais", 2: "savais", 3: "savait", 4: "savions", 5: "saviez", 6: "savaient" } 
+      },
+      { 
+        id: 20, verb: "AIMER", icon: "❤️", stem: "aim", 
+        complements: ["manger des glaces", "jouer sous la pluie", "les vacances à la montagne"],
+        fullConjugations: { 1: "aimais", 2: "aimais", 3: "aimait", 4: "aimions", 5: "aimiez", 6: "aimaient" } 
+      }
+    ];
+
+    // 5 Players configuration with customizable names, avatars and colors
+    const PLAYERS = [
+      { id: 1, name: "Élève 1", emoji: "🦁", color: "bg-rose-500", lightColor: "bg-rose-50 border-rose-300 text-rose-700", ringColor: "ring-rose-400", position: 0 },
+      { id: 2, name: "Élève 2", emoji: "🦊", color: "bg-blue-500", lightColor: "bg-blue-50 border-blue-300 text-blue-700", ringColor: "ring-blue-400", position: 0 },
+      { id: 3, name: "Élève 3", emoji: "🐼", color: "bg-emerald-500", lightColor: "bg-emerald-50 border-emerald-300 text-emerald-700", ringColor: "ring-emerald-400", position: 0 },
+      { id: 4, name: "Élève 4", emoji: "🦄", color: "bg-purple-500", lightColor: "bg-purple-50 border-purple-300 text-purple-700", ringColor: "ring-purple-400", position: 0 },
+      { id: 5, name: "Élève 5", emoji: "🐸", color: "bg-amber-500", lightColor: "bg-amber-50 border-amber-300 text-amber-700", ringColor: "ring-amber-400", position: 0 }
+    ];
+
+    let activePlayerIndex = 0; // 0 to 4
+
+    const PRONOUNS = {
+      1: { label: "je / j'", pronounClean: "je" },
+      2: { label: "tu", pronounClean: "tu" },
+      3: { label: "il / elle / on", pronounClean: "il" },
+      4: { label: "nous", pronounClean: "nous" },
+      5: { label: "vous", pronounClean: "vous" },
+      6: { label: "ils / elles", pronounClean: "ils" }
+    };
+
+    // The exact expressions from the poster image
+    const TEMPORAL_EXPRESSIONS = [
+      "Tous les jours",
+      "Tous les mois",
+      "Tous les matins",
+      "Tous les soirs",
+      "Toutes les semaines",
+      "Chaque matin, chaque week-end",
+      "Autrefois",
+      "(Comme) d'habitude",
+      "En général",
+      "Quand j'avais 10 ans",
+      "Quand j'étais petit(e)",
+      "Quand on partait en famille"
+    ];
+
+    // --- STREAMING_CHUNK:Defining game state variables and audio synthesizers ---
+    let currentTilePosition = 0;
+    let currentDie1 = 1;
+    let currentDie2 = 1;
+    let currentScore = 0;
+    let isRolling = false;
+    let soundEnabled = true;
+    let currentExpression = TEMPORAL_EXPRESSIONS[0];
+
+    // Audio synthesizer with Tone.js
+    let rollSynth, successSynth, failSynth;
+
+    function initAudio() {
+      try {
+        rollSynth = new Tone.MembraneSynth({
+          pitchDecay: 0.05,
+          octaves: 3,
+          oscillator: { type: "sine" },
+          envelope: { attack: 0.001, decay: 0.2, sustain: 0.01, release: 0.1 }
+        }).toDestination();
+
+        successSynth = new Tone.PolySynth(Tone.Synth).toDestination();
+        failSynth = new Tone.Synth({
+          oscillator: { type: "sawtooth" },
+          envelope: { attack: 0.05, decay: 0.2, sustain: 0.1, release: 0.2 }
+        }).toDestination();
+      } catch (e) {
+        console.warn("Audio Context will initialize on first user gesture.");
+      }
+    }
+
+    function playVictoryFanfare() {
+      if (!soundEnabled) return;
+      try {
+        if (Tone.context.state !== 'running') {
+          Tone.start();
+        }
+        const now = Tone.now();
+        const synth = new Tone.PolySynth(Tone.Synth, {
+          oscillator: { type: "triangle" },
+          envelope: { attack: 0.02, decay: 0.3, sustain: 0.4, release: 0.8 }
+        }).toDestination();
+
+        // Cheerful victory arpeggio: C4 -> E4 -> G4 -> C5 -> E5 -> G5 -> C6 chord
+        synth.triggerAttackRelease("C4", "16n", now);
+        synth.triggerAttackRelease("E4", "16n", now + 0.12);
+        synth.triggerAttackRelease("G4", "16n", now + 0.24);
+        synth.triggerAttackRelease("C5", "16n", now + 0.36);
+        synth.triggerAttackRelease("E5", "16n", now + 0.48);
+        synth.triggerAttackRelease(["C5", "G5", "C6"], "2n", now + 0.60);
+      } catch (err) {
+        console.warn("Victory fanfare audio blocked or unavailable", err);
+      }
+    }
+
+    function triggerConfettiAndJoy(player) {
+      // 1. Play joyful sound fanfare
+      playVictoryFanfare();
+
+      // 2. Multi-stage confetti celebration
+      if (typeof confetti === "function") {
+        const count = 200;
+        const defaults = { origin: { y: 0.7 } };
+
+        function fire(particleRatio, opts) {
+          confetti(Object.assign({}, defaults, opts, {
+            particleCount: Math.floor(count * particleRatio)
+          }));
+        }
+
+        fire(0.25, { spread: 26, startVelocity: 55 });
+        fire(0.2, { spread: 60 });
+        fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+        fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+        fire(0.1, { spread: 120, startVelocity: 45 });
+
+        // Second wave from left & right corners
+        setTimeout(() => {
+          confetti({
+            particleCount: 50,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 }
+          });
+          confetti({
+            particleCount: 50,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 }
+          });
+        }, 350);
+      }
+
+      // 3. Display celebratory modal
+      const modal = document.getElementById("victoryModal");
+      const modalName = document.getElementById("victoryPlayerName");
+      if (modal && modalName) {
+        modalName.innerHTML = `${player.emoji} Bravo ${player.name} !`;
+        modal.classList.remove("hidden");
+        setTimeout(() => {
+          document.getElementById("victoryCard")?.classList.remove("scale-95");
+          document.getElementById("victoryCard")?.classList.add("scale-100");
+        }, 10);
+      }
+    }
+
+    function playSound(type) {
+      if (!soundEnabled) return;
+      try {
+        if (Tone.context.state !== 'running') {
+          Tone.start();
+        }
+        if (!rollSynth) initAudio();
+
+        const now = Tone.now();
+        if (type === 'roll') {
+          rollSynth.triggerAttackRelease("C2", "16n", now);
+          rollSynth.triggerAttackRelease("G2", "16n", now + 0.1);
+          rollSynth.triggerAttackRelease("C3", "16n", now + 0.2);
+        } else if (type === 'success') {
+          successSynth.triggerAttackRelease(["C4", "E4", "G4", "C5"], "8n", now);
+        } else if (type === 'error') {
+          failSynth.triggerAttackRelease("F2", "8n", now);
+        }
+      } catch (err) {
+        console.warn("Audio play blocked or unavailable", err);
+      }
+    }
+
+    // --- STREAMING_CHUNK:Rendering dynamic interactive board tiles and expressions ---
+    function renderTemporalChips() {
+      const container = document.getElementById("temporalChipsContainer");
+      if (!container) return;
+      container.innerHTML = "";
+      TEMPORAL_EXPRESSIONS.forEach(exp => {
+        const chip = document.createElement("button");
+        chip.type = "button";
+        chip.className = `px-2.5 py-1 rounded-lg text-xs font-semibold border transition-all ${
+          currentExpression === exp 
+            ? 'bg-rose-500 text-white border-rose-600 shadow-sm scale-105' 
+            : 'bg-white text-rose-900 border-rose-200 hover:bg-rose-100 hover:border-rose-300'
+        }`;
+        chip.textContent = exp;
+        chip.addEventListener("click", () => {
+          setTemporalExpression(exp);
+        });
+        container.appendChild(chip);
+      });
+    }
+
+    function setTemporalExpression(exp) {
+      currentExpression = exp;
+      document.getElementById("targetExpressionDisplay").textContent = `"${currentExpression}..."`;
+      renderTemporalChips();
+    }
+
+    function renderPlayersBar() {
+      const container = document.getElementById("playersListContainer");
+      if (!container) return;
+      container.innerHTML = "";
+
+      PLAYERS.forEach((player, idx) => {
+        const isCurrent = (idx === activePlayerIndex);
+        const card = document.createElement("div");
+        card.className = `p-2 rounded-xl border transition-all flex flex-col justify-between cursor-pointer relative ${
+          isCurrent 
+            ? `${player.lightColor} border-2 ring-2 ${player.ringColor} shadow-sm scale-[1.02]` 
+            : 'bg-slate-50 border-slate-200 hover:bg-white text-slate-700 opacity-90'
+        }`;
+
+        card.setAttribute("draggable", "true");
+        card.addEventListener("dragstart", (e) => {
+          e.dataTransfer.setData("text/plain", idx.toString());
+          e.dataTransfer.effectAllowed = "move";
+        });
+
+        card.addEventListener("click", () => {
+          activePlayerIndex = idx;
+          updateActivePlayerView();
+        });
+
+        let locationText = "Départ";
+        if (player.position === 21) {
+          locationText = "🏆 Arrivée";
+        } else if (player.position > 0) {
+          const verbAtPos = VERBS_DATA.find(v => v.id === player.position);
+          locationText = verbAtPos ? `#${verbAtPos.id} ${verbAtPos.verb}` : `#${player.position}`;
+        }
+
+        card.innerHTML = `
+          <div class="flex items-center justify-between gap-1 mb-1">
+            <span class="text-lg leading-none cursor-grab" title="Glisser ce pion">${player.emoji}</span>
+            <span class="text-[10px] font-bold px-1.5 py-0.2 rounded-full ${isCurrent ? 'bg-white shadow-xs font-black' : 'bg-slate-200 text-slate-600'}">
+              ${locationText}
+            </span>
+          </div>
+          <div class="flex items-center justify-between">
+            <input 
+              type="text" 
+              value="${player.name}" 
+              title="Cliquer pour renommer l'élève"
+              class="w-full bg-transparent font-bold text-xs focus:outline-none focus:bg-white focus:px-1 rounded border-b border-transparent focus:border-slate-300 transition"
+              onclick="event.stopPropagation();"
+            />
+          </div>
+          <div class="flex items-center justify-between mt-1 text-[10px] pt-1 border-t border-slate-200/60" onclick="event.stopPropagation();">
+            <button title="Reculer d'une case" class="px-1 hover:bg-black/10 rounded font-bold transition" onclick="manuallyMovePlayer(${idx}, -1)">◀</button>
+            <span class="text-[9px] font-mono text-slate-500">${isCurrent ? '● Actif' : 'Choisir'}</span>
+            <button title="Avancer d'une case" class="px-1 hover:bg-black/10 rounded font-bold transition" onclick="manuallyMovePlayer(${idx}, 1)">▶</button>
+          </div>
+        `;
+
+        const nameInput = card.querySelector("input");
+        nameInput.addEventListener("change", (e) => {
+          player.name = e.target.value.trim() || `Élève ${player.id}`;
+          updateActivePlayerView();
+        });
+
+        container.appendChild(card);
+      });
+    }
+
+    function manuallyMovePlayer(playerIdx, delta) {
+      const player = PLAYERS[playerIdx];
+      let newPos = player.position + delta;
+      if (newPos > 21) newPos = 1;
+      if (newPos < 0) newPos = 21;
+      
+      activePlayerIndex = playerIdx;
+      player.position = newPos;
+      moveToTile(newPos);
+      renderPlayersBar();
+      renderPawnsOnBoard();
+
+      if (newPos === 21) {
+        triggerConfettiAndJoy(player);
+      }
+    }
+
+    function renderPawnsOnBoard() {
+      document.querySelectorAll(".tile-pawns-container").forEach(el => el.innerHTML = "");
+
+      PLAYERS.forEach((player, idx) => {
+        const targetContainer = document.getElementById(`pawns-slot-${player.position}`);
+        if (targetContainer) {
+          const badge = document.createElement("span");
+          badge.className = `inline-flex items-center justify-center w-5 h-5 rounded-full text-xs shadow-sm cursor-grab transition-transform hover:scale-125 ${
+            idx === activePlayerIndex ? 'ring-2 ring-rose-500 scale-110' : ''
+          } bg-white border border-slate-300`;
+          const posLabel = player.position === 0 ? 'Départ' : (player.position === 21 ? 'Arrivée 🏆' : 'Case ' + player.position);
+          badge.title = `${player.name} (${posLabel})`;
+          badge.textContent = player.emoji;
+          badge.setAttribute("draggable", "true");
+          badge.addEventListener("dragstart", (e) => {
+            e.stopPropagation();
+            e.dataTransfer.setData("text/plain", idx.toString());
+          });
+          targetContainer.appendChild(badge);
+        }
+      });
+    }
+
+    function renderBoard() {
+      const grid = document.getElementById("boardTilesGrid");
+      grid.innerHTML = "";
+
+      const orderedTiles = [
+        { type: "start", id: 0, title: "DÉMARRER", icon: "🏁" },
+        ...VERBS_DATA,
+        { type: "finish", id: 21, title: "ARRIVÉE", icon: "🏆" }
+      ];
+
+      orderedTiles.forEach((tile) => {
+        const div = document.createElement("div");
+        div.id = `board-tile-${tile.id}`;
+        
+        let tileStyleClasses = "bg-white border-blue-400 hover:border-orange-400 text-slate-800 shadow-xs";
+        if (tile.id === 0) {
+          tileStyleClasses = "bg-rose-100/70 border-rose-300 text-rose-800";
+        } else if (tile.id === 21) {
+          tileStyleClasses = "arrival-tile text-amber-950 font-bold border-2 border-amber-500";
+        }
+
+        // Responsive heights and paddings for mobile screens
+        div.className = `relative p-1 sm:p-2 rounded-xl sm:rounded-2xl border-2 transition-all duration-200 cursor-pointer flex flex-col justify-between min-h-[72px] sm:min-h-[96px] touch-manipulation select-none ${tileStyleClasses}`;
+
+        div.addEventListener("dragover", (e) => {
+          e.preventDefault();
+          div.classList.add("ring-2", "ring-orange-400");
+        });
+        div.addEventListener("dragleave", () => {
+          div.classList.remove("ring-2", "ring-orange-400");
+        });
+        div.addEventListener("drop", (e) => {
+          e.preventDefault();
+          div.classList.remove("ring-2", "ring-orange-400");
+          const draggedPlayerIdx = parseInt(e.dataTransfer.getData("text/plain"), 10);
+          if (!isNaN(draggedPlayerIdx) && PLAYERS[draggedPlayerIdx]) {
+            activePlayerIndex = draggedPlayerIdx;
+            PLAYERS[draggedPlayerIdx].position = tile.id;
+            moveToTile(tile.id);
+            renderPlayersBar();
+            renderPawnsOnBoard();
+
+            if (tile.id === 21) {
+              triggerConfettiAndJoy(PLAYERS[draggedPlayerIdx]);
+            }
+          }
+        });
+
+        if (tile.id === 0) {
+          div.innerHTML = `
+            <div class="text-[8px] sm:text-[9px] font-bold text-rose-600 uppercase tracking-tighter">Départ</div>
+            <div class="text-base sm:text-xl my-auto">🏁</div>
+            <div class="font-game text-[9px] sm:text-[10px] font-bold text-rose-700 leading-tight">DÉBUT</div>
+            <div id="pawns-slot-${tile.id}" class="tile-pawns-container flex items-center justify-center gap-0.5 sm:gap-1 flex-wrap min-h-[18px] sm:min-h-[22px] mt-0.5"></div>
+          `;
+        } else if (tile.id === 21) {
+          div.innerHTML = `
+            <div class="w-full flex justify-between items-center text-[9px] sm:text-[10px] font-bold">
+              <span class="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-amber-600 text-white flex items-center justify-center text-[8px] sm:text-[9px] shadow-xs">★</span>
+              <span class="text-xs sm:text-sm">✨</span>
+            </div>
+            <div class="text-base sm:text-2xl my-auto">🏆</div>
+            <div class="font-game font-bold text-[9px] sm:text-xs text-amber-900 tracking-tight uppercase leading-tight">ARRIVÉE</div>
+            <div id="pawns-slot-${tile.id}" class="tile-pawns-container flex items-center justify-center gap-0.5 flex-wrap min-h-[18px] sm:min-h-[22px] mt-0.5"></div>
+          `;
+        } else {
+          div.innerHTML = `
+            <div class="w-full flex justify-between items-center text-[9px] sm:text-[10px] font-bold">
+              <span class="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-orange-500 text-white flex items-center justify-center text-[8px] sm:text-[9px] shadow-xs">${tile.id}</span>
+              <span class="text-xs sm:text-sm">${tile.icon}</span>
+            </div>
+            <div class="font-game font-bold text-[10px] sm:text-xs text-blue-900 tracking-tight my-auto uppercase leading-tight">${tile.verb}</div>
+            <div class="text-[8px] sm:text-[9px] text-slate-400 font-mono">rad: ${tile.stem}-</div>
+            <div id="pawns-slot-${tile.id}" class="tile-pawns-container flex items-center justify-center gap-0.5 flex-wrap min-h-[18px] sm:min-h-[22px] mt-0.5"></div>
+          `;
+        }
+
+        // Tap to move active player (optimal for mobile & desktop touch)
+        div.addEventListener("click", () => {
+          PLAYERS[activePlayerIndex].position = tile.id;
+          moveToTile(tile.id);
+          renderPlayersBar();
+          renderPawnsOnBoard();
+
+          if (tile.id === 21) {
+            triggerConfettiAndJoy(PLAYERS[activePlayerIndex]);
+          }
+        });
+
+        grid.appendChild(div);
+      });
+
+      renderPawnsOnBoard();
+    }
+
+    function updateActivePlayerView() {
+      const activeP = PLAYERS[activePlayerIndex];
+      const badge = document.getElementById("activePlayerTurnBadge");
+      if (badge) {
+        badge.innerHTML = `Tour : ${activeP.emoji} ${activeP.name}`;
+      }
+      renderPlayersBar();
+      renderPawnsOnBoard();
+    }
+
+    // --- STREAMING_CHUNK:Implementing 3D dice physics and rotation mechanics ---
+    function rollDice() {
+      if (isRolling) return;
+      isRolling = true;
+
+      playSound('roll');
+
+      const dice1El = document.getElementById("dice1");
+      const dice2El = document.getElementById("dice2");
+      const rollBtn = document.getElementById("rollDiceBtn");
+
+      rollBtn.disabled = true;
+      rollBtn.classList.add("opacity-70", "cursor-not-allowed");
+
+      dice1El.className = "cube is-rolling";
+      dice2El.className = "cube is-rolling";
+
+      const val1 = Math.floor(Math.random() * 6) + 1;
+      const val2 = Math.floor(Math.random() * 6) + 1;
+
+      setTimeout(() => {
+        dice1El.className = `cube show-${val1}`;
+        dice2El.className = `cube show-${val2}`;
+
+        currentDie1 = val1;
+        currentDie2 = val2;
+
+        document.getElementById("dice1ValueBadge").textContent = `Avance : +${val1}`;
+        document.getElementById("dice2ValueBadge").textContent = `${PRONOUNS[val2].label}`;
+
+        // Select a new random temporal expression on roll
+        const randomExp = TEMPORAL_EXPRESSIONS[Math.floor(Math.random() * TEMPORAL_EXPRESSIONS.length)];
+        setTemporalExpression(randomExp);
+
+        const activeP = PLAYERS[activePlayerIndex];
+        let nextPos = activeP.position + val1;
+        
+        // Handle landing on or reaching Arrivée (case 21)
+        if (nextPos >= 21) {
+          nextPos = 21;
+          activeP.position = nextPos;
+          moveToTile(nextPos);
+          renderPlayersBar();
+          renderPawnsOnBoard();
+          triggerConfettiAndJoy(activeP);
+        } else {
+          activeP.position = nextPos;
+          moveToTile(nextPos);
+          renderPlayersBar();
+          renderPawnsOnBoard();
+        }
+
+        isRolling = false;
+        rollBtn.disabled = false;
+        rollBtn.classList.remove("opacity-70", "cursor-not-allowed");
+
+      }, 1000);
+    }
+
+    // --- STREAMING_CHUNK:Handling pawn movement, complements chips and challenge updates ---
+    function moveToTile(newTileId) {
+      const prevTile = document.getElementById(`board-tile-${currentTilePosition}`);
+      if (prevTile) prevTile.classList.remove("active-case");
+
+      currentTilePosition = newTileId;
+
+      const newTile = document.getElementById(`board-tile-${currentTilePosition}`);
+      if (newTile) {
+        newTile.classList.add("active-case");
+        newTile.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+
+      const activeP = PLAYERS[activePlayerIndex];
+
+      // Special case: Tile 21 is ARRIVÉE
+      if (currentTilePosition === 21) {
+        document.getElementById("targetVerbDisplay").textContent = "VICTOIRE !";
+        document.getElementById("targetVerbNumber").textContent = `Case Arrivée (${activeP.emoji} ${activeP.name})`;
+        document.getElementById("targetPronounDisplay").textContent = "🏆 Champion";
+        document.getElementById("targetPronounDie").textContent = "Parcours terminé";
+        
+        const complementsContainer = document.getElementById("complementsChipsContainer");
+        if (complementsContainer) {
+          complementsContainer.innerHTML = `
+            <span class="text-xs text-amber-800 font-bold bg-amber-100 px-2 py-1 rounded-lg">
+              ✨ Défi d'honneur : raconte un souvenir d'enfance à l'imparfait !
+            </span>
+          `;
+        }
+
+        showFeedback(`🏆 <strong>Félicitations ${activeP.name} !</strong> Tu es arrivé(e) à destination ! Bravo pour ta pratique de l'imparfait !`, "success");
+        return;
+      }
+
+      const verbData = VERBS_DATA.find(v => v.id === currentTilePosition) || VERBS_DATA[0];
+      const pronounData = PRONOUNS[currentDie2];
+
+      document.getElementById("targetVerbDisplay").textContent = verbData.verb;
+      document.getElementById("targetVerbNumber").textContent = `Case #${verbData.id} (${activeP.emoji} ${activeP.name})`;
+      document.getElementById("targetPronounDisplay").textContent = pronounData.label;
+      document.getElementById("targetPronounDie").textContent = `Dé n° 2 (${currentDie2})`;
+      document.getElementById("targetExpressionDisplay").textContent = `"${currentExpression}..."`;
+
+      // Render Complements chips
+      const complementsContainer = document.getElementById("complementsChipsContainer");
+      if (complementsContainer) {
+        complementsContainer.innerHTML = "";
+        verbData.complements.forEach(comp => {
+          const compBtn = document.createElement("button");
+          compBtn.type = "button";
+          compBtn.className = "px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-900 font-semibold text-xs transition cursor-pointer flex items-center gap-1";
+          compBtn.innerHTML = `<span>➕</span> <span>${comp}</span>`;
+          compBtn.title = "Cliquer pour ajouter à votre phrase";
+          compBtn.addEventListener("click", () => {
+            const input = document.getElementById("verbAnswerInput");
+            const expectedForm = verbData.fullConjugations[currentDie2];
+            const cleanPronoun = PRONOUNS[currentDie2].pronounClean;
+            const subjectPrefix = (cleanPronoun === 'je' && ['a','e','i','o','u','é'].includes(expectedForm[0])) ? "j'" : `${cleanPronoun} `;
+            
+            // Build suggestion or append
+            if (!input.value.trim()) {
+              input.value = `${currentExpression}, ${subjectPrefix}${expectedForm} ${comp}`;
+            } else {
+              input.value += ` ${comp}`;
+            }
+            input.focus();
+          });
+          complementsContainer.appendChild(compBtn);
+        });
+      }
+
+      const input = document.getElementById("verbAnswerInput");
+      input.value = "";
+      input.focus();
+      hideFeedback();
+    }
+
+    // --- STREAMING_CHUNK:Validating French imparfait conjugation answers ---
+    function checkAnswer(e) {
+      if (e) e.preventDefault();
+      
+      const input = document.getElementById("verbAnswerInput");
+      const userText = input.value.trim().toLowerCase();
+      
+      if (!userText) {
+        showFeedback("Veuillez saisir votre phrase ou conjugaison avant de valider !", "warning");
+        return;
+      }
+
+      // If at Arrivée, validate any answer with encouragement
+      if (currentTilePosition === 21) {
+        currentScore += 20;
+        document.getElementById("scoreCounter").textContent = `Score : ${currentScore} point(s)`;
+        playVictoryFanfare();
+        showFeedback("🎉 Magnifique phrase pour célébrer la victoire !", "success");
+        return;
+      }
+
+      const verbData = VERBS_DATA.find(v => v.id === currentTilePosition) || VERBS_DATA[0];
+      const expectedForm = verbData.fullConjugations[currentDie2].toLowerCase();
+      const expectedPronoun = PRONOUNS[currentDie2].pronounClean;
+
+      const words = userText.split(/[\s,.'’!?]+/).map(w => w.trim());
+      const containsCorrectForm = words.includes(expectedForm) || userText === expectedForm;
+
+      if (containsCorrectForm) {
+        currentScore += 10;
+        document.getElementById("scoreCounter").textContent = `Score : ${currentScore} point(s)`;
+        playSound('success');
+        
+        const sampleComp = verbData.complements[0];
+        const subjectLead = (expectedPronoun === 'je' && ['a','e','i','o','u','é'].includes(expectedForm[0])) ? "j'" : `${expectedPronoun} `;
+
+        showFeedback(
+          `🎉 <strong>Excellent ! Phrase ou verbe validé !</strong><br>` +
+          `Verbe <em>${verbData.verb}</em> avec <strong>${PRONOUNS[currentDie2].label}</strong> ➔ <code>${expectedForm}</code>.<br>` +
+          `<span class="text-[11px] text-emerald-700 font-normal">Exemple modèle en contexte : <em>« ${currentExpression}, ${subjectLead}${expectedForm} ${sampleComp}. »</em></span>`,
+          "success"
+        );
+      } else {
+        playSound('error');
+        showFeedback(
+          `❌ <strong>Attention à la terminaison !</strong><br>` +
+          `Pour <em>${verbData.verb}</em> avec <strong>${PRONOUNS[currentDie2].label}</strong>, la forme attendue est : ` +
+          `<code class="font-bold underline text-rose-800">${expectedForm}</code>.<br>` +
+          `<span class="text-[11px] text-rose-700 font-normal">Rappel : Radical <code>${verbData.stem}</code> + terminaison de l'imparfait.</span>`,
+          "error"
+        );
+      }
+    }
+
+    function showFeedback(htmlContent, type) {
+      const box = document.getElementById("feedbackBox");
+      box.className = "p-3.5 rounded-xl text-xs font-medium transition-all block";
+      if (type === "success") {
+        box.classList.add("bg-emerald-50", "border", "border-emerald-200", "text-emerald-900");
+      } else if (type === "error") {
+        box.classList.add("bg-rose-50", "border", "border-rose-200", "text-rose-900");
+      } else {
+        box.classList.add("bg-amber-50", "border", "border-amber-200", "text-amber-900");
+      }
+      box.innerHTML = htmlContent;
+    }
+
+    function hideFeedback() {
+      const box = document.getElementById("feedbackBox");
+      box.classList.add("hidden");
+      box.innerHTML = "";
+    }
+
+    // --- STREAMING_CHUNK:Setting up event listeners and user controls ---
+    window.addEventListener("DOMContentLoaded", () => {
+      renderTemporalChips();
+      renderPlayersBar();
+      renderBoard();
+      updateActivePlayerView();
+      moveToTile(1);
+
+      // Change suggested expression button
+      document.getElementById("changeExpressionBtn").addEventListener("click", () => {
+        const remaining = TEMPORAL_EXPRESSIONS.filter(e => e !== currentExpression);
+        const nextExp = remaining[Math.floor(Math.random() * remaining.length)];
+        setTemporalExpression(nextExp);
+      });
+
+      // Roll Dice button & Spacebar shortcut
+      document.getElementById("rollDiceBtn").addEventListener("click", rollDice);
+      window.addEventListener("keydown", (e) => {
+        if (e.code === "Space" && document.activeElement.tagName !== "INPUT") {
+          e.preventDefault();
+          rollDice();
+        }
+      });
+
+      // Reset button
+      document.getElementById("resetGameBtn").addEventListener("click", () => {
+        PLAYERS.forEach(p => p.position = 0);
+        currentTilePosition = 0;
+        currentScore = 0;
+        document.getElementById("scoreCounter").textContent = "Score : 0 point(s)";
+        renderPlayersBar();
+        renderPawnsOnBoard();
+        moveToTile(1);
+        showFeedback("Jeu réinitialisé ! Tous les pions sont au Départ.", "warning");
+      });
+
+      // Form submission
+      document.getElementById("conjugationForm").addEventListener("submit", checkAnswer);
+
+      // Accent buttons
+      document.querySelectorAll(".accent-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const input = document.getElementById("verbAnswerInput");
+          input.value += btn.textContent;
+          input.focus();
+        });
+      });
+
+      // Sound toggle
+      const soundBtn = document.getElementById("soundToggleBtn");
+      soundBtn.addEventListener("click", () => {
+        soundEnabled = !soundEnabled;
+        document.getElementById("soundIcon").textContent = soundEnabled ? "🔊" : "🔇";
+        document.getElementById("soundLabel").textContent = soundEnabled ? "Son : Activé" : "Son : Muet";
+      });
+
+      // Victory Modal controls
+      const closeVictoryBtn = document.getElementById("closeVictoryModalBtn");
+      const relaunchConfettiBtn = document.getElementById("relaunchConfettiBtn");
+      const victoryModal = document.getElementById("victoryModal");
+
+      if (closeVictoryBtn && victoryModal) {
+        closeVictoryBtn.addEventListener("click", () => {
+          victoryModal.classList.add("hidden");
+        });
+        victoryModal.addEventListener("click", (e) => {
+          if (e.target === victoryModal) {
+            victoryModal.classList.add("hidden");
+          }
+        });
+      }
+
+      if (relaunchConfettiBtn) {
+        relaunchConfettiBtn.addEventListener("click", () => {
+          const activeP = PLAYERS[activePlayerIndex];
+          triggerConfettiAndJoy(activeP);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
