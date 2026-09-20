@@ -476,6 +476,44 @@
         </div>
       </div>
 
+      <!-- SCORE GLOBAL SUR 20 -->
+      <div id="global-score-container" class="bg-gradient-to-br from-slate-900 via-teal-950 to-slate-900 text-white rounded-2xl p-6 sm:p-8 shadow-xl border border-teal-500/30">
+        <div class="max-w-2xl mx-auto text-center space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 bg-teal-500/20 border border-teal-400/30 rounded-full text-teal-300 text-xs font-bold uppercase tracking-wider">
+            <i class="fa-solid fa-award text-amber-400"></i> Bilan des activités
+          </div>
+          <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Votre Score Global</h3>
+          <p class="text-xs sm:text-sm text-slate-300">
+            Validez l'Activité 1 (10 pts) et l'Activité 2 (10 pts) pour calculer votre note finale.
+          </p>
+
+          <!-- Affichage du score -->
+          <div class="py-2 flex items-baseline justify-center gap-2">
+            <span id="global-score-val" class="text-5xl sm:text-6xl font-black text-amber-400 tracking-tight">0</span>
+            <span class="text-2xl sm:text-3xl font-bold text-slate-400">/ 20</span>
+          </div>
+
+          <!-- Barre de progression -->
+          <div class="w-full bg-slate-800 rounded-full h-3.5 overflow-hidden border border-slate-700 p-0.5">
+            <div id="global-progress-bar" class="bg-gradient-to-r from-teal-400 to-emerald-400 h-full rounded-full transition-all duration-500" style="width: 0%;"></div>
+          </div>
+
+          <!-- Détail et appréciation -->
+          <div class="flex flex-wrap items-center justify-center gap-4 text-xs sm:text-sm pt-1">
+            <span class="px-3 py-1 bg-slate-800/80 rounded-lg border border-slate-700">
+              Activité 1 : <strong id="global-part-1" class="text-teal-300">— / 10</strong>
+            </span>
+            <span class="px-3 py-1 bg-slate-800/80 rounded-lg border border-slate-700">
+              Activité 2 : <strong id="global-part-2" class="text-rose-300">— / 10</strong>
+            </span>
+          </div>
+
+          <p id="global-feedback-msg" class="text-sm font-medium text-slate-300 italic pt-1">
+            En attente de validation des activités...
+          </p>
+        </div>
+      </div>
+
     </section>
 
   </main>
@@ -676,6 +714,10 @@
       const scoreVal = document.getElementById('score-1');
       scoreVal.textContent = score;
       scoreBox.classList.remove('hidden');
+
+      scoreEx1 = score;
+      hasDoneEx1 = true;
+      updateTotalScore();
     }
 
     function resetExercise1() {
@@ -688,6 +730,10 @@
         row.classList.remove('border-emerald-300', 'bg-emerald-50/50', 'border-rose-300', 'bg-rose-50/50');
       });
       document.getElementById('score-box-1').classList.add('hidden');
+
+      scoreEx1 = 0;
+      hasDoneEx1 = false;
+      updateTotalScore();
     }
 
     function showAnswersExercise1() {
@@ -733,11 +779,11 @@
         explanation: "Devant un adjectif pluriel placé avant le nom, « des » devient obligatoirement « de »."
       },
       {
-        q: "4. Quelle phrase associe correctement deux adjectifs ? :",
+        q: "4. Place de l'adjectif de couleur :",
         options: [
-          "Il porte une rouge chemise belle.",
-          "Il porte une belle chemise rouge.",
-          "Il porte une belle rouge chemise."
+          "Il porte une rouge chemise.",
+          "Il porte une chemise rouge.",
+          "Il porte une de rouge chemise."
         ],
         answer: 1,
         explanation: "Les adjectifs de couleur se placent toujours APRÈS le nom."
@@ -860,6 +906,10 @@
       const scoreVal = document.getElementById('score-2');
       scoreVal.textContent = score;
       scoreBox.classList.remove('hidden');
+
+      scoreEx2 = score;
+      hasDoneEx2 = true;
+      updateTotalScore();
     }
 
     function resetExercise2() {
@@ -868,16 +918,68 @@
         if (checked) checked.checked = false;
         const card = document.getElementById(`q2-card-${index}`);
         card.classList.remove('border-emerald-300', 'border-rose-300');
-        const feedback = document.getElementById(`q2-feedback-${index}`);
-        feedback.classList.add('hidden');
+        const feedback = document.getElementById(`feedback-q2-${index}`) || document.getElementById(`q2-feedback-${index}`);
+        if (feedback) feedback.classList.add('hidden');
       });
       document.getElementById('score-box-2').classList.add('hidden');
+
+      scoreEx2 = 0;
+      hasDoneEx2 = false;
+      updateTotalScore();
+    }
+
+    /* =========================================================================
+       4. GESTION DU SCORE GLOBAL SUR 20
+       ========================================================================= */
+    let scoreEx1 = 0;
+    let scoreEx2 = 0;
+    let hasDoneEx1 = false;
+    let hasDoneEx2 = false;
+
+    function updateTotalScore() {
+      const globalVal = document.getElementById('global-score-val');
+      const progressBar = document.getElementById('global-progress-bar');
+      const part1El = document.getElementById('global-part-1');
+      const part2El = document.getElementById('global-part-2');
+      const feedbackMsg = document.getElementById('global-feedback-msg');
+
+      const total = (hasDoneEx1 ? scoreEx1 : 0) + (hasDoneEx2 ? scoreEx2 : 0);
+      globalVal.textContent = total;
+
+      const percentage = (total / 20) * 100;
+      progressBar.style.width = `${percentage}%`;
+
+      part1El.textContent = hasDoneEx1 ? `${scoreEx1} / 10` : "— / 10";
+      part2El.textContent = hasDoneEx2 ? `${scoreEx2} / 10` : "— / 10";
+
+      if (!hasDoneEx1 && !hasDoneEx2) {
+        feedbackMsg.textContent = "En attente de validation des activités...";
+        feedbackMsg.className = "text-sm font-medium text-slate-400 italic pt-1";
+      } else if (!hasDoneEx1 || !hasDoneEx2) {
+        feedbackMsg.textContent = "Validez la seconde activité pour obtenir votre bilan complet !";
+        feedbackMsg.className = "text-sm font-medium text-amber-300 pt-1";
+      } else {
+        if (total >= 18) {
+          feedbackMsg.innerHTML = "🌟 <strong>Excellent résultat !</strong> Vous maîtrisez parfaitement la place des adjectifs.";
+          feedbackMsg.className = "text-sm font-medium text-emerald-300 pt-1";
+        } else if (total >= 14) {
+          feedbackMsg.innerHTML = "👏 <strong>Très bon travail !</strong> Les notions fondamentales sont bien acquises.";
+          feedbackMsg.className = "text-sm font-medium text-teal-300 pt-1";
+        } else if (total >= 10) {
+          feedbackMsg.innerHTML = "👍 <strong>Bien !</strong> Recommencez pour perfectionner les cas particuliers (bel/nouvel, de/des).";
+          feedbackMsg.className = "text-sm font-medium text-amber-300 pt-1";
+        } else {
+          feedbackMsg.innerHTML = "💪 <strong>Courage !</strong> Relisez le tableau récapitulatif ci-dessus et réessayez.";
+          feedbackMsg.className = "text-sm font-medium text-rose-300 pt-1";
+        }
+      }
     }
 
     /* Initialize on load */
     window.onload = function() {
       renderExercise1();
       renderExercise2();
+      updateTotalScore();
     };
   </script>
 </body>
