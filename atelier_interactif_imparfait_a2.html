@@ -109,19 +109,47 @@
         <!-- =================================================================== -->
         <section id="tab1" class="space-y-6">
             
-            <!-- Introduction / Règle de base -->
+            <!-- Introduction / Règle de base + Vidéo côte à côte -->
             <div class="bg-white border-2 border-inspireGreen rounded-2xl p-5 sm:p-7 shadow-sm">
-                <div class="flex items-center gap-3 mb-4">
+                <div class="flex items-center gap-3 mb-5">
                     <span class="w-8 h-8 rounded-lg bg-inspireGreen text-white font-black flex items-center justify-center text-sm shadow">1</span>
                     <h2 class="text-lg sm:text-2xl font-bold text-slate-900">Règle fondamentale de formation</h2>
                 </div>
                 
-                <div class="bg-inspireLightGreen border border-emerald-200 p-4 rounded-xl text-slate-800 text-sm sm:text-base leading-relaxed mb-6">
-                    <p class="font-bold text-inspireDarkGreen mb-1">Formule mathématique de l'imparfait :</p>
-                    <p class="text-sm sm:text-lg">
-                        <strong>Radical du verbe avec <em>NOUS</em> au présent</strong> + 
-                        <span class="text-inspireRed font-black"> -ais, -ais, -ait, -ions, -iez, -aient</span>
-                    </p>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start mb-6">
+                    <!-- Colonne Gauche : Explication de la règle -->
+                    <div class="lg:col-span-6 space-y-4">
+                        <div class="bg-inspireLightGreen border border-emerald-200 p-4 rounded-xl text-slate-800 text-sm sm:text-base leading-relaxed">
+                            <p class="font-bold text-inspireDarkGreen mb-1">Formule mathématique de l'imparfait :</p>
+                            <p class="text-sm sm:text-lg">
+                                <strong>Radical du verbe avec <em>NOUS</em> au présent</strong> + 
+                                <span class="text-inspireRed font-black"> -ais, -ais, -ait, -ions, -iez, -aient</span>
+                            </p>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            📺 Visionnez l'extrait explicatif ci-contre (de <strong>0:55</strong> à <strong>6:14</strong>) pour observer le mécanisme en action, les exceptions et les particularités phonétiques de la formation.
+                        </p>
+                    </div>
+
+                    <!-- Colonne Droite : Vidéo 1 (Partie Formation : 0:55 à 6:14) -->
+                    <div class="lg:col-span-6">
+                        <div class="border border-slate-200 rounded-2xl overflow-hidden shadow-sm bg-slate-900">
+                            <div class="aspect-video w-full">
+                                <iframe id="yt-player-tab1" class="w-full h-full" src="https://www.youtube.com/embed/culF1WXnaOw?start=55&end=374&enablejsapi=1" title="Formation de l'imparfait" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <div class="p-2.5 bg-slate-100 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-600">
+                                <span class="font-semibold">⏱ Extrait : 0:55 ➔ 6:14</span>
+                                <div class="flex items-center gap-1.5">
+                                    <a href="https://youtu.be/culF1WXnaOw?t=55" target="_blank" rel="noopener noreferrer" class="touch-btn px-2.5 py-1 bg-white hover:bg-slate-200 border border-slate-300 rounded-lg font-bold text-slate-700 text-xs flex items-center gap-1" title="Ouvrir sur YouTube si le lecteur local est bloqué">
+                                        ↗ Ouvrir sur YouTube
+                                    </a>
+                                    <button type="button" onclick="replayVideo('yt-player-tab1', 'culF1WXnaOw', 55, 374)" class="touch-btn px-2.5 py-1 bg-white hover:bg-slate-200 border border-slate-300 rounded-lg font-bold text-inspireDarkGreen text-xs flex items-center gap-1">
+                                        🔄 Rejouer l'extrait
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-3 flex items-center gap-2">
@@ -315,23 +343,51 @@
         <section id="tab2" class="hidden space-y-6">
 
             <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-7 shadow-sm">
-                <div class="flex items-center gap-3 mb-4">
+                <div class="flex items-center gap-3 mb-5">
                     <span class="w-8 h-8 rounded-lg bg-blue-600 text-white font-black flex items-center justify-center text-sm shadow">2</span>
                     <h2 class="text-lg sm:text-2xl font-bold text-slate-900">Et l'imparfait, à quoi ça sert ?</h2>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                    <div class="bg-blue-50 border border-blue-200 p-4 rounded-xl">
-                        <h3 class="font-bold text-blue-900 text-base mb-1">1. Exprimer des habitudes passées</h3>
-                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-                            Pour raconter ce qu'on avait l'habitude de faire régulièrement dans le passé, des rituels ou des répétitions (souvent avec <em>avant, à cette époque, tous les jours, le week-end</em>).
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start mb-6">
+                    <!-- Colonne Gauche : Explications d'usage -->
+                    <div class="lg:col-span-6 space-y-4">
+                        <div class="grid grid-cols-1 gap-3">
+                            <div class="bg-blue-50 border border-blue-200 p-3.5 rounded-xl">
+                                <h3 class="font-bold text-blue-900 text-sm sm:text-base mb-1">1. Exprimer des habitudes passées</h3>
+                                <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                                    Pour raconter ce qu'on faisait régulièrement dans le passé (souvent avec <em>avant, à cette époque, tous les jours</em>).
+                                </p>
+                            </div>
+                            <div class="bg-emerald-50 border border-emerald-200 p-3.5 rounded-xl">
+                                <h3 class="font-bold text-inspireDarkGreen text-sm sm:text-base mb-1">2. Décrire une situation passée</h3>
+                                <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                                    Pour peindre le décor, le paysage, la météo, l'âge, l'état physique ou psychologique sans marquer de début ni de fin.
+                                </p>
+                            </div>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            📺 Regardez l'extrait ci-contre (de <strong>6:14</strong> à <strong>8:29</strong>) pour comprendre la nuance entre habitude répétée et description.
                         </p>
                     </div>
-                    <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl">
-                        <h3 class="font-bold text-inspireDarkGreen text-base mb-1">2. Décrire une situation passée</h3>
-                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-                            Pour décrire le décor, le paysage, la météo, l'âge, l'état physique ou psychologique des personnes dans le passé sans préciser de début ni de fin.
-                        </p>
+
+                    <!-- Colonne Droite : Vidéo 1 (Partie Emploi : 6:14 à 8:29) -->
+                    <div class="lg:col-span-6">
+                        <div class="border border-slate-200 rounded-2xl overflow-hidden shadow-sm bg-slate-900">
+                            <div class="aspect-video w-full">
+                                <iframe id="yt-player-tab2" class="w-full h-full" src="https://www.youtube.com/embed/culF1WXnaOw?start=374&end=509&enablejsapi=1" title="Emploi de l'imparfait" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <div class="p-2.5 bg-slate-100 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-600">
+                                <span class="font-semibold">⏱ Extrait : 6:14 ➔ 8:29</span>
+                                <div class="flex items-center gap-1.5">
+                                    <a href="https://youtu.be/culF1WXnaOw?t=374" target="_blank" rel="noopener noreferrer" class="touch-btn px-2.5 py-1 bg-white hover:bg-slate-200 border border-slate-300 rounded-lg font-bold text-slate-700 text-xs flex items-center gap-1" title="Ouvrir sur YouTube si le lecteur local est bloqué">
+                                        ↗ Ouvrir sur YouTube
+                                    </a>
+                                    <button type="button" onclick="replayVideo('yt-player-tab2', 'culF1WXnaOw', 374, 509)" class="touch-btn px-2.5 py-1 bg-white hover:bg-slate-200 border border-slate-300 rounded-lg font-bold text-blue-700 text-xs flex items-center gap-1">
+                                        🔄 Rejouer l'extrait
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -477,6 +533,128 @@
                     <button onclick="checkDictation()" class="touch-btn px-6 py-2.5 bg-inspireGreen hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-all shadow-sm">
                         Valider la dictée
                     </button>
+                </div>
+            </div>
+
+            <!-- ACTIVITÉ 4 : VIDÉO DIALOGUE ET SOUVENIRS D'ENFANCE (NOUVEAU) -->
+            <div class="bg-white border-2 border-emerald-300 rounded-2xl p-5 sm:p-6 shadow-sm space-y-5">
+                <div class="flex items-center justify-between flex-wrap gap-2 border-b border-slate-200 pb-3">
+                    <div>
+                        <span class="px-2.5 py-0.5 bg-emerald-100 text-inspireDarkGreen text-xs rounded-md font-bold">Activité 4 • Vidéo & Récit d'enfance</span>
+                        <h3 class="font-bold text-base sm:text-lg text-slate-900 mt-1">L'enfance et les habitudes passées</h3>
+                    </div>
+                    <span class="text-xs text-slate-500 font-semibold">Minutage : 2:35 ➔ 4:49</span>
+                </div>
+
+                <!-- Lecteur Vidéo 2 -->
+                <div class="max-w-2xl mx-auto border border-slate-200 rounded-2xl overflow-hidden shadow-sm bg-slate-900">
+                    <div class="aspect-video w-full">
+                        <iframe id="yt-player-tab3" class="w-full h-full" src="https://www.youtube.com/embed/KgQnUx-0wt0?start=155&end=289&enablejsapi=1" title="Dialogue enfance et imparfait" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-3 bg-slate-100 border-t border-slate-200 flex items-center justify-between flex-wrap gap-2 text-xs text-slate-700">
+                        <span class="font-semibold">⏱ Extrait : 2:35 à 4:49</span>
+                        <div class="flex items-center gap-2">
+                            <a href="https://youtu.be/KgQnUx-0wt0?t=155" target="_blank" rel="noopener noreferrer" class="touch-btn px-3 py-1.5 bg-white hover:bg-slate-200 border border-slate-300 rounded-lg font-bold text-slate-700 text-xs flex items-center gap-1" title="Ouvrir sur YouTube si le lecteur local est bloqué">
+                                ↗ Ouvrir sur YouTube
+                            </a>
+                            <button type="button" onclick="replayVideo('yt-player-tab3', 'KgQnUx-0wt0', 155, 289)" class="touch-btn px-3 py-1.5 bg-inspireGreen hover:bg-emerald-700 text-white rounded-lg font-bold text-xs transition-all shadow-sm flex items-center gap-1.5">
+                                🔄 Rejouer l'extrait (2:35 - 4:49)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7 Questions sur l'enfance -->
+                <div class="space-y-3 pt-2">
+                    <div class="flex items-center justify-between">
+                        <h4 class="font-bold text-slate-900 text-sm sm:text-base">1. Répondez aux questions avec l'imparfait (comme dans le modèle) :</h4>
+                        <span id="childhoodScore" class="text-xs sm:text-sm font-bold text-slate-600">Score : -/7</span>
+                    </div>
+                    <p class="text-xs text-slate-500 italic">
+                        💡 Modèle : <em>« Quand l'enfant avait deux ans, il ne pleurait jamais ? »</em> ➔ <strong>« Non, il pleurait souvent / tout le temps. »</strong>
+                    </p>
+
+                    <div id="childhoodQuestionsList" class="space-y-3">
+                        <!-- Généré par JS : 7 questions interactives -->
+                    </div>
+
+                    <div class="pt-2">
+                        <button onclick="checkChildhoodQuestions()" class="touch-btn px-6 py-2.5 bg-inspireGreen hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-all shadow-sm">
+                            Vérifier mes 7 réponses
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Lexique pour parler de son enfance -->
+                <div class="bg-emerald-50/70 border border-emerald-200 rounded-xl p-4 sm:p-5 space-y-3">
+                    <h4 class="font-bold text-inspireDarkGreen text-sm sm:text-base flex items-center gap-2">
+                        <span>🧸</span> Lexique utile pour parler de son enfance
+                    </h4>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 text-xs sm:text-sm">
+                        <span class="p-2 bg-white rounded-lg border border-emerald-100 font-semibold text-slate-800">• être sage / turbulent(e)</span>
+                        <span class="p-2 bg-white rounded-lg border border-emerald-100 font-semibold text-slate-800">• faire des bêtises</span>
+                        <span class="p-2 bg-white rounded-lg border border-emerald-100 font-semibold text-slate-800">• faire des caprices</span>
+                        <span class="p-2 bg-white rounded-lg border border-emerald-100 font-semibold text-slate-800">• pleurer souvent / rarement</span>
+                        <span class="p-2 bg-white rounded-lg border border-emerald-100 font-semibold text-slate-800">• sucer son pouce</span>
+                        <span class="p-2 bg-white rounded-lg border border-emerald-100 font-semibold text-slate-800">• avoir peur du noir</span>
+                        <span class="p-2 bg-white rounded-lg border border-emerald-100 font-semibold text-slate-800">• faire la sieste</span>
+                        <span class="p-2 bg-white rounded-lg border border-emerald-100 font-semibold text-slate-800">• jouer aux petites voitures</span>
+                        <span class="p-2 bg-white rounded-lg border border-emerald-100 font-semibold text-slate-800">• jouer à la poupée / aux billes</span>
+                        <span class="p-2 bg-white rounded-lg border border-emerald-100 font-semibold text-slate-800">• regarder des dessins animés</span>
+                        <span class="p-2 bg-white rounded-lg border border-emerald-100 font-semibold text-slate-800">• obéir à ses parents</span>
+                        <span class="p-2 bg-white rounded-lg border border-emerald-100 font-semibold text-slate-800">• aller au parc avec des copains</span>
+                    </div>
+                </div>
+
+                <!-- Production Orale guidée -->
+                <div class="border-2 border-emerald-200 rounded-xl p-4 sm:p-5 bg-slate-50 space-y-3">
+                    <div class="flex items-center justify-between flex-wrap gap-2">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2.5 py-0.5 bg-emerald-100 text-inspireDarkGreen font-bold text-xs rounded-md">🎙️ Production Orale</span>
+                            <h4 class="font-bold text-slate-900 text-sm sm:text-base">
+                                2. Et toi, quel type d'enfant tu étais ?
+                            </h4>
+                        </div>
+                        <span class="text-xs text-slate-500 font-semibold">En binôme ou prise de parole continue</span>
+                    </div>
+
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        Prends la parole pour raconter ton enfance à voix haute à l'aide de l'imparfait et du lexique ci-dessus. Réponds oralement en t'appuyant sur ces trois axes :
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs sm:text-sm">
+                        <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
+                            <span class="font-bold text-inspireDarkGreen block">1. Ton tempérament</span>
+                            <p class="text-slate-600 text-xs">Tu étais sage, timide ou turbulent(e) ? Tu faisais des bêtises ou des caprices ?</p>
+                        </div>
+                        <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
+                            <span class="font-bold text-inspireDarkGreen block">2. Tes activités & jeux</span>
+                            <p class="text-slate-600 text-xs">À quoi tu jouais ? Avec qui ? Quels dessins animés tu regardais ?</p>
+                        </div>
+                        <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
+                            <span class="font-bold text-inspireDarkGreen block">3. Tes émotions</span>
+                            <p class="text-slate-600 text-xs">Tu pleurais souvent ? Tu avais peur du noir, du docteur ou des animaux ?</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between flex-wrap gap-2 pt-2">
+                        <button type="button" onclick="showChildhoodExample()" class="touch-btn px-3.5 py-1.5 bg-white hover:bg-slate-100 border border-slate-300 text-slate-800 font-semibold rounded-lg text-xs transition-all shadow-sm flex items-center gap-1.5">
+                            <span>💬</span>
+                            <span>Afficher / masquer un modèle oral</span>
+                        </button>
+                    </div>
+
+                    <div id="childhoodExampleBox" class="hidden p-3.5 bg-white border border-emerald-300 rounded-xl text-xs sm:text-sm text-slate-700 space-y-2">
+                        <div class="flex items-center justify-between flex-wrap gap-2">
+                            <span class="font-bold text-inspireDarkGreen">Exemple de production orale à écouter :</span>
+                            <button type="button" onclick="speakFrench('Quand j\'avais six ans, j\'étais un enfant très curieux mais plutôt sage. Je ne pleurais presque jamais. Tous les après-midis, je jouais aux petites voitures avec mon frère et je regardais des dessins animés avant de faire la sieste.')" class="touch-btn px-2.5 py-1 bg-emerald-50 hover:bg-emerald-100 text-inspireDarkGreen border border-emerald-200 rounded-lg text-xs font-bold flex items-center gap-1">
+                                🔊 Écouter l'exemple
+                            </button>
+                        </div>
+                        <p class="italic leading-relaxed">
+                            « Quand j'avais six ans, <strong>j'étais</strong> un enfant très curieux mais plutôt sage. Je ne <strong>pleurais</strong> presque jamais. Tous les après-midis, je <strong>jouais</strong> aux petites voitures avec mon frère et je <strong>regardais</strong> des dessins animés avant de faire la sieste. »
+                        </p>
+                    </div>
                 </div>
             </div>
 
@@ -1194,7 +1372,7 @@
         // ===================================================================
         // 6. SYSTÉMATISATION (ONGLET 3) : QCM, PHRASES À TROUS, DICTÉE
         // ===================================================================
-        let scoreTab3 = { qcm: 0, blanks: 0, dictation: 0 };
+        let scoreTab3 = { qcm: 0, blanks: 0, dictation: 0, childhood: 0 };
 
         function updateGlobalTab3Score() {
             const total = scoreTab3.qcm + scoreTab3.blanks + scoreTab3.dictation;
@@ -1387,6 +1565,110 @@
             const scoreDisplay = document.getElementById('scoreEx3');
             if (scoreDisplay) scoreDisplay.innerText = `Score : ${correct}/9`;
             updateGlobalTab3Score();
+        }
+
+        // ===================================================================
+        // NOUVEAU : ACTIVITÉ 4 (VIDÉO ENFANCE ET QUESTIONS DE COMPRÉHENSION)
+        // ===================================================================
+        function replayVideo(iframeId, videoId, start, end) {
+            const frame = document.getElementById(iframeId);
+            if (frame) {
+                frame.src = `https://www.youtube.com/embed/${videoId}?start=${start}&end=${end}&autoplay=1&enablejsapi=1`;
+            }
+        }
+
+        const CHILDHOOD_QUESTIONS = [
+            {
+                q: "1. Quand l'enfant avait deux ans, il ne pleurait jamais ?",
+                hint: "Non, il pleurait souvent / toujours.",
+                keywords: ["pleurait"]
+            },
+            {
+                q: "2. Quand il était petit, il dormait toute la nuit sans se réveiller ?",
+                hint: "Non, il se réveillait souvent / il ne dormait pas bien.",
+                keywords: ["dormait", "réveillait"]
+            },
+            {
+                q: "3. À cinq ans, il était toujours sage avec ses parents ?",
+                hint: "Non, il faisait souvent des bêtises / il n'était pas toujours sage.",
+                keywords: ["faisait", "était"]
+            },
+            {
+                q: "4. Quand il était petit, il n'aimait pas du tout jouer ?",
+                hint: "Non, il adorait jouer / il jouait tout le temps.",
+                keywords: ["jouait", "adorait", "aimait"]
+            },
+            {
+                q: "5. À l'école maternelle, il n'avait aucun ami ?",
+                hint: "Non, il avait beaucoup d'amis / de copains.",
+                keywords: ["avait"]
+            },
+            {
+                q: "6. Quand il mangeait, il ne faisait jamais de caprices ?",
+                hint: "Non, il faisait souvent des caprices.",
+                keywords: ["faisait"]
+            },
+            {
+                q: "7. Le soir, il n'avait jamais peur du noir ?",
+                hint: "Non, il avait souvent peur du noir.",
+                keywords: ["avait"]
+            }
+        ];
+
+        function renderChildhoodQuestions() {
+            const container = document.getElementById('childhoodQuestionsList');
+            if (!container) return;
+
+            let html = '';
+            CHILDHOOD_QUESTIONS.forEach((item, idx) => {
+                html += `
+                    <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1.5 text-xs sm:text-sm">
+                        <p class="font-semibold text-slate-800">${item.q}</p>
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                            <input type="text" id="ch_ans_${idx}" class="flex-grow p-2 border border-slate-300 rounded-lg text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-inspireGreen" placeholder="Votre réponse (ex: Non, il pleurait souvent...)">
+                            <span id="ch_fb_${idx}" class="text-xs font-bold whitespace-nowrap"></span>
+                        </div>
+                        <p class="text-[11px] text-slate-400">Exemple attendu : <em>« ${item.hint} »</em></p>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function checkChildhoodQuestions() {
+            let correct = 0;
+            CHILDHOOD_QUESTIONS.forEach((item, idx) => {
+                const input = document.getElementById(`ch_ans_${idx}`);
+                const fb = document.getElementById(`ch_fb_${idx}`);
+                if (!input || !fb) return;
+
+                const val = input.value.trim().toLowerCase();
+                const hasKeyword = item.keywords.some(k => val.includes(k));
+
+                if (val.length >= 8 && (hasKeyword || val.startsWith("non"))) {
+                    correct++;
+                    fb.innerHTML = '<span class="text-emerald-600">✓ Bien formulé</span>';
+                    input.className = 'flex-grow p-2 border border-emerald-500 bg-emerald-50 rounded-lg text-xs sm:text-sm text-slate-900';
+                } else if (val.length > 0) {
+                    fb.innerHTML = `<span class="text-amber-600">Pensez à l'imparfait : ${item.hint}</span>`;
+                    input.className = 'flex-grow p-2 border border-amber-400 bg-amber-50 rounded-lg text-xs sm:text-sm text-slate-900';
+                } else {
+                    fb.innerHTML = '<span class="text-red-500">Réponse attendue</span>';
+                    input.className = 'flex-grow p-2 border border-red-400 bg-red-50 rounded-lg text-xs sm:text-sm text-slate-900';
+                }
+            });
+
+            scoreTab3.childhood = correct;
+            const scoreEl = document.getElementById('childhoodScore');
+            if (scoreEl) {
+                scoreEl.innerText = `Score : ${correct}/7`;
+                scoreEl.className = correct >= 5 ? 'text-xs sm:text-sm font-bold text-emerald-600' : 'text-xs sm:text-sm font-bold text-slate-700';
+            }
+        }
+
+        function showChildhoodExample() {
+            const box = document.getElementById('childhoodExampleBox');
+            if (box) box.classList.toggle('hidden');
         }
 
         // ===================================================================
@@ -1595,6 +1877,7 @@
             renderQCM();
             renderFillBlanks();
             renderDictation();
+            renderChildhoodQuestions();
         });
     </script>
 </body>
