@@ -1,868 +1,611 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>La place de l'adjectif - Inspire 2 (Unité 2)</title>
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Font Awesome for clean educational icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Google Fonts: Inter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f8fafc;
-      color: #1e293b;
-    }
-    /* Palette inspirée d'Inspire 2 (Bleu canard profond, corail dynamique, beige sable) */
-    :root {
-      --inspire-teal: #0e7490;     /* Bleu pétrole / canard */
-      --inspire-teal-dark: #155e75;
-      --inspire-coral: #e11d48;    /* Rouge corail/framboise */
-      --inspire-amber: #d97706;
-      --inspire-light: #f0fdfa;
-    }
-    .text-teal-inspire { color: var(--inspire-teal); }
-    .bg-teal-inspire { background-color: var(--inspire-teal); }
-    .bg-teal-dark { background-color: var(--inspire-teal-dark); }
-    .text-coral-inspire { color: var(--inspire-coral); }
-    .bg-coral-inspire { background-color: var(--inspire-coral); }
-    .border-teal-inspire { border-color: var(--inspire-teal); }
-    
-    /* Curved liaison connector symbol */
-    .liaison-link {
-      position: relative;
-      display: inline-block;
-      border-bottom: 2px dashed #0284c7;
-      padding-bottom: 2px;
-    }
-    .liaison-badge {
-      font-size: 0.75rem;
-      vertical-align: super;
-      font-weight: 700;
-      color: #0284c7;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activité 12 - La place des adjectifs</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        oifBlue: '#005FA3',
+                        oifRed: '#E52320',
+                        oifYellow: '#FFC800',
+                        oifGreen: '#009B48',
+                        oifViolet: '#682D86',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #F8FAFC;
+        }
+    </style>
 </head>
-<body class="min-h-screen flex flex-col antialiased">
+<body class="text-slate-800 min-h-screen flex flex-col selection:bg-blue-100 selection:text-oifBlue">
 
-  <header class="bg-teal-inspire text-white shadow-md sticky top-0 z-40">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-3">
-      <div class="flex items-center space-x-3">
-        <span class="bg-white text-teal-900 font-extrabold text-xs uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
-          Inspire 2 • Unité 2
-        </span>
-        <h1 class="text-xl sm:text-2xl font-bold tracking-tight">La place des adjectifs</h1>
-      </div>
-      <nav class="flex items-center space-x-2 text-xs sm:text-sm font-medium">
-        <a href="#regle" class="px-3 py-1.5 rounded-lg hover:bg-teal-800 transition">Règle & Vidéo</a>
-        <a href="#tableau" class="px-3 py-1.5 rounded-lg hover:bg-teal-800 transition">Tableau</a>
-        <a href="#phonetique" class="px-3 py-1.5 rounded-lg hover:bg-teal-800 transition">Phonétique</a>
-        <a href="#exercices" class="px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white rounded-lg shadow transition">Activités</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-10">
-
-    <section class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200">
-      <div class="max-w-3xl">
-        <div class="inline-flex items-center gap-2 text-rose-600 font-semibold text-sm mb-2">
-          <i class="fa-solid fa-compass"></i> Grammaire fondamentale (Niveau A2)
+    <!-- Bandeau supérieur aux couleurs de la Francophonie -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="h-2 w-full flex">
+            <div class="w-1/5 bg-oifBlue"></div>
+            <div class="w-1/5 bg-oifRed"></div>
+            <div class="w-1/5 bg-oifYellow"></div>
+            <div class="w-1/5 bg-oifGreen"></div>
+            <div class="w-1/5 bg-oifViolet"></div>
         </div>
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-800 leading-tight">
-          Où placer l'adjectif : <span class="text-teal-700">avant</span> ou <span class="text-rose-600">après</span> le nom ?
-        </h2>
-        <p class="mt-3 text-slate-600 leading-relaxed text-sm sm:text-base">
-          En français, la très grande majorité des adjectifs se place <strong>après</strong> le nom. Cependant, une série d'adjectifs fréquents et d'usage courant se place <strong>avant</strong>. Découvrez les régularités, écoutez les liaisons obligatoires et entraînez-vous en direct !
-        </p>
-      </div>
-    </section>
-
-    <section id="regle" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-      <!-- Video embed card (optimized for YouTube Shorts) -->
-      <div class="lg:col-span-5 bg-white rounded-2xl p-5 shadow-sm border border-slate-200 flex flex-col items-center">
-        <div class="w-full flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
-          <span class="font-bold text-slate-800 flex items-center gap-2">
-            <i class="fa-brands fa-youtube text-red-600 text-lg"></i> Mémo en vidéo (Short)
-          </span>
-          <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">1 min</span>
-        </div>
-        
-        <!-- Video Container (Responsive 9:16 aspect ratio suitable for shorts) -->
-        <div class="w-full max-w-[290px] aspect-[9/16] rounded-xl overflow-hidden shadow-md bg-black relative">
-          <iframe 
-            class="w-full h-full object-cover"
-            src="https://www.youtube-nocookie.com/embed/5qScUkGk2vo" 
-            title="La place des adjectifs en français" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-            allowfullscreen>
-          </iframe>
-        </div>
-        <p class="text-xs text-slate-500 mt-3 text-center">
-          Astuce visuelle : mémorisez la mélodie de cette petite liste d'adjectifs courants.
-        </p>
-      </div>
-
-      <!-- Explanatory text & categorized lists -->
-      <div class="lg:col-span-7 space-y-6">
-        <!-- Main rule card -->
-        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-5">
-          <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-xl bg-teal-100 text-teal-800 flex items-center justify-center font-bold">
-              1
-            </div>
-            <h3 class="text-xl font-bold text-slate-800">La règle d'or en 2 principes</h3>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl">
-              <h4 class="font-bold text-slate-700 flex items-center gap-2 mb-2 text-sm uppercase tracking-wide">
-                <i class="fa-solid fa-arrow-right text-rose-600"></i> Règle générale (Après)
-              </h4>
-              <p class="text-sm text-slate-600 mb-2">
-                Les adjectifs de couleur, forme, nationalité, état civil et participes :
-              </p>
-              <ul class="text-xs space-y-1 text-slate-700 font-medium">
-                <li>• Une famille <span class="text-rose-600 font-bold">recomposée</span></li>
-                <li>• Une voiture <span class="text-rose-600 font-bold">bleue</span> / une table <span class="text-rose-600 font-bold">ronde</span></li>
-                <li>• Un quartier <span class="text-rose-600 font-bold">parisien</span></li>
-              </ul>
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3 w-full sm:w-auto text-left">
+                <div class="p-2.5 bg-blue-50 text-oifBlue rounded-2xl font-bold text-xl shadow-inner border border-blue-100 flex-shrink-0">
+                    📚 FLE
+                </div>
+                <div>
+                    <span class="inline-block text-[10px] sm:text-xs font-bold tracking-wider uppercase text-oifBlue bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-100">
+                        Niveau A2 • Inspire 2 (Unité 2)
+                    </span>
+                    <h1 class="text-lg sm:text-2xl font-bold text-slate-900 leading-tight">
+                        La place des adjectifs
+                    </h1>
+                </div>
             </div>
 
-            <div class="bg-teal-50/70 border border-teal-200 p-4 rounded-xl">
-              <h4 class="font-bold text-teal-900 flex items-center gap-2 mb-2 text-sm uppercase tracking-wide">
-                <i class="fa-solid fa-arrow-left text-teal-700"></i> Devant le nom (Avant)
-              </h4>
-              <p class="text-sm text-slate-600 mb-2">
-                Une vingtaine d'adjectifs fréquents et évaluatifs + les chiffres :
-              </p>
-              <ul class="text-xs space-y-1 text-slate-700 font-medium">
-                <li>• Un <span class="text-teal-700 font-bold">petit</span> choc</li>
-                <li>• De <span class="text-teal-700 font-bold">grandes</span> familles</li>
-                <li>• Le <span class="text-teal-700 font-bold">premier</span> étage / <span class="text-teal-700 font-bold">deux</span> amis</li>
-              </ul>
-            </div>
-          </div>
+            <!-- Bouton Retour au Sommaire -->
+            <a href="index.html" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs sm:text-sm rounded-xl border border-slate-300 transition-all shadow-sm">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                <span>Retour au sommaire</span>
+            </a>
+        </div>
+    </header>
 
-          <!-- Encadré réflexif & pédagogique sur les adjectifs dits courts -->
-          <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl">
-            <div class="flex items-start gap-3">
-              <i class="fa-solid fa-lightbulb text-amber-600 text-lg mt-0.5"></i>
-              <div>
-                <h4 class="font-bold text-amber-900 text-sm">Le coin didactique : Pourquoi la règle des « adjectifs courts » est trompeuse ?</h4>
-                <p class="text-xs sm:text-sm text-amber-800 mt-1 leading-relaxed">
-                  On entend souvent : <em>« Les adjectifs courts se placent avant »</em>. Or, <strong>« court »</strong> a une seule syllabe, et pourtant on dit <em>« des cheveux <strong>courts</strong> »</em> (et jamais *courts cheveux*), <em>« un toit <strong>plat</strong> »</em> ou <em>« un ciel <strong>gris</strong> »</em> !<br>
-                  Plutôt que la taille syllabique, retenez qu'il s'agit d'<strong>adjectifs d'appréciation fréquente</strong> (taille, âge, valeur, beauté) mémorisés sous l'acronyme <strong>BAGS</strong> (<em>Beauty, Age, Goodness, Size</em>) ainsi que les ordinaux et numéraux.
+    <!-- Contenu Principal -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8 flex-grow w-full space-y-8">
+
+        <!-- 1. MÉMO VIDÉO & RÈGLE FONDAMENTALE -->
+        <section class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm">
+            <h2 class="text-lg sm:text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-oifBlue"></span>
+                1. Règle générale & Mémo
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <!-- Vidéo YouTube Shorts -->
+                <div class="lg:col-span-5 flex flex-col items-center">
+                    <div class="w-full max-w-[280px] aspect-[9/16] rounded-2xl overflow-hidden shadow-md border border-slate-200 bg-black">
+                        <iframe 
+                            class="w-full h-full"
+                            src="https://www.youtube-nocookie.com/embed/5qScUkGk2vo" 
+                            title="La place des adjectifs en français" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <span class="text-xs text-slate-500 mt-2 text-center">Règle mnémotechnique (BAGS / BANGS)</span>
+                </div>
+
+                <!-- Explication & Nuance didactique -->
+                <div class="lg:col-span-7 space-y-4">
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <h3 class="font-bold text-slate-900 mb-2">Règle standard en français :</h3>
+                        <p class="text-sm text-slate-700 leading-relaxed mb-2">
+                            En général, l'adjectif qualificatif se place <strong>APRÈS</strong> le nom :
+                        </p>
+                        <ul class="text-sm text-slate-600 list-disc list-inside space-y-1">
+                            <li>Une famille <strong>recomposée</strong>, un livre <strong>intéressant</strong></li>
+                            <li>La couleur et la forme : <em>une table <strong>ronde</strong>, un sac <strong>noir</strong></em></li>
+                            <li>La nationalité et la catégorie : <em>un passeport <strong>mexicain</strong></em></li>
+                        </ul>
+                    </div>
+
+                    <div class="p-4 bg-blue-50 rounded-xl border border-blue-200">
+                        <h3 class="font-bold text-oifBlue mb-1">Adjectifs placés AVANT le nom :</h3>
+                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                            Un groupe restreint d'adjectifs très fréquents se place avant le nom : 
+                            <strong>petit, grand, gros, beau, bon, mauvais, nouveau, vieux, jeune, joli, long, même, autre</strong>, ainsi que les <strong>adjectifs numéraux</strong> (<em>premier, deuxième, trois...</em>).
+                        </p>
+                    </div>
+
+                    <div class="p-4 bg-amber-50 rounded-xl border border-amber-200">
+                        <h4 class="text-xs font-bold text-amber-800 uppercase tracking-wide mb-1">Point de vigilance linguistique :</h4>
+                        <p class="text-xs text-amber-900 leading-relaxed">
+                            On dit souvent que les adjectifs « courts » vont devant, mais attention aux contre-exemples : 
+                            <em>court</em> ne comporte qu'une syllabe et se place pourtant après (<em>« des cheveux <strong>courts</strong> »</em>). 
+                            La place dépend de la fréquence et de la catégorie sémantique, non de la seule longueur du mot.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. TABLEAU COMPARATIF DES FORMES AVANT LE NOM -->
+        <section class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-oifViolet"></span>
+                    2. Tableau des formes (Masculin, Féminin, Pluriel)
+                </h2>
+                <span class="text-xs font-semibold px-2.5 py-1 bg-purple-50 text-oifViolet rounded-full border border-purple-100">
+                    Règle : <em>des</em> devient <em>de / d'</em> devant l'adjectif
+                </span>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs sm:text-sm border-collapse">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-700 border-b border-slate-200">
+                            <th class="p-3 font-semibold">Masculin singulier</th>
+                            <th class="p-3 font-semibold">Devant voyelle / « h » muet</th>
+                            <th class="p-3 font-semibold">Féminin singulier</th>
+                            <th class="p-3 font-semibold">Pluriel (avec <em>de / d'</em>)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-slate-700">
+                        <tr>
+                            <td class="p-3 font-medium">beau</td>
+                            <td class="p-3 text-oifRed font-semibold">bel (un bel arbre)</td>
+                            <td class="p-3">belle</td>
+                            <td class="p-3">de beaux / de belles</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-medium">nouveau</td>
+                            <td class="p-3 text-oifRed font-semibold">nouvel (un nouvel élève)</td>
+                            <td class="p-3">nouvelle</td>
+                            <td class="p-3">de nouveaux / de nouvelles</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-medium">vieux</td>
+                            <td class="p-3 text-oifRed font-semibold">vieil (un vieil ami)</td>
+                            <td class="p-3">vieille</td>
+                            <td class="p-3">de vieux / de vieilles</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-medium">bon / mauvais</td>
+                            <td class="p-3 text-slate-400">—</td>
+                            <td class="p-3">bonne / mauvaise</td>
+                            <td class="p-3">de bons / de mauvaises</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-medium">petit / grand / gros</td>
+                            <td class="p-3 text-slate-400">—</td>
+                            <td class="p-3">petite / grande / grosse</td>
+                            <td class="p-3">de petits / de grandes / de gros</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-medium">jeune / joli / long</td>
+                            <td class="p-3 text-slate-400">—</td>
+                            <td class="p-3">jeune / jolie / longue</td>
+                            <td class="p-3">de jeunes / de jolis / de longs</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-medium">autre / même</td>
+                            <td class="p-3 text-slate-400">—</td>
+                            <td class="p-3">autre / même</td>
+                            <td class="p-3">d'autres / les mêmes</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-medium">premier / dernier</td>
+                            <td class="p-3 text-slate-400">—</td>
+                            <td class="p-3">première / dernière</td>
+                            <td class="p-3">les premiers / les premières</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 3. PHONÉTIQUE & LIAISONS OBLIGATOIRES -->
+        <section class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm">
+            <div class="mb-4">
+                <h2 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-oifGreen"></span>
+                    3. Phonétique : Liaisons obligatoires avec l'adjectif antéposé
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-600 mt-1">
+                    Quand l'adjectif est placé <strong>avant</strong> un nom commençant par une voyelle ou un « h » muet, la liaison est <strong>obligatoire</strong> :
                 </p>
-              </div>
             </div>
-          </div>
 
-          <!-- Groupes d'adjectifs placés avant -->
-          <div>
-            <h4 class="font-bold text-slate-800 text-sm mb-3">La sélection essentielle (Inspire 2 + Complément didactique) :</h4>
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
-              <div class="bg-slate-100 p-2.5 rounded-lg">
-                <span class="font-bold text-teal-800 block">Taille & Dimension</span>
-                Petit • Grand • Gros • Long
-              </div>
-              <div class="bg-slate-100 p-2.5 rounded-lg">
-                <span class="font-bold text-teal-800 block">Âge & Temps</span>
-                Jeune • Vieux • Nouveau
-              </div>
-              <div class="bg-slate-100 p-2.5 rounded-lg">
-                <span class="font-bold text-teal-800 block">Qualité / Valeur</span>
-                Bon • Mauvais • Beau • Joli
-              </div>
-              <div class="bg-slate-100 p-2.5 rounded-lg">
-                <span class="font-bold text-teal-800 block">Ordre & Quantité</span>
-                Premier • Même • Autre • Chiffres
-              </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-4 rounded-xl border border-emerald-200 bg-emerald-50/50 space-y-3">
+                    <h3 class="font-bold text-xs uppercase tracking-wide text-oifGreen">Liaison en [z] (au pluriel)</h3>
+                    <div class="space-y-2 text-xs sm:text-sm">
+                        <div class="flex items-center justify-between p-2 bg-white rounded-lg border border-emerald-100">
+                            <span>De vieux<span class="text-emerald-600 font-bold">‿</span>amis / De nouveaux<span class="text-emerald-600 font-bold">‿</span>amis</span>
+                            <button onclick="playAudio('De vieux amis. De nouveaux amis.')" class="p-1.5 bg-emerald-100 hover:bg-emerald-200 rounded-lg text-emerald-800" title="Écouter">🔊</button>
+                        </div>
+                        <div class="flex items-center justify-between p-2 bg-white rounded-lg border border-emerald-100">
+                            <span>De bons<span class="text-emerald-600 font-bold">‿</span>étudiants / De mauvais<span class="text-emerald-600 font-bold">‿</span>étudiants</span>
+                            <button onclick="playAudio('De bons étudiants. De mauvais étudiants.')" class="p-1.5 bg-emerald-100 hover:bg-emerald-200 rounded-lg text-emerald-800" title="Écouter">🔊</button>
+                        </div>
+                        <div class="flex items-center justify-between p-2 bg-white rounded-lg border border-emerald-100">
+                            <span>De jeunes<span class="text-emerald-600 font-bold">‿</span>adultes / De jeunes<span class="text-emerald-600 font-bold">‿</span>élèves</span>
+                            <button onclick="playAudio('De jeunes adultes. De jeunes élèves.')" class="p-1.5 bg-emerald-100 hover:bg-emerald-200 rounded-lg text-emerald-800" title="Écouter">🔊</button>
+                        </div>
+                        <div class="flex items-center justify-between p-2 bg-white rounded-lg border border-emerald-100">
+                            <span>De beaux<span class="text-emerald-600 font-bold">‿</span>yeux / De petits<span class="text-emerald-600 font-bold">‿</span>yeux / De grands<span class="text-emerald-600 font-bold">‿</span>yeux</span>
+                            <button onclick="playAudio('De beaux yeux, de petits yeux, de grands yeux.')" class="p-1.5 bg-emerald-100 hover:bg-emerald-200 rounded-lg text-emerald-800" title="Écouter">🔊</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 rounded-xl border border-blue-200 bg-blue-50/50 space-y-3">
+                    <h3 class="font-bold text-xs uppercase tracking-wide text-oifBlue">Liaison en [t] (au singulier)</h3>
+                    <div class="space-y-2 text-xs sm:text-sm">
+                        <div class="flex items-center justify-between p-2 bg-white rounded-lg border border-blue-100">
+                            <span>Un grand<span class="text-oifBlue font-bold">‿</span>homme / Un petit<span class="text-oifBlue font-bold">‿</span>homme</span>
+                            <button onclick="playAudio('Un grand homme. Un petit homme.')" class="p-1.5 bg-blue-100 hover:bg-blue-200 rounded-lg text-oifBlue" title="Écouter">🔊</button>
+                        </div>
+                        <div class="flex items-center justify-between p-2 bg-white rounded-lg border border-blue-100">
+                            <span>Un grand<span class="text-oifBlue font-bold">‿</span>hommage / Un petit<span class="text-oifBlue font-bold">‿</span>hommage</span>
+                            <button onclick="playAudio('Un grand hommage. Un petit hommage.')" class="p-1.5 bg-blue-100 hover:bg-blue-200 rounded-lg text-oifBlue" title="Écouter">🔊</button>
+                        </div>
+                        <div class="flex items-center justify-between p-2 bg-white rounded-lg border border-blue-100">
+                            <span>Un grand<span class="text-oifBlue font-bold">‿</span>appartement / Un petit<span class="text-oifBlue font-bold">‿</span>appartement</span>
+                            <button onclick="playAudio('Un grand appartement. Un petit appartement.')" class="p-1.5 bg-blue-100 hover:bg-blue-200 rounded-lg text-oifBlue" title="Écouter">🔊</button>
+                        </div>
+                        <div class="flex items-center justify-between p-2 bg-white rounded-lg border border-blue-100">
+                            <span>Raconte-nous de jolies<span class="text-oifBlue font-bold">‿</span>histoires</span>
+                            <button onclick="playAudio('Raconte-nous de jolies histoires.')" class="p-1.5 bg-blue-100 hover:bg-blue-200 rounded-lg text-oifBlue" title="Écouter">🔊</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+        </section>
 
-        </div>
-      </div>
-    </section>
+        <!-- 4. ACTIVITÉ 1 : SYSTÉMATISATION (10 QUESTIONS / 20 POINTS) -->
+        <section class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm">
+            <div class="mb-4">
+                <span class="px-2.5 py-0.5 bg-blue-50 text-oifBlue font-bold text-xs rounded-full border border-blue-100">
+                    Atelier 1 • Pratique guidée
+                </span>
+                <h2 class="text-lg sm:text-xl font-bold text-slate-900 mt-2">
+                    Placez un adjectif avant le nom et un adjectif après le nom[cite: 2]
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-600 mt-1">
+                    Complétez chaque case avec l'adjectif qui convient selon les deux propositions entre parenthèses[cite: 2].
+                </p>
+            </div>
 
-    <!-- SECTION TABLEAU DE SYNTHÈSE (Basé sur Inspire 2 et les pages 2-3 du PDF) -->
-    <section id="tableau" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200">
-        <div>
-          <span class="text-xs font-bold text-teal-700 uppercase tracking-wider bg-teal-50 px-2 py-1 rounded">Récapitulatif morphologique</span>
-          <h3 class="text-2xl font-bold text-slate-800 mt-1">Tableau complet des adjectifs antéposés</h3>
-        </div>
-        <div class="text-xs bg-rose-50 text-rose-800 border border-rose-200 p-2.5 rounded-xl flex items-center gap-2">
-          <i class="fa-solid fa-triangle-exclamation text-rose-600"></i>
-          <span>Attention au pluriel : <strong>DES</strong> devient souvent <strong>DE / D'</strong> devant l'adjectif !</span>
-        </div>
-      </div>
+            <form id="form-act1" onsubmit="verifierActivite1(event)" class="space-y-4">
+                <div class="space-y-3" id="container-act1">
+                    <!-- Questions générées sans réponses apparentes -->
+                </div>
 
-      <!-- Table overflow container -->
-      <div class="overflow-x-auto mt-6">
-        <table class="w-full text-left text-sm border-collapse">
-          <thead>
-            <tr class="bg-slate-100 text-slate-700 uppercase text-xs tracking-wider">
-              <th class="py-3.5 px-4 font-bold rounded-l-lg">Masculin</th>
-              <th class="py-3.5 px-4 font-bold">Devant voyelle / « h »</th>
-              <th class="py-3.5 px-4 font-bold">Féminin</th>
-              <th class="py-3.5 px-4 font-bold">Pluriel (de / d')</th>
-              <th class="py-3.5 px-4 font-bold rounded-r-lg">Exemples contextuels</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-100 text-slate-700">
-            <!-- Beau -->
-            <tr class="hover:bg-slate-50/80 transition">
-              <td class="py-3 px-4 font-semibold text-teal-800">Beau</td>
-              <td class="py-3 px-4 font-semibold text-rose-600">Bel <span class="text-xs text-slate-400 font-normal">(un bel arbre)</span></td>
-              <td class="py-3 px-4">Belle</td>
-              <td class="py-3 px-4">De beaux / De belles</td>
-              <td class="py-3 px-4 text-xs text-slate-600">Un <em>beau</em> jour • Un <em>bel</em> homme • De <em>belles</em> fleurs</td>
-            </tr>
-            <!-- Nouveau -->
-            <tr class="hover:bg-slate-50/80 transition">
-              <td class="py-3 px-4 font-semibold text-teal-800">Nouveau</td>
-              <td class="py-3 px-4 font-semibold text-rose-600">Nouvel <span class="text-xs text-slate-400 font-normal">(un nouvel ami)</span></td>
-              <td class="py-3 px-4">Nouvelle</td>
-              <td class="py-3 px-4">De nouveaux / De nouvelles</td>
-              <td class="py-3 px-4 text-xs text-slate-600">Un <em>nouveau</em> projet • Une <em>nouvelle</em> vie</td>
-            </tr>
-            <!-- Vieux -->
-            <tr class="hover:bg-slate-50/80 transition">
-              <td class="py-3 px-4 font-semibold text-teal-800">Vieux</td>
-              <td class="py-3 px-4 font-semibold text-rose-600">Vieil <span class="text-xs text-slate-400 font-normal">(un vieil ami)</span></td>
-              <td class="py-3 px-4">Vieille</td>
-              <td class="py-3 px-4">De vieux / De vieilles</td>
-              <td class="py-3 px-4 text-xs text-slate-600">Un <em>vieux</em> quartier • De <em>vieux</em> livres</td>
-            </tr>
-            <!-- Bon / Mauvais -->
-            <tr class="hover:bg-slate-50/80 transition">
-              <td class="py-3 px-4 font-semibold text-teal-800">Bon / Mauvais</td>
-              <td class="py-3 px-4 text-slate-400">—</td>
-              <td class="py-3 px-4">Bonne / Mauvaise</td>
-              <td class="py-3 px-4">De bons / De mauvais(es)</td>
-              <td class="py-3 px-4 text-xs text-slate-600">Une <em>bonne</em> note • De <em>mauvaises</em> nouvelles</td>
-            </tr>
-            <!-- Petit / Grand / Gros -->
-            <tr class="hover:bg-slate-50/80 transition">
-              <td class="py-3 px-4 font-semibold text-teal-800">Petit / Grand / Gros</td>
-              <td class="py-3 px-4 text-slate-400">—</td>
-              <td class="py-3 px-4">Petite / Grande / Grosse</td>
-              <td class="py-3 px-4">De petits / grands / gros</td>
-              <td class="py-3 px-4 text-xs text-slate-600">Un <em>petit</em> choc • De <em>grandes</em> familles • Un <em>gros</em> sac</td>
-            </tr>
-            <!-- Jeune / Joli / Long -->
-            <tr class="hover:bg-slate-50/80 transition">
-              <td class="py-3 px-4 font-semibold text-teal-800">Jeune / Joli / Long</td>
-              <td class="py-3 px-4 text-slate-400">—</td>
-              <td class="py-3 px-4">Jeune / Jolie / Longue</td>
-              <td class="py-3 px-4">De jeunes / jolis / longs</td>
-              <td class="py-3 px-4 text-xs text-slate-600">Un <em>jeune</em> homme • Une <em>longue</em> journée</td>
-            </tr>
-            <!-- Autre / Même -->
-            <tr class="hover:bg-slate-50/80 transition">
-              <td class="py-3 px-4 font-semibold text-teal-800">Autre / Même</td>
-              <td class="py-3 px-4 text-slate-400">—</td>
-              <td class="py-3 px-4">Autre / Même</td>
-              <td class="py-3 px-4">D'autres / Les mêmes</td>
-              <td class="py-3 px-4 text-xs text-slate-600">D'<em>autres</em> chances • Les <em>mêmes</em> parents</td>
-            </tr>
-            <!-- Premier / Chiffres -->
-            <tr class="hover:bg-slate-50/80 transition">
-              <td class="py-3 px-4 font-semibold text-teal-800">Premier / Deuxième...</td>
-              <td class="py-3 px-4 text-slate-400">—</td>
-              <td class="py-3 px-4">Première / Deuxième</td>
-              <td class="py-3 px-4">Premiers / Premières</td>
-              <td class="py-3 px-4 text-xs text-slate-600">La <em>première</em> rencontre • Les <em>trois</em> enfants</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-slate-200">
+                    <div class="flex items-center gap-2 w-full sm:w-auto">
+                        <button type="submit" class="w-full sm:w-auto px-6 py-2.5 bg-oifBlue hover:bg-blue-700 text-white font-semibold text-sm rounded-xl transition-all shadow-sm">
+                            Vérifier l'atelier 1
+                        </button>
+                        <button type="button" onclick="reinitialiserActivite1()" class="w-full sm:w-auto px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm rounded-xl transition-all border border-slate-300">
+                            Recommencer
+                        </button>
+                    </div>
+                    <!-- Affichage score atelier 1 -->
+                    <div id="score-act1" class="text-sm font-bold px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl hidden text-center w-full sm:w-auto"></div>
+                </div>
+            </form>
+        </section>
 
-    <!-- SECTION PHONÉTIQUE & LIAISON OBLIGATOIRE (Dernière diapo du PDF) -->
-    <section id="phonetique" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
-        <div>
-          <span class="text-xs font-bold text-rose-600 uppercase tracking-wider bg-rose-50 px-2 py-1 rounded">
-            <i class="fa-solid fa-volume-high mr-1"></i> Phonétique & Prosodie A2
-          </span>
-          <h3 class="text-2xl font-bold text-slate-800 mt-1">Liaison obligatoire avec l'adjectif antéposé</h3>
-          <p class="text-sm text-slate-600 mt-1">
-            Lorsque l'adjectif placé avant se termine par une consonne muette et que le mot suivant commence par une <strong>voyelle</strong> ou un <strong>h muet</strong>, la liaison est <strong>indispensable</strong>.
-          </p>
-        </div>
-        <div class="flex items-center gap-3">
-          <span class="text-xs font-semibold px-3 py-1 bg-slate-100 rounded-full text-slate-700">
-            Écoute interactive intégrée
-          </span>
-        </div>
-      </div>
+        <!-- 5. ACTIVITÉ 2 : CHOIX MULTIPLE & PIÈGES A2 (6 QUESTIONS / 6 POINTS) -->
+        <section class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm">
+            <div class="mb-4">
+                <span class="px-2.5 py-0.5 bg-emerald-50 text-oifGreen font-bold text-xs rounded-full border border-emerald-100">
+                    Atelier 2 • Précision & Syntaxe
+                </span>
+                <h2 class="text-lg sm:text-xl font-bold text-slate-900 mt-2">
+                    Choisissez la formulation correcte
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-600 mt-1">
+                    Sélectionnez la seule proposition exacte parmi les trois options.
+                </p>
+            </div>
 
-      <!-- Liaison cards inspired by Page 4 of PDF -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        
-        <!-- Liaison en [z] au pluriel -->
-        <div class="border border-sky-200 bg-sky-50/50 rounded-xl p-4 sm:p-5 space-y-3">
-          <div class="flex items-center justify-between">
-            <h4 class="font-bold text-sky-900 flex items-center gap-2">
-              <span class="w-7 h-7 rounded-full bg-sky-600 text-white flex items-center justify-center text-xs">[z]</span>
-              Liaison au pluriel (s / x + voyelle)
-            </h4>
-            <span class="text-xs font-semibold text-sky-700 bg-sky-100 px-2 py-0.5 rounded">Très fréquente</span>
-          </div>
+            <form id="form-act2" onsubmit="verifierActivite2(event)" class="space-y-5">
+                <div class="space-y-4" id="container-act2">
+                    <!-- QCM généré par JS -->
+                </div>
 
-          <p class="text-xs text-slate-600">Le « s » ou le « x » muet du pluriel sonne obligatoirement comme un <strong>[z]</strong> :</p>
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-slate-200">
+                    <div class="flex items-center gap-2 w-full sm:w-auto">
+                        <button type="submit" class="w-full sm:w-auto px-6 py-2.5 bg-oifGreen hover:bg-emerald-700 text-white font-semibold text-sm rounded-xl transition-all shadow-sm">
+                            Valider l'atelier 2
+                        </button>
+                        <button type="button" onclick="reinitialiserActivite2()" class="w-full sm:w-auto px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm rounded-xl transition-all border border-slate-300">
+                            Recommencer
+                        </button>
+                    </div>
+                    <!-- Affichage score atelier 2 -->
+                    <div id="score-act2" class="text-sm font-bold px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl hidden text-center w-full sm:w-auto"></div>
+                </div>
+            </form>
+        </section>
 
-          <ul class="space-y-2 text-sm text-slate-800">
-            <li class="flex items-center justify-between bg-white p-2.5 rounded-lg border border-sky-100 shadow-sm">
-              <span>Voici mes nouveau<span class="text-sky-600 font-bold">x</span><span class="liaison-badge">‿[z]</span>amis → Ce sont de vieu<span class="text-sky-600 font-bold">x</span><span class="liaison-badge">‿[z]</span>amis</span>
-              <button onclick="speakText('Voici mes nouveaux amis. Ce sont de vieux amis.')" class="text-sky-600 hover:text-sky-800 p-1.5 rounded-md hover:bg-sky-50 transition" title="Écouter">
-                <i class="fa-solid fa-volume-high"></i>
-              </button>
-            </li>
-            <li class="flex items-center justify-between bg-white p-2.5 rounded-lg border border-sky-100 shadow-sm">
-              <span>Il y a de bon<span class="text-sky-600 font-bold">s</span><span class="liaison-badge">‿[z]</span>étudiants / de mauvai<span class="text-sky-600 font-bold">s</span><span class="liaison-badge">‿[z]</span>étudiants</span>
-              <button onclick="speakText('Il y a de bons étudiants et de mauvais étudiants.')" class="text-sky-600 hover:text-sky-800 p-1.5 rounded-md hover:bg-sky-50 transition" title="Écouter">
-                <i class="fa-solid fa-volume-high"></i>
-              </button>
-            </li>
-            <li class="flex items-center justify-between bg-white p-2.5 rounded-lg border border-sky-100 shadow-sm">
-              <span>De jeune<span class="text-sky-600 font-bold">s</span><span class="liaison-badge">‿[z]</span>adultes • De jeune<span class="text-sky-600 font-bold">s</span><span class="liaison-badge">‿[z]</span>élèves</span>
-              <button onclick="speakText('De jeunes adultes, de jeunes élèves')" class="text-sky-600 hover:text-sky-800 p-1.5 rounded-md hover:bg-sky-50 transition" title="Écouter">
-                <i class="fa-solid fa-volume-high"></i>
-              </button>
-            </li>
-            <li class="flex items-center justify-between bg-white p-2.5 rounded-lg border border-sky-100 shadow-sm">
-              <span>Raconte-nous de jolie<span class="text-sky-600 font-bold">s</span><span class="liaison-badge">‿[z]</span>histoires</span>
-              <button onclick="speakText('Raconte-nous de jolies histoires.')" class="text-sky-600 hover:text-sky-800 p-1.5 rounded-md hover:bg-sky-50 transition" title="Écouter">
-                <i class="fa-solid fa-volume-high"></i>
-              </button>
-            </li>
-            <li class="flex items-center justify-between bg-white p-2.5 rounded-lg border border-sky-100 shadow-sm">
-              <span>Tu as de beau<span class="text-sky-600 font-bold">x</span><span class="liaison-badge">‿[z]</span>yeux, de petit<span class="text-sky-600 font-bold">s</span><span class="liaison-badge">‿[z]</span>yeux, de grand<span class="text-sky-600 font-bold">s</span><span class="liaison-badge">‿[z]</span>yeux</span>
-              <button onclick="speakText('Tu as de beaux yeux, de petits yeux, de grands yeux.')" class="text-sky-600 hover:text-sky-800 p-1.5 rounded-md hover:bg-sky-50 transition" title="Écouter">
-                <i class="fa-solid fa-volume-high"></i>
-              </button>
-            </li>
-          </ul>
-        </div>
+        <!-- 6. BILAN GLOBAL DES ACTIVITÉS -->
+        <section id="bilan-global-card" class="bg-gradient-to-r from-slate-900 to-blue-950 rounded-2xl p-6 text-white shadow-lg border border-slate-800">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div>
+                    <span class="inline-block text-[10px] sm:text-xs font-bold uppercase tracking-wider text-blue-300 bg-blue-900/60 px-2.5 py-1 rounded-full border border-blue-700/50 mb-2">
+                        Bilan global du module
+                    </span>
+                    <h3 class="text-lg sm:text-xl font-bold">Score total de l'activité 12</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 mt-1">
+                        Validez les deux ateliers pour connaître votre résultat global et votre appréciation.
+                    </p>
+                </div>
+                <div class="flex items-center gap-4 bg-white/10 px-5 py-3 rounded-2xl border border-white/10 w-full sm:w-auto justify-center sm:justify-start">
+                    <div class="text-right">
+                        <div class="text-2xl sm:text-3xl font-extrabold text-white" id="global-score-text">-- / 26</div>
+                        <div class="text-[11px] text-blue-200 font-medium" id="global-percentage-text">Progression : 0%</div>
+                    </div>
+                </div>
+            </div>
 
-        <!-- Liaison en [t] au singulier (grand / petit) -->
-        <div class="border border-emerald-200 bg-emerald-50/50 rounded-xl p-4 sm:p-5 space-y-3">
-          <div class="flex items-center justify-between">
-            <h4 class="font-bold text-emerald-900 flex items-center gap-2">
-              <span class="w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs">[t]</span>
-              Liaison au singulier avec Grand & Petit
-            </h4>
-            <span class="text-xs font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">Spécifique</span>
-          </div>
+            <!-- Barre de progression -->
+            <div class="w-full bg-white/10 rounded-full h-2.5 mt-5 overflow-hidden">
+                <div id="global-progress-bar" class="bg-blue-400 h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
 
-          <p class="text-xs text-slate-600">Le « d » de <em>grand</em> se prononce <strong>[t]</strong> en liaison :</p>
+            <div id="global-feedback" class="mt-3 text-xs sm:text-sm text-slate-300 font-medium italic">
+                En attente de réalisation des deux ateliers...
+            </div>
+        </section>
 
-          <ul class="space-y-2 text-sm text-slate-800">
-            <li class="flex items-center justify-between bg-white p-2.5 rounded-lg border border-emerald-100 shadow-sm">
-              <span>Un gran<span class="text-emerald-700 font-bold">d</span><span class="liaison-badge">‿[t]</span>homme • Un peti<span class="text-emerald-700 font-bold">t</span><span class="liaison-badge">‿[t]</span>homme</span>
-              <button onclick="speakText('Un grand homme. Un petit homme.')" class="text-emerald-700 hover:text-emerald-900 p-1.5 rounded-md hover:bg-emerald-50 transition" title="Écouter">
-                <i class="fa-solid fa-volume-high"></i>
-              </button>
-            </li>
-            <li class="flex items-center justify-between bg-white p-2.5 rounded-lg border border-emerald-100 shadow-sm">
-              <span>Un gran<span class="text-emerald-700 font-bold">d</span><span class="liaison-badge">‿[t]</span>hommage • Un peti<span class="text-emerald-700 font-bold">t</span><span class="liaison-badge">‿[t]</span>hommage</span>
-              <button onclick="speakText('Un grand hommage. Un petit hommage.')" class="text-emerald-700 hover:text-emerald-900 p-1.5 rounded-md hover:bg-emerald-50 transition" title="Écouter">
-                <i class="fa-solid fa-volume-high"></i>
-              </button>
-            </li>
-            <li class="flex items-center justify-between bg-white p-2.5 rounded-lg border border-emerald-100 shadow-sm">
-              <span>Un gran<span class="text-emerald-700 font-bold">d</span><span class="liaison-badge">‿[t]</span>appartement • Un peti<span class="text-emerald-700 font-bold">t</span><span class="liaison-badge">‿[t]</span>appartement</span>
-              <button onclick="speakText('Un grand appartement. Un petit appartement.')" class="text-emerald-700 hover:text-emerald-900 p-1.5 rounded-md hover:bg-emerald-50 transition" title="Écouter">
-                <i class="fa-solid fa-volume-high"></i>
-              </button>
-            </li>
-            <li class="p-3 bg-white rounded-lg border border-emerald-100 text-xs text-slate-600 leading-relaxed">
-              <strong class="text-emerald-800">Rappel phonétique :</strong> 
-              En liaison, <em>« grand »</em> sonne exactement comme <em>« grande »</em> sans le « e » muet étiré (ex: [gʁɑ̃t‿ɔm]).
-            </li>
-          </ul>
-        </div>
+    </main>
 
-      </div>
-    </section>
-
-    <!-- SECTION ACTIVITÉS D'ENTRAÎNEMENT -->
-    <section id="exercices" class="space-y-8">
-      
-      <!-- ACTIVITÉ 1 : SYSTÉMATISATION (10 PHRASES) -->
-      <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-200">
-          <div>
-            <span class="text-xs font-bold text-teal-700 uppercase tracking-wider bg-teal-50 px-2 py-1 rounded">Activité 1 • Systématisation</span>
-            <h3 class="text-xl sm:text-2xl font-bold text-slate-800 mt-1">Placez un adjectif avant le nom et un adjectif après le nom</h3>
-            <p class="text-xs sm:text-sm text-slate-500 mt-0.5">
-              Sélectionnez pour chaque trou l'adjectif qui convient. <em>Exemple : J'ai un <strong class="text-teal-700">petit</strong> frère <strong class="text-rose-600">adorable</strong>.</em>
+    <!-- Pied de page -->
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 mt-auto">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col items-center justify-center text-center gap-1.5">
+            <p class="font-medium text-slate-700">Niveau 6 - Inspire 2, Unités 1 et 2 • Cours de Français Langue Étrangère</p>
+            <p class="text-slate-600 font-semibold">©Hachette FLE</p>
+            <p class="text-slate-400 text-[11px] mt-1 flex items-center justify-center gap-1.5">
+                <span>Conception pédagogique : Nadia Aguilar Neri</span>
+                <span>•</span>
+                <span class="inline-flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 text-blue-500 inline-block" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/>
+                    </svg>
+                    Développé via Gemini by Google
+                </span>
             </p>
-          </div>
-          <div id="score-box-1" class="hidden px-4 py-2 bg-slate-100 rounded-xl font-bold text-sm text-slate-700 text-center">
-            Score : <span id="score-1">0</span> / 10
-          </div>
         </div>
+    </footer>
 
-        <!-- Questions container -->
-        <div id="exercise1-container" class="space-y-4 text-sm sm:text-base">
-          <!-- Questions will be injected by JavaScript -->
-        </div>
+    <!-- Logique Interactive JS -->
+    <script>
+        // Suivi des scores globaux
+        let scoreAct1 = null;
+        let scoreAct2 = null;
+        const totalPointsAct1 = 20; // 10 phrases x 2 réponses
+        const totalPointsAct2 = 6;  // 6 questions QCM
+        const totalPointsGeneral = totalPointsAct1 + totalPointsAct2; // 26
 
-        <!-- Controls for exercise 1 -->
-        <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-slate-100">
-          <button onclick="checkExercise1()" class="px-6 py-2.5 bg-teal-inspire hover:bg-teal-dark text-white font-bold rounded-xl shadow-sm transition flex items-center gap-2">
-            <i class="fa-solid fa-check"></i> Valider mes réponses
-          </button>
-          <button onclick="resetExercise1()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition">
-            <i class="fa-solid fa-rotate-left mr-1"></i> Réinitialiser
-          </button>
-          <button onclick="showAnswersExercise1()" class="px-5 py-2.5 text-slate-500 hover:text-slate-800 text-sm underline ml-auto">
-            Afficher la correction
-          </button>
-        </div>
-      </div>
+        // Données Activité 1
+        const questionsAct1 = [
+            { id: '1', start: "C'est une", noun: "famille", end: ".", options: "belle / recomposée", correctBefore: "belle", correctAfter: "recomposée" },
+            { id: '2', start: "Nous avons de", noun: "relations", end: ".", options: "familiales / mauvaises", correctBefore: "mauvaises", correctAfter: "familiales" },
+            { id: '3', start: "J'ai vécu un", noun: "choc", end: ".", options: "gros / sentimental", correctBefore: "gros", correctAfter: "sentimental" },
+            { id: '4', start: "C'est sa", noun: "rencontre", end: ".", options: "première / amoureuse", correctBefore: "première", correctAfter: "amoureuse" },
+            { id: '5', start: "Ils sont dans une", noun: "situation", end: ".", options: "compliquée / nouvelle", correctBefore: "nouvelle", correctAfter: "compliquée" },
+            { id: '6', start: "Nous n'avons pas les", noun: "parents", end: ".", options: "biologiques / mêmes", correctBefore: "mêmes", correctAfter: "biologiques" },
+            { id: '7', start: "On commence une", noun: "aventure", end: ".", options: "passionnante / grande", correctBefore: "grande", correctAfter: "passionnante" },
+            { id: '8', start: "Elle habite dans un", noun: "appartement", end: ".", options: "ancien / joli", correctBefore: "joli", correctAfter: "ancien" },
+            { id: '9', start: "Ce sont de", noun: "choses", end: ".", options: "bonnes / simples", correctBefore: "bonnes", correctAfter: "simples" },
+            { id: '10', start: "Ils ont fait un", noun: "voyage", end: ".", options: "inoubliable / long", correctBefore: "long", correctAfter: "inoubliable" }
+        ];
 
-      <!-- ACTIVITÉ 2 : PRATIQUE & NUANCES A2 (10 QUESTIONS À CHOIX MULTIPLES) -->
-      <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-200">
-          <div>
-            <span class="text-xs font-bold text-rose-600 uppercase tracking-wider bg-rose-50 px-2 py-1 rounded">Activité 2 • Approfondissement</span>
-            <h3 class="text-xl sm:text-2xl font-bold text-slate-800 mt-1">Quiz de maîtrise : Position, Bel/Nouvel et DE vs DES</h3>
-            <p class="text-xs sm:text-sm text-slate-500 mt-0.5">
-              Choisissez la formulation correcte pour chaque situation.
-            </p>
-          </div>
-          <div id="score-box-2" class="hidden px-4 py-2 bg-slate-100 rounded-xl font-bold text-sm text-slate-700 text-center">
-            Score : <span id="score-2">0</span> / 10
-          </div>
-        </div>
-
-        <div id="exercise2-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <!-- Quiz injected via JavaScript -->
-        </div>
-
-        <!-- Controls for exercise 2 -->
-        <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-slate-100">
-          <button onclick="checkExercise2()" class="px-6 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl shadow-sm transition flex items-center gap-2">
-            <i class="fa-solid fa-check"></i> Valider le quiz
-          </button>
-          <button onclick="resetExercise2()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition">
-            <i class="fa-solid fa-rotate-left mr-1"></i> Réinitialiser
-          </button>
-        </div>
-      </div>
-
-    </section>
-
-  </main>
-
-  <footer class="bg-slate-900 text-slate-400 py-8 px-4 text-center text-xs mt-12">
-    <div class="max-w-4xl mx-auto space-y-2">
-      <p class="font-medium text-slate-300">Ressource pédagogique numérique • FLE Niveau A2</p>
-      <p>Inspirée de la progression pédagogique de <em>Inspire 2</em> (Hachette FLE) & document didactique de référence.</p>
-    </div>
-  </footer>
-
-  <script>
-    /* =========================================================================
-       1. SYNTHÈSE VOCALE (Web Speech API) POUR LA PHONÉTIQUE
-       ========================================================================= */
-    function speakText(text) {
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel(); // Stop ongoing speech
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'fr-FR';
-        utterance.rate = 0.88; // Slightly slower for language learners
-        window.speechSynthesis.speak(utterance);
-      } else {
-        alert("La synthèse vocale n'est pas prise en charge par ce navigateur.");
-      }
-    }
-
-    /* =========================================================================
-       2. DONNÉES DE L'EXERCICE 1 (Systématisation Inspire 2 enrichi à 10 items)
-       ========================================================================= */
-    const exercise1Data = [
-      {
-        id: "a",
-        pre: "C'est une",
-        noun: "famille",
-        post: ".",
-        options: ["belle", "recomposée"],
-        correctBefore: "belle",
-        correctAfter: "recomposée"
-      },
-      {
-        id: "b",
-        pre: "Nous avons de",
-        noun: "relations",
-        post: ".",
-        options: ["familiales", "mauvaises"],
-        correctBefore: "mauvaises",
-        correctAfter: "familiales"
-      },
-      {
-        id: "c",
-        pre: "J'ai vécu un",
-        noun: "choc",
-        post: ".",
-        options: ["gros", "sentimental"],
-        correctBefore: "gros",
-        correctAfter: "sentimental"
-      },
-      {
-        id: "d",
-        pre: "C'est sa",
-        noun: "rencontre",
-        post: ".",
-        options: ["première", "amoureuse"],
-        correctBefore: "première",
-        correctAfter: "amoureuse"
-      },
-      {
-        id: "e",
-        pre: "Ils sont dans une",
-        noun: "situation",
-        post: ".",
-        options: ["compliquée", "nouvelle"],
-        correctBefore: "nouvelle",
-        correctAfter: "compliquée"
-      },
-      {
-        id: "f",
-        pre: "Nous n'avons pas les",
-        noun: "parents",
-        post: ".",
-        options: ["biologiques", "mêmes"],
-        correctBefore: "mêmes",
-        correctAfter: "biologiques"
-      },
-      {
-        id: "g",
-        pre: "On commence une",
-        noun: "aventure",
-        post: ".",
-        options: ["passionnante", "grande"],
-        correctBefore: "grande",
-        correctAfter: "passionnante"
-      },
-      // Phrases 8 à 10 supplémentaires pour atteindre 10 items conformes au niveau A2
-      {
-        id: "h",
-        pre: "Il a emménagé dans un",
-        noun: "appartement",
-        post: ".",
-        options: ["joli", "parisien"],
-        correctBefore: "joli",
-        correctAfter: "parisien"
-      },
-      {
-        id: "i",
-        pre: "C'est un",
-        noun: "projet",
-        post: ".",
-        options: ["bon", "professionnel"],
-        correctBefore: "bon",
-        correctAfter: "professionnel"
-      },
-      {
-        id: "j",
-        pre: "J'ai rencontré un",
-        noun: "homme",
-        post: ".",
-        options: ["vieil", "sympathique"],
-        correctBefore: "vieil",
-        correctAfter: "sympathique"
-      }
-    ];
-
-    function renderExercise1() {
-      const container = document.getElementById('exercise1-container');
-      container.innerHTML = '';
-
-      exercise1Data.forEach((item, index) => {
-        const row = document.createElement('div');
-        row.className = "p-3.5 sm:p-4 rounded-xl border border-slate-200 bg-slate-50/60 flex flex-wrap items-center gap-2.5 transition";
-        row.id = `q1-row-${item.id}`;
-
-        const letter = String.fromCharCode(97 + index); // a, b, c...
-
-        row.innerHTML = `
-          <span class="font-bold text-teal-800 text-sm w-6">${letter}.</span>
-          <span class="text-slate-700">${item.pre}</span>
-          
-          <!-- Select BEFORE -->
-          <select id="q1-before-${item.id}" class="bg-white border border-slate-300 text-teal-900 font-medium text-xs sm:text-sm rounded-lg px-2.5 py-1.5 focus:ring-2 focus:ring-teal-500 focus:outline-none">
-            <option value="">[Adjectif avant]</option>
-            <option value="${item.options[0]}">${item.options[0]}</option>
-            <option value="${item.options[1]}">${item.options[1]}</option>
-          </select>
-
-          <!-- The Noun -->
-          <span class="font-bold text-slate-900 underline decoration-slate-300 decoration-2 underline-offset-4">${item.noun}</span>
-
-          <!-- Select AFTER -->
-          <select id="q1-after-${item.id}" class="bg-white border border-slate-300 text-rose-900 font-medium text-xs sm:text-sm rounded-lg px-2.5 py-1.5 focus:ring-2 focus:ring-rose-500 focus:outline-none">
-            <option value="">[Adjectif après]</option>
-            <option value="${item.options[0]}">${item.options[0]}</option>
-            <option value="${item.options[1]}">${item.options[1]}</option>
-          </select>
-
-          <span class="text-slate-700">${item.post}</span>
-
-          <span class="text-xs text-slate-400 font-mono ml-auto">(${item.options.join(' / ')})</span>
-          <span id="feedback-q1-${item.id}" class="ml-2 text-sm hidden font-bold"></span>
-        `;
-
-        container.appendChild(row);
-      });
-    }
-
-    function checkExercise1() {
-      let score = 0;
-
-      exercise1Data.forEach((item) => {
-        const selectBefore = document.getElementById(`q1-before-${item.id}`);
-        const selectAfter = document.getElementById(`q1-after-${item.id}`);
-        const feedback = document.getElementById(`feedback-q1-${item.id}`);
-        const row = document.getElementById(`q1-row-${item.id}`);
-
-        const valBefore = selectBefore.value;
-        const valAfter = selectAfter.value;
-
-        const isCorrect = (valBefore === item.correctBefore && valAfter === item.correctAfter);
-
-        feedback.classList.remove('hidden');
-        if (isCorrect) {
-          score++;
-          feedback.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600"></i>`;
-          row.classList.remove('border-rose-300', 'bg-rose-50/50');
-          row.classList.add('border-emerald-300', 'bg-emerald-50/50');
-        } else {
-          feedback.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-600"></i>`;
-          row.classList.remove('border-emerald-300', 'bg-emerald-50/50');
-          row.classList.add('border-rose-300', 'bg-rose-50/50');
+        function renderActivite1() {
+            const container = document.getElementById('container-act1');
+            container.innerHTML = questionsAct1.map((q, idx) => `
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm flex flex-col md:flex-row md:items-center justify-between gap-2">
+                    <div class="flex-grow flex flex-wrap items-center gap-1.5">
+                        <span class="font-bold text-slate-400 w-5">${String.fromCharCode(97 + idx)}.</span>
+                        <span>${q.start}</span>
+                        <input type="text" id="act1-before-${q.id}" autocomplete="off" placeholder="[...]" class="w-24 sm:w-28 px-2 py-1 bg-white border border-slate-300 rounded text-center text-slate-800 font-semibold focus:outline-none focus:border-oifBlue">
+                        <span class="font-bold text-slate-900">${q.noun}</span>
+                        <input type="text" id="act1-after-${q.id}" autocomplete="off" placeholder="[...]" class="w-28 sm:w-32 px-2 py-1 bg-white border border-slate-300 rounded text-center text-slate-800 font-semibold focus:outline-none focus:border-oifBlue">
+                        <span>${q.end}</span>
+                    </div>
+                    <span class="text-xs font-semibold text-slate-500 bg-white px-2 py-1 rounded border border-slate-200 self-start md:self-auto">
+                        (${q.options})
+                    </span>
+                </div>
+            `).join('');
         }
-      });
 
-      const scoreBox = document.getElementById('score-box-1');
-      const scoreVal = document.getElementById('score-1');
-      scoreVal.textContent = score;
-      scoreBox.classList.remove('hidden');
-    }
+        function verifierActivite1(e) {
+            e.preventDefault();
+            let score = 0;
 
-    function resetExercise1() {
-      exercise1Data.forEach((item) => {
-        document.getElementById(`q1-before-${item.id}`).value = "";
-        document.getElementById(`q1-after-${item.id}`).value = "";
-        const feedback = document.getElementById(`feedback-q1-${item.id}`);
-        feedback.classList.add('hidden');
-        const row = document.getElementById(`q1-row-${item.id}`);
-        row.classList.remove('border-emerald-300', 'bg-emerald-50/50', 'border-rose-300', 'bg-rose-50/50');
-      });
-      document.getElementById('score-box-1').classList.add('hidden');
-    }
+            questionsAct1.forEach(q => {
+                const inputBefore = document.getElementById(`act1-before-${q.id}`);
+                const inputAfter = document.getElementById(`act1-after-${q.id}`);
 
-    function showAnswersExercise1() {
-      exercise1Data.forEach((item) => {
-        document.getElementById(`q1-before-${item.id}`).value = item.correctBefore;
-        document.getElementById(`q1-after-${item.id}`).value = item.correctAfter;
-      });
-      checkExercise1();
-    }
+                const valBefore = inputBefore.value.trim().toLowerCase();
+                const valAfter = inputAfter.value.trim().toLowerCase();
 
-    /* =========================================================================
-       3. DONNÉES DE L'ACTIVITÉ 2 : QUIZ PRATIQUE & NUANCES A2 (10 ITEMS)
-       ========================================================================= */
-    const exercise2Data = [
-      {
-        q: "1. Choisissez la phrase correcte avec l'adjectif « petit » :",
-        options: [
-          "J'ai acheté un appartement petit.",
-          "J'ai acheté un petit appartement.",
-          "J'ai acheté une petite appartement."
-        ],
-        answer: 1,
-        explanation: "« Petit » fait partie des adjectifs de dimension qui se placent avant le nom."
-      },
-      {
-        q: "2. Devant un nom masculin commençant par une voyelle :",
-        options: [
-          "C'est un beau homme.",
-          "C'est un bel homme.",
-          "C'est un belle homme."
-        ],
-        answer: 1,
-        explanation: "« Beau » devient « bel » devant une voyelle ou un h muet (euphonie)."
-      },
-      {
-        q: "3. Laquelle de ces phrases respecte la transformation « des » en « de » ?",
-        options: [
-          "Elle a des beaux yeux.",
-          "Elle a de beaux yeux.",
-          "Elle a du beaux yeux."
-        ],
-        answer: 1,
-        explanation: "Devant un adjectif pluriel placé avant le nom, « des » devient obligatoirement « de »."
-      },
-      {
-        q: "4. Quelle phrase associe correctement deux adjectifs ? :",
-        options: [
-          "Il porte une rouge chemise belle.",
-          "Il porte une belle chemise rouge.",
-          "Il porte une belle rouge chemise."
-        ],
-        answer: 1,
-        explanation: "Les adjectifs de couleur se placent toujours APRÈS le nom."
-      },
-      {
-        q: "5. Forme correcte pour « nouveau » devant « étudiant » :",
-        options: [
-          "Un nouveau étudiant.",
-          "Un nouvel étudiant.",
-          "Un nouvelle étudiant."
-        ],
-        answer: 1,
-        explanation: "« Nouveau » devient « nouvel » devant une voyelle."
-      },
-      {
-        q: "6. Quelle phrase comporte une liaison en [z] obligatoire ?",
-        options: [
-          "Ce sont de vieux amis.",
-          "Ce sont de gentils garçons.",
-          "Ce sont des tables rondes."
-        ],
-        answer: 0,
-        explanation: "« vieux amis » : liaison obligatoire en [z] entre le pluriel et la voyelle."
-      },
-      {
-        q: "7. Les adjectifs numéraux et ordinaux se placent :",
-        options: [
-          "Toujours après le nom (ex: La page deuxième)",
-          "Généralement avant le nom (ex: Le premier jour / trois personnes)",
-          "Au choix sans règle particulière"
-        ],
-        answer: 1,
-        explanation: "Premier, deuxième, deux, trois... se placent avant le nom."
-      },
-      {
-        q: "8. Pourquoi « des cheveux courts » a l'adjectif après ?",
-        options: [
-          "Parce que 'court' est une exception phonétique.",
-          "Parce que la longueur/coupe physique se place après, malgré le fait que 'court' soit un mot court.",
-          "C'est une erreur de la langue orale."
-        ],
-        answer: 1,
-        explanation: "La règle dite des 'adjectifs courts' est simpliste. 'Court' qualifie une forme/mesure descriptive et se place après."
-      },
-      {
-        q: "9. Quelle phrase associe correctement deux adjectifs ?",
-        options: [
-          "C'est une grande maison blanche.",
-          "C'est une blanche maison grande.",
-          "C'est une maison grande et blanche."
-        ],
-        answer: 0,
-        explanation: "« Grande » (dimension) se place avant ; « blanche » (couleur) se place après."
-      },
-      {
-        q: "10. Devant « amie » au féminin, on dit :",
-        options: [
-          "Une vieille amie.",
-          "Une vieil amie.",
-          "Une vieux amie."
-        ],
-        answer: 0,
-        explanation: "Au féminin régulier, c'est toujours « vieille » (ex: une vieille amie)."
-      }
-    ];
+                if (valBefore === q.correctBefore.toLowerCase()) {
+                    inputBefore.className = "w-24 sm:w-28 px-2 py-1 bg-emerald-50 border-2 border-emerald-500 rounded text-center font-bold text-emerald-800";
+                    score++;
+                } else {
+                    inputBefore.className = "w-24 sm:w-28 px-2 py-1 bg-rose-50 border-2 border-rose-500 rounded text-center font-bold text-rose-800";
+                }
 
-    function renderExercise2() {
-      const container = document.getElementById('exercise2-container');
-      container.innerHTML = '';
+                if (valAfter === q.correctAfter.toLowerCase()) {
+                    inputAfter.className = "w-28 sm:w-32 px-2 py-1 bg-emerald-50 border-2 border-emerald-500 rounded text-center font-bold text-emerald-800";
+                    score++;
+                } else {
+                    inputAfter.className = "w-28 sm:w-32 px-2 py-1 bg-rose-50 border-2 border-rose-500 rounded text-center font-bold text-rose-800";
+                }
+            });
 
-      exercise2Data.forEach((item, index) => {
-        const card = document.createElement('div');
-        card.className = "bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col justify-between space-y-3";
-        card.id = `q2-card-${index}`;
-
-        let optionsHtml = item.options.map((opt, optIndex) => `
-          <label class="flex items-start gap-2.5 p-2 rounded-lg hover:bg-white cursor-pointer transition text-xs sm:text-sm text-slate-700">
-            <input type="radio" name="q2-${index}" value="${optIndex}" class="mt-0.5 text-rose-600 focus:ring-rose-500">
-            <span>${opt}</span>
-          </label>
-        `).join('');
-
-        card.innerHTML = `
-          <div>
-            <h4 class="font-bold text-slate-800 text-sm mb-2">${item.q}</h4>
-            <div class="space-y-1">${optionsHtml}</div>
-          </div>
-          <div id="q2-feedback-${index}" class="text-xs p-2.5 rounded-lg hidden font-medium"></div>
-        `;
-
-        container.appendChild(card);
-      });
-    }
-
-    function checkExercise2() {
-      let score = 0;
-
-      exercise2Data.forEach((item, index) => {
-        const card = document.getElementById(`q2-card-${index}`);
-        const feedback = document.getElementById(`q2-feedback-${index}`);
-        const selected = document.querySelector(`input[name="q2-${index}"]:checked`);
-
-        feedback.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-rose-100', 'text-rose-800');
-
-        if (selected && parseInt(selected.value, 10) === item.answer) {
-          score++;
-          card.classList.remove('border-rose-300');
-          card.classList.add('border-emerald-300');
-          feedback.classList.add('bg-emerald-100', 'text-emerald-800');
-          feedback.innerHTML = `<i class="fa-solid fa-check mr-1"></i> <strong>Bravo !</strong> ${item.explanation}`;
-        } else {
-          card.classList.remove('border-emerald-300');
-          card.classList.add('border-rose-300');
-          feedback.classList.add('bg-rose-100', 'text-rose-800');
-          feedback.innerHTML = `<i class="fa-solid fa-xmark mr-1"></i> <strong>Réponse attendue :</strong> ${item.options[item.answer]}<br><span class="text-slate-600">${item.explanation}</span>`;
+            scoreAct1 = score;
+            const scoreDisplay = document.getElementById('score-act1');
+            scoreDisplay.classList.remove('hidden');
+            scoreDisplay.innerHTML = `Score Atelier 1 : <span class="${score >= 16 ? 'text-emerald-600' : 'text-amber-600'}">${score} / ${totalPointsAct1}</span> (${Math.round((score / totalPointsAct1) * 100)}%)`;
+            
+            actualiserScoreGlobal();
         }
-      });
 
-      const scoreBox = document.getElementById('score-box-2');
-      const scoreVal = document.getElementById('score-2');
-      scoreVal.textContent = score;
-      scoreBox.classList.remove('hidden');
-    }
+        function reinitialiserActivite1() {
+            document.getElementById('form-act1').reset();
+            renderActivite1();
+            scoreAct1 = null;
+            const scoreDisplay = document.getElementById('score-act1');
+            scoreDisplay.classList.add('hidden');
+            actualiserScoreGlobal();
+        }
 
-    function resetExercise2() {
-      exercise2Data.forEach((item, index) => {
-        const checked = document.querySelector(`input[name="q2-${index}"]:checked`);
-        if (checked) checked.checked = false;
-        const card = document.getElementById(`q2-card-${index}`);
-        card.classList.remove('border-emerald-300', 'border-rose-300');
-        const feedback = document.getElementById(`q2-feedback-${index}`);
-        feedback.classList.add('hidden');
-      });
-      document.getElementById('score-box-2').classList.add('hidden');
-    }
+        // Données Activité 2 (QCM)
+        const questionsAct2 = [
+            {
+                q: "1. Quelle phrase utilise correctement la forme euphonique masculine ?",
+                options: ["C'est un beau arbre.", "C'est un bel arbre.", "C'est un beau homme."],
+                correct: 1
+            },
+            {
+                q: "2. Choisissez la transformation correcte au pluriel : « un nouveau projet »",
+                options: ["des nouveaux projets", "de nouveaux projets", "d'un nouveaux projets"],
+                correct: 1
+            },
+            {
+                q: "3. Quelle phrase place correctement l'adjectif de couleur ?",
+                options: ["Elle a acheté une rouge robe.", "Elle a acheté une robe rouge.", "Elle a acheté rouge une robe."],
+                correct: 1
+            },
+            {
+                q: "4. Quelle phrase associe correctement la forme euphonique de « vieux » ?",
+                options: ["C'est un vieux ami.", "C'est un vieil ami.", "C'est un viel ami."],
+                correct: 1
+            },
+            {
+                q: "5. Choisissez l'ordre correct pour les adjectifs numéraux / ordinaux :",
+                options: ["C'est la première fois.", "C'est la fois première.", "C'est première fois."],
+                correct: 0
+            },
+            {
+                q: "6. Transformez au pluriel : « un grand appartement »",
+                options: ["des grands appartements", "de grands appartements", "de grand appartements"],
+                correct: 1
+            }
+        ];
 
-    /* Initialize on load */
-    window.onload = function() {
-      renderExercise1();
-      renderExercise2();
-    };
-  </script>
+        function renderActivite2() {
+            const container = document.getElementById('container-act2');
+            container.innerHTML = questionsAct2.map((item, qIdx) => `
+                <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm" id="card-act2-${qIdx}">
+                    <p class="font-semibold text-slate-900 mb-2">${item.q}</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        ${item.options.map((opt, optIdx) => `
+                            <label class="flex items-center gap-2 p-2 bg-white rounded-lg border border-slate-200 cursor-pointer hover:border-emerald-300">
+                                <input type="radio" name="q2-${qIdx}" value="${optIdx}" class="text-oifGreen focus:ring-emerald-400">
+                                <span>${opt}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function verifierActivite2(e) {
+            e.preventDefault();
+            let score = 0;
+
+            questionsAct2.forEach((item, qIdx) => {
+                const selected = document.querySelector(`input[name="q2-${qIdx}"]:checked`);
+                const card = document.getElementById(`card-act2-${qIdx}`);
+
+                if (selected && parseInt(selected.value) === item.correct) {
+                    card.className = "p-4 bg-emerald-50/70 rounded-xl border border-emerald-400 text-xs sm:text-sm";
+                    score++;
+                } else {
+                    card.className = "p-4 bg-rose-50/70 rounded-xl border border-rose-400 text-xs sm:text-sm";
+                }
+            });
+
+            scoreAct2 = score;
+            const scoreDisplay = document.getElementById('score-act2');
+            scoreDisplay.classList.remove('hidden');
+            scoreDisplay.innerHTML = `Score Atelier 2 : <span class="${score >= 4 ? 'text-emerald-600' : 'text-amber-600'}">${score} / ${totalPointsAct2}</span> (${Math.round((score / totalPointsAct2) * 100)}%)`;
+
+            actualiserScoreGlobal();
+        }
+
+        function reinitialiserActivite2() {
+            renderActivite2();
+            scoreAct2 = null;
+            const scoreDisplay = document.getElementById('score-act2');
+            scoreDisplay.classList.add('hidden');
+            actualiserScoreGlobal();
+        }
+
+        // Calcul et actualisation du Bilan Global
+        function actualiserScoreGlobal() {
+            const globalText = document.getElementById('global-score-text');
+            const globalPerc = document.getElementById('global-percentage-text');
+            const progressBar = document.getElementById('global-progress-bar');
+            const feedback = document.getElementById('global-feedback');
+
+            const current1 = scoreAct1 !== null ? scoreAct1 : 0;
+            const current2 = scoreAct2 !== null ? scoreAct2 : 0;
+            const totalScore = current1 + current2;
+
+            if (scoreAct1 === null && scoreAct2 === null) {
+                globalText.textContent = `-- / ${totalPointsGeneral}`;
+                globalPerc.textContent = "Progression : 0%";
+                progressBar.style.width = "0%";
+                progressBar.className = "bg-blue-400 h-2.5 rounded-full transition-all duration-500";
+                feedback.textContent = "En attente de réalisation des deux ateliers...";
+                feedback.className = "mt-3 text-xs sm:text-sm text-slate-300 font-medium italic";
+                return;
+            }
+
+            const percentage = Math.round((totalScore / totalPointsGeneral) * 100);
+            globalText.textContent = `${totalScore} / ${totalPointsGeneral}`;
+            globalPerc.textContent = `Résultat global : ${percentage}%`;
+            progressBar.style.width = `${percentage}%`;
+
+            if (percentage >= 80) {
+                progressBar.className = "bg-emerald-400 h-2.5 rounded-full transition-all duration-500";
+                feedback.innerHTML = "🎉 <strong>Bravo !</strong> Excellente maîtrise de la place des adjectifs et des accords.";
+                feedback.className = "mt-3 text-xs sm:text-sm text-emerald-300 font-medium";
+            } else if (percentage >= 50) {
+                progressBar.className = "bg-amber-400 h-2.5 rounded-full transition-all duration-500";
+                feedback.innerHTML = "👍 <strong>Bon travail !</strong> Révisez les formes euphoniques (<em>bel, vieil, nouvel</em>) et la règle de <em>des &rarr; de</em>.";
+                feedback.className = "mt-3 text-xs sm:text-sm text-amber-300 font-medium";
+            } else {
+                progressBar.className = "bg-rose-400 h-2.5 rounded-full transition-all duration-500";
+                feedback.innerHTML = "⚠️ <strong>À revoir :</strong> Reprenez le tableau explicatif au début de la page et réessayez les ateliers.";
+                feedback.className = "mt-3 text-xs sm:text-sm text-rose-300 font-medium";
+            }
+        }
+
+        // Synthèse Vocale Web Speech API
+        function playAudio(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'fr-FR';
+                utterance.rate = 0.85;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("La synthèse vocale n'est pas prise en charge sur ce navigateur.");
+            }
+        }
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', () => {
+            renderActivite1();
+            renderActivite2();
+        });
+    </script>
 </body>
 </html>
