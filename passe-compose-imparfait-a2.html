@@ -23,9 +23,9 @@
     --coral-050:rgba(218,41,28,0.10);
     --teal-600:#702082;
     --teal-050:rgba(112,32,130,0.10);
-    --bg:#F8FAFC;
+    --bg:#FFFFFF;
     --surface:#FFFFFF;
-    --surface-2:#F1F5F9;
+    --surface-2:#F7F7F8;
     --ink:#1E293B;
     --ink-soft:#56677A;
     --border:rgba(30,41,59,0.12);
@@ -158,9 +158,9 @@
   /* ===== Photo/Film mnemonic ===== */
   .mnemonic{display:grid; grid-template-columns:1fr 1fr; gap:.9rem;}
   @media (max-width:520px){.mnemonic{grid-template-columns:1fr;}}
-  .mnem-box{border-radius:12px; padding:1rem; border:2px solid;}
-  .mnem-box.pc{background:var(--coral-050); border-color:var(--coral-600);}
-  .mnem-box.imp{background:var(--teal-050); border-color:var(--teal-600);}
+  .mnem-box{border-radius:12px; padding:1rem; border:2px solid; background:var(--surface);}
+  .mnem-box.pc{border-color:var(--coral-600);}
+  .mnem-box.imp{border-color:var(--teal-600);}
   .mnem-tag{
     display:inline-block; font-size:.68rem; font-weight:700; letter-spacing:.08em;
     text-transform:uppercase; padding:.2rem .55rem; border-radius:6px; margin-bottom:.5rem;
@@ -177,16 +177,16 @@
     border:1px solid var(--border); border-radius:10px; overflow:hidden;
   }
   @media (max-width:560px){.pair-row{grid-template-columns:1fr;}}
-  .pair-cell{padding:.75rem .85rem; font-size:.88rem; line-height:1.45;}
-  .pair-cell.imp{background:var(--teal-050); border-right:1px solid var(--border);}
+  .pair-cell{padding:.75rem .85rem; font-size:.88rem; line-height:1.45; background:var(--surface);}
+  .pair-cell.imp{border-left:4px solid var(--teal-600); border-right:1px solid var(--border);}
   @media (max-width:560px){.pair-cell.imp{border-right:none; border-bottom:1px solid var(--border);}}
-  .pair-cell.pc{background:var(--coral-050);}
+  .pair-cell.pc{border-left:4px solid var(--coral-600);}
   .exp{font-weight:700; padding:.03rem .35rem; border-radius:4px; white-space:nowrap;}
   .exp.imp{background:var(--teal-600); color:#fff;}
   .exp.pc{background:var(--coral-600); color:#fff;}
 
   /* ===== Callout (synonymes) ===== */
-  .callout{border:2px solid var(--coral-600); background:var(--coral-050); border-radius:12px; padding:1rem; margin-top:1rem;}
+  .callout{border:2px solid var(--coral-600); background:var(--surface); border-radius:12px; padding:1rem; margin-top:1rem;}
   .callout h4{margin:0 0 .5rem; font-size:.74rem; text-transform:uppercase; letter-spacing:.07em; color:var(--coral-600); font-weight:700;}
   .callout .syn-row{display:flex; gap:.4rem; flex-wrap:wrap; margin-bottom:.6rem;}
   .callout p{margin:.3rem 0; font-size:.88rem; line-height:1.5; color:var(--ink);}
