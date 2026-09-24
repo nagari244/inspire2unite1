@@ -9,75 +9,78 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --blue-900:#3A5468;
-    --blue-700:#5E7F91;
-    --blue-050:#E9EFEF;
-    --header-a:#4A6572;
-    --header-b:#7C9B97;
-    --green-700:#146C43;
-    --green-050:#E4F3EB;
-    --gold-500:#DA9A1F;
-    --gold-050:#FBF0DA;
-    --coral-600:#C94A38;
-    --coral-050:#FAE7E2;
-    --teal-600:#1B6E7D;
-    --teal-050:#E1F0F1;
-    --bg:#F6F2E8;
+    --blue-900:#0085CA;
+    --blue-700:#3AA6D9;
+    --blue-050:rgba(0,133,202,0.12);
+    --header-a:#0085CA;
+    --header-mid:#702082;
+    --header-b:#0085CA;
+    --green-700:#00A859;
+    --green-050:rgba(0,168,89,0.12);
+    --gold-500:#FFB81C;
+    --gold-050:rgba(255,184,28,0.18);
+    --coral-600:#DA291C;
+    --coral-050:rgba(218,41,28,0.10);
+    --teal-600:#702082;
+    --teal-050:rgba(112,32,130,0.10);
+    --bg:#F8FAFC;
     --surface:#FFFFFF;
-    --surface-2:#FBF7EE;
-    --ink:#182430;
-    --ink-soft:#51606D;
-    --border:rgba(58,84,104,0.14);
-    --shadow:0 10px 28px rgba(58,84,104,0.09);
-    --explain-color:#6b4f10;
+    --surface-2:#F1F5F9;
+    --ink:#1E293B;
+    --ink-soft:#56677A;
+    --border:rgba(30,41,59,0.12);
+    --shadow:0 10px 28px rgba(30,41,59,0.08);
+    --explain-color:#7A5000;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --blue-900:#9DC2C9;
-      --blue-700:#6FA1AB;
-      --blue-050:rgba(111,161,171,0.14);
-      --header-a:#1E3038;
-      --header-b:#2B4A4E;
-      --green-700:#4FCB8E;
-      --green-050:rgba(79,203,142,0.14);
-      --gold-500:#F0BB4E;
-      --gold-050:rgba(240,187,78,0.16);
-      --coral-600:#F08B78;
-      --coral-050:rgba(240,139,120,0.15);
-      --teal-600:#5FC2D1;
-      --teal-050:rgba(95,194,209,0.15);
-      --bg:#0C1D2E;
-      --surface:#122A40;
-      --surface-2:#0F2337;
+      --blue-900:#4DB8E8;
+      --blue-700:#8FCFEF;
+      --blue-050:rgba(77,184,232,0.16);
+      --header-a:#0B3A52;
+      --header-mid:#3B1450;
+      --header-b:#0B3A52;
+      --green-700:#34D399;
+      --green-050:rgba(52,211,153,0.14);
+      --gold-500:#FFCB4D;
+      --gold-050:rgba(255,203,77,0.18);
+      --coral-600:#FF8A75;
+      --coral-050:rgba(255,138,117,0.15);
+      --teal-600:#C084E0;
+      --teal-050:rgba(192,132,224,0.15);
+      --bg:#0F1B2A;
+      --surface:#16273B;
+      --surface-2:#12212F;
       --ink:#EAF1F8;
       --ink-soft:#A9BBCB;
       --border:rgba(234,241,248,0.14);
       --shadow:0 10px 28px rgba(0,0,0,0.35);
-      --explain-color:#f0d9a3;
+      --explain-color:#FFD98A;
     }
   }
   :root[data-theme="dark"]{
-    --blue-900:#9DC2C9;
-    --blue-700:#6FA1AB;
-    --blue-050:rgba(111,161,171,0.14);
-    --header-a:#1E3038;
-    --header-b:#2B4A4E;
-    --green-700:#4FCB8E;
-    --green-050:rgba(79,203,142,0.14);
-    --gold-500:#F0BB4E;
-    --gold-050:rgba(240,187,78,0.16);
-    --coral-600:#F08B78;
-    --coral-050:rgba(240,139,120,0.15);
-    --teal-600:#5FC2D1;
-    --teal-050:rgba(95,194,209,0.15);
-    --bg:#0C1D2E;
-    --surface:#122A40;
-    --surface-2:#0F2337;
+    --blue-900:#4DB8E8;
+    --blue-700:#8FCFEF;
+    --blue-050:rgba(77,184,232,0.16);
+    --header-a:#0B3A52;
+    --header-mid:#3B1450;
+    --header-b:#0B3A52;
+    --green-700:#34D399;
+    --green-050:rgba(52,211,153,0.14);
+    --gold-500:#FFCB4D;
+    --gold-050:rgba(255,203,77,0.18);
+    --coral-600:#FF8A75;
+    --coral-050:rgba(255,138,117,0.15);
+    --teal-600:#C084E0;
+    --teal-050:rgba(192,132,224,0.15);
+    --bg:#0F1B2A;
+    --surface:#16273B;
+    --surface-2:#12212F;
     --ink:#EAF1F8;
     --ink-soft:#A9BBCB;
     --border:rgba(234,241,248,0.14);
     --shadow:0 10px 28px rgba(0,0,0,0.35);
-    --explain-color:#f0d9a3;
+    --explain-color:#FFD98A;
   }
 
   *{box-sizing:border-box;}
@@ -94,7 +97,7 @@
 
   /* ===== HEADER ===== */
   header.top{
-    background:linear-gradient(180deg, var(--header-a) 0%, var(--header-b) 100%);
+    background:linear-gradient(115deg, var(--header-a) 0%, var(--header-mid) 55%, var(--header-b) 100%);
     color:#F5F8FC;
     padding:28px 16px 22px;
     position:relative;
