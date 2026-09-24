@@ -6,324 +6,785 @@
 <title>Passé composé ou imparfait ? — Niveau A2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --blue-900:#0085CA;
-    --blue-700:#3AA6D9;
-    --blue-050:rgba(0,133,202,0.12);
-    --header-a:#0085CA;
-    --header-mid:#702082;
-    --header-b:#0085CA;
-    --green-700:#00A859;
-    --green-050:rgba(0,168,89,0.12);
-    --gold-500:#FFB81C;
-    --gold-050:rgba(255,184,28,0.18);
-    --coral-600:#DA291C;
-    --coral-050:rgba(218,41,28,0.10);
-    --teal-600:#702082;
-    --teal-050:rgba(112,32,130,0.10);
-    --bg:#FFFFFF;
-    --surface:#FFFFFF;
-    --surface-2:#F7F7F8;
-    --ink:#1E293B;
-    --ink-soft:#56677A;
-    --border:rgba(30,41,59,0.12);
-    --shadow:0 10px 28px rgba(30,41,59,0.08);
-    --explain-color:#7A5000;
+  /* ==========================================================================
+     PALETTE OFFICIELLE OIF (Identique à pass_compos_auxiliaire_avoir.html)
+     - Bleu OIF : #0085CA
+     - Or OIF   : #FFB81C
+     - Vert OIF : #00A859
+     - Rouge OIF: #DA291C  (Passé Composé = action ponctuelle / coupure)
+     - Violet OIF: #702082 (Imparfait = habitude / décor / continuité)
+     - Fond     : #F8FAFC  (Slate-50 propre et lisible)
+     ========================================================================== */
+  :root {
+    /* Couleurs de la Francophonie (OIF) */
+    --oif-blue: #0085CA;
+    --oif-blue-soft: #3AA6D9;
+    --oif-gold: #FFB81C;
+    --oif-green: #00A859;
+    --oif-red: #DA291C;
+    --oif-purple: #702082;
+    --oif-dark: #1E293B;
+    --oif-light: #F8FAFC;
+
+    /* Structure & navigation */
+    --primary-main: var(--oif-blue);
+    --primary-soft: var(--oif-blue-soft);
+    --primary-050: rgba(0, 133, 202, 0.10);
+
+    /* Passé Composé : Rouge OIF #DA291C (Action nette, rupture) */
+    --pc-color: var(--oif-red);
+    --pc-bg: #FEF2F2;
+    --pc-border: #FCA5A5;
+    --pc-strong: #B91C1C;
+
+    /* Imparfait : Violet OIF #702082 (Décor, durée, habitudes) */
+    --imp-color: var(--oif-purple);
+    --imp-bg: #FDF4FF;
+    --imp-border: #F0ABFC;
+    --imp-strong: #6B21A8;
+
+    /* Feedback & Notes pédagogiques */
+    --green-success: var(--oif-green);
+    --green-bg: #ECFDF5;
+    --green-border: #A7F3D0;
+    --amber-gold: var(--oif-gold);
+    --amber-bg: #FFFBEB;
+    --amber-border: #FDE68A;
+    --explain-color: #92400E;
+
+    /* Toile de fond & surfaces (Slate-50 & Blanc) */
+    --bg: #F8FAFC;
+    --surface: #FFFFFF;
+    --surface-2: #F1F5F9;
+    --surface-hover: #E2E8F0;
+    --ink: #1E293B;
+    --ink-soft: #64748B;
+    --border: #E2E8F0;
+    --shadow: 0 4px 18px rgba(15, 23, 42, 0.06);
   }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --blue-900:#4DB8E8;
-      --blue-700:#8FCFEF;
-      --blue-050:rgba(77,184,232,0.16);
-      --header-a:#0B3A52;
-      --header-mid:#3B1450;
-      --header-b:#0B3A52;
-      --green-700:#34D399;
-      --green-050:rgba(52,211,153,0.14);
-      --gold-500:#FFCB4D;
-      --gold-050:rgba(255,203,77,0.18);
-      --coral-600:#FF8A75;
-      --coral-050:rgba(255,138,117,0.15);
-      --teal-600:#C084E0;
-      --teal-050:rgba(192,132,224,0.15);
-      --bg:#0F1B2A;
-      --surface:#16273B;
-      --surface-2:#12212F;
-      --ink:#EAF1F8;
-      --ink-soft:#A9BBCB;
-      --border:rgba(234,241,248,0.14);
-      --shadow:0 10px 28px rgba(0,0,0,0.35);
-      --explain-color:#FFD98A;
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --primary-main: #3AA6D9;
+      --primary-soft: #7DD3FC;
+      --primary-050: rgba(58, 166, 217, 0.16);
+
+      --pc-color: #F87171;
+      --pc-bg: rgba(218, 41, 28, 0.18);
+      --pc-border: #EF4444;
+      --pc-strong: #FCA5A5;
+
+      --imp-color: #C084FC;
+      --imp-bg: rgba(112, 32, 130, 0.22);
+      --imp-border: #A855F7;
+      --imp-strong: #E9D5FF;
+
+      --green-success: #34D399;
+      --green-bg: rgba(0, 168, 89, 0.16);
+      --green-border: #059669;
+      --amber-gold: #FCD34D;
+      --amber-bg: rgba(255, 184, 28, 0.16);
+      --amber-border: #D97706;
+      --explain-color: #FDE68A;
+
+      --bg: #0F172A;
+      --surface: #1E293B;
+      --surface-2: #162032;
+      --surface-hover: #293548;
+      --ink: #F8FAFC;
+      --ink-soft: #94A3B8;
+      --border: #334155;
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
     }
   }
-  :root[data-theme="dark"]{
-    --blue-900:#4DB8E8;
-    --blue-700:#8FCFEF;
-    --blue-050:rgba(77,184,232,0.16);
-    --header-a:#0B3A52;
-    --header-mid:#3B1450;
-    --header-b:#0B3A52;
-    --green-700:#34D399;
-    --green-050:rgba(52,211,153,0.14);
-    --gold-500:#FFCB4D;
-    --gold-050:rgba(255,203,77,0.18);
-    --coral-600:#FF8A75;
-    --coral-050:rgba(255,138,117,0.15);
-    --teal-600:#C084E0;
-    --teal-050:rgba(192,132,224,0.15);
-    --bg:#0F1B2A;
-    --surface:#16273B;
-    --surface-2:#12212F;
-    --ink:#EAF1F8;
-    --ink-soft:#A9BBCB;
-    --border:rgba(234,241,248,0.14);
-    --shadow:0 10px 28px rgba(0,0,0,0.35);
-    --explain-color:#FFD98A;
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  .wrap {
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 0 16px 60px;
   }
 
-  *{box-sizing:border-box;}
-  body{
-    background:var(--bg);
-    color:var(--ink);
-    font-family:'Work Sans', 'Segoe UI', sans-serif;
-    padding-inline:0;
+  /* ==================== BANDEAU SUPÉRIEUR OIF ==================== */
+  header.top {
+    background: linear-gradient(135deg, #0085CA 0%, #702082 50%, #0085CA 100%);
+    color: #F8FAFC;
+    padding: 0;
+    position: relative;
+    box-shadow: 0 6px 20px rgba(0, 133, 202, 0.25);
   }
-  h1,h2,h3{font-family:'Fraunces', Georgia, serif; text-wrap:balance;}
-  .mono{font-family:'IBM Plex Mono', 'Courier New', monospace;}
+  .oif-ribbon {
+    height: 6px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .header-content {
+    padding: 26px 18px 24px;
+    max-width: 940px;
+    margin: 0 auto;
+  }
+  .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #FFD166;
+    font-weight: 800;
+    margin: 0 0 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  header.top h1 {
+    font-size: clamp(1.6rem, 4.4vw, 2.35rem);
+    font-weight: 800;
+    margin: 0 0 8px;
+    line-height: 1.15;
+    color: #FFFFFF;
+  }
+  header.top p.sub {
+    margin: 0;
+    font-size: 0.94rem;
+    opacity: 0.95;
+    max-width: 68ch;
+    line-height: 1.5;
+    color: #E2E8F0;
+  }
+  .header-decor-bar {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .header-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 999px;
+    letter-spacing: 0.04em;
+  }
+  .header-tag.pc { background: rgba(218, 41, 28, 0.28); color: #FEE2E2; border: 1px solid rgba(218, 41, 28, 0.45); }
+  .header-tag.imp { background: rgba(112, 32, 130, 0.35); color: #F5D0FE; border: 1px solid rgba(112, 32, 130, 0.5); }
 
-  .wrap{max-width:960px; margin:0 auto; padding-inline:16px; padding-bottom:56px;}
-
-  /* ===== HEADER ===== */
-  header.top{
-    background:linear-gradient(115deg, var(--header-a) 0%, var(--header-mid) 55%, var(--header-b) 100%);
-    color:#F5F8FC;
-    padding:28px 16px 22px;
-    position:relative;
-    border-bottom:6px solid var(--gold-500);
+  /* ==================== ONGLETS (NAVIGATION) ==================== */
+  nav.tabs {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 12px 16px;
+    background: var(--surface);
+    border-bottom: 2px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    -webkit-overflow-scrolling: touch;
   }
-  header.top .inner{max-width:960px; margin:0 auto;}
-  .eyebrow{
-    font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
-    color:var(--gold-500); font-weight:700; margin:0 0 6px;
+  nav.tabs::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex: none;
+    padding: 0.55rem 1.05rem;
+    border-radius: 999px;
+    border: 1.5px solid var(--border);
+    background: var(--surface-2);
+    color: var(--ink-soft);
+    font-weight: 700;
+    font-size: 0.86rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    font-family: inherit;
   }
-  header.top h1{
-    font-size:clamp(1.5rem, 4.2vw, 2.3rem); font-weight:700; margin:0 0 6px; line-height:1.08;
-    color:#fff;
+  .tab-btn:hover:not(.active) {
+    border-color: var(--primary-main);
+    color: var(--primary-main);
+    background: var(--surface);
   }
-  header.top p.sub{margin:0; font-size:.92rem; opacity:.88; max-width:62ch;}
-  .flag-dots{display:flex; gap:6px; margin-top:14px;}
-  .flag-dots span{width:10px;height:10px;border-radius:50%;}
-
-  /* ===== TABS ===== */
-  nav.tabs{
-    display:flex; gap:8px; overflow-x:auto; padding:12px 16px;
-    background:var(--surface-2); border-bottom:1px solid var(--border);
-    position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
-    -webkit-overflow-scrolling:touch;
-  }
-  nav.tabs::-webkit-scrollbar{display:none;}
-  .tab-btn{
-    flex:none; padding:.55rem 1rem; border-radius:999px; border:2px solid var(--border);
-    background:var(--surface); color:var(--ink-soft); font-weight:600; font-size:.83rem;
-    cursor:pointer; white-space:nowrap; transition:.2s;
-    font-family:'Work Sans', sans-serif;
-  }
-  .tab-btn.active{background:var(--blue-900); border-color:var(--blue-900); color:#fff;}
-  .tab-btn:not(.active):hover{border-color:var(--blue-700); color:var(--blue-700);}
-
-  section.panel{display:none; padding-top:22px;}
-  section.panel.active{display:block;}
-
-  .card{
-    background:var(--surface); border:1px solid var(--border); border-radius:14px;
-    padding:1.15rem 1.2rem; margin-bottom:1rem; box-shadow:var(--shadow);
-  }
-  .card h2{font-size:1.2rem; margin:0 0 .3rem; color:var(--blue-900);}
-  .card h3{font-size:1rem; margin:1.1rem 0 .5rem; color:var(--blue-700);}
-  .lead{color:var(--ink-soft); font-size:.9rem; margin:0 0 .9rem; line-height:1.5;}
-  .activity-title{
-    font-size:.74rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em;
-    color:var(--blue-700); margin:0 0 .6rem;
+  .tab-btn.active {
+    background: var(--primary-main);
+    border-color: var(--primary-main);
+    color: #FFFFFF;
+    box-shadow: 0 3px 10px rgba(0, 133, 202, 0.3);
   }
 
-  /* ===== Legend ===== */
-  .legend{display:flex; gap:1.2rem; flex-wrap:wrap; font-size:.85rem; align-items:center;}
-  .legend .item{display:flex; align-items:center; gap:.4rem;}
-  .dot{width:11px;height:11px;border-radius:50%;}
-  .dot.pc{background:var(--coral-600);}
-  .dot.imp{background:var(--teal-600);}
+  section.panel { display: none; padding-top: 24px; }
+  section.panel.active { display: block; }
 
-  /* ===== Photo/Film mnemonic ===== */
-  .mnemonic{display:grid; grid-template-columns:1fr 1fr; gap:.9rem;}
-  @media (max-width:520px){.mnemonic{grid-template-columns:1fr;}}
-  .mnem-box{border-radius:12px; padding:1rem; border:2px solid; background:var(--surface);}
-  .mnem-box.pc{border-color:var(--coral-600);}
-  .mnem-box.imp{border-color:var(--teal-600);}
-  .mnem-tag{
-    display:inline-block; font-size:.68rem; font-weight:700; letter-spacing:.08em;
-    text-transform:uppercase; padding:.2rem .55rem; border-radius:6px; margin-bottom:.5rem;
+  /* ==================== CARTES DE CONTENU ==================== */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.35rem 1.45rem;
+    margin-bottom: 1.15rem;
+    box-shadow: var(--shadow);
   }
-  .mnem-box.pc .mnem-tag{background:var(--coral-600); color:#fff;}
-  .mnem-box.imp .mnem-tag{background:var(--teal-600); color:#fff;}
-  .mnem-box p{margin:.2rem 0; font-size:.88rem; line-height:1.45;}
-  .mnem-box .fr-ex{font-style:italic; font-weight:600; margin-top:.4rem;}
+  .card h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 0 0.4rem;
+    color: var(--oif-dark);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .card h2 { color: #F8FAFC; }
+  }
+  .card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 1.25rem 0 0.55rem;
+    color: var(--primary-main);
+  }
+  .lead {
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    margin: 0 0 1rem;
+    line-height: 1.55;
+  }
+  .activity-title {
+    font-size: 0.74rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--primary-main);
+    margin: 0 0 0.5rem;
+    display: inline-block;
+  }
 
-  /* ===== Pair table ===== */
-  .pairs{display:flex; flex-direction:column; gap:.7rem;}
-  .pair-row{
-    display:grid; grid-template-columns:1fr 1fr; gap:.7rem;
-    border:1px solid var(--border); border-radius:10px; overflow:hidden;
+  /* ==================== LÉGENDE & MNÉMONIQUE ==================== */
+  .legend {
+    display: flex;
+    gap: 1.4rem;
+    flex-wrap: wrap;
+    font-size: 0.88rem;
+    align-items: center;
   }
-  @media (max-width:560px){.pair-row{grid-template-columns:1fr;}}
-  .pair-cell{padding:.75rem .85rem; font-size:.88rem; line-height:1.45; background:var(--surface);}
-  .pair-cell.imp{border-left:4px solid var(--teal-600); border-right:1px solid var(--border);}
-  @media (max-width:560px){.pair-cell.imp{border-right:none; border-bottom:1px solid var(--border);}}
-  .pair-cell.pc{border-left:4px solid var(--coral-600);}
-  .exp{font-weight:700; padding:.03rem .35rem; border-radius:4px; white-space:nowrap;}
-  .exp.imp{background:var(--teal-600); color:#fff;}
-  .exp.pc{background:var(--coral-600); color:#fff;}
+  .legend .item { display: flex; align-items: center; gap: 0.5rem; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot.pc { background: var(--pc-color); }
+  .dot.imp { background: var(--imp-color); }
 
-  /* ===== Callout (synonymes) ===== */
-  .callout{border:2px solid var(--coral-600); background:var(--surface); border-radius:12px; padding:1rem; margin-top:1rem;}
-  .callout h4{margin:0 0 .5rem; font-size:.74rem; text-transform:uppercase; letter-spacing:.07em; color:var(--coral-600); font-weight:700;}
-  .callout .syn-row{display:flex; gap:.4rem; flex-wrap:wrap; margin-bottom:.6rem;}
-  .callout p{margin:.3rem 0; font-size:.88rem; line-height:1.5; color:var(--ink);}
-  .callout .fr-ex{font-style:italic; font-weight:600;}
+  .mnemonic {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 580px) { .mnemonic { grid-template-columns: 1fr; } }
+  .mnem-box {
+    border-radius: 12px;
+    padding: 1.15rem;
+    border: 1.5px solid;
+    position: relative;
+  }
+  .mnem-box.pc {
+    background: var(--pc-bg);
+    border-color: var(--pc-border);
+  }
+  .mnem-box.imp {
+    background: var(--imp-bg);
+    border-color: var(--imp-border);
+  }
+  .mnem-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.65rem;
+    border-radius: 6px;
+    margin-bottom: 0.6rem;
+  }
+  .mnem-box.pc .mnem-tag { background: var(--pc-color); color: #FFFFFF; }
+  .mnem-box.imp .mnem-tag { background: var(--imp-color); color: #FFFFFF; }
+  .mnem-box p { margin: 0.25rem 0; font-size: 0.9rem; line-height: 1.5; }
+  .mnem-box .fr-ex {
+    font-style: italic;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    padding-top: 0.45rem;
+    border-top: 1px dashed rgba(0,0,0,0.1);
+  }
 
-  /* ===== Toolbox badges ===== */
-  .badge-cols{display:grid; grid-template-columns:1fr 1fr; gap:1rem;}
-  @media (max-width:520px){.badge-cols{grid-template-columns:1fr;}}
-  .badge-col h4{
-    font-size:.72rem; text-transform:uppercase; letter-spacing:.08em; font-weight:700;
-    margin:0 0 .5rem;
+  /* Callout interruption avec Or OIF #FFB81C */
+  .callout {
+    border: 1.5px solid var(--amber-border);
+    background: var(--amber-bg);
+    border-radius: 12px;
+    padding: 1.1rem;
+    margin-top: 1.1rem;
   }
-  .badge-col.pc h4{color:var(--coral-600);}
-  .badge-col.imp h4{color:var(--teal-600);}
-  .badge-wrap{display:flex; flex-wrap:wrap; gap:.4rem;}
-  .b{
-    font-size:.78rem; padding:.28rem .6rem; border-radius:7px; font-weight:600;
+  .callout h4 {
+    margin: 0 0 0.5rem;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--explain-color);
+    font-weight: 800;
   }
-  .b.pc{background:var(--coral-050); color:var(--coral-600); border:1px solid var(--coral-600);}
-  .b.imp{background:var(--teal-050); color:var(--teal-600); border:1px solid var(--teal-600);}
+  .callout .syn-row { display: flex; gap: 0.45rem; flex-wrap: wrap; margin-bottom: 0.65rem; }
+  .callout p { margin: 0.35rem 0; font-size: 0.9rem; line-height: 1.5; color: var(--ink); }
+  .callout .fr-ex { font-style: italic; font-weight: 600; color: var(--explain-color); }
 
-  /* ===== Exercise items ===== */
-  .ex-item{border:1px solid var(--border); border-radius:12px; padding:.9rem 1rem; margin-bottom:.85rem; background:var(--surface-2);}
-  .ex-num{
-    display:inline-flex; align-items:center; justify-content:center;
-    width:24px; height:24px; border-radius:50%; background:var(--blue-900); color:#fff;
-    font-size:.75rem; font-weight:700; flex-shrink:0; margin-right:.5rem;
+  /* ==================== TABLEAU DES OPPOSITIONS ==================== */
+  .pairs { display: flex; flex-direction: column; gap: 0.75rem; }
+  .pair-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
   }
-  .ex-sentence{font-size:.94rem; line-height:1.85;}
-  .inf{color:var(--ink-soft); font-style:italic; font-size:.85rem;}
-  .vinput{
-    font-family:'IBM Plex Mono', monospace; font-size:.88rem;
-    border:none; border-bottom:2px dashed var(--blue-700); background:transparent;
-    color:var(--ink); padding:2px 4px; min-width:80px; max-width:200px; outline:none;
+  @media (max-width: 580px) { .pair-row { grid-template-columns: 1fr; } }
+  .pair-cell {
+    padding: 0.85rem 1rem;
+    font-size: 0.91rem;
+    line-height: 1.5;
   }
-  .vinput:focus{border-bottom-style:solid; background:var(--blue-050);}
-  .vinput.correct{border-bottom-color:var(--green-700); background:var(--green-050); color:var(--green-700);}
-  .vinput.incorrect{border-bottom-color:var(--coral-600); background:var(--coral-050);}
-  .explain{
-    display:none; font-size:.8rem; margin-top:.55rem; padding:.5rem .65rem;
-    border-radius:8px; background:var(--gold-050); color:var(--explain-color); line-height:1.4;
+  .pair-cell.imp {
+    background: var(--imp-bg);
+    border-right: 1px solid var(--border);
   }
-  .explain.show{display:block;}
+  @media (max-width: 580px) {
+    .pair-cell.imp { border-right: none; border-bottom: 1px solid var(--border); }
+  }
+  .pair-cell.pc { background: var(--pc-bg); }
 
-  /* ===== Buttons ===== */
-  .btn-row{display:flex; gap:.6rem; flex-wrap:wrap; margin-top:.9rem;}
-  .btn{
-    border:none; border-radius:9px; padding:.6rem 1.2rem; font-weight:700; font-size:.86rem;
-    cursor:pointer; font-family:'Work Sans', sans-serif; transition:transform .15s;
+  /* Marqueurs d'expression */
+  .exp {
+    font-weight: 700;
+    padding: 0.12rem 0.5rem;
+    border-radius: 6px;
+    white-space: nowrap;
+    display: inline-block;
   }
-  .btn:active{transform:scale(.97);}
-  .btn.primary{background:var(--blue-900); color:#fff;}
-  .btn.ghost{background:transparent; border:2px solid var(--blue-900); color:var(--blue-900);}
-  .btn.sm{padding:.5rem 1rem; font-size:.8rem;}
+  .exp.imp { background: var(--imp-color); color: #FFFFFF; }
+  .exp.pc { background: var(--pc-color); color: #FFFFFF; }
 
-  /* ===== Score ===== */
-  .score-wrap{margin-top:.2rem;}
-  .score-line{display:flex; justify-content:space-between; font-size:.85rem; font-weight:700; margin-bottom:.4rem;}
-  .score-bar{height:8px; border-radius:4px; background:var(--border); overflow:hidden;}
-  .score-fill{height:100%; background:linear-gradient(90deg, var(--gold-500), var(--green-700)); width:0%; transition:width .5s;}
-  .tabscore-card{border:2px solid var(--blue-900);}
-  .tabscore-card .score-line{font-size:.92rem;}
-
-  /* ===== Activity 2: classify badges ===== */
-  .cl-grid{display:flex; flex-wrap:wrap; gap:.55rem;}
-  .cl-badge{
-    padding:.5rem .8rem; border-radius:9px; font-size:.85rem; font-weight:600;
-    border:2px solid var(--border); background:var(--surface); cursor:pointer;
-    user-select:none; transition:.15s; display:flex; flex-direction:column; align-items:center; gap:.15rem;
+  /* Boîte à expressions */
+  .badge-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.1rem;
   }
-  .cl-badge .state{font-size:.62rem; letter-spacing:.06em; text-transform:uppercase; font-weight:700; opacity:.7;}
-  .cl-badge[data-state="pc"]{background:var(--coral-050); border-color:var(--coral-600); color:var(--coral-600);}
-  .cl-badge[data-state="imp"]{background:var(--teal-050); border-color:var(--teal-600); color:var(--teal-600);}
-  .cl-badge.right{outline:3px solid var(--green-700); outline-offset:1px;}
-  .cl-badge.wrong{outline:3px solid var(--coral-600); outline-offset:1px;}
-  .cl-badge .fix{font-size:.68rem; color:var(--coral-600); font-weight:700; margin-top:.1rem;}
-
-  /* ===== Activity: vrai/faux ===== */
-  .vf-item{border:1px solid var(--border); border-radius:12px; padding:.9rem 1rem; margin-bottom:.7rem; background:var(--surface-2);}
-  .vf-sentence{font-size:.92rem; line-height:1.5; margin-bottom:.6rem;}
-  .vf-btns{display:flex; gap:.5rem;}
-  .vf-btn{
-    flex:1; padding:.5rem; border-radius:8px; border:2px solid var(--border); background:var(--surface);
-    font-weight:700; font-size:.82rem; cursor:pointer; color:var(--ink-soft);
+  @media (max-width: 540px) { .badge-cols { grid-template-columns: 1fr; } }
+  .badge-col {
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1.5px solid;
   }
-  .vf-btn.selected{border-color:var(--blue-700); color:var(--blue-700); background:var(--blue-050);}
-  .vf-item.right .vf-btn.selected{border-color:var(--green-700); color:var(--green-700); background:var(--green-050);}
-  .vf-item.wrong .vf-btn.selected{border-color:var(--coral-600); color:var(--coral-600); background:var(--coral-050);}
-  .vf-feedback{display:none; font-size:.8rem; margin-top:.55rem; padding:.5rem .65rem; border-radius:8px; background:var(--gold-050); color:var(--explain-color); line-height:1.4;}
-  .vf-feedback.show{display:block;}
-
-  /* ===== Activity: associez (matching) ===== */
-  .match-row{display:flex; justify-content:space-between; align-items:center; gap:.7rem; padding:.6rem 0; border-bottom:1px solid var(--border);}
-  .match-row:last-child{border-bottom:none;}
-  .match-q{font-size:.88rem; line-height:1.4;}
-  .match-select{
-    font-family:'Work Sans', sans-serif; font-size:.85rem; padding:.4rem .5rem; border-radius:7px;
-    border:2px solid var(--border); background:var(--surface); color:var(--ink); min-width:60px; flex-shrink:0;
+  .badge-col.imp {
+    background: var(--imp-bg);
+    border-color: var(--imp-border);
   }
-  .match-select.correct{border-color:var(--green-700); background:var(--green-050); color:var(--green-700);}
-  .match-select.incorrect{border-color:var(--coral-600); background:var(--coral-050);}
-  .reasons-box{background:var(--surface-2); border:1px solid var(--border); border-radius:10px; padding:.8rem 1rem; margin-top:1rem; font-size:.85rem; line-height:1.75;}
-  .reasons-box strong{color:var(--blue-700);}
-
-  .toast{
-    position:fixed; bottom:calc(18px + env(safe-area-inset-bottom,0px)); left:50%; transform:translateX(-50%);
-    background:var(--blue-900); color:#fff; padding:.65rem 1.2rem; border-radius:10px;
-    font-size:.85rem; font-weight:600; opacity:0; pointer-events:none; transition:opacity .3s; z-index:99;
-    box-shadow:var(--shadow); max-width:88vw; text-align:center;
+  .badge-col.pc {
+    background: var(--pc-bg);
+    border-color: var(--pc-border);
   }
-  .toast.show{opacity:1;}
+  .badge-col h4 {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 800;
+    margin: 0 0 0.65rem;
+  }
+  .badge-col.imp h4 { color: var(--imp-strong); }
+  .badge-col.pc h4 { color: var(--pc-strong); }
+  .badge-wrap { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+  .b {
+    font-size: 0.8rem;
+    padding: 0.32rem 0.65rem;
+    border-radius: 6px;
+    font-weight: 600;
+    background: var(--surface);
+  }
+  .b.imp { color: var(--imp-strong); border: 1px solid var(--imp-border); }
+  .b.pc { color: var(--pc-strong); border: 1px solid var(--pc-border); }
 
-  footer.sig{text-align:center; font-size:.72rem; color:var(--ink-soft); padding:1.6rem 1rem 2.2rem; line-height:1.6;}
+  /* ==================== EXERCICES : CHAMPS ET VERBES ==================== */
+  .ex-item {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+    margin-bottom: 0.9rem;
+    background: var(--surface-2);
+    transition: all 0.2s ease;
+  }
+  .ex-item:focus-within {
+    background: var(--surface);
+    border-color: var(--primary-main);
+    box-shadow: 0 0 0 3px rgba(0, 133, 202, 0.12);
+  }
+  .ex-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    background: var(--primary-main);
+    color: #FFFFFF;
+    font-size: 0.78rem;
+    font-weight: 800;
+    flex-shrink: 0;
+    margin-right: 0.55rem;
+  }
+  .ex-sentence {
+    font-size: 0.96rem;
+    line-height: 1.9;
+  }
+  .inf {
+    color: var(--ink-soft);
+    font-style: italic;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  .vinput {
+    font-family: 'JetBrains Mono', Courier, monospace;
+    font-size: 0.92rem;
+    font-weight: 600;
+    border: none;
+    border-bottom: 2px dashed var(--primary-main);
+    background: transparent;
+    color: var(--ink);
+    padding: 2px 6px;
+    min-width: 85px;
+    max-width: 210px;
+    outline: none;
+    transition: all 0.2s ease;
+  }
+  .vinput:focus {
+    border-bottom-style: solid;
+    border-bottom-color: var(--primary-main);
+    background: var(--primary-050);
+  }
+  .vinput.correct {
+    border-bottom: 2px solid var(--green-success);
+    background: var(--green-bg);
+    color: var(--green-success);
+  }
+  .vinput.incorrect {
+    border-bottom: 2px solid var(--pc-color);
+    background: var(--pc-bg);
+    color: var(--pc-strong);
+  }
+  .explain {
+    display: none;
+    font-size: 0.84rem;
+    margin-top: 0.65rem;
+    padding: 0.6rem 0.85rem;
+    border-radius: 8px;
+    background: var(--amber-bg);
+    border-left: 4px solid var(--amber-gold);
+    color: var(--explain-color);
+    line-height: 1.45;
+  }
+  .explain.show { display: block; }
+
+  /* ==================== BOUTONS D'ACTION ==================== */
+  .btn-row {
+    display: flex;
+    gap: 0.65rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+  .btn {
+    border: none;
+    border-radius: 10px;
+    padding: 0.65rem 1.3rem;
+    font-weight: 700;
+    font-size: 0.88rem;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn.primary {
+    background: var(--primary-main);
+    color: #FFFFFF;
+    box-shadow: 0 3px 8px rgba(0, 133, 202, 0.25);
+  }
+  .btn.primary:hover {
+    background: #0070AA;
+  }
+  .btn.ghost {
+    background: transparent;
+    border: 1.5px solid var(--primary-main);
+    color: var(--primary-main);
+  }
+  .btn.ghost:hover {
+    background: var(--primary-050);
+  }
+  .btn.sm {
+    padding: 0.5rem 1.05rem;
+    font-size: 0.82rem;
+  }
+
+  /* ==================== CARTE DE SCORE PÉDAGOGIQUE ==================== */
+  .score-wrap { margin-top: 0.3rem; }
+  .score-line {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.88rem;
+    font-weight: 700;
+    margin-bottom: 0.45rem;
+  }
+  .score-bar {
+    height: 8px;
+    border-radius: 999px;
+    background: var(--border);
+    overflow: hidden;
+  }
+  .score-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--amber-gold), var(--green-success));
+    width: 0%;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .tabscore-card {
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+  }
+  .tabscore-card .score-line {
+    font-size: 0.94rem;
+    color: var(--primary-main);
+  }
+
+  /* ==================== SYSTÉMATISATION (ACTIVITÉS) ==================== */
+  /* VI. Classez les expressions */
+  .cl-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .cl-badge {
+    padding: 0.55rem 0.9rem;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.15s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+  }
+  .cl-badge:hover { border-color: var(--primary-main); background: var(--surface-hover); }
+  .cl-badge .state {
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 800;
+    opacity: 0.85;
+  }
+  .cl-badge[data-state="pc"] {
+    background: var(--pc-bg);
+    border-color: var(--pc-border);
+    color: var(--pc-strong);
+  }
+  .cl-badge[data-state="imp"] {
+    background: var(--imp-bg);
+    border-color: var(--imp-border);
+    color: var(--imp-strong);
+  }
+  .cl-badge.right {
+    outline: 2.5px solid var(--green-success);
+    outline-offset: 1px;
+  }
+  .cl-badge.wrong {
+    outline: 2.5px solid var(--pc-color);
+    outline-offset: 1px;
+  }
+  .cl-badge .fix {
+    font-size: 0.72rem;
+    color: var(--pc-strong);
+    font-weight: 700;
+    margin-top: 0.1rem;
+  }
+
+  /* VII. Associez */
+  .match-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .match-row:last-child { border-bottom: none; }
+  .match-q { font-size: 0.92rem; line-height: 1.45; }
+  .match-select {
+    font-family: inherit;
+    font-size: 0.88rem;
+    padding: 0.4rem 0.6rem;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    color: var(--ink);
+    min-width: 68px;
+    flex-shrink: 0;
+    outline: none;
+    font-weight: 700;
+  }
+  .match-select:focus { border-color: var(--primary-main); }
+  .match-select.correct {
+    border-color: var(--green-success);
+    background: var(--green-bg);
+    color: var(--green-success);
+  }
+  .match-select.incorrect {
+    border-color: var(--pc-color);
+    background: var(--pc-bg);
+    color: var(--pc-strong);
+  }
+  .reasons-box {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    margin-top: 1.1rem;
+    font-size: 0.88rem;
+    line-height: 1.8;
+  }
+  .reasons-box strong { color: var(--primary-main); }
+
+  /* VIII. Vrai / Faux */
+  .vf-item {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.95rem 1.1rem;
+    margin-bottom: 0.8rem;
+    background: var(--surface-2);
+  }
+  .vf-sentence {
+    font-size: 0.94rem;
+    line-height: 1.5;
+    margin: 0 0 0.65rem;
+  }
+  .vf-btns { display: flex; gap: 0.6rem; }
+  .vf-btn {
+    flex: 1;
+    padding: 0.55rem;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: var(--ink-soft);
+    font-family: inherit;
+    transition: all 0.15s ease;
+  }
+  .vf-btn:hover { border-color: var(--primary-main); color: var(--primary-main); }
+  .vf-btn.selected {
+    border-color: var(--primary-main);
+    color: var(--primary-main);
+    background: var(--primary-050);
+  }
+  .vf-item.right .vf-btn.selected {
+    border-color: var(--green-success);
+    color: var(--green-success);
+    background: var(--green-bg);
+  }
+  .vf-item.wrong .vf-btn.selected {
+    border-color: var(--pc-color);
+    color: var(--pc-strong);
+    background: var(--pc-bg);
+  }
+  .vf-feedback {
+    display: none;
+    font-size: 0.84rem;
+    margin-top: 0.65rem;
+    padding: 0.55rem 0.75rem;
+    border-radius: 8px;
+    background: var(--amber-bg);
+    border-left: 4px solid var(--amber-gold);
+    color: var(--explain-color);
+    line-height: 1.45;
+  }
+  .vf-feedback.show { display: block; }
+
+  /* Notification Toast */
+  .toast {
+    position: fixed;
+    bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--oif-dark);
+    color: #FFFFFF;
+    padding: 0.75rem 1.4rem;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 99;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    max-width: 90vw;
+    text-align: center;
+  }
+  .toast.show { opacity: 1; }
+
+  footer.sig {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    padding: 2rem 1rem 2.8rem;
+    line-height: 1.6;
+    border-top: 1px solid var(--border);
+  }
 </style>
 </head>
 <body>
 
-
 <header class="top">
-  <div class="inner">
-    <p class="eyebrow">Niveau A2 · FLE</p>
+  <!-- Ruban aux 5 couleurs officielles OIF -->
+  <div class="oif-ribbon" aria-hidden="true">
+    <div style="background:#0085CA;"></div>
+    <div style="background:#FFB81C;"></div>
+    <div style="background:#00A859;"></div>
+    <div style="background:#DA291C;"></div>
+    <div style="background:#702082;"></div>
+  </div>
+  <div class="header-content">
+    <p class="eyebrow">
+      <span>●</span> FLE Niveau A2 · Espace Francophone
+    </p>
     <h1>Passé composé ou imparfait ?</h1>
-    <p class="sub">Deux temps, deux fonctions : une photo (l'action précise) et un film (la scène qui dure). Apprenez à choisir le bon temps grâce aux expressions qui les accompagnent.</p>
-    <div class="flag-dots" aria-hidden="true">
-      <span style="background:var(--gold-500);"></span>
-      <span style="background:var(--coral-600);"></span>
-      <span style="background:#fff;"></span>
-      <span style="background:var(--teal-600);"></span>
-      <span style="background:var(--green-700);"></span>
+    <p class="sub">Deux temps, deux fonctions : la photo (l'action ponctuelle qui fait avancer l'histoire) et le film (le décor en arrière-plan). Repérez les expressions temporelles pour choisir le temps adapté.</p>
+    <div class="header-decor-bar">
+      <span class="header-tag pc">Passé composé = Action ponctuelle & Rupture</span>
+      <span class="header-tag imp">Imparfait = Décor & Habitudes</span>
     </div>
   </div>
 </header>
 
-<nav class="tabs" aria-label="Sections">
-  <button class="tab-btn active" data-tab="comp" onclick="showTab('comp')">1 · Comparaison</button>
-  <button class="tab-btn" data-tab="ex1" onclick="showTab('ex1')">2 · Exercices I</button>
-  <button class="tab-btn" data-tab="ex2" onclick="showTab('ex2')">3 · Exercices II</button>
+<nav class="tabs" aria-label="Sections de la leçon">
+  <button class="tab-btn active" data-tab="comp" onclick="showTab('comp')">1 · Comparaison & Règle</button>
+  <button class="tab-btn" data-tab="ex1" onclick="showTab('ex1')">2 · Exercices I (Guidé)</button>
+  <button class="tab-btn" data-tab="ex2" onclick="showTab('ex2')">3 · Exercices II (Récit)</button>
   <button class="tab-btn" data-tab="commissariat" onclick="showTab('commissariat')">4 · Au commissariat</button>
   <button class="tab-btn" data-tab="syst" onclick="showTab('syst')">5 · Systématisation</button>
 </nav>
@@ -335,42 +796,42 @@
 
     <div class="card">
       <div class="legend">
-        <span class="item"><span class="dot pc"></span> <strong>Passé composé</strong> — action ponctuelle</span>
-        <span class="item"><span class="dot imp"></span> <strong>Imparfait</strong> — habitude / description</span>
+        <span class="item"><span class="dot pc"></span> <strong>Passé composé</strong> — événement ponctuel, action unique ou rupture</span>
+        <span class="item"><span class="dot imp"></span> <strong>Imparfait</strong> — habitude, situation continue, description du décor</span>
       </div>
     </div>
 
     <div class="card">
-      <h2>Le truc à retenir</h2>
-      <p class="lead">Avant de conjuguer, posez-vous une question simple.</p>
+      <h2>Le truc à retenir au niveau A2</h2>
+      <p class="lead">Avant de conjuguer, posez-vous une question visuelle simple :</p>
       <div class="mnemonic">
         <div class="mnem-box imp">
           <span class="mnem-tag">Le film — imparfait</span>
-          <p>Ça décrit une scène qui dure, une habitude, un décor. Pas de début ni de fin précis.</p>
+          <p>On décrit la scène qui se déroule déjà, une habitude passée ou l'atmosphère. Pas de début ni de fin précis dans la phrase.</p>
           <p class="fr-ex">« Tous les jours, je mangeais à midi. »</p>
         </div>
         <div class="mnem-box pc">
           <span class="mnem-tag">La photo — passé composé</span>
-          <p>Ça montre un événement précis, qui arrive une fois, à un moment donné.</p>
-          <p class="fr-ex">« Hier, j'ai mangé à midi. »</p>
+          <p>On fige un événement qui arrive soudainement ou à une date bien délimitée dans le temps.</p>
+          <p class="fr-ex">« Hier, j'ai mangé au restaurant. »</p>
         </div>
       </div>
 
       <div class="callout">
-        <h4>Les 3 signaux de l'interruption</h4>
+        <h4>⚡ Les 3 signaux majeurs de la rupture</h4>
         <div class="syn-row">
           <span class="exp pc">tout à coup</span>
           <span class="exp pc">soudain</span>
           <span class="exp pc">brusquement</span>
         </div>
-        <p>Ces trois mots ont le même sens et la même fonction : ils annoncent qu'une action précise <strong>interrompt</strong> une scène en cours. Ils sont donc toujours suivis du <strong>passé composé</strong>.</p>
-        <p class="fr-ex">« Il traversait l'avenue ; brusquement, une voiture est arrivée en face de lui. »</p>
+        <p>Ces trois connecteurs annoncent qu'un événement imprévu <strong>interrompt</strong> une action en cours. Ils sont donc toujours accompagnés du <strong>passé composé</strong>.</p>
+        <p class="fr-ex">« Il traversait l'avenue [imparfait] ; brusquement, une voiture est arrivée [passé composé] en face de lui. »</p>
       </div>
     </div>
 
     <div class="card">
-      <h2>Phrases opposées</h2>
-      <p class="lead">Même verbe, même thème : seule l'expression de temps change le sens et le temps verbal.</p>
+      <h2>Phrases opposées : Comparez la nuance</h2>
+      <p class="lead">Même verbe, même situation : seule l'expression temporelle commande le choix du temps verbal.</p>
       <div class="pairs">
         <div class="pair-row">
           <div class="pair-cell imp"><span class="exp imp">d'habitude</span>, je mangeais à la cantine.</div>
@@ -394,21 +855,21 @@
         </div>
       </div>
 
-      <h3>Et dans la même phrase ?</h3>
-      <p class="lead" style="margin-bottom:.4rem;">Le film continue... et une photo l'interrompt.</p>
+      <h3>Et combinés dans la même phrase ?</h3>
+      <p class="lead" style="margin-bottom:.4rem;">Le film se déroule... et une photo nette vient l'interrompre :</p>
       <div class="pair-row" style="grid-template-columns:1fr;">
-        <div class="pair-cell" style="background:var(--surface-2);">
+        <div class="pair-cell" style="background:var(--surface-2); border-left: 4px solid var(--primary-navy);">
           Je <span class="exp imp">regardais</span> la télé <strong>quand</strong> le téléphone <span class="exp pc">a sonné</span>.
         </div>
       </div>
     </div>
 
     <div class="card">
-      <h2>Boîte à expressions</h2>
-      <p class="lead">Ces mots vous aident à choisir le bon temps. Apprenez-les par cœur !</p>
+      <h2>Boîte à expressions (Vos déclencheurs de référence)</h2>
+      <p class="lead">Ces mots vous indiquent directement la perspective temporelle :</p>
       <div class="badge-cols">
         <div class="badge-col imp">
-          <h4>Imparfait — habitude</h4>
+          <h4>Imparfait — Habitude & État</h4>
           <div class="badge-wrap">
             <span class="b imp">tous les jours</span>
             <span class="b imp">tous les matins</span>
@@ -423,7 +884,7 @@
           </div>
         </div>
         <div class="badge-col pc">
-          <h4>Passé composé — un jour précis</h4>
+          <h4>Passé composé — Action délimitée</h4>
           <div class="badge-wrap">
             <span class="b pc">hier</span>
             <span class="b pc">hier soir</span>
@@ -447,7 +908,7 @@
   <section class="panel" id="panel-ex1">
     <div class="card">
       <h2>I. Complétez avec le verbe conjugué</h2>
-      <p class="lead">Observez la couleur de l'expression de temps : <span class="exp imp" style="font-size:.75rem;">imparfait</span> <span class="exp pc" style="font-size:.75rem;">passé composé</span> — puis conjuguez le verbe entre parenthèses.</p>
+      <p class="lead">Repérez la couleur du déclencheur temporel : <span class="exp imp" style="font-size:.78rem;">imparfait</span> <span class="exp pc" style="font-size:.78rem;">passé composé</span> — puis conjuguez chaque verbe entre parenthèses.</p>
     </div>
 
     <div class="card" id="act-ex1">
@@ -462,7 +923,7 @@
           <input class="vinput" id="ex1c" data-answer="a changé" placeholder="…">
           ma vie.
         </span>
-        <div class="explain">« avais » décrit l'âge (situation) → imparfait. « ai eu » et « a changé » racontent des événements précis, une seule fois → passé composé.</div>
+        <div class="explain">« avais » indique l'âge / le cadre durable (imparfait). « ai eu » et « a changé » marquent la rupture accidentelle et sa conséquence ponctuelle (passé composé).</div>
       </div>
 
       <div class="ex-item">
@@ -474,7 +935,7 @@
           <input class="vinput" id="ex2b" data-answer="a préparé" placeholder="…">
           une tarte.
         </span>
-        <div class="explain">« tous les dimanches » = habitude → imparfait. « dimanche dernier » = un jour précis → passé composé.</div>
+        <div class="explain">« tous les dimanches » = coutume répétée (imparfait). « dimanche dernier » = un jour précis qui isole l'événement (passé composé).</div>
       </div>
 
       <div class="ex-item">
@@ -485,7 +946,7 @@
           minuit quand le téléphone <span class="inf">(sonner)</span>
           <input class="vinput" id="ex3b" data-answer="a sonné" placeholder="…">.
         </span>
-        <div class="explain">« était » décrit la scène (l'heure) → imparfait. « a sonné » est l'action précise qui interrompt → passé composé.</div>
+        <div class="explain">« était » brosse le décor temporel (imparfait). « a sonné » constitue l'interruption soudaine (passé composé).</div>
       </div>
 
       <div class="ex-item">
@@ -497,7 +958,7 @@
           <input class="vinput" id="ex4b" data-answer="avons pris" placeholder="…">
           le train.
         </span>
-        <div class="explain">« d'habitude » = habitude → imparfait. « ce matin » = moment précis → passé composé.</div>
+        <div class="explain">« d'habitude » = habitude régulière (imparfait). « ce matin » = matinée particulière et action accomplie (passé composé).</div>
       </div>
 
       <div class="ex-item">
@@ -509,7 +970,7 @@
           <input class="vinput" id="ex5b" data-answer="avais" placeholder="…">
           très peur du noir.
         </span>
-        <div class="explain">Les deux verbes décrivent un état pendant l'enfance, sans limite précise → imparfait.</div>
+        <div class="explain">Les deux verbes évoquent une période générale d'enfance et une émotion durable (imparfait).</div>
       </div>
 
       <div class="ex-item">
@@ -519,7 +980,7 @@
           <input class="vinput" id="ex6a" data-answer="ont invité" placeholder="…">
           à une fête surprise.
         </span>
-        <div class="explain">« un jour » annonce un événement unique → passé composé.</div>
+        <div class="explain">« un jour » est le déclencheur typique d'une péripétie qui commence (passé composé).</div>
       </div>
 
       <div class="ex-item">
@@ -531,7 +992,7 @@
           <input class="vinput" id="ex7b" data-answer="ai écrit" placeholder="…">
           mon premier e-mail en français.
         </span>
-        <div class="explain">« autrefois » = habitude ancienne → imparfait. « hier » = jour précis → passé composé.</div>
+        <div class="explain">« autrefois » = époque révolue (imparfait). « hier » = fait accompli et délimité (passé composé).</div>
       </div>
 
       <div class="ex-item">
@@ -542,7 +1003,7 @@
           la télévision quand <span class="exp pc">soudain</span>, les lumières <span class="inf">(s'éteindre)</span>
           <input class="vinput" id="ex8b" data-answer="se sont éteintes" placeholder="…">.
         </span>
-        <div class="explain">Action en cours (le film) interrompue par un événement ponctuel (la photo) : « soudain » → passé composé.</div>
+        <div class="explain">Action de fond en cours (imparfait) coupée nette par « soudain » (passé composé, accord féminin pluriel avec être).</div>
       </div>
 
       <div class="ex-item">
@@ -554,7 +1015,7 @@
           <input class="vinput" id="ex9b" data-answer="me suis couché" data-alt="me suis couchée" placeholder="…">
           très tard.
         </span>
-        <div class="explain">« en général » = habitude → imparfait. « hier soir » = un soir précis → passé composé.</div>
+        <div class="explain">« en général » = fréquence coutumière (imparfait). « hier soir » = exception ponctuelle (passé composé).</div>
       </div>
 
       <div class="ex-item">
@@ -566,17 +1027,17 @@
           <input class="vinput" id="ex10b" data-answer="avons déménagé" placeholder="…">
           à Paris.
         </span>
-        <div class="explain">« habitions » décrit la situation de fond (le film) ; « puis » introduit l'événement suivant, précis → passé composé.</div>
+        <div class="explain">« habitions » décrit l'arrière-plan de vie ; « puis » introduit l'action successive et précise (passé composé).</div>
       </div>
 
       <div class="btn-row">
-        <button class="btn primary" onclick="checkFill('act-ex1','ex1')">Vérifier</button>
+        <button class="btn primary" onclick="checkFill('act-ex1','ex1')">Vérifier mes réponses</button>
         <button class="btn ghost" onclick="resetFill('act-ex1','ex1')">Réinitialiser</button>
       </div>
     </div>
 
     <div class="card tabscore-card">
-      <div class="score-line"><span>Score total de l'onglet</span><span id="ex1-tabscoretext">0 / 0</span></div>
+      <div class="score-line"><span>Progression de l'onglet</span><span id="ex1-tabscoretext">0 / 0</span></div>
       <div class="score-bar"><div class="score-fill" id="ex1-tabscorefill"></div></div>
     </div>
   </section>
@@ -585,7 +1046,7 @@
   <section class="panel" id="panel-ex2">
     <div class="card">
       <h2>II. Interruptions soudaines</h2>
-      <p class="lead">Une scène en cours (imparfait), puis un événement qui l'interrompt (passé composé).</p>
+      <p class="lead">Une scène en cours (imparfait), puis un événement qui vient la couper (passé composé).</p>
     </div>
 
     <div class="card" id="act-interrupt">
@@ -594,42 +1055,42 @@
         <span class="ex-sentence">
           Il <strong>traversait</strong> <span class="inf">(traverser)</span> l'avenue ; <span class="exp pc">brusquement</span>, une voiture <input class="vinput" id="int1a" data-answer="est arrivée" placeholder="…"> <span class="inf">(arriver)</span> en face de lui.
         </span>
-        <div class="explain">« traversait » = action en cours → imparfait. « brusquement » annonce l'événement qui interrompt → passé composé.</div>
+        <div class="explain">« traversait » = scène en déroulement (imparfait). « brusquement » appelle une action ponctuelle (passé composé).</div>
       </div>
       <div class="ex-item">
         <span class="ex-num">2</span>
         <span class="ex-sentence">
           Elle <input class="vinput" id="int2a" data-answer="se promenait" placeholder="…"> <span class="inf">(se promener)</span> tranquillement ; <span class="exp pc">tout à coup</span>, il <input class="vinput" id="int2b" data-answer="a commencé" placeholder="…"> <span class="inf">(commencer)</span> à pleuvoir.
         </span>
-        <div class="explain">« se promenait » = scène en cours → imparfait. « tout à coup » + événement précis → passé composé.</div>
+        <div class="explain">« se promenait » = cadre en cours. « tout à coup » déclenche l'événement imprévu au passé composé.</div>
       </div>
       <div class="ex-item">
         <span class="ex-num">3</span>
         <span class="ex-sentence">
           Je <input class="vinput" id="int3a" data-answer="regardais" placeholder="…"> <span class="inf">(regarder)</span> les vitrines des magasins et, <span class="exp pc">à un moment</span>, j'<input class="vinput" id="int3b" data-answer="ai entendu" placeholder="…"> <span class="inf">(entendre)</span> quelqu'un m'appeler par mon nom.
         </span>
-        <div class="explain">« regardais » = action en cours → imparfait. « à un moment » fonctionne comme « soudain » → passé composé.</div>
+        <div class="explain">« regardais » = action continue (imparfait). « à un moment » marque la rupture auditive précise (passé composé).</div>
       </div>
       <div class="ex-item">
         <span class="ex-num">4</span>
         <span class="ex-sentence">
           Elle <input class="vinput" id="int4a" data-answer="était" placeholder="…"> <span class="inf">(être)</span> assise à la terrasse d'un café et elle <input class="vinput" id="int4b" data-answer="regardait" placeholder="…"> <span class="inf">(regarder)</span> les gens passer quand, <span class="exp pc">tout à coup</span>, elle <input class="vinput" id="int4c" data-answer="a entendu" placeholder="…"> <span class="inf">(entendre)</span> un énorme bruit.
         </span>
-        <div class="explain">« était » et « regardait » décrivent le décor → imparfait. « tout à coup » annonce l'événement → passé composé.</div>
+        <div class="explain">« était » et « regardait » créent le tableau d'ambiance (imparfait). Le bruit qui surgit est au passé composé.</div>
       </div>
       <div class="ex-item">
         <span class="ex-num">5</span>
         <span class="ex-sentence">
           Je <input class="vinput" id="int5a" data-answer="faisais" placeholder="…"> <span class="inf">(faire)</span> mes courses quand, <span class="exp pc">brusquement</span>, il y <input class="vinput" id="int5b" data-answer="a eu" placeholder="…"> <span class="inf">(avoir)</span> une explosion.
         </span>
-        <div class="explain">« faisais » = action en cours → imparfait. « brusquement » + événement précis → passé composé.</div>
+        <div class="explain">« faisais » = activité en cours (imparfait). « brusquement » + fait accidentel au passé composé (« a eu »).</div>
       </div>
       <div class="ex-item">
         <span class="ex-num">6</span>
         <span class="ex-sentence">
           Nous <input class="vinput" id="int6a" data-answer="nous sommes rencontrés" data-alt="nous sommes rencontrées" placeholder="…"> <span class="inf">(se rencontrer)</span> alors que je <input class="vinput" id="int6b" data-answer="sortais" placeholder="…"> <span class="inf">(sortir)</span> du restaurant.
         </span>
-        <div class="explain">« nous sommes rencontrés » = événement unique → passé composé. « sortais » décrit ce qui était en train de se passer → imparfait.</div>
+        <div class="explain">« nous sommes rencontrés » = événement de rencontre (passé composé). « sortais » = ce qui était en train de se passer (imparfait).</div>
       </div>
 
       <div class="btn-row">
@@ -639,8 +1100,8 @@
     </div>
 
     <div class="card">
-      <h2>III. Récit au passé</h2>
-      <p class="lead">Ici, pas de couleurs : à vous de repérer les indices (« chaque soir », « toutes les nuits », « ce jour-là »...).</p>
+      <h2>III. Récit au passé sans indicateurs de couleur</h2>
+      <p class="lead">Détectez les indices dans le texte (« chaque soir », « toutes les nuits », « ce jour-là »...).</p>
     </div>
 
     <div class="card" id="act-recit">
@@ -649,35 +1110,35 @@
         <span class="ex-sentence">
           Tout à coup, il <input class="vinput" id="rec1a" data-answer="s'est produit" placeholder="…"> <span class="inf">(se produire)</span> un grand mouvement dans la foule.
         </span>
-        <div class="explain">« tout à coup » + événement précis, une seule fois → passé composé.</div>
+        <div class="explain">« tout à coup » = événement soudain, unique (passé composé).</div>
       </div>
       <div class="ex-item">
         <span class="ex-num">2</span>
         <span class="ex-sentence">
           Chaque soir <input class="vinput" id="rec2a" data-answer="éclatait" placeholder="…"> <span class="inf">(éclater)</span> un orage qui <input class="vinput" id="rec2b" data-answer="durait" placeholder="…"> <span class="inf">(durer)</span> une heure.
         </span>
-        <div class="explain">« chaque soir » = habitude répétée → imparfait pour les deux verbes.</div>
+        <div class="explain">« chaque soir » signale une répétition régulière → imparfait pour les deux verbes.</div>
       </div>
       <div class="ex-item">
         <span class="ex-num">3</span>
         <span class="ex-sentence">
           Toutes les nuits, il <input class="vinput" id="rec3a" data-answer="sortait" placeholder="…"> <span class="inf">(sortir)</span> de la maison, mais cette nuit-là il <input class="vinput" id="rec3b" data-answer="est resté" placeholder="…"> <span class="inf">(rester)</span> chez lui parce qu'il y <input class="vinput" id="rec3c" data-answer="avait" placeholder="…"> <span class="inf">(avoir)</span> une forte tempête.
         </span>
-        <div class="explain">« toutes les nuits » = habitude → imparfait. « cette nuit-là » = un soir précis → passé composé. « il y avait une tempête » décrit la situation → imparfait.</div>
+        <div class="explain">« toutes les nuits » = habitude (imparfait). « cette nuit-là » = date précise et fait singulier (passé composé). La tempête décrit les conditions météo (imparfait).</div>
       </div>
       <div class="ex-item">
         <span class="ex-num">4</span>
         <span class="ex-sentence">
           À chaque gare, l'omnibus <input class="vinput" id="rec4a" data-answer="s'arrêtait" placeholder="…"> <span class="inf">(s'arrêter)</span>, <input class="vinput" id="rec4b" data-answer="manoeuvrait" data-alt="manœuvrait" placeholder="…"> <span class="inf">(manœuvrer)</span>, <input class="vinput" id="rec4c" data-answer="attendait" placeholder="…"> <span class="inf">(attendre)</span> on ne sait quoi, puis <input class="vinput" id="rec4d" data-answer="repartait" placeholder="…"> <span class="inf">(repartir)</span>.
         </span>
-        <div class="explain">« à chaque gare » = action habituelle et répétée → imparfait pour toute la série.</div>
+        <div class="explain">« à chaque gare » montre une routine d'actions itératives (imparfait pour toute la série).</div>
       </div>
       <div class="ex-item">
         <span class="ex-num">5</span>
         <span class="ex-sentence">
           Ce jour-là, ils <input class="vinput" id="rec5a" data-answer="sont partis" placeholder="…"> <span class="inf">(partir)</span> à l'aube et <input class="vinput" id="rec5b" data-answer="ont marché" placeholder="…"> <span class="inf">(marcher)</span> longtemps avant d'atteindre la ville qui <input class="vinput" id="rec5c" data-answer="se trouvait" placeholder="…"> <span class="inf">(se trouver)</span> au-delà de la rivière.
         </span>
-        <div class="explain">« ce jour-là » = jour précis, actions terminées → passé composé. « se trouvait » décrit un fait permanent → imparfait.</div>
+        <div class="explain">« ce jour-là » délimite des actions achevées (passé composé). « se trouvait » est une caractéristique permanente du lieu (imparfait).</div>
       </div>
 
       <div class="btn-row">
@@ -687,7 +1148,7 @@
     </div>
 
     <div class="card tabscore-card">
-      <div class="score-line"><span>Score total de l'onglet</span><span id="ex2-tabscoretext">0 / 0</span></div>
+      <div class="score-line"><span>Progression de l'onglet</span><span id="ex2-tabscoretext">0 / 0</span></div>
       <div class="score-bar"><div class="score-fill" id="ex2-tabscorefill"></div></div>
     </div>
   </section>
@@ -695,13 +1156,13 @@
   <!-- ===================== SECTION 4 : AU COMMISSARIAT ===================== -->
   <section class="panel" id="panel-commissariat">
     <div class="card">
-      <h2>Au commissariat</h2>
-      <p class="lead">Deux témoignages sur le même incident. Complétez les verbes à l'imparfait ou au passé composé.</p>
+      <h2>Au commissariat : Décor vs Péripéties</h2>
+      <p class="lead">Deux dépositions policières pour le même incident. Observez la transition du décor vers les faits réels.</p>
     </div>
 
     <div class="card" id="act-victime">
       <p class="activity-title">IV. Interrogatoire de la victime</p>
-      <p class="ex-sentence" style="margin-bottom:.6rem;">— Expliquez-moi ce qui vous est arrivé, Mademoiselle.</p>
+      <p class="ex-sentence" style="margin-bottom:.6rem; color:var(--primary-navy-soft); font-weight:600;">— Expliquez-moi ce qui vous est arrivé, Mademoiselle.</p>
       <p class="ex-sentence">
         — Voilà. Il <strong>était</strong> <span class="inf">(être)</span> environ 22h30, il
         <input class="vinput" id="vic1" data-answer="faisait" placeholder="…"> <span class="inf">(faire)</span> nuit. Je
@@ -712,7 +1173,7 @@
         <input class="vinput" id="vic6" data-answer="ai reçu" placeholder="…"> <span class="inf">(recevoir)</span> un violent coup sur la tête. Je
         <input class="vinput" id="vic7" data-answer="me suis évanouie" data-alt="me suis évanoui" placeholder="…"> <span class="inf">(s'évanouir)</span>.
       </p>
-      <div class="explain">« il était 22h30 », « il faisait nuit », « je rentrais », « il n'y avait pas de monde » décrivent la scène → imparfait. Après « tout à coup », chaque action précise passe au passé composé.</div>
+      <div class="explain">« il faisait nuit », « je rentrais », « il n'y avait pas de monde » campent le décor (imparfait). Dès « tout à coup », chaque action chronologique s'enchaîne au passé composé.</div>
       <div class="btn-row">
         <button class="btn primary" onclick="checkFill('act-victime','commissariat')">Vérifier</button>
         <button class="btn ghost" onclick="resetFill('act-victime','commissariat')">Réinitialiser</button>
@@ -721,7 +1182,7 @@
 
     <div class="card" id="act-temoin">
       <p class="activity-title">V. Interrogatoire d'un témoin</p>
-      <p class="ex-sentence" style="margin-bottom:.6rem;">— Monsieur, qu'avez-vous à dire ?</p>
+      <p class="ex-sentence" style="margin-bottom:.6rem; color:var(--primary-navy-soft); font-weight:600;">— Monsieur, qu'avez-vous à déclarer ?</p>
       <p class="ex-sentence">
         — Il
         <input class="vinput" id="tem1" data-answer="était" placeholder="…"> <span class="inf">(être)</span> assez tard, j'
@@ -737,7 +1198,7 @@
         <input class="vinput" id="tem11" data-answer="ai crié" placeholder="…"> <span class="inf">(crier)</span> et l'homme
         <input class="vinput" id="tem12" data-answer="s'est enfui" placeholder="…"> <span class="inf">(s'enfuir)</span>.
       </p>
-      <div class="explain">Tout ce qui décrit le décor (l'heure, ce que chacun faisait) est à l'imparfait. « Soudain » déclenche une suite d'actions précises au passé composé — sauf « qui frappait », qui décrit une action vue en train de se dérouler.</div>
+      <div class="explain">Ce que faisait chacun paisiblement = imparfait. « Soudain » fait basculer dans l'action vive (passé composé). « qui frappait » décrit l'action en train de se dérouler au moment où on la regarde.</div>
       <div class="btn-row">
         <button class="btn primary" onclick="checkFill('act-temoin','commissariat')">Vérifier</button>
         <button class="btn ghost" onclick="resetFill('act-temoin','commissariat')">Réinitialiser</button>
@@ -745,7 +1206,7 @@
     </div>
 
     <div class="card tabscore-card">
-      <div class="score-line"><span>Score total de l'onglet</span><span id="commissariat-tabscoretext">0 / 0</span></div>
+      <div class="score-line"><span>Progression de l'onglet</span><span id="commissariat-tabscoretext">0 / 0</span></div>
       <div class="score-bar"><div class="score-fill" id="commissariat-tabscorefill"></div></div>
     </div>
   </section>
@@ -755,7 +1216,7 @@
     <div class="card">
       <p class="activity-title">VI. Classez les expressions</p>
       <h2 style="margin-top:0;">Passé composé ou imparfait ?</h2>
-      <p class="lead">Cliquez sur chaque expression : elle passe de <strong>neutre</strong> à <strong style="color:var(--coral-600);">passé composé</strong> à <strong style="color:var(--teal-600);">imparfait</strong>, puis revient à neutre.</p>
+      <p class="lead">Cliquez sur chaque badge pour modifier son état : <strong>neutre</strong> ➔ <strong style="color:var(--pc-strong);">passé composé</strong> ➔ <strong style="color:var(--imp-strong);">imparfait</strong>.</p>
       <div class="cl-grid" id="cl-grid">
         <div class="cl-badge" data-correct="pc" data-state="" onclick="cycleBadge(this)">tout à coup<span class="state"></span></div>
         <div class="cl-badge" data-correct="imp" data-state="" onclick="cycleBadge(this)">tous les soirs<span class="state"></span></div>
@@ -764,7 +1225,7 @@
         <div class="cl-badge" data-correct="pc" data-state="" onclick="cycleBadge(this)">enfin<span class="state"></span></div>
         <div class="cl-badge" data-correct="imp" data-state="" onclick="cycleBadge(this)">souvent<span class="state"></span></div>
         <div class="cl-badge" data-correct="pc" data-state="" onclick="cycleBadge(this)">à ce moment-là<span class="state"></span></div>
-        <div class="cl-badge" data-correct="imp" data-state="" onclick="cycleBadge(this)">le lundi</div>
+        <div class="cl-badge" data-correct="imp" data-state="" onclick="cycleBadge(this)">le lundi<span class="state"></span></div>
         <div class="cl-badge" data-correct="pc" data-state="" onclick="cycleBadge(this)">la semaine dernière<span class="state"></span></div>
         <div class="cl-badge" data-correct="imp" data-state="" onclick="cycleBadge(this)">tous les ans<span class="state"></span></div>
         <div class="cl-badge" data-correct="imp" data-state="" onclick="cycleBadge(this)">d'ordinaire<span class="state"></span></div>
@@ -772,7 +1233,7 @@
         <div class="cl-badge" data-correct="pc" data-state="" onclick="cycleBadge(this)">brusquement<span class="state"></span></div>
       </div>
       <div class="btn-row">
-        <button class="btn primary sm" onclick="checkCl()">Vérifier</button>
+        <button class="btn primary sm" onclick="checkCl()">Vérifier le classement</button>
         <button class="btn ghost sm" onclick="resetCl()">Réinitialiser</button>
       </div>
     </div>
@@ -780,7 +1241,7 @@
     <div class="card">
       <p class="activity-title">VII. Associez</p>
       <h2 style="margin-top:0;">Jérôme, j'attends des explications !</h2>
-      <p class="lead">Associez chaque question (passé composé) à sa raison (imparfait — pour décrire la situation au moment des faits).</p>
+      <p class="lead">Associez chaque question (passé composé) à sa raison d'arrière-plan (imparfait).</p>
       <div id="match-grid">
         <div class="match-row">
           <span class="match-q">1. Pourquoi es-tu rentré si tard après l'école ?</span>
@@ -820,17 +1281,17 @@
         <strong>f.</strong> Parce que l'entraîneur était absent.<br>
         <strong>g.</strong> Parce que je ne savais pas ma leçon.
       </div>
-      <p class="lead" style="margin:.6rem 0 0;">Remarquez : toutes les raisons sont à l'imparfait — elles décrivent la situation au moment des faits.</p>
+      <p class="lead" style="margin:.75rem 0 0; font-size:0.86rem;">💡 Remarque pragmatique : toutes les justifications sont à l'imparfait, car elles décrivent l'état mental, physique ou circonstanciel au moment des faits.</p>
       <div class="btn-row">
-        <button class="btn primary sm" onclick="checkMatch()">Vérifier</button>
+        <button class="btn primary sm" onclick="checkMatch()">Vérifier les associations</button>
         <button class="btn ghost sm" onclick="resetMatch()">Réinitialiser</button>
       </div>
     </div>
 
     <div class="card" id="vf-list">
       <p class="activity-title">VIII. Vrai ou faux ?</p>
-      <h2 style="margin-top:0;">Le temps est-il bien utilisé ?</h2>
-      <p class="lead">Choisissez, puis lisez l'explication.</p>
+      <h2 style="margin-top:0;">Le temps est-il adéquat ?</h2>
+      <p class="lead">Testez votre réflexe grammatical puis visualisez l'explication :</p>
 
       <div class="vf-item" data-correct="vrai">
         <p class="vf-sentence">1. « Hier, je <u>regardais</u> un film quand tu as appelé. »</p>
@@ -838,7 +1299,7 @@
           <button class="vf-btn" onclick="selectVf(this,'vrai')">Vrai</button>
           <button class="vf-btn" onclick="selectVf(this,'faux')">Faux</button>
         </div>
-        <div class="vf-feedback">Vrai — action en cours (imparfait) interrompue par un événement précis (passé composé).</div>
+        <div class="vf-feedback">Vrai — Action en cours (imparfait) interrompue par un fait précis (passé composé).</div>
       </div>
 
       <div class="vf-item" data-correct="faux">
@@ -847,7 +1308,7 @@
           <button class="vf-btn" onclick="selectVf(this,'vrai')">Vrai</button>
           <button class="vf-btn" onclick="selectVf(this,'faux')">Faux</button>
         </div>
-        <div class="vf-feedback">Faux — il fallait dire « je buvais ». Habitude répétée = imparfait, pas passé composé.</div>
+        <div class="vf-feedback">Faux — Il fallait dire « je buvais ». Habitude répétée = imparfait obligatoire.</div>
       </div>
 
       <div class="vf-item" data-correct="vrai">
@@ -856,7 +1317,7 @@
           <button class="vf-btn" onclick="selectVf(this,'vrai')">Vrai</button>
           <button class="vf-btn" onclick="selectVf(this,'faux')">Faux</button>
         </div>
-        <div class="vf-feedback">Vrai — « un jour » annonce une suite d'événements précis, une seule fois : passé composé.</div>
+        <div class="vf-feedback">Vrai — « un jour » annonce des événements ponctuels en chaîne : passé composé.</div>
       </div>
 
       <div class="vf-item" data-correct="vrai">
@@ -865,7 +1326,7 @@
           <button class="vf-btn" onclick="selectVf(this,'vrai')">Vrai</button>
           <button class="vf-btn" onclick="selectVf(this,'faux')">Faux</button>
         </div>
-        <div class="vf-feedback">Vrai — « d'habitude » + habitude répétée = imparfait.</div>
+        <div class="vf-feedback">Vrai — « d'habitude » indique la répétition régulière : imparfait.</div>
       </div>
 
       <div class="vf-item" data-correct="faux">
@@ -874,7 +1335,7 @@
           <button class="vf-btn" onclick="selectVf(this,'vrai')">Vrai</button>
           <button class="vf-btn" onclick="selectVf(this,'faux')">Faux</button>
         </div>
-        <div class="vf-feedback">Faux — il fallait dire « s'est ouverte » et « est entré ». « Soudain » annonce une action ponctuelle : passé composé.</div>
+        <div class="vf-feedback">Faux — Il fallait dire « s'est ouverte » et « est entré ». « Soudain » déclenche des actions brèves : passé composé.</div>
       </div>
 
       <div class="vf-item" data-correct="vrai">
@@ -883,7 +1344,7 @@
           <button class="vf-btn" onclick="selectVf(this,'vrai')">Vrai</button>
           <button class="vf-btn" onclick="selectVf(this,'faux')">Faux</button>
         </div>
-        <div class="vf-feedback">Vrai — « chaque été » = habitude = imparfait.</div>
+        <div class="vf-feedback">Vrai — « chaque été » marque une coutume annuelle : imparfait.</div>
       </div>
 
       <div class="vf-item" data-correct="faux">
@@ -892,7 +1353,7 @@
           <button class="vf-btn" onclick="selectVf(this,'vrai')">Vrai</button>
           <button class="vf-btn" onclick="selectVf(this,'faux')">Faux</button>
         </div>
-        <div class="vf-feedback">Faux — il fallait dire « j'ai regardé ». Action complète, du début à la fin : passé composé.</div>
+        <div class="vf-feedback">Faux — Il fallait dire « j'ai regardé ». L'action a été menée à son terme du début à la fin : passé composé.</div>
       </div>
 
       <div class="vf-item" data-correct="vrai">
@@ -901,17 +1362,17 @@
           <button class="vf-btn" onclick="selectVf(this,'vrai')">Vrai</button>
           <button class="vf-btn" onclick="selectVf(this,'faux')">Faux</button>
         </div>
-        <div class="vf-feedback">Vrai — « l'année dernière » = moment précis, action unique : passé composé.</div>
+        <div class="vf-feedback">Vrai — « l'année dernière » = moment déterminé dans le passé, action unique : passé composé.</div>
       </div>
 
       <div class="btn-row">
-        <button class="btn primary sm" onclick="checkVf()">Vérifier</button>
+        <button class="btn primary sm" onclick="checkVf()">Vérifier le test</button>
         <button class="btn ghost sm" onclick="resetVf()">Réinitialiser</button>
       </div>
     </div>
 
     <div class="card tabscore-card">
-      <div class="score-line"><span>Score total de l'onglet</span><span id="syst-tabscoretext">0 / 0</span></div>
+      <div class="score-line"><span>Progression de l'onglet</span><span id="syst-tabscoretext">0 / 0</span></div>
       <div class="score-bar"><div class="score-fill" id="syst-tabscorefill"></div></div>
     </div>
   </section>
@@ -920,35 +1381,42 @@
 
 <footer class="sig">
   Conception pédagogique : <strong>Nadia Aguilar Neri</strong><br>
-  Passé composé ou imparfait — Niveau A2 · FLE, 2026
+  Passé composé ou imparfait — Niveau A2 · FLE
 </footer>
 
 <div class="toast" id="toast"></div>
 
 <script>
+  /* Navigation par onglets */
   function showTab(name){
-    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-    document.getElementById('panel-'+name).classList.add('active');
-    document.querySelector('.tab-btn[data-tab="'+name+'"]').classList.add('active');
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    const panel = document.getElementById('panel-' + name);
+    if(panel) panel.classList.add('active');
+    const btn = document.querySelector('.tab-btn[data-tab="' + name + '"]');
+    if(btn) btn.classList.add('active');
   }
 
+  /* Normalisation pour comparaison de texte tolérante */
   function norm(s){
-    return s.trim().toLowerCase()
-      .replace(/[‘’`´]/g,"'")
-      .replace(/\s+/g,' ');
+    return (s || '').trim().toLowerCase()
+      .replace(/[‘’`´]/g, "'")
+      .replace(/\s+/g, ' ');
   }
 
+  /* Toast de rétroaction */
   function toast(msg){
     const el = document.getElementById('toast');
+    if(!el) return;
     el.textContent = msg;
     el.classList.add('show');
-    setTimeout(()=>el.classList.remove('show'), 2800);
+    setTimeout(() => el.classList.remove('show'), 2800);
   }
 
-  /* ===== Tab aggregate score ===== */
+  /* Calcul et mise à jour du score par onglet */
   function tabScoreCounts(tabId){
-    const root = document.getElementById('panel-'+tabId);
+    const root = document.getElementById('panel-' + tabId);
+    if(!root) return { correct: 0, total: 0 };
     const vinputs = root.querySelectorAll('.vinput');
     const badges = root.querySelectorAll('.cl-badge');
     const vfitems = root.querySelectorAll('.vf-item');
@@ -959,137 +1427,170 @@
     correct += root.querySelectorAll('.cl-badge.right').length;
     correct += root.querySelectorAll('.vf-item.right').length;
     correct += root.querySelectorAll('.match-select.correct').length;
-    return {correct, total};
-  }
-  function updateTabScore(tabId){
-    const {correct, total} = tabScoreCounts(tabId);
-    const fill = document.getElementById(tabId+'-tabscorefill');
-    const text = document.getElementById(tabId+'-tabscoretext');
-    if(!fill || !text) return;
-    text.textContent = correct+' / '+total;
-    fill.style.width = (total ? (correct/total*100) : 0)+'%';
+    return { correct, total };
   }
 
-  /* ===== Generic fill-in activities ===== */
+  function updateTabScore(tabId){
+    const { correct, total } = tabScoreCounts(tabId);
+    const fill = document.getElementById(tabId + '-tabscorefill');
+    const text = document.getElementById(tabId + '-tabscoretext');
+    if(!fill || !text) return;
+    text.textContent = correct + ' / ' + total;
+    fill.style.width = (total ? (correct / total * 100) : 0) + '%';
+  }
+
+  /* Vérification générique des exercices à trous */
   function checkFill(containerId, tabId){
     const root = document.getElementById(containerId);
+    if(!root) return;
     const inputs = root.querySelectorAll('.vinput');
     let correct = 0;
-    inputs.forEach(inp=>{
+    inputs.forEach(inp => {
       const ans = norm(inp.dataset.answer);
       const alt = inp.dataset.alt ? norm(inp.dataset.alt) : '';
       const val = norm(inp.value);
-      inp.classList.remove('correct','incorrect');
+      inp.classList.remove('correct', 'incorrect');
       if(val === ans || (alt && val === alt)){
-        inp.classList.add('correct'); correct++;
+        inp.classList.add('correct');
+        correct++;
       } else if(val.length){
         inp.classList.add('incorrect');
       }
     });
-    root.querySelectorAll('.explain').forEach(e=>e.classList.add('show'));
+    root.querySelectorAll('.explain').forEach(e => e.classList.add('show'));
     updateTabScore(tabId);
-    toast(correct===inputs.length ? 'Bravo ! Tout est correct.' : correct+'/'+inputs.length+' — regardez les explications.');
-  }
-  function resetFill(containerId, tabId){
-    const root = document.getElementById(containerId);
-    root.querySelectorAll('.vinput').forEach(inp=>{inp.value=''; inp.classList.remove('correct','incorrect');});
-    root.querySelectorAll('.explain').forEach(e=>e.classList.remove('show'));
-    updateTabScore(tabId);
-    toast('Activité réinitialisée');
+    toast(correct === inputs.length ? 'Bravo ! Tout est exact.' : correct + ' / ' + inputs.length + ' verbes corrects. Lisez les explications !');
   }
 
-  /* ===== Classez ===== */
+  function resetFill(containerId, tabId){
+    const root = document.getElementById(containerId);
+    if(!root) return;
+    root.querySelectorAll('.vinput').forEach(inp => {
+      inp.value = '';
+      inp.classList.remove('correct', 'incorrect');
+    });
+    root.querySelectorAll('.explain').forEach(e => e.classList.remove('show'));
+    updateTabScore(tabId);
+    toast('Exercice réinitialisé');
+  }
+
+  /* Activité VI : Classez les badges */
   function cycleBadge(el){
     const order = ['', 'pc', 'imp'];
     const cur = el.dataset.state || '';
-    const next = order[(order.indexOf(cur)+1) % order.length];
+    const next = order[(order.indexOf(cur) + 1) % order.length];
     el.dataset.state = next;
-    el.classList.remove('right','wrong');
+    el.classList.remove('right', 'wrong');
     const stateEl = el.querySelector('.state');
-    if(stateEl) stateEl.textContent = next ? (next==='pc' ? ' · PC' : ' · IMP') : '';
-    const fix = el.querySelector('.fix'); if(fix) fix.remove();
+    if(stateEl) stateEl.textContent = next ? (next === 'pc' ? ' · Passé composé' : ' · Imparfait') : '';
+    const fix = el.querySelector('.fix');
+    if(fix) fix.remove();
   }
+
   function checkCl(){
     const badges = document.querySelectorAll('#cl-grid .cl-badge');
     let correct = 0;
-    badges.forEach(b=>{
-      b.classList.remove('right','wrong');
-      const old = b.querySelector('.fix'); if(old) old.remove();
+    badges.forEach(b => {
+      b.classList.remove('right', 'wrong');
+      const old = b.querySelector('.fix');
+      if(old) old.remove();
       if(b.dataset.state === b.dataset.correct){
-        b.classList.add('right'); correct++;
+        b.classList.add('right');
+        correct++;
       } else {
         b.classList.add('wrong');
         const fix = document.createElement('span');
-        fix.className='fix';
-        fix.textContent = '→ ' + (b.dataset.correct==='pc' ? 'passé composé' : 'imparfait');
+        fix.className = 'fix';
+        fix.textContent = '→ ' + (b.dataset.correct === 'pc' ? 'passé composé' : 'imparfait');
         b.appendChild(fix);
       }
     });
     updateTabScore('syst');
-    toast(correct===badges.length ? 'Parfait ! Toutes les expressions sont bien classées.' : correct+'/'+badges.length+' — corrigez et réessayez.');
-  }
-  function resetCl(){
-    document.querySelectorAll('#cl-grid .cl-badge').forEach(b=>{
-      b.dataset.state=''; b.classList.remove('right','wrong');
-      const s=b.querySelector('.state'); if(s) s.textContent='';
-      const fix=b.querySelector('.fix'); if(fix) fix.remove();
-    });
-    updateTabScore('syst');
-    toast('Activité réinitialisée');
+    toast(correct === badges.length ? 'Parfait ! Toutes les expressions sont bien classées.' : correct + ' / ' + badges.length + ' correctes.');
   }
 
-  /* ===== Associez ===== */
+  function resetCl(){
+    document.querySelectorAll('#cl-grid .cl-badge').forEach(b => {
+      b.dataset.state = '';
+      b.classList.remove('right', 'wrong');
+      const s = b.querySelector('.state');
+      if(s) s.textContent = '';
+      const fix = b.querySelector('.fix');
+      if(fix) fix.remove();
+    });
+    updateTabScore('syst');
+    toast('Classement réinitialisé');
+  }
+
+  /* Activité VII : Associez */
   function checkMatch(){
     const selects = document.querySelectorAll('#match-grid .match-select');
     let correct = 0;
-    selects.forEach(s=>{
-      s.classList.remove('correct','incorrect');
-      if(s.value === s.dataset.correct){ s.classList.add('correct'); correct++; }
-      else if(s.value){ s.classList.add('incorrect'); }
+    selects.forEach(s => {
+      s.classList.remove('correct', 'incorrect');
+      if(s.value === s.dataset.correct){
+        s.classList.add('correct');
+        correct++;
+      } else if(s.value){
+        s.classList.add('incorrect');
+      }
     });
     updateTabScore('syst');
-    toast(correct===selects.length ? 'Parfait ! Toutes les paires sont correctes.' : correct+'/'+selects.length+' — réessayez.');
-  }
-  function resetMatch(){
-    document.querySelectorAll('#match-grid .match-select').forEach(s=>{s.value=''; s.classList.remove('correct','incorrect');});
-    updateTabScore('syst');
-    toast('Activité réinitialisée');
+    toast(correct === selects.length ? 'Excellent ! Toutes les associations sont correctes.' : correct + ' / ' + selects.length + ' correctes.');
   }
 
-  /* ===== Vrai/Faux ===== */
+  function resetMatch(){
+    document.querySelectorAll('#match-grid .match-select').forEach(s => {
+      s.value = '';
+      s.classList.remove('correct', 'incorrect');
+    });
+    updateTabScore('syst');
+    toast('Associations réinitialisées');
+  }
+
+  /* Activité VIII : Vrai ou Faux */
   function selectVf(btn, val){
     const item = btn.closest('.vf-item');
-    item.querySelectorAll('.vf-btn').forEach(b=>b.classList.remove('selected'));
+    item.querySelectorAll('.vf-btn').forEach(b => b.classList.remove('selected'));
     btn.classList.add('selected');
     item.dataset.picked = val;
-    item.classList.remove('right','wrong');
+    item.classList.remove('right', 'wrong');
     item.querySelector('.vf-feedback').classList.remove('show');
   }
+
   function checkVf(){
     const items = document.querySelectorAll('#vf-list .vf-item');
     let correct = 0;
-    items.forEach(it=>{
-      it.classList.remove('right','wrong');
+    items.forEach(it => {
+      it.classList.remove('right', 'wrong');
       const picked = it.dataset.picked;
-      if(picked === it.dataset.correct){ it.classList.add('right'); correct++; }
-      else if(picked){ it.classList.add('wrong'); }
+      if(picked === it.dataset.correct){
+        it.classList.add('right');
+        correct++;
+      } else if(picked){
+        it.classList.add('wrong');
+      }
       it.querySelector('.vf-feedback').classList.add('show');
     });
     updateTabScore('syst');
-    toast(correct===items.length ? 'Excellent ! Vous maîtrisez la règle.' : correct+'/'+items.length+' — lisez les explications.');
+    toast(correct === items.length ? 'Bravo ! Vous maîtrisez parfaitement l\'emploi des temps.' : correct + ' / ' + items.length + ' réponses exactes.');
   }
+
   function resetVf(){
-    document.querySelectorAll('#vf-list .vf-item').forEach(it=>{
-      it.classList.remove('right','wrong');
+    document.querySelectorAll('#vf-list .vf-item').forEach(it => {
+      it.classList.remove('right', 'wrong');
       it.removeAttribute('data-picked');
-      it.querySelectorAll('.vf-btn').forEach(b=>b.classList.remove('selected'));
+      it.querySelectorAll('.vf-btn').forEach(b => b.classList.remove('selected'));
       it.querySelector('.vf-feedback').classList.remove('show');
     });
     updateTabScore('syst');
-    toast('Activité réinitialisée');
+    toast('Test réinitialisé');
   }
 
-  ['ex1','ex2','commissariat','syst'].forEach(updateTabScore);
+  /* Initialisation des compteurs */
+  document.addEventListener('DOMContentLoaded', () => {
+    ['ex1', 'ex2', 'commissariat', 'syst'].forEach(updateTabScore);
+  });
 </script>
 
 </body>
