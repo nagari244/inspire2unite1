@@ -344,6 +344,109 @@
   .callout p { margin: 0.35rem 0; font-size: 0.9rem; line-height: 1.5; color: var(--ink); }
   .callout .fr-ex { font-style: italic; font-weight: 600; color: var(--explain-color); }
 
+  /* ==================== SUPPORTS MÉDIAS & VIDÉO (GITHUB READY) ==================== */
+  .media-card {
+    background: var(--surface-2);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem;
+    margin: 1.1rem 0;
+  }
+  .gif-frame {
+    width: 100%;
+    max-width: 620px;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+    background: #000;
+  }
+  .gif-frame img, .gif-frame video {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .media-caption {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-top: 0.75rem;
+    text-align: center;
+    color: var(--ink-soft);
+  }
+  .media-caption strong.sub-black {
+    background: #1E293B;
+    color: #F8FAFC;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-weight: 700;
+  }
+  .media-caption strong.sub-white {
+    background: #F1F5F9;
+    color: #0F172A;
+    border: 1px solid #CBD5E1;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-weight: 700;
+  }
+  .video-embed-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    align-items: center;
+    background: var(--surface-2);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 1.1rem;
+  }
+  .video-player-wrapper {
+    width: 100%;
+    max-width: 320px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+    aspect-ratio: 9/16;
+    max-height: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .video-player-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Agencement côte à côte : Phrases opposées & Vidéo */
+  .oppose-layout {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 1.25rem;
+    align-items: start;
+  }
+  @media (max-width: 860px) {
+    .oppose-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .es-fr-bridge {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    width: 100%;
+    margin-top: 0.85rem;
+  }
+  @media (max-width: 580px) { .es-fr-bridge { grid-template-columns: 1fr; } }
+  .bridge-item {
+    padding: 0.85rem 0.95rem;
+    border-radius: 10px;
+    font-size: 0.86rem;
+    line-height: 1.45;
+  }
+  .bridge-item.imp { background: var(--imp-bg); border-left: 4px solid var(--imp-color); }
+  .bridge-item.pc { background: var(--pc-bg); border-left: 4px solid var(--pc-color); }
+
   /* ==================== TABLEAU DES OPPOSITIONS ==================== */
   .pairs { display: flex; flex-direction: column; gap: 0.75rem; }
   .pair-row {
@@ -817,6 +920,24 @@
         </div>
       </div>
 
+      <!-- Animation GIF : Film vs Photo -->
+      <div class="media-card">
+        <div class="gif-frame">
+          <img
+            id="anim-pc-imp"
+            src="Passé composé - imparfait.gif"
+            alt="Animation démonstrative : Imparfait (décor) vs Passé composé (événement)"
+            loading="lazy"
+            onerror="if(this.src.indexOf('.gif') !== -1){ this.src='Passé composé - imparfait.jpg'; } else if(this.src.indexOf('Passe_compose_imparfait') === -1){ this.src='Passe_compose_imparfait.gif'; }"
+          >
+        </div>
+        <p class="media-caption">
+          🎬 <strong>Regardez la vidéo / le GIF :</strong><br>
+          • <strong class="sub-black">Sous-titres noirs</strong> = Le décor / l'atmosphère continue à l'<strong>imparfait</strong> (<em>« La journée était calme. Le ciel était bleu. »</em>)<br>
+          • <strong class="sub-white">Sous-titres blancs</strong> = Les actions ponctuelles qui surgissent au <strong>passé composé</strong> !
+        </p>
+      </div>
+
       <div class="callout">
         <h4>⚡ Les 3 signaux majeurs de la rupture</h4>
         <div class="syn-row">
@@ -829,37 +950,102 @@
       </div>
     </div>
 
+    <!-- CARTE FUSIONNÉE : PHRASES OPPOSÉES & VIDÉO CÔTE À CÔTE -->
     <div class="card">
-      <h2>Phrases opposées : Comparez la nuance</h2>
-      <p class="lead">Même verbe, même situation : seule l'expression temporelle commande le choix du temps verbal.</p>
-      <div class="pairs">
-        <div class="pair-row">
-          <div class="pair-cell imp"><span class="exp imp">d'habitude</span>, je mangeais à la cantine.</div>
-          <div class="pair-cell pc"><span class="exp pc">hier</span>, j'ai mangé au restaurant.</div>
-        </div>
-        <div class="pair-row">
-          <div class="pair-cell imp"><span class="exp imp">tous les étés</span>, on allait à la mer.</div>
-          <div class="pair-cell pc"><span class="exp pc">l'été dernier</span>, on est allé à la montagne.</div>
-        </div>
-        <div class="pair-row">
-          <div class="pair-cell imp"><span class="exp imp">quand j'avais 10 ans</span>, j'habitais à Dakar.</div>
-          <div class="pair-cell pc"><span class="exp pc">un jour</span>, j'ai eu un accident qui a changé ma vie.</div>
-        </div>
-        <div class="pair-row">
-          <div class="pair-cell imp"><span class="exp imp">autrefois</span>, les gens écrivaient des lettres.</div>
-          <div class="pair-cell pc"><span class="exp pc">hier soir</span>, j'ai écrit mon premier e-mail en français.</div>
-        </div>
-        <div class="pair-row">
-          <div class="pair-cell imp"><span class="exp imp">en général</span>, il faisait beau en été.</div>
-          <div class="pair-cell pc"><span class="exp pc">soudain</span>, il a commencé à pleuvoir.</div>
-        </div>
-      </div>
+      <div class="oppose-layout">
+        <!-- Colonne Gauche : Phrases opposées & Passerelle espagnole -->
+        <div class="oppose-left">
+          <h2>Phrases opposées : Comparez la nuance</h2>
+          <p class="lead">Même verbe, même situation : seule l'expression temporelle commande le choix du temps verbal.</p>
+          
+          <div class="pairs">
+            <div class="pair-row">
+              <div class="pair-cell imp"><span class="exp imp">d'habitude</span>, je mangeais à la cantine.</div>
+              <div class="pair-cell pc"><span class="exp pc">hier</span>, j'ai mangé au restaurant.</div>
+            </div>
+            <div class="pair-row">
+              <div class="pair-cell imp"><span class="exp imp">tous les étés</span>, on allait à la mer.</div>
+              <div class="pair-cell pc"><span class="exp pc">l'été dernier</span>, on est allé à la montagne.</div>
+            </div>
+            <div class="pair-row">
+              <div class="pair-cell imp"><span class="exp imp">quand j'avais 10 ans</span>, j'habitais à Dakar.</div>
+              <div class="pair-cell pc"><span class="exp pc">un jour</span>, j'ai eu un accident qui a changé ma vie.</div>
+            </div>
+            <div class="pair-row">
+              <div class="pair-cell imp"><span class="exp imp">autrefois</span>, les gens écrivaient des lettres.</div>
+              <div class="pair-cell pc"><span class="exp pc">hier soir</span>, j'ai écrit mon premier e-mail en français.</div>
+            </div>
+            <div class="pair-row">
+              <div class="pair-cell imp"><span class="exp imp">en général</span>, il faisait beau en été.</div>
+              <div class="pair-cell pc"><span class="exp pc">soudain</span>, il a commencé à pleuvoir.</div>
+            </div>
+          </div>
 
-      <h3>Et combinés dans la même phrase ?</h3>
-      <p class="lead" style="margin-bottom:.4rem;">Le film se déroule... et une photo nette vient l'interrompre :</p>
-      <div class="pair-row" style="grid-template-columns:1fr;">
-        <div class="pair-cell" style="background:var(--surface-2); border-left: 4px solid var(--primary-navy);">
-          Je <span class="exp imp">regardais</span> la télé <strong>quand</strong> le téléphone <span class="exp pc">a sonné</span>.
+          <h3>Et combinés dans la même phrase ?</h3>
+          <p class="lead" style="margin-bottom:.4rem;">Le film se déroule... et une photo nette vient l'interrompre :</p>
+          <div class="pair-row" style="grid-template-columns:1fr; margin-bottom: 0.9rem;">
+            <div class="pair-cell" style="background:var(--surface-2); border-left: 4px solid var(--primary-main);">
+              Je <span class="exp imp">regardais</span> la télé <strong>quand</strong> le téléphone <span class="exp pc">a sonné</span>.
+            </div>
+          </div>
+
+          <!-- Passerelle contrastive espagnol-français (équivalences et exemples) -->
+          <div class="es-fr-bridge">
+            <div class="bridge-item imp">
+              <strong style="color:var(--imp-strong); font-size:0.9rem;">🇪🇸 Pretérito imperfecto (copretérito)</strong>
+              <div style="margin:0.2rem 0; font-weight:700; color:var(--primary-main);">➔ 🇫🇷 Imparfait</div>
+              <p style="margin:0.35rem 0 0.25rem; font-style:italic; font-weight:600; color:var(--ink);">
+                « Comía tranquilamente / hacía frío / cuando tenía 10 años »
+              </p>
+              <p style="margin:0; font-size:0.8rem; color:var(--ink-soft);">
+                ➔ Habitude, description d'état et décor de fond (le film).
+              </p>
+            </div>
+            <div class="bridge-item pc">
+              <strong style="color:var(--pc-strong); font-size:0.9rem;">🇪🇸 Pasado compuesto o simple</strong>
+              <div style="margin:0.2rem 0; font-weight:700; color:var(--primary-main);">➔ 🇫🇷 Passé composé</div>
+              <p style="margin:0.35rem 0 0.25rem; font-style:italic; font-weight:600; color:var(--ink);">
+                « Comí en cinco minutos / de repente sonó el timbre »
+              </p>
+              <p style="margin:0; font-size:0.8rem; color:var(--ink-soft);">
+                ➔ Action ponctuelle, coupure nette dans le temps (la photo).
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Colonne Droite : Vidéo explicative et lien Instagram -->
+        <div class="video-embed-box">
+          <div style="width: 100%; text-align: center;">
+            <span class="activity-title" style="margin-bottom: 0.2rem;">Vidéo explicative</span>
+            <h3 style="margin: 0 0 0.35rem; font-size: 1.05rem;">Faisons le point en vidéo</h3>
+            <p class="lead" style="margin: 0 0 0.75rem; font-size: 0.83rem;">Observez l'opposition visuelle et la structure mentale :</p>
+          </div>
+
+          <!-- Lecteur vidéo compatible GitHub / Local -->
+          <div class="video-player-wrapper">
+            <video
+              controls
+              playsinline
+              preload="metadata"
+              poster="Passé composé - imparfait.jpg"
+              id="reel-video-player"
+            >
+              <source src="passe_compose_imparfait_reel.mp4" type="video/mp4">
+              <source src="video.mp4" type="video/mp4">
+              Votre navigateur ne prend pas en charge la balise vidéo. Vous pouvez visionner la vidéo via le lien ci-dessous.
+            </video>
+          </div>
+
+          <a
+            href="https://www.instagram.com/reel/DZVZH9pyqze/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA=="
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn primary sm"
+            style="width: 100%; max-width: 320px; background:linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color:#fff; border:none; text-decoration:none;"
+          >
+            <span style="margin-right:6px;">📸</span> Voir le Reel sur Instagram
+          </a>
         </div>
       </div>
     </div>
