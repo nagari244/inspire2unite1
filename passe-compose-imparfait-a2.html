@@ -344,7 +344,7 @@
   .callout p { margin: 0.35rem 0; font-size: 0.9rem; line-height: 1.5; color: var(--ink); }
   .callout .fr-ex { font-style: italic; font-weight: 600; color: var(--explain-color); }
 
-  /* ==================== SUPPORTS MÉDIAS & VIDÉO (GITHUB READY) ==================== */
+  /* ==================== SUPPORTS MÉDIAS & VIDÉO HTML5 ==================== */
   .media-card {
     background: var(--surface-2);
     border: 1.5px solid var(--border);
@@ -401,20 +401,22 @@
   .video-player-wrapper {
     width: 100%;
     max-width: 320px;
-    border-radius: 12px;
+    border-radius: 14px;
     overflow: hidden;
     background: #000;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.18);
-    aspect-ratio: 9/16;
-    max-height: 480px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
     display: flex;
     align-items: center;
     justify-content: center;
+    aspect-ratio: 9 / 16;
+    position: relative;
   }
   .video-player-wrapper video {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
+    border-radius: 14px;
   }
 
   /* Agencement côte à côte : Phrases opposées & Vidéo */
@@ -1014,26 +1016,26 @@
           </div>
         </div>
 
-        <!-- Colonne Droite : Vidéo explicative et lien Instagram -->
+        <!-- Colonne Droite : Lecteur vidéo pour diferenciar_pc_imp.mp4 -->
         <div class="video-embed-box">
           <div style="width: 100%; text-align: center;">
             <span class="activity-title" style="margin-bottom: 0.2rem;">Vidéo explicative</span>
             <h3 style="margin: 0 0 0.35rem; font-size: 1.05rem;">Faisons le point en vidéo</h3>
-            <p class="lead" style="margin: 0 0 0.75rem; font-size: 0.83rem;">Observez l'opposition visuelle et la structure mentale :</p>
+            <p class="lead" style="margin: 0 0 0.75rem; font-size: 0.83rem;">Visionnez la capsule pour bien distinguer le film et la photo :</p>
           </div>
 
-          <!-- Lecteur vidéo compatible GitHub / Local -->
+          <!-- Lecteur vidéo HTML5 configuré avec diferenciar_pc_imp.mp4 -->
           <div class="video-player-wrapper">
             <video
+              id="player-pc-imp"
               controls
               playsinline
               preload="metadata"
               poster="Passé composé - imparfait.jpg"
-              id="reel-video-player"
             >
-              <source src="passe_compose_imparfait_reel.mp4" type="video/mp4">
-              <source src="video.mp4" type="video/mp4">
-              Votre navigateur ne prend pas en charge la balise vidéo. Vous pouvez visionner la vidéo via le lien ci-dessous.
+              <source src="diferenciar_pc_imp.mp4" type="video/mp4">
+              <source src="diferenciar_pc_imp.MOV" type="video/quicktime">
+              Votre navigateur ne prend pas en charge la lecture directe de ce format vidéo.
             </video>
           </div>
 
@@ -1044,7 +1046,7 @@
             class="btn primary sm"
             style="width: 100%; max-width: 320px; background:linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color:#fff; border:none; text-decoration:none;"
           >
-            <span style="margin-right:6px;">📸</span> Voir le Reel sur Instagram
+            <span style="margin-right:6px;">📸</span> Ouvrir sur Instagram (Lien de secours)
           </a>
         </div>
       </div>
