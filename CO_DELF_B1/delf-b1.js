@@ -6,12 +6,24 @@
 
 const VF = ["Vrai", "Faux"];
 
+// Une couleur par activité, d'après les cinq couleurs du logo de l'OIF
+// (vert, jaune, rouge, violet, bleu), ajustées pour la lisibilité.
+function applyColor(c) {
+    const r = document.documentElement.style;
+    r.setProperty("--accent", c.accent);
+    r.setProperty("--accent-dark", c.dark);
+    r.setProperty("--on-accent", c.on);
+    r.setProperty("--accent-text", c.text);
+    r.setProperty("--accent-soft", c.soft);
+}
+
 const activitiesData = {
     1: {
         title: "Comprendre des échanges",
         subtitle: "Un album pour Nadia",
         type: "Conversation entre locuteurs natifs",
         audio: "DELFB1_activite01.mp3",
+        color: { name: "vert", accent: "#2E8540", dark: "#24692F", on: "#ffffff", text: "#2E8540", soft: "#E8F3EA" },
         instruction: "Vous allez entendre une conversation entre deux personnes. Lisez d'abord les questions, puis écoutez le document et choisissez la bonne réponse.",
         questions: [
             { text: "Nadia est…", options: ["la fille de la personne qui cherche un cadeau.", "la nièce de la personne qui cherche un cadeau.", "une amie de la famille."], ans: 1, quote: "…un album de 10 chansons personnalisées avec le prénom de ta nièce." },
@@ -47,6 +59,7 @@ const activitiesData = {
         subtitle: "Un nouveau sport en ville",
         type: "Conversation entre locuteurs natifs",
         audio: "DELFB1_activite02.mp3",
+        color: { name: "jaune", accent: "#FFC20E", dark: "#E5AC00", on: "#1f2937", text: "#8A6A00", soft: "#FFF6D9" },
         instruction: "Vous allez entendre une conversation entre deux amies. Lisez d'abord les questions, puis écoutez le document et choisissez la bonne réponse.",
         questions: [
             { text: "Jacqueline ne fait plus de qi gong parce qu'elle…", options: ["n'a plus le temps.", "a envie de bouger davantage.", "trouve ce sport trop cher."], ans: 1, quote: "Non, cette année j'ai envie de bouger un peu plus. Je fais de l'urban training." },
@@ -82,6 +95,7 @@ const activitiesData = {
         subtitle: "Interview radiophonique",
         type: "Interview",
         audio: "DELFB1_activite03.mp3",
+        color: { name: "rouge", accent: "#D7192D", dark: "#A8131F", on: "#ffffff", text: "#C0172A", soft: "#FCE8EA" },
         instruction: "Vous allez entendre une interview. Lisez d'abord les questions, puis écoutez le document et choisissez la bonne réponse.",
         questions: [
             { text: "Madame Boinard travaille…", options: ["dans une association d'aide aux seniors.", "à la Direction centrale de la sécurité publique.", "pour la société du gaz et de l'électricité."], ans: 1, quote: "Vous êtes chef de la division Prévention et Partenariat à la Direction centrale de la sécurité publique." },
@@ -111,6 +125,7 @@ const activitiesData = {
         subtitle: "Chez le médecin",
         type: "Conversation entre locuteurs natifs",
         audio: "DELFB1_activite04.mp3",
+        color: { name: "violet", accent: "#7B2C83", dark: "#5E1F64", on: "#ffffff", text: "#7B2C83", soft: "#F3E9F4" },
         instruction: "Vous allez entendre une conversation entre une patiente et son médecin. Lisez d'abord les questions, puis écoutez le document et choisissez la bonne réponse.",
         questions: [
             { text: "Madame Bonnefoy va chez le médecin parce qu'elle…", options: ["dort mal la nuit.", "se sent fatiguée et n'a envie de rien.", "a mal aux yeux."], ans: 1, quote: "…je me sens fatiguée. Je n'ai envie de rien." },
@@ -145,6 +160,7 @@ const activitiesData = {
         subtitle: "Consommer local",
         type: "Conversation entre locuteurs natifs",
         audio: "DELFB1_activite05.mp3",
+        color: { name: "bleu", accent: "#0077C0", dark: "#005A92", on: "#ffffff", text: "#0077C0", soft: "#E5F1F9" },
         instruction: "Vous allez entendre une conversation entre deux amis. Lisez d'abord les questions, puis écoutez le document et choisissez la bonne réponse.",
         questions: [
             { text: "La réunion pour créer l'AMAP a lieu…", options: ["à la mairie de Puy-Guillaume.", "dans une ferme de la région.", "à la salle des fêtes de Limons."], ans: 2, quote: "La réunion est à la salle des fêtes." },
@@ -206,17 +222,17 @@ function initIndex() {
         const act = activitiesData[id];
         const done = !!scores[id];
         return `
-        <a href="${pageOf(id)}" class="group bg-white rounded-2xl border border-slate-200 shadow-sm p-5 flex flex-col justify-between gap-4 hover:border-[#00a8b5] hover:shadow-md transition-all">
+        <a href="${pageOf(id)}" style="border-top-color:${act.color.accent}" class="group bg-white rounded-2xl border border-slate-200 border-t-8 shadow-sm p-5 flex flex-col justify-between gap-4 hover:shadow-md hover:-translate-y-0.5 transition-all">
             <div>
                 <div class="flex items-center justify-between gap-2 mb-2">
-                    <span class="text-xs font-bold text-white bg-[#00a8b5] px-2 py-0.5 rounded uppercase tracking-wide">Activité ${id}</span>
+                    <span style="background:${act.color.accent};color:${act.color.on}" class="text-xs font-bold px-2 py-0.5 rounded uppercase tracking-wide">Activité ${id}</span>
                     ${badgeHtml(id, scores)}
                 </div>
                 <h3 class="text-lg font-bold text-slate-800 leading-snug">${act.title}</h3>
                 <p class="text-sm text-slate-500 mt-1">${act.subtitle}</p>
                 <p class="text-xs text-slate-400 italic mt-2"><i class="fa-solid fa-headphones-simple mr-1"></i>${act.type} · ${act.questions.length} questions</p>
             </div>
-            <span class="inline-flex items-center gap-2 text-sm font-semibold text-[#0f2c59] group-hover:text-[#00a8b5]">
+            <span style="color:${act.color.text}" class="inline-flex items-center gap-2 text-sm font-semibold">
                 ${done ? "Refaire l'activité" : "Commencer"} <i class="fa-solid fa-arrow-right text-xs"></i>
             </span>
         </a>`;
@@ -238,6 +254,7 @@ function initActivity(id) {
     currentId = id;
     const act = activitiesData[id];
     document.title = `DELF B1 – Activité ${id} : ${act.title}`;
+    applyColor(act.color);
 
     renderMenu();
 
@@ -284,12 +301,12 @@ function renderMenu() {
 
         const a = document.createElement("a");
         a.href = pageOf(id);
-        a.className = active
-            ? "w-full text-left p-4 bg-blue-50/75 border-l-4 border-[#00a8b5] transition-all flex items-center justify-between text-slate-900"
-            : "w-full text-left p-4 hover:bg-slate-50 transition-all flex items-center justify-between border-l-4 border-transparent";
+        a.className = "w-full text-left p-4 hover:bg-slate-50 transition-all flex items-center justify-between border-l-4";
+        a.style.borderLeftColor = act.color.accent;
+        if (active) a.style.background = act.color.soft;
         a.innerHTML = `
             <div class="truncate pr-2">
-                <span class="text-xs text-slate-400 block font-bold">ACTIVITÉ ${id}</span>
+                <span class="text-xs block font-bold" style="color:${act.color.text}">ACTIVITÉ ${id}</span>
                 <span class="text-sm font-semibold text-slate-700 block truncate">${act.title}</span>
             </div>
             <span id="badge-${id}">${badgeHtml(id, scores)}</span>`;
@@ -327,7 +344,7 @@ function renderQuestions() {
         const isVF = q.options === VF;
         const opts = q.options.map((opt, o) => `
             <label class="option-label flex items-start gap-3 bg-white px-4 py-3 rounded-xl border border-slate-200 cursor-pointer hover:border-blue-300 transition-all text-sm font-medium ${isVF ? "" : "w-full"}">
-                <input type="radio" name="q${i}" value="${o}" class="text-[#00a8b5] focus:ring-[#00a8b5] h-4 w-4 mt-0.5 shrink-0">
+                <input type="radio" name="q${i}" value="${o}" class="h-4 w-4 mt-0.5 shrink-0">
                 <span>${isVF ? "" : `<span class="font-bold text-[#0f2c59] mr-1">${LETTERS[o]}.</span>`}${opt}</span>
             </label>`).join("");
         const correctLabel = isVF ? q.options[q.ans] : `${LETTERS[q.ans]}. ${q.options[q.ans]}`;
@@ -335,7 +352,7 @@ function renderQuestions() {
         <div id="block-${i}" class="p-5 rounded-2xl bg-slate-50/80 border border-slate-200/60 transition-all relative">
             <div class="flex justify-between items-start gap-4">
                 <p class="text-sm sm:text-base font-semibold text-slate-800 leading-snug">
-                    <span class="text-[#00a8b5] mr-1">${i + 1}.</span>${q.text}
+                    <span class="text-[var(--accent-text)] mr-1">${i + 1}.</span>${q.text}
                     ${isVF ? `<span class="ml-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 align-middle">Vrai / Faux</span>` : ""}
                 </p>
                 <span id="indicator-${i}" class="hidden shrink-0 text-sm font-bold flex items-center gap-1"></span>
