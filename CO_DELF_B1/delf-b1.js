@@ -429,10 +429,18 @@ function initActivity(id) {
     document.getElementById("transcript-text").textContent = act.transcription;
 
     const audio = document.getElementById("audio-player");
-    audio.src = act.audio;
+    // GitHub Pages distingue majuscules et minuscules : on essaie plusieurs extensions
+    const base = act.audio.replace(/\.[^.]+$/, "");
+    const candidates = [".mp3", ".MP3", ".m4a", ".wav"].map(ext => base + ext);
+    let attempt = 0;
+    audio.src = candidates[attempt];
     document.getElementById("audio-name").textContent = act.audio;
     audio.addEventListener("error", () => {
-        document.getElementById("audio-error").classList.remove("hidden");
+        if (++attempt < candidates.length) {
+            audio.src = candidates[attempt];
+        } else {
+            document.getElementById("audio-error").classList.remove("hidden");
+        }
     });
 
     // Navigation précédente / suivante
