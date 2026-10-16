@@ -1,10 +1,8 @@
 // =====================================================================
 //  DELF B1 – Compréhension de l'oral : données et logique partagées
 //  Format certification : questions fermées uniquement
-//  (QCM à 3 choix et Vrai / Faux, sans « On ne sait pas »)
+//  (QCM à 3 choix, sans « On ne sait pas » ni réponse ouverte)
 // =====================================================================
-
-const VF = ["Vrai", "Faux"];
 
 // Une couleur par activité, d'après les cinq couleurs du logo de l'OIF
 // (vert, jaune, rouge, violet, bleu), ajustées pour la lisibilité.
@@ -26,16 +24,16 @@ const activitiesData = {
         color: { name: "vert", accent: "#2E8540", dark: "#24692F", on: "#ffffff", text: "#2E8540", soft: "#E8F3EA" },
         instruction: "Vous allez entendre une conversation entre deux personnes. Lisez d'abord les questions, puis écoutez le document et choisissez la bonne réponse.",
         questions: [
-            { text: "Nadia est…", options: ["la fille de la personne qui cherche un cadeau.", "la nièce de la personne qui cherche un cadeau.", "une amie de la famille."], ans: 1, quote: "…un album de 10 chansons personnalisées avec le prénom de ta nièce." },
-            { text: "Pour son prochain anniversaire, Nadia va avoir…", options: ["8 ans.", "10 ans.", "7 ans."], ans: 0, quote: "Remarque, c'est normal, elle a bientôt 8 ans." },
-            { text: "Pourquoi est-il difficile de choisir un cadeau pour Nadia ?", options: ["Elle n'aime pas les jouets.", "Le budget est limité.", "Elle a déjà tout."], ans: 2, quote: "Elle est tellement gâtée, elle a tout !" },
-            { text: "« Star My Name », c'est…", options: ["un nouveau groupe de musique.", "un site où l'on commande des chansons personnalisées.", "une émission de télévision pour enfants."], ans: 1, quote: "Starmyname.com est un site où tu peux commander un album de 10 chansons personnalisées…" },
-            { text: "L'amie qui a commandé un album a payé…", options: ["un peu moins de 30 euros.", "exactement 30 euros.", "plus de 30 euros."], ans: 0, quote: "…ça ne lui a coûté pas tout à fait 30 euros…" },
-            { text: "Elle a reçu l'album…", options: ["le jour même.", "une semaine après.", "2 ou 3 jours après."], ans: 2, quote: "…et 2 ou 3 jours après, elle avait l'album avec le livret des paroles." },
-            { text: "Sur le site, on peut écouter des extraits des chansons avant de commander.", options: VF, ans: 0, quote: "Il te suffit de cliquer dessus et tu entends des extraits des chansons." },
-            { text: "Si le prénom de l'enfant n'est pas dans la liste…", options: ["on ne peut pas commander l'album.", "les chansons sont enregistrées sur mesure.", "on doit choisir un prénom proche."], ans: 1, quote: "Et s'il n'y est pas, les chansons sont enregistrées sur mesure." },
-            { text: "Olivier, le créateur du site, a eu cette idée…", options: ["pour la naissance de son premier enfant.", "pour l'anniversaire de sa nièce.", "pour un concours de chanson."], ans: 0, quote: "Olivier, le créateur du site, a eu cette idée pour la naissance de son premier enfant." },
-            { text: "Le site propose uniquement des albums de chansons.", options: VF, ans: 1, quote: "Tu peux même lui envoyer une carte d'anniversaire électronique… faire imprimer des cartes d'invitation pour ses copains et copines !" }
+            { text: "Nadia est…", options: ["la fille de la personne qui cherche un cadeau.","la nièce de la personne qui cherche un cadeau.","une amie de la famille."], ans: 1, quote: "…un album de 10 chansons personnalisées avec le prénom de ta nièce." },
+            { text: "Pour son prochain anniversaire, Nadia va avoir…", options: ["7 ans.","8 ans.","10 ans."], ans: 1, quote: "Remarque, c'est normal, elle a bientôt 8 ans." },
+            { text: "Pourquoi est-il difficile de choisir un cadeau pour Nadia ?", options: ["Elle n'aime pas les jouets.","Le budget est limité.","Elle a déjà tout."], ans: 2, quote: "Elle est tellement gâtée, elle a tout !" },
+            { text: "« Star My Name », c'est…", options: ["un nouveau groupe de musique.","un site où l'on commande des chansons personnalisées.","une émission de télévision pour enfants."], ans: 1, quote: "Starmyname.com est un site où tu peux commander un album de 10 chansons personnalisées…" },
+            { text: "L'amie qui a commandé un album a payé…", options: ["un peu moins de 30 euros.","exactement 30 euros.","plus de 30 euros."], ans: 0, quote: "…ça ne lui a coûté pas tout à fait 30 euros…" },
+            { text: "Elle a reçu l'album…", options: ["le jour même.","2 ou 3 jours après.","une semaine après."], ans: 1, quote: "…et 2 ou 3 jours après, elle avait l'album avec le livret des paroles." },
+            { text: "Avant de commander, on peut…", options: ["écouter des extraits des chansons.","recevoir un CD d'essai gratuit.","choisir les mélodies des chansons."], ans: 0, quote: "Il te suffit de cliquer dessus et tu entends des extraits des chansons." },
+            { text: "Si le prénom de l'enfant n'est pas dans la liste…", options: ["on ne peut pas commander l'album.","on doit choisir un prénom proche.","les chansons sont enregistrées sur mesure."], ans: 2, quote: "Et s'il n'y est pas, les chansons sont enregistrées sur mesure." },
+            { text: "Olivier, le créateur du site, a eu cette idée…", options: ["pour la naissance de son premier enfant.","pour l'anniversaire de sa nièce.","pour un concours de chanson."], ans: 0, quote: "Olivier, le créateur du site, a eu cette idée pour la naissance de son premier enfant." },
+            { text: "En plus de l'album, le site propose…", options: ["des jouets personnalisés.","des cartes d'anniversaire électroniques et des cartes d'invitation.","des cours de chant en ligne."], ans: 1, quote: "Tu peux même lui envoyer une carte d'anniversaire électronique… faire imprimer des cartes d'invitation pour ses copains et copines !" }
         ],
         transcription: `— Tu as vu les photos des dernières vacances ?
 — Non, fais voir ! Qui est-ce, là ? Oh ! Mais c'est Nadia !
@@ -62,16 +60,16 @@ const activitiesData = {
         color: { name: "jaune", accent: "#FFC20E", dark: "#E5AC00", on: "#1f2937", text: "#8A6A00", soft: "#FFF6D9" },
         instruction: "Vous allez entendre une conversation entre deux amies. Lisez d'abord les questions, puis écoutez le document et choisissez la bonne réponse.",
         questions: [
-            { text: "Jacqueline ne fait plus de qi gong parce qu'elle…", options: ["n'a plus le temps.", "a envie de bouger davantage.", "trouve ce sport trop cher."], ans: 1, quote: "Non, cette année j'ai envie de bouger un peu plus. Je fais de l'urban training." },
-            { text: "L'urban training se pratique…", options: ["dans la rue, en petit groupe, avec un coach.", "dans une salle de sport, en équipe.", "seul, à la maison."], ans: 0, quote: "Ça se pratique dans la rue, en petit groupe et avec un coach ? C'est bien ça, non ? — Oui." },
-            { text: "Pour faire les exercices, on utilise…", options: ["des appareils de musculation.", "un tapis et des haltères.", "ce qui se trouve autour de nous."], ans: 2, quote: "On utilise ce qui se trouve autour de nous pour nos exercices." },
-            { text: "L'urban training est réservé aux sportifs confirmés.", options: VF, ans: 1, quote: "Non, il y a plusieurs niveaux." },
-            { text: "Quel équipement est conseillé ?", options: ["Une tenue spéciale et un casque.", "Des chaussures de running et des gants.", "Un maillot de club et des genouillères."], ans: 1, quote: "Il faut surtout des chaussures adaptées de type running… Il faut aussi des gants pour protéger les mains." },
-            { text: "La ceinture sert à…", options: ["accrocher une bouteille d'eau.", "protéger le dos.", "ranger son téléphone."], ans: 0, quote: "…on recommande d'avoir une ceinture pour accrocher une bouteille d'eau." },
-            { text: "L'échauffement dure environ…", options: ["5 minutes.", "30 minutes.", "10 minutes."], ans: 2, quote: "On commence par l'échauffement pendant 10 minutes environ." },
-            { text: "Parmi ces exercices, lequel est mentionné ?", options: ["Des pompes sur un banc.", "Des sauts à la corde.", "Des longueurs de piscine."], ans: 0, quote: "Des abdos sur des marches, des tractions accrochées à une barre, ou encore des pompes sur un banc." },
-            { text: "Une séance d'urban training dure environ une heure.", options: VF, ans: 0, quote: "Et tout ça pendant une heure ? — Oui." },
-            { text: "Selon Jacqueline, l'autre grand avantage de ce sport, c'est qu'on…", options: ["rencontre beaucoup de monde.", "redécouvre sa ville.", "ne paie rien."], ans: 1, quote: "Et ce qui est formidable, c'est qu'en plus, tu redécouvres ta ville." }
+            { text: "Jacqueline ne fait plus de qi gong parce qu'elle…", options: ["n'a plus le temps.","a envie de bouger davantage.","trouve ce sport trop cher."], ans: 1, quote: "Non, cette année j'ai envie de bouger un peu plus. Je fais de l'urban training." },
+            { text: "L'urban training se pratique…", options: ["dans la rue, en petit groupe, avec un coach.","dans une salle de sport, en équipe.","seul, à la maison."], ans: 0, quote: "Ça se pratique dans la rue, en petit groupe et avec un coach ? C'est bien ça, non ? — Oui." },
+            { text: "Pour faire les exercices, on utilise…", options: ["des appareils de musculation.","un tapis et des haltères.","ce qui se trouve autour de nous."], ans: 2, quote: "On utilise ce qui se trouve autour de nous pour nos exercices." },
+            { text: "Pour pratiquer l'urban training…", options: ["il faut être un sportif confirmé.","on peut choisir parmi plusieurs niveaux.","il faut avoir fait du qi gong avant."], ans: 1, quote: "Non, il y a plusieurs niveaux. […] L'animateur nous montre les bons gestes et voit ce qui convient à chacun." },
+            { text: "Quel équipement est conseillé ?", options: ["Des chaussures de running et des gants.","Une tenue spéciale et un casque.","Un maillot de club et des genouillères."], ans: 0, quote: "Il faut surtout des chaussures adaptées de type running… Il faut aussi des gants pour protéger les mains." },
+            { text: "La ceinture sert à…", options: ["protéger le dos.","ranger son téléphone.","accrocher une bouteille d'eau."], ans: 2, quote: "…on recommande d'avoir une ceinture pour accrocher une bouteille d'eau." },
+            { text: "L'échauffement dure environ…", options: ["5 minutes.","10 minutes.","30 minutes."], ans: 1, quote: "On commence par l'échauffement pendant 10 minutes environ." },
+            { text: "Parmi ces exercices, lequel est mentionné ?", options: ["Des pompes sur un banc.","Des sauts à la corde.","Des longueurs de piscine."], ans: 0, quote: "Des abdos sur des marches, des tractions accrochées à une barre, ou encore des pompes sur un banc." },
+            { text: "Une séance d'urban training comporte…", options: ["deux étapes.","trois étapes.","quatre étapes."], ans: 1, quote: "On commence par l'échauffement… Ensuite, ce sont les exercices proprement dits… Et on termine par un moment de stretching et de détente." },
+            { text: "Selon Jacqueline, l'autre grand avantage de ce sport, c'est qu'on…", options: ["rencontre beaucoup de monde.","ne paie rien.","redécouvre sa ville."], ans: 2, quote: "Et ce qui est formidable, c'est qu'en plus, tu redécouvres ta ville." }
         ],
         transcription: `— Tiens, Jacqueline ! Comment vas-tu ? On ne te voit plus au qi gong. Qu'est-ce que tu deviens ?
 — Non, cette année j'ai envie de bouger un peu plus. Je fais de l'urban training.
@@ -98,16 +96,16 @@ const activitiesData = {
         color: { name: "rouge", accent: "#D7192D", dark: "#A8131F", on: "#ffffff", text: "#C0172A", soft: "#FCE8EA" },
         instruction: "Vous allez entendre une interview. Lisez d'abord les questions, puis écoutez le document et choisissez la bonne réponse.",
         questions: [
-            { text: "Madame Boinard travaille…", options: ["dans une association d'aide aux seniors.", "à la Direction centrale de la sécurité publique.", "pour la société du gaz et de l'électricité."], ans: 1, quote: "Vous êtes chef de la division Prévention et Partenariat à la Direction centrale de la sécurité publique." },
-            { text: "Les personnes les plus vulnérables aux arnaques sont…", options: ["les personnes âgées.", "les jeunes adultes.", "les commerçants."], ans: 0, quote: "Ce sont les personnes âgées. Les escrocs profitent de leur faiblesse." },
-            { text: "Ces personnes sont souvent victimes parce qu'elles…", options: ["ont beaucoup d'argent chez elles.", "habitent dans les grandes villes.", "sont souvent isolées."], ans: 2, quote: "Ils sont souvent isolés, parfois touchés par le décès de leur mari ou de leur femme." },
-            { text: "Les voleurs se font passer pour…", options: ["des médecins ou des infirmiers.", "des policiers ou des agents du gaz et de l'électricité.", "des facteurs ou des livreurs."], ans: 1, quote: "Ils sonnent chez eux, se font passer pour de faux policiers ou de faux agents de la société du gaz et de l'électricité." },
-            { text: "Les voleurs viennent souvent à deux : l'un distrait la victime pendant que l'autre vole.", options: VF, ans: 0, quote: "Souvent, ils viennent à deux. L'un des deux parle avec eux, les distrait, et pendant ce temps, l'autre vole l'argent, les bijoux..." },
-            { text: "Quand quelqu'un sonne chez elles, les personnes âgées doivent…", options: ["ne jamais ouvrir la porte.", "appeler immédiatement un voisin.", "demander son nom et sa carte professionnelle."], ans: 2, quote: "Demander son nom et sa carte professionnelle à la personne qui vient chez eux." },
-            { text: "En cas de doute, elles peuvent appeler le commissariat de police.", options: VF, ans: 0, quote: "S'ils ont un doute, ils peuvent appeler le commissariat de police." },
-            { text: "Les démarcheurs proposent des biens ou des travaux…", options: ["à un prix bien supérieur à leur valeur réelle.", "gratuitement, pour gagner leur confiance.", "à prix réduit, mais de mauvaise qualité."], ans: 0, quote: "…à un prix en fait bien au-dessus de leur valeur réelle." },
-            { text: "L'« Opération Tranquillité Seniors » existe depuis…", options: ["l'hiver 2000.", "l'été 2010.", "le printemps 2012."], ans: 1, quote: "Depuis l'été 2010, il existe un plan d'action nationale appelé « Opération Tranquillité Seniors »." },
-            { text: "Le conseil le plus important de la police est de…", options: ["installer une alarme à la maison.", "ne pas garder d'argent chez soi.", "garder un lien avec sa famille, ses voisins ou des associations."], ans: 2, quote: "…nous leur recommandons surtout de garder un lien avec leur famille et leurs voisins, ou encore de faire partie d'associations." }
+            { text: "Madame Boinard travaille…", options: ["dans une association d'aide aux seniors.","à la Direction centrale de la sécurité publique.","pour la société du gaz et de l'électricité."], ans: 1, quote: "Vous êtes chef de la division Prévention et Partenariat à la Direction centrale de la sécurité publique." },
+            { text: "Les personnes les plus vulnérables aux arnaques sont…", options: ["les personnes âgées.","les jeunes adultes.","les commerçants."], ans: 0, quote: "Ce sont les personnes âgées. Les escrocs profitent de leur faiblesse." },
+            { text: "Ces personnes sont souvent victimes parce qu'elles…", options: ["ont beaucoup d'argent chez elles.","habitent dans les grandes villes.","sont souvent isolées."], ans: 2, quote: "Ils sont souvent isolés, parfois touchés par le décès de leur mari ou de leur femme." },
+            { text: "Les voleurs se font passer pour…", options: ["des médecins ou des infirmiers.","des policiers ou des agents du gaz et de l'électricité.","des facteurs ou des livreurs."], ans: 1, quote: "Ils sonnent chez eux, se font passer pour de faux policiers ou de faux agents de la société du gaz et de l'électricité." },
+            { text: "Souvent, les voleurs…", options: ["viennent à deux : l'un distrait la victime, l'autre vole.","téléphonent avant de venir.","viennent seuls, pendant la nuit."], ans: 0, quote: "Souvent, ils viennent à deux. L'un des deux parle avec eux, les distrait, et pendant ce temps, l'autre vole l'argent, les bijoux..." },
+            { text: "Quand quelqu'un sonne chez elles, les personnes âgées doivent…", options: ["ne jamais ouvrir la porte.","demander son nom et sa carte professionnelle.","appeler immédiatement un voisin."], ans: 1, quote: "Demander son nom et sa carte professionnelle à la personne qui vient chez eux." },
+            { text: "En cas de doute, elles peuvent appeler…", options: ["leur banque.","un membre de leur famille.","le commissariat de police."], ans: 2, quote: "S'ils ont un doute, ils peuvent appeler le commissariat de police." },
+            { text: "Les démarcheurs proposent des biens ou des travaux…", options: ["à un prix bien supérieur à leur valeur réelle.","gratuitement, pour gagner leur confiance.","à prix réduit, mais de mauvaise qualité."], ans: 0, quote: "…à un prix en fait bien au-dessus de leur valeur réelle." },
+            { text: "L'« Opération Tranquillité Seniors » existe depuis…", options: ["l'hiver 2000.","l'été 2010.","le printemps 2012."], ans: 1, quote: "Depuis l'été 2010, il existe un plan d'action nationale appelé « Opération Tranquillité Seniors »." },
+            { text: "Le conseil le plus important de la police est de…", options: ["installer une alarme à la maison.","ne pas garder d'argent chez soi.","garder un lien avec sa famille, ses voisins ou des associations."], ans: 2, quote: "…nous leur recommandons surtout de garder un lien avec leur famille et leurs voisins, ou encore de faire partie d'associations." }
         ],
         transcription: `— Madame Boinard, merci de nous recevoir. Vous êtes chef de la division Prévention et Partenariat à la Direction centrale de la sécurité publique. Pouvez-vous dire quelles sont les personnes les plus vulnérables aux arnaques ?
 — Ce sont les personnes âgées. Les escrocs profitent de leur faiblesse. Ils sont souvent isolés, parfois touchés par le décès de leur mari ou de leur femme.
@@ -128,16 +126,16 @@ const activitiesData = {
         color: { name: "violet", accent: "#7B2C83", dark: "#5E1F64", on: "#ffffff", text: "#7B2C83", soft: "#F3E9F4" },
         instruction: "Vous allez entendre une conversation entre une patiente et son médecin. Lisez d'abord les questions, puis écoutez le document et choisissez la bonne réponse.",
         questions: [
-            { text: "Madame Bonnefoy va chez le médecin parce qu'elle…", options: ["dort mal la nuit.", "se sent fatiguée et n'a envie de rien.", "a mal aux yeux."], ans: 1, quote: "…je me sens fatiguée. Je n'ai envie de rien." },
-            { text: "Ce problème apparaît…", options: ["chaque année, au début de l'hiver.", "pour la première fois cette année.", "chaque été, pendant les vacances."], ans: 0, quote: "Comme tous les ans, à l'entrée de l'hiver, je me sens fatiguée." },
-            { text: "Madame Bonnefoy a beaucoup de mal à se réveiller.", options: VF, ans: 0, quote: "J'ai toujours sommeil, et après j'ai beaucoup de mal à me réveiller." },
-            { text: "Selon le médecin, Madame Bonnefoy souffre…", options: ["d'une maladie du sommeil.", "d'une allergie.", "d'une dépression saisonnière."], ans: 2, quote: "C'est un peu de dépression saisonnière, Madame Bonnefoy." },
-            { text: "Madame Bonnefoy souhaite un traitement avec des médicaments.", options: VF, ans: 1, quote: "Vous savez docteur, j'en ai assez des médicaments." },
-            { text: "Dans les pays nordiques, cette maladie touche…", options: ["1 à 2 % des personnes.", "5 à 10 % des personnes.", "plus de 20 % des personnes."], ans: 1, quote: "Dans les pays nordiques où 5 % et même 10 % des personnes en souffrent…" },
-            { text: "D'après les études, le plus efficace, ce sont des séances de…", options: ["30 minutes tous les matins, près du lever du jour.", "30 minutes tous les soirs, avant de dormir.", "une heure, une fois par semaine."], ans: 0, quote: "…le plus efficace ce sont des séances de 30 minutes, tous les matins, le plus près possible du lever du jour." },
-            { text: "La lampe de luminothérapie doit…", options: ["avoir une puissance de 500 lux et être placée à 1 mètre.", "avoir une puissance de 3 000 lux et être placée à 40 cm.", "avoir au moins 1 500 lux et être placée à 30 cm."], ans: 2, quote: "Il vous faut une lampe de 1 500 lux minimum, placée à 30 centimètres de vous." },
-            { text: "Un appareil de luminothérapie coûte environ…", options: ["100 euros.", "200 à 300 euros.", "plus de 500 euros."], ans: 1, quote: "Il faut compter 200 à 300 euros environ." },
-            { text: "Le simulateur d'aube sert à…", options: ["se réveiller en douceur.", "s'endormir plus facilement.", "remplacer la lampe de luminothérapie."], ans: 0, quote: "…ces petits appareils vous réveillent en douceur en simulant le lever du soleil." }
+            { text: "Madame Bonnefoy va chez le médecin parce qu'elle…", options: ["dort mal la nuit.","se sent fatiguée et n'a envie de rien.","a mal aux yeux."], ans: 1, quote: "…je me sens fatiguée. Je n'ai envie de rien." },
+            { text: "Ce problème apparaît…", options: ["chaque année, au début de l'hiver.","pour la première fois cette année.","chaque été, pendant les vacances."], ans: 0, quote: "Comme tous les ans, à l'entrée de l'hiver, je me sens fatiguée." },
+            { text: "Selon le médecin, Madame Bonnefoy souffre…", options: ["d'une maladie du sommeil.","d'une allergie.","d'une dépression saisonnière."], ans: 2, quote: "C'est un peu de dépression saisonnière, Madame Bonnefoy." },
+            { text: "Madame Bonnefoy parle de la luminothérapie parce qu'elle…", options: ["ne veut plus prendre de médicaments.","l'a déjà essayée l'année dernière.","travaille dans un centre du sommeil."], ans: 0, quote: "Vous savez docteur, j'en ai assez des médicaments. J'ai entendu parler de la luminothérapie. Qu'en pensez-vous ?" },
+            { text: "La dépression saisonnière est fréquente…", options: ["en Amérique du Sud.","dans les pays nordiques.","dans les pays méditerranéens."], ans: 1, quote: "Dans les pays nordiques où 5 % et même 10 % des personnes en souffrent…" },
+            { text: "La luminothérapie est efficace parce qu'elle…", options: ["remplace les médicaments.","limite les effets du manque de soleil.","aide à dormir plus longtemps."], ans: 1, quote: "En fait, elle limite les effets du manque de soleil. Comme lui, c'est un antidépresseur naturel." },
+            { text: "D'après les études, le plus efficace, ce sont des séances de…", options: ["30 minutes tous les matins, près du lever du jour.","30 minutes tous les soirs, avant de dormir.","une heure, une fois par semaine."], ans: 0, quote: "…le plus efficace ce sont des séances de 30 minutes, tous les matins, le plus près possible du lever du jour." },
+            { text: "La lampe de luminothérapie doit…", options: ["avoir une puissance de 500 lux et être placée à 1 mètre.","avoir une puissance de 3 000 lux et être placée à 40 cm.","avoir au moins 1 500 lux et être placée à 30 cm."], ans: 2, quote: "Il vous faut une lampe de 1 500 lux minimum, placée à 30 centimètres de vous." },
+            { text: "Il faut vérifier que l'appareil…", options: ["a une minuterie automatique.","est vendu en pharmacie.","a des filtres contre les rayons ultraviolets et infrarouges."], ans: 2, quote: "Il faut cependant vous assurer que l'appareil a des filtres contre les rayons ultraviolets et infrarouges." },
+            { text: "Le simulateur d'aube sert à…", options: ["se réveiller en douceur.","s'endormir plus facilement.","remplacer la lampe de luminothérapie."], ans: 0, quote: "…ces petits appareils vous réveillent en douceur en simulant le lever du soleil." }
         ],
         transcription: `— Bonjour docteur.
 — Bonjour Madame Bonnefoy. Qu'est-ce qui vous amène ?
@@ -163,16 +161,16 @@ const activitiesData = {
         color: { name: "bleu", accent: "#0077C0", dark: "#005A92", on: "#ffffff", text: "#0077C0", soft: "#E5F1F9" },
         instruction: "Vous allez entendre une conversation entre deux amis. Lisez d'abord les questions, puis écoutez le document et choisissez la bonne réponse.",
         questions: [
-            { text: "La réunion pour créer l'AMAP a lieu…", options: ["à la mairie de Puy-Guillaume.", "dans une ferme de la région.", "à la salle des fêtes de Limons."], ans: 2, quote: "La réunion est à la salle des fêtes." },
-            { text: "AMAP signifie…", options: ["Association pour le Maintien de l'Agriculture Paysanne.", "Association des Marchés Agricoles de Proximité.", "Aide aux Maraîchers et Agriculteurs Paysans."], ans: 0, quote: "Une AMAP : une Association pour le Maintien de l'Agriculture Paysanne." },
-            { text: "Seules les familles à revenus modestes peuvent faire partie d'une AMAP.", options: VF, ans: 1, quote: "…des familles à revenus modestes, des retraités, des sans-abris... tout type de personnes." },
-            { text: "Le budget annuel est calculé par…", options: ["la mairie.", "l'agriculteur, aidé par un comité de consommateurs.", "les consommateurs seuls."], ans: 1, quote: "…l'agriculteur, aidé par un comité de consommateurs, calcule un budget qui correspond au coût de sa production sur l'année." },
-            { text: "Le prix de la part de chaque membre correspond…", options: ["au budget divisé par le nombre de personnes inscrites.", "au prix des produits au supermarché.", "au poids des produits reçus."], ans: 0, quote: "Ensuite, le budget est divisé par le nombre de personnes inscrites. Ça donne le prix de la part de chaque membre…" },
-            { text: "En général, les paniers sont distribués…", options: ["tous les jours, toute l'année.", "une fois par mois.", "une fois par semaine, pendant deux saisons."], ans: 2, quote: "En général pendant deux saisons : printemps-été et automne-hiver. (…) un par semaine." },
-            { text: "Un membre peut payer moins cher son panier en travaillant à la ferme.", options: VF, ans: 0, quote: "Un membre peut aussi échanger une réduction du prix du panier ou même sa gratuité contre des heures de travail à la ferme." },
-            { text: "Un panier correspond aux besoins…", options: ["d'une personne seule.", "d'une famille de quatre personnes.", "de deux familles."], ans: 1, quote: "Normalement, un panier correspond aux besoins d'une famille de quatre personnes." },
-            { text: "Les paniers ont toujours la même taille et les mêmes produits.", options: VF, ans: 1, quote: "Comme les récoltes changent à chaque saison, les paniers varient en taille et en produits." },
-            { text: "Pour le fermier, l'avantage principal est…", options: ["de travailler moins d'heures.", "d'être sûr de vendre sa production, avec peu de pertes.", "de pouvoir exporter ses produits."], ans: 1, quote: "…pour le fermier, la garantie de vendre sa production, d'avoir très peu de pertes et de gaspillage." }
+            { text: "La réunion pour créer l'AMAP a lieu…", options: ["à la mairie de Puy-Guillaume.","dans une ferme de la région.","à la salle des fêtes de Limons."], ans: 2, quote: "La réunion est à la salle des fêtes." },
+            { text: "AMAP signifie…", options: ["Association pour le Maintien de l'Agriculture Paysanne.","Association des Marchés Agricoles de Proximité.","Aide aux Maraîchers et Agriculteurs Paysans."], ans: 0, quote: "Une AMAP : une Association pour le Maintien de l'Agriculture Paysanne." },
+            { text: "Peuvent faire partie d'une AMAP…", options: ["seulement les agriculteurs.","seulement les familles à revenus modestes.","tout type de personnes."], ans: 2, quote: "…des familles à revenus modestes, des retraités, des sans-abris... tout type de personnes." },
+            { text: "Le budget annuel est calculé par…", options: ["la mairie.","l'agriculteur, aidé par un comité de consommateurs.","les consommateurs seuls."], ans: 1, quote: "…l'agriculteur, aidé par un comité de consommateurs, calcule un budget qui correspond au coût de sa production sur l'année." },
+            { text: "Chaque membre achète…", options: ["une part de la production de l'agriculteur.","uniquement les produits qu'il choisit.","des produits au prix du supermarché."], ans: 0, quote: "Ensuite, le budget est divisé par le nombre de personnes inscrites. Ça donne le prix de la part de chaque membre…" },
+            { text: "En général, les paniers sont distribués…", options: ["tous les jours, toute l'année.","une fois par semaine, pendant deux saisons.","une fois par mois."], ans: 1, quote: "En général pendant deux saisons : printemps-été et automne-hiver. […] un par semaine." },
+            { text: "Un membre peut payer moins cher son panier, ou l'avoir gratuitement, en échange…", options: ["d'heures de travail à la ferme.","de ses propres produits.","de l'inscription de nouveaux membres."], ans: 0, quote: "Un membre peut aussi échanger une réduction du prix du panier ou même sa gratuité contre des heures de travail à la ferme." },
+            { text: "Un panier correspond aux besoins…", options: ["d'une personne seule.","d'une famille de quatre personnes.","de deux familles."], ans: 1, quote: "Normalement, un panier correspond aux besoins d'une famille de quatre personnes." },
+            { text: "Le contenu des paniers…", options: ["est choisi par chaque membre.","est le même toute l'année.","varie selon les saisons."], ans: 2, quote: "Comme les récoltes changent à chaque saison, les paniers varient en taille et en produits." },
+            { text: "Pour le fermier, l'avantage principal est…", options: ["de travailler moins d'heures.","d'être sûr de vendre sa production, avec peu de pertes.","de pouvoir exporter ses produits."], ans: 1, quote: "…pour le fermier, la garantie de vendre sa production, d'avoir très peu de pertes et de gaspillage." }
         ],
         transcription: `— Tu viens avec moi à Limons ?
 — À Limons ? Près de Puy-Guillaume ? Mais qu'est-ce que tu vas y faire ?
@@ -187,6 +185,172 @@ const activitiesData = {
 — Normalement, un panier correspond aux besoins d'une famille de quatre personnes. Il y a des fruits, des œufs, des produits laitiers... Tout est fraîchement cueilli, localement produit. Comme les récoltes changent à chaque saison, les paniers varient en taille et en produits.
 — C'est vraiment une bonne idée, ces associations ! Et puis, tout le monde y gagne.
 — Exactement. De bons produits pour les consommateurs, et pour le fermier, la garantie de vendre sa production, d'avoir très peu de pertes et de gaspillage.`
+    },
+    6: {
+        title: "Les sites les plus visités",
+        subtitle: "Le palmarès touristique 2010",
+        type: "Conversation entre locuteurs natifs",
+        audio: "DELFB1_activite06.mp3",
+        color: { name: "vert", accent: "#2E8540", dark: "#24692F", on: "#ffffff", text: "#2E8540", soft: "#E8F3EA" },
+        instruction: "Vous allez entendre une conversation entre deux personnes. Lisez d'abord les questions, puis écoutez le document et choisissez la bonne réponse.",
+        questions: [
+            { text: "La personne rentre tard parce qu'elle…", options: ["a accompagné un groupe de touristes.","a dû terminer le nouveau catalogue.","a visité un parc d'attractions."], ans: 1, quote: "Vous n'avez pas encore fini votre nouveau catalogue ? — Si, ça y est, il est enfin terminé." },
+            { text: "Dans le nouveau catalogue, son entreprise…", options: ["a augmenté les propositions pour les sites les plus demandés.","propose surtout de nouvelles excursions.","a supprimé les visites de musées."], ans: 0, quote: "Non, pas vraiment. Nous avons augmenté les propositions pour les sites les plus demandés." },
+            { text: "En 2010, la France a accueilli…", options: ["15,3 millions de touristes.","20 millions de touristes.","79 millions de touristes."], ans: 2, quote: "C'est plus de 20 % des 79 millions de touristes venus en France." },
+            { text: "Disneyland Paris a reçu…", options: ["1,5 million de visiteurs.","15,3 millions de visiteurs.","79 millions de visiteurs."], ans: 1, quote: "Eh bien, c'est Disneyland Paris, avec 15,3 millions de visiteurs en 2010." },
+            { text: "Par rapport à la tour Eiffel, Disneyland Paris a eu…", options: ["moitié moins de visites.","à peu près autant de visites.","plus du double de visites."], ans: 2, quote: "Il a fait plus du double de visites que la tour Eiffel." },
+            { text: "Parmi les dix sites les plus visités, on trouve…", options: ["deux musées, deux monuments et un palais.","trois musées et un monument.","un musée, deux palais et deux monuments."], ans: 0, quote: "Sur les dix sites les plus visités, il y a deux musées, deux centres culturels, deux monuments, un palais..." },
+            { text: "Le Louvre se trouve…", options: ["à la première place.","à la deuxième place.","à la septième place."], ans: 1, quote: "Le Louvre vient après Disneyland, juste avant la tour Eiffel. Et Orsay est à la septième place." },
+            { text: "Quel site est à la dernière place du classement ?", options: ["Le Futuroscope.","Le Centre Pompidou.","L'Arc de Triomphe."], ans: 2, quote: "L'Arc de Triomphe. Avec 1,5 million de visiteurs, il est en dernière position." },
+            { text: "Dans quel ordre se suivent ces trois sites ?", options: ["Versailles, puis le Centre Pompidou, puis la Cité des sciences.","Le Centre Pompidou, puis Versailles, puis la Cité des sciences.","La Cité des sciences, puis Versailles, puis le Centre Pompidou."], ans: 0, quote: "Versailles est quatrième devant le Centre Pompidou, suivi de la Cité des sciences de La Villette." },
+            { text: "Les deux autres parcs d'attractions du classement sont…", options: ["le Futuroscope (8e) et le Parc Astérix (9e).","le Parc Astérix (8e) et le Futuroscope (9e).","le Parc Astérix (5e) et le Futuroscope (6e)."], ans: 1, quote: "Le Parc Astérix, qui est huitième, et le Futuroscope, neuvième, avec un peu moins de visiteurs." }
+        ],
+        transcription: `— Tu rentres encore bien tard ce soir ! Il exagère, ton patron. Vous n'avez pas encore fini votre nouveau catalogue ?
+— Si, ça y est, il est enfin terminé.
+— Vous avez programmé de nouvelles excursions, de nouvelles visites ?
+— Non, pas vraiment. Nous avons augmenté les propositions pour les sites les plus demandés.
+— La tour Eiffel, l'Arc de Triomphe, Versailles...
+— Mais non, pas du tout ! Sais-tu quel est, de très loin, le site le plus visité en France ? Il a fait plus du double de visites que la tour Eiffel. Eh bien, c'est Disneyland Paris, avec 15,3 millions de visiteurs en 2010. Tu te rends compte ? C'est plus de 20 % des 79 millions de touristes venus en France.
+— Et nos vieilles pierres, nos musées, ils n'attirent plus les touristes ?
+— Mais si, rassure-toi. Sur les dix sites les plus visités, il y a deux musées, deux centres culturels, deux monuments, un palais...
+— Quels sont les musées ? Le Louvre, Orsay ?
+— Oui. Le Louvre vient après Disneyland, juste avant la tour Eiffel. Et Orsay est à la septième place.
+— Le palais, c'est Versailles, non ? Et le deuxième monument ?
+— L'Arc de Triomphe. Avec 1,5 million de visiteurs, il est en dernière position. Versailles est quatrième devant le Centre Pompidou, suivi de la Cité des sciences de La Villette.
+— Ça ne fait pas dix sites.
+— Tu as raison : il manque deux parcs d'attractions. Le Parc Astérix, qui est huitième, et le Futuroscope, neuvième, avec un peu moins de visiteurs.
+— Huit sites sur dix sont en région parisienne et à Paris, alors ?
+— C'est normal, c'est là qu'il y a le plus de touristes.`
+    },
+    7: {
+        title: "Les Vergers de Gally",
+        subtitle: "Des fruits au bureau",
+        type: "Interview",
+        audio: "DELFB1_activite07.mp3",
+        color: { name: "jaune", accent: "#FFC20E", dark: "#E5AC00", on: "#1f2937", text: "#8A6A00", soft: "#FFF6D9" },
+        instruction: "Vous allez entendre une interview. Lisez d'abord les questions, puis écoutez le document et choisissez la bonne réponse.",
+        questions: [
+            { text: "Les Vergers de Gally livrent aux entreprises…", options: ["des corbeilles de fruits.","des paniers de fruits et légumes.","des plateaux-repas."], ans: 0, quote: "Nos techniciens confectionnent des corbeilles de fruits et ils les livrent directement au sein de votre entreprise." },
+            { text: "Ce service existe depuis…", options: ["2000.","2003.","2010."], ans: 1, quote: "Effectivement, depuis 2003, nous proposons un service de fruits en entreprise." },
+            { text: "Les fruits proviennent…", options: ["de toute la France.","des grands marchés de Paris.","de leurs propres vergers, près de Versailles."], ans: 2, quote: "Directement de nos vergers, qui sont situés au cœur de la plaine de Versailles." },
+            { text: "Les corbeilles sont livrées…", options: ["par une entreprise de messagerie.","directement dans l'entreprise, sur un présentoir.","chez le concierge de l'entreprise."], ans: 1, quote: "Nos paniers sont livrés sur un présentoir, sans sous-traitance par des entreprises de messagerie." },
+            { text: "Le contenu des corbeilles…", options: ["dépend des saisons.","est toujours le même.","est choisi par les salariés."], ans: 0, quote: "Ça dépend des saisons." },
+            { text: "Les corbeilles sont livrées…", options: ["une fois par mois.","entre une et cinq fois par semaine.","deux fois par jour."], ans: 1, quote: "Entre une et cinq fois par semaine, ça dépend." },
+            { text: "Une corbeille contient…", options: ["8 kg de fruits.","12 kg de fruits.","de 8 à 12 kg de fruits."], ans: 2, quote: "…par panier de 8 à 12 kg de fruits…" },
+            { text: "Pour un seul panier par semaine, l'entreprise paie…", options: ["45 euros hors taxes.","48 euros hors taxes.","1 euro par salarié."], ans: 1, quote: "…ou 48 euros hors taxes par panier pour un seul panier de fruits par semaine." },
+            { text: "Le programme de solidarité soutient notamment…", options: ["la recherche contre le cancer.","le sport en entreprise.","la campagne « Cinq fruits et légumes par jour »."], ans: 0, quote: "Il est solidaire de la Fondation de France pour la recherche contre le cancer…" },
+            { text: "Selon la journaliste, manger des fruits au bureau permet…", options: ["de faire des pauses plus longues.","plus de convivialité dans les relations humaines.","de travailler plus vite."], ans: 1, quote: "…permet aussi plus de convivialité et de naturel dans les relations humaines." }
+        ],
+        transcription: `— Bonjour madame. « Cinq fruits et légumes par jour », tout le monde connaît ce slogan. Si j'ai bien compris, vous fournissez des fruits dans les entreprises. Pourriez-vous m'expliquer comment cela fonctionne ?
+— Oui, bien sûr. Effectivement, depuis 2003, nous proposons un service de fruits en entreprise. Nous sommes convaincus du bien-être du végétal dans les entreprises. Nos techniciens confectionnent des corbeilles de fruits et ils les livrent directement au sein de votre entreprise.
+— D'où proviennent ces fruits ?
+— Directement de nos vergers, qui sont situés au cœur de la plaine de Versailles. Nos paniers sont livrés sur un présentoir, sans sous-traitance par des entreprises de messagerie.
+— Qu'est-ce qu'il y a comme fruits dans vos corbeilles ?
+— Ça dépend des saisons. En décembre 2010, nous avions par exemple des clémentines, des litchis, différentes sortes de pommes, des kiwis jaunes, des poires, des oranges bien sûr, des bananes, des pamplemousses et des citrons. Et en juin, des pêches, des nectarines, des fraises, des abricots, des cerises, du raisin...
+— Vous les livrez combien de fois par semaine ?
+— Entre une et cinq fois par semaine, ça dépend.
+— Et ça coûte combien, tout ça ?
+— Nos tarifs actuels sont de 45 euros hors taxes par panier de 8 à 12 kg de fruits pour deux paniers de fruits ou plus livrés par semaine, ou 48 euros hors taxes par panier pour un seul panier de fruits par semaine. Ce tarif inclut l'installation, la mise à disposition et l'entretien du présentoir, la confection des paniers et la livraison par les techniciens du Verger de Gally. Ce service de distribution est gratuit pour les salariés. Il est solidaire de la Fondation de France pour la recherche contre le cancer, pour le soutien de la filière biologique et pour la protection de l'environnement. Chaque salarié peut alors se servir avec une participation en moyenne de 1 euro pour trois fruits. Il existe un service gratuit de distribution de paniers de fruits frais sans programme de solidarité.
+— Une bien belle idée qui, non seulement incite à consommer des fruits frais au bureau tout au long de la journée, mais permet aussi plus de convivialité et de naturel dans les relations humaines. Et en plus, elle représente une attention et une reconnaissance pour les salariés de la part de l'entreprise. Bravo !`
+    },
+    8: {
+        title: "Le tri des déchets",
+        subtitle: "Chez Madame Dupré",
+        type: "Conversation entre locuteurs natifs",
+        audio: "DELFB1_activite08.mp3",
+        color: { name: "rouge", accent: "#D7192D", dark: "#A8131F", on: "#ffffff", text: "#C0172A", soft: "#FCE8EA" },
+        instruction: "Vous allez entendre une conversation entre une Française et une personne étrangère. Lisez d'abord les questions, puis écoutez le document et choisissez la bonne réponse.",
+        questions: [
+            { text: "Les déchets recyclables vont dans…", options: ["les sacs noirs.","les sacs jaunes.","les sacs bleus."], ans: 1, quote: "Dans les sacs jaunes, on met tout ce qui peut être recyclé." },
+            { text: "La personne qui parle avec Madame Dupré vient…", options: ["de Thaïlande.","du Japon.","du Vietnam."], ans: 0, quote: "Chez moi, en Thaïlande, on commence aussi à trier." },
+            { text: "En France, chaque personne produit chaque année…", options: ["39 kilos de déchets.","190 kilos de déchets.","390 kilos de déchets."], ans: 2, quote: "…nous produisons trop de déchets : 390 kilos par an et par personne." },
+            { text: "Pour éviter de gaspiller le papier, on…", options: ["n'imprime que ce qui est nécessaire.","n'utilise plus de papier.","achète uniquement du papier recyclé."], ans: 0, quote: "On évite aussi de gaspiller le papier, on n'imprime que ce qui est nécessaire." },
+            { text: "Pour les brouillons, Madame Dupré propose d'utiliser…", options: ["de vieux journaux.","des feuilles mal imprimées.","des enveloppes usagées."], ans: 1, quote: "Tenez, pour vos brouillons, vous pouvez utiliser ces feuilles mal imprimées." },
+            { text: "Les lingettes à usage unique, Madame Dupré…", options: ["les recycle.","les utilise souvent.","les évite."], ans: 2, quote: "Par exemple, j'évite les lingettes à usage unique…" },
+            { text: "Pour les produits ménagers et les piles, elle achète…", options: ["des recharges et des piles rechargeables.","des grands formats.","des produits en vrac."], ans: 0, quote: "…j'achète des recharges pour les produits ménagers et aussi des piles rechargeables." },
+            { text: "Pour Madame Dupré, acheter en vrac ou en grand format…", options: ["est la meilleure solution.","n'est pas une bonne solution, car on finit par jeter des aliments.","coûte trop cher."], ans: 1, quote: "Mais pour moi, ce n'est pas vraiment une bonne solution : on ne consomme pas toujours tout avant la date de péremption et on doit jeter des aliments." },
+            { text: "Ses vieux vêtements et ses vieux meubles, elle…", options: ["les jette.","les garde.","les donne ou les vend dans des brocantes."], ans: 2, quote: "Je donne mes vêtements et mes vieux meubles. Je vends aussi ce que je peux à des brocantes ou des vide-greniers." },
+            { text: "Selon Madame Dupré…", options: ["de plus en plus de gens font des efforts.","tout le monde réduit déjà ses déchets.","personne ne fait d'efforts."], ans: 0, quote: "Non, mais de plus en plus de gens font des efforts." }
+        ],
+        transcription: `— Madame Dupré, vous avez deux poubelles différentes : une avec des sacs noirs et l'autre avec des sacs jaunes.
+— C'est pour trier les déchets. Dans les sacs jaunes, on met tout ce qui peut être recyclé.
+— C'est bien pour l'environnement. Chez moi, en Thaïlande, on commence aussi à trier.
+— Oui, mais nous produisons trop de déchets : 390 kilos par an et par personne. Il faut absolument essayer de les réduire.
+— Comment ?
+— Depuis longtemps déjà, les hypermarchés proposent des sacs réutilisables. On évite aussi de gaspiller le papier, on n'imprime que ce qui est nécessaire. Tenez, pour vos brouillons, vous pouvez utiliser ces feuilles mal imprimées.
+— Merci, madame. Je trouve aussi qu'en France, vous utilisez trop d'emballages.
+— C'est vrai. Moi, je fais de mon mieux pour les réduire. Par exemple, j'évite les lingettes à usage unique, j'achète des recharges pour les produits ménagers et aussi des piles rechargeables. On nous conseille aussi d'acheter en vrac ou en grand format, parce que les portions individuelles produisent beaucoup de déchets. Mais pour moi, ce n'est pas vraiment une bonne solution : on ne consomme pas toujours tout avant la date de péremption et on doit jeter des aliments. Alors, le gaspillage alimentaire augmente.
+— Et les vieilles choses, qu'est-ce que vous en faites ?
+— Je donne mes vêtements et mes vieux meubles. Je vends aussi ce que je peux à des brocantes ou des vide-greniers.
+— Et tout le monde fait comme vous ?
+— Non, mais de plus en plus de gens font des efforts. Réduire nos déchets est indispensable si nous voulons protéger l'environnement.`
+    },
+    9: {
+        title: "2011, l'année du métal",
+        subtitle: "Recycler l'acier",
+        type: "Conversation entre locuteurs natifs",
+        audio: "DELFB1_activite09.mp3",
+        color: { name: "violet", accent: "#7B2C83", dark: "#5E1F64", on: "#ffffff", text: "#7B2C83", soft: "#F3E9F4" },
+        instruction: "Vous allez entendre une conversation entre deux personnes. Lisez d'abord les questions, puis écoutez le document et choisissez la bonne réponse.",
+        questions: [
+            { text: "L'« Année du métal » concerne…", options: ["toute la France.","la ville de Vichy seulement.","les communes de Vichy Val d'Allier."], ans: 2, quote: "La communauté d'agglomération décrète 2011 « Année du métal ». Ils voudraient arriver à augmenter le tonnage d'acier recyclé sur les trois communes…" },
+            { text: "L'objectif est de recycler, par habitant…", options: ["1,95 kilo d'acier.","2 kilos d'acier.","2,5 kilos d'acier."], ans: 1, quote: "…passer de 1,95 kilo à 2 kilos par habitant." },
+            { text: "On peut recycler…", options: ["les boîtes de conserve et les canettes.","seulement les boîtes de conserve.","seulement les canettes."], ans: 0, quote: "Avec quoi ? Nos boîtes de conserve ? — Et aussi les canettes." },
+            { text: "Avant de jeter les boîtes dans le sac jaune, il faut…", options: ["les laver.","les écraser.","seulement bien les vider."], ans: 2, quote: "…inutile comme tu le fais de nettoyer les boîtes avant de les jeter dans le sac jaune : il suffit de bien les vider." },
+            { text: "Quelle part des emballages en acier recyclé provient du tri sélectif ?", options: ["15 %.","20 %.","54 %."], ans: 1, quote: "Tu savais que 20 % des emballages en acier recyclé proviennent du tri sélectif ?" },
+            { text: "Selon les écologistes, l'acier est…", options: ["le matériau le plus recyclé au monde.","un matériau difficile à recycler.","moins recyclé que le verre."], ans: 0, quote: "…l'acier est le matériau le plus recyclé au monde." },
+            { text: "Une canette est recyclable…", options: ["à 54 %.","à 90 %.","à 100 %, à l'infini."], ans: 2, quote: "On dit qu'une canette est recyclable à 100 %, à l'infini." },
+            { text: "Une canette recyclée peut devenir…", options: ["seulement une autre canette.","toutes sortes d'objets : un frigidaire, un pont, un capot de voiture…","seulement des emballages."], ans: 1, quote: "Une canette peut redevenir une canette, mais aussi un frigidaire, un pont, le capot d'une voiture..." },
+            { text: "Dans une voiture neuve, la part d'acier recyclé est de…", options: ["20 %.","45 %.","54 %."], ans: 2, quote: "…54 % de l'acier d'une voiture neuve est issu du recyclage." },
+            { text: "Recycler l'acier permet aussi…", options: ["de préserver les ressources naturelles et de réduire les gaz à effet de serre.","de faire baisser le prix des voitures.","de créer de nouveaux emplois."], ans: 0, quote: "…préserver les ressources naturelles… diminuer l'énergie nécessaire à la fabrication d'un nouvel acier et réduire l'émission de gaz à effet de serre dans l'air." }
+        ],
+        transcription: `— Chantal, tu as lu la lettre de l'environnement de Vichy Val d'Allier ?
+— Non, je n'ai pas eu le temps. Pourquoi ?
+— La communauté d'agglomération décrète 2011 « Année du métal ». Ils voudraient arriver à augmenter le tonnage d'acier recyclé sur les trois communes : passer de 1,95 kilo à 2 kilos par habitant.
+— Avec quoi ? Nos boîtes de conserve ?
+— Et aussi les canettes. À ce propos, inutile comme tu le fais de nettoyer les boîtes avant de les jeter dans le sac jaune : il suffit de bien les vider. Tu savais que 20 % des emballages en acier recyclé proviennent du tri sélectif ?
+— Non. Mais ce que je sais, parce que les écologistes en parlent souvent, c'est que l'acier est le matériau le plus recyclé au monde.
+— C'est vrai. On dit qu'une canette est recyclable à 100 %, à l'infini. Le métal ne perd jamais ses qualités d'origine. Une canette peut redevenir une canette, mais aussi un frigidaire, un pont, le capot d'une voiture... D'ailleurs, d'après l'article, 54 % de l'acier d'une voiture neuve est issu du recyclage. Et comme ils l'écrivent avec humour : en théorie, rien n'interdit de penser qu'une partie de l'épée de Vercingétorix revit dans la tour Eiffel.
+— Mais recycler, c'est aussi préserver les ressources naturelles, non ?
+— La lettre de l'environnement le rappelle, comme elle précise que cela permet aussi de diminuer l'énergie nécessaire à la fabrication d'un nouvel acier et de réduire l'émission de gaz à effet de serre dans l'air.
+— Alors recyclons, recyclons ! Tiens, passe-moi ta canette vide.`
+    },
+    10: {
+        title: "Les plats préférés des Français",
+        subtitle: "Un sondage culinaire",
+        type: "Conversation entre locuteurs natifs",
+        audio: "DELFB1_activite10.mp3",
+        color: { name: "bleu", accent: "#0077C0", dark: "#005A92", on: "#ffffff", text: "#0077C0", soft: "#E5F1F9" },
+        instruction: "Vous allez entendre une conversation dans un couple. Lisez d'abord les questions, puis écoutez le document et choisissez la bonne réponse.",
+        questions: [
+            { text: "Le sondage a été réalisé…", options: ["en août 2006.","en août 2010.","en août 2011."], ans: 2, quote: "Un sondage réalisé par la SOFRES au mois d'août 2011…" },
+            { text: "Le plat préféré des Français est…", options: ["la blanquette de veau.","le magret de canard.","les moules-frites."], ans: 1, quote: "…21 % d'entre nous préfèrent le magret de canard." },
+            { text: "Les moules-frites et le couscous obtiennent…", options: ["20 % et 19 %.","21 % et 20 %.","19 % et 18 %."], ans: 0, quote: "…juste devant les moules-frites et le couscous, qui font 20 et 19 %." },
+            { text: "La blanquette de veau…", options: ["est toujours à la première place.","était le plat préféré en 2006 et arrive maintenant quatrième.","n'apparaît plus dans le classement."], ans: 1, quote: "Gagnante en 2006, elle obtient la quatrième place avec 18 %." },
+            { text: "Parmi les huit plats préférés, sept sont…", options: ["à base de poisson.","à base de légumes.","à base de viande."], ans: 2, quote: "…parmi les huit premiers plats cités par les Français, sept sont à base de viande…" },
+            { text: "Le plat préféré des 50-64 ans est…", options: ["le gigot.","le pot-au-feu.","la blanquette de veau."], ans: 1, quote: "Le pot-au-feu est le plat préféré des 50-64 ans…" },
+            { text: "Les hommes préfèrent…", options: ["la côte de bœuf.","le magret de canard.","le gigot."], ans: 0, quote: "25 % préfèrent la côte de bœuf et 23 % le magret de canard, plat préféré des femmes." },
+            { text: "Le plat préféré des femmes est…", options: ["le pavé de saumon grillé.","les tomates farcies.","le magret de canard."], ans: 2, quote: "…23 % le magret de canard, plat préféré des femmes." },
+            { text: "Dans le Nord et dans l'Est, les spécialités régionales…", options: ["arrivent en tête.","n'occupent que la deuxième place.","ne sont pas citées."], ans: 1, quote: "Dans le Nord, les moules-frites n'occupent que la deuxième place… Et dans l'Est, la choucroute est aussi à la deuxième place…" },
+            { text: "Dans l'Est, le plat qui arrive en tête est…", options: ["le magret de canard.","la choucroute.","le couscous."], ans: 2, quote: "Et tiens-toi bien : c'est le couscous avec 28 % qui arrive en tête." }
+        ],
+        transcription: `— Chérie, qu'est-ce qu'on mange ce soir ?
+— Du magret de canard.
+— Ça alors, c'est drôle ! Nous allons confirmer les résultats de l'enquête que je viens de lire. Un sondage réalisé par la SOFRES au mois d'août 2011 sur les plats préférés des Français révèle que 21 % d'entre nous préfèrent le magret de canard. Tiens, regarde : les Français le placent juste devant les moules-frites et le couscous, qui font 20 et 19 %.
+— Ah bon ? Ce n'est plus la blanquette de veau ?
+— Non. Gagnante en 2006, elle obtient la quatrième place avec 18 %. Mais nous sommes très carnivores : parmi les huit premiers plats cités par les Français, sept sont à base de viande, que ce soit du bœuf, du veau, de l'agneau ou du canard.
+— Pas bien diététique tout ça ! Seuls le couscous et la blanquette ont des légumes.
+— Bien sûr, les classements des plats changent selon les régions, le sexe ou l'âge des personnes interrogées.
+— Je suis sûre que les plus âgés préfèrent les plats mijotés.
+— Tout à fait. Le pot-au-feu est le plat préféré des 50-64 ans, mais pour les plus de 65 ans, le gigot passe avant la blanquette.
+— Quels sont les plats que préfèrent les hommes ?
+— 25 % préfèrent la côte de bœuf et 23 % le magret de canard, plat préféré des femmes. D'après l'enquête, vous aimez autant les moules-frites que le couscous, les tomates farcies ou le pavé de saumon grillé.
+— Les résultats sont les mêmes partout ?
+— Non, ils changent aussi selon les régions.
+— C'est normal, les gens aiment bien leurs spécialités régionales.
+— Oui, mais il y a quelques surprises. Dans le Nord, les moules-frites n'occupent que la deuxième place avec 25 % des voix. Et dans l'Est, la choucroute est aussi à la deuxième place avec 22 %. Et tiens-toi bien : c'est le couscous avec 28 % qui arrive en tête.
+— Ça, c'est l'influence méditerranéenne, l'apport des immigrés.
+— En attendant, je suis sûr que ton magret sera réussi. On va se régaler !`
     }
 };
 
@@ -341,23 +505,21 @@ function renderQuestions() {
     const act = activitiesData[currentId];
     const form = document.getElementById("exercise-form");
     form.innerHTML = act.questions.map((q, i) => {
-        const isVF = q.options === VF;
         const opts = q.options.map((opt, o) => `
-            <label class="option-label flex items-start gap-3 bg-white px-4 py-3 rounded-xl border border-slate-200 cursor-pointer hover:border-blue-300 transition-all text-sm font-medium ${isVF ? "" : "w-full"}">
+            <label class="option-label flex items-start gap-3 bg-white px-4 py-3 rounded-xl border border-slate-200 cursor-pointer hover:border-blue-300 transition-all text-sm font-medium w-full">
                 <input type="radio" name="q${i}" value="${o}" class="h-4 w-4 mt-0.5 shrink-0">
-                <span>${isVF ? "" : `<span class="font-bold text-[#0f2c59] mr-1">${LETTERS[o]}.</span>`}${opt}</span>
+                <span><span class="font-bold text-[#0f2c59] mr-1">${LETTERS[o]}.</span>${opt}</span>
             </label>`).join("");
-        const correctLabel = isVF ? q.options[q.ans] : `${LETTERS[q.ans]}. ${q.options[q.ans]}`;
+        const correctLabel = `${LETTERS[q.ans]}. ${q.options[q.ans]}`;
         return `
         <div id="block-${i}" class="p-5 rounded-2xl bg-slate-50/80 border border-slate-200/60 transition-all relative">
             <div class="flex justify-between items-start gap-4">
                 <p class="text-sm sm:text-base font-semibold text-slate-800 leading-snug">
                     <span class="text-[var(--accent-text)] mr-1">${i + 1}.</span>${q.text}
-                    ${isVF ? `<span class="ml-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 align-middle">Vrai / Faux</span>` : ""}
                 </p>
                 <span id="indicator-${i}" class="hidden shrink-0 text-sm font-bold flex items-center gap-1"></span>
             </div>
-            <div class="${isVF ? "flex flex-wrap gap-3" : "flex flex-col gap-2"} mt-3">${opts}</div>
+            <div class="flex flex-col gap-2 mt-3">${opts}</div>
             <div id="correction-${i}" class="hidden mt-4 p-4 bg-red-50 border border-red-200 rounded-xl text-xs sm:text-sm text-red-800 space-y-2">
                 <div class="font-bold flex flex-wrap items-center gap-1.5 text-red-900">
                     <i class="fa-solid fa-circle-check text-emerald-600"></i>
