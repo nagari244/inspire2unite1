@@ -9,41 +9,39 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
   /* ==========================================================================
-     PALETTE OFFICIELLE OIF (Identique à pass_compos_auxiliaire_avoir.html)
-     - Bleu OIF : #0085CA
-     - Or OIF   : #FFB81C
-     - Vert OIF : #00A859
-     - Rouge OIF: #DA291C  (Passé Composé = action ponctuelle / coupure)
-     - Violet OIF: #702082 (Imparfait = habitude / décor / continuité)
-     - Fond     : #F8FAFC  (Slate-50 propre et lisible)
+     PALETTE "INSPIRE 2" (dérivée du logo de la méthode : marine, rouge, terracotta)
+     - Marine     : #1E293B  (texte, boutons, onglet actif)
+     - Rouge      : #DA291C (Passé Composé = action ponctuelle / coupure)
+     - Terracotta : #96482F (Imparfait = habitude / décor / continuité)
+     - Fond       : #F8FAFC (Slate-50 propre et lisible)
      ========================================================================== */
   :root {
-    /* Couleurs de la Francophonie (OIF) */
-    --oif-blue: #0085CA;
-    --oif-blue-soft: #3AA6D9;
+    /* Couleurs de la méthode Inspire 2 */
+    --oif-blue: #1E293B;
+    --oif-blue-soft: #46566B;
     --oif-gold: #FFB81C;
     --oif-green: #00A859;
     --oif-red: #DA291C;
-    --oif-purple: #702082;
+    --oif-purple: #96482F;
     --oif-dark: #1E293B;
     --oif-light: #F8FAFC;
 
     /* Structure & navigation */
     --primary-main: var(--oif-blue);
     --primary-soft: var(--oif-blue-soft);
-    --primary-050: rgba(0, 133, 202, 0.10);
+    --primary-050: rgba(30, 41, 59, 0.10);
 
-    /* Passé Composé : Rouge OIF #DA291C (Action nette, rupture) */
+    /* Passé Composé : Rouge #DA291C (Action nette, rupture) */
     --pc-color: var(--oif-red);
     --pc-bg: #FEF2F2;
     --pc-border: #FCA5A5;
     --pc-strong: #B91C1C;
 
-    /* Imparfait : Violet OIF #702082 (Décor, durée, habitudes) */
+    /* Imparfait : Terracotta #96482F (Décor, durée, habitudes) */
     --imp-color: var(--oif-purple);
-    --imp-bg: #FDF4FF;
-    --imp-border: #F0ABFC;
-    --imp-strong: #6B21A8;
+    --imp-bg: #FDF0E9;
+    --imp-border: #E8B49A;
+    --imp-strong: #6B3016;
 
     /* Feedback & Notes pédagogiques */
     --green-success: var(--oif-green);
@@ -67,19 +65,19 @@
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --primary-main: #3AA6D9;
-      --primary-soft: #7DD3FC;
-      --primary-050: rgba(58, 166, 217, 0.16);
+      --primary-main: #8FA3BD;
+      --primary-soft: #B8C6D9;
+      --primary-050: rgba(143, 163, 189, 0.16);
 
       --pc-color: #F87171;
       --pc-bg: rgba(218, 41, 28, 0.18);
       --pc-border: #EF4444;
       --pc-strong: #FCA5A5;
 
-      --imp-color: #C084FC;
-      --imp-bg: rgba(112, 32, 130, 0.22);
-      --imp-border: #A855F7;
-      --imp-strong: #E9D5FF;
+      --imp-color: #E8966B;
+      --imp-bg: rgba(150, 72, 47, 0.22);
+      --imp-border: #D9825A;
+      --imp-strong: #FBD9C4;
 
       --green-success: #34D399;
       --green-bg: rgba(0, 168, 89, 0.16);
@@ -125,17 +123,18 @@
 
   /* ==================== BANDEAU SUPÉRIEUR OIF ==================== */
   header.top {
-    background: linear-gradient(135deg, #0085CA 0%, #702082 50%, #0085CA 100%);
-    color: #F8FAFC;
+    background: linear-gradient(135deg, #FFFFFF 0%, #FBEFE9 100%);
+    color: var(--ink);
     padding: 0;
     position: relative;
-    box-shadow: 0 6px 20px rgba(0, 133, 202, 0.25);
+    box-shadow: 0 4px 16px rgba(30, 41, 59, 0.10);
+    border-bottom: 1px solid var(--border);
   }
   .oif-ribbon {
     height: 6px;
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
   .header-content {
     padding: 26px 18px 24px;
@@ -146,7 +145,7 @@
     font-size: 0.75rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #FFD166;
+    color: var(--oif-red);
     font-weight: 800;
     margin: 0 0 6px;
     display: inline-flex;
@@ -158,7 +157,7 @@
     font-weight: 800;
     margin: 0 0 8px;
     line-height: 1.15;
-    color: #FFFFFF;
+    color: var(--ink);
   }
   header.top p.sub {
     margin: 0;
@@ -166,7 +165,7 @@
     opacity: 0.95;
     max-width: 68ch;
     line-height: 1.5;
-    color: #E2E8F0;
+    color: var(--ink-soft);
   }
   .header-decor-bar {
     display: flex;
@@ -182,8 +181,8 @@
     border-radius: 999px;
     letter-spacing: 0.04em;
   }
-  .header-tag.pc { background: rgba(218, 41, 28, 0.28); color: #FEE2E2; border: 1px solid rgba(218, 41, 28, 0.45); }
-  .header-tag.imp { background: rgba(112, 32, 130, 0.35); color: #F5D0FE; border: 1px solid rgba(112, 32, 130, 0.5); }
+  .header-tag.pc { background: var(--pc-bg); color: var(--pc-strong); border: 1px solid var(--pc-border); }
+  .header-tag.imp { background: var(--imp-bg); color: var(--imp-strong); border: 1px solid var(--imp-border); }
 
   /* ==================== ONGLETS (NAVIGATION) ==================== */
   nav.tabs {
@@ -222,7 +221,7 @@
     background: var(--primary-main);
     border-color: var(--primary-main);
     color: #FFFFFF;
-    box-shadow: 0 3px 10px rgba(0, 133, 202, 0.3);
+    box-shadow: 0 3px 10px rgba(30, 41, 59, 0.3);
   }
 
   section.panel { display: none; padding-top: 24px; }
@@ -537,7 +536,7 @@
   .ex-item:focus-within {
     background: var(--surface);
     border-color: var(--primary-main);
-    box-shadow: 0 0 0 3px rgba(0, 133, 202, 0.12);
+    box-shadow: 0 0 0 3px rgba(30, 41, 59, 0.12);
   }
   .ex-num {
     display: inline-flex;
@@ -629,10 +628,10 @@
   .btn.primary {
     background: var(--primary-main);
     color: #FFFFFF;
-    box-shadow: 0 3px 8px rgba(0, 133, 202, 0.25);
+    box-shadow: 0 3px 8px rgba(30, 41, 59, 0.25);
   }
   .btn.primary:hover {
-    background: #0070AA;
+    background: #0F172A;
   }
   .btn.ghost {
     background: transparent;
@@ -867,11 +866,9 @@
 <header class="top">
   <!-- Ruban aux 5 couleurs officielles OIF -->
   <div class="oif-ribbon" aria-hidden="true">
-    <div style="background:#0085CA;"></div>
-    <div style="background:#FFB81C;"></div>
-    <div style="background:#00A859;"></div>
+    <div style="background:#1E293B;"></div>
     <div style="background:#DA291C;"></div>
-    <div style="background:#702082;"></div>
+    <div style="background:#96482F;"></div>
   </div>
   <div class="header-content">
     <p class="eyebrow">
@@ -922,19 +919,21 @@
         </div>
       </div>
 
-      <!-- Animation GIF : Film vs Photo -->
+      <!-- Vidéo : Film vs Photo -->
       <div class="media-card">
         <div class="gif-frame">
-          <img
+          <video
             id="anim-pc-imp"
-            src="Passé composé - imparfait.gif"
-            alt="Animation démonstrative : Imparfait (décor) vs Passé composé (événement)"
-            loading="lazy"
-            onerror="if(this.src.indexOf('.gif') !== -1){ this.src='Passé composé - imparfait.jpg'; } else if(this.src.indexOf('Passe_compose_imparfait') === -1){ this.src='Passe_compose_imparfait.gif'; }"
+            controls
+            playsinline
+            preload="metadata"
           >
+            <source src="Passé composé - imparfait.mp4" type="video/mp4">
+            Votre navigateur ne prend pas en charge la lecture directe de cette vidéo.
+          </video>
         </div>
         <p class="media-caption">
-          🎬 <strong>Regardez la vidéo / le GIF :</strong><br>
+          🎬 <strong>Regardez la vidéo :</strong><br>
           • <strong class="sub-black">Sous-titres noirs</strong> = Le décor / l'atmosphère continue à l'<strong>imparfait</strong> (<em>« La journée était calme. Le ciel était bleu. »</em>)<br>
           • <strong class="sub-white">Sous-titres blancs</strong> = Les actions ponctuelles qui surgissent au <strong>passé composé</strong> !
         </p>
