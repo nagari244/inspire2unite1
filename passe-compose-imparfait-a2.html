@@ -124,11 +124,11 @@
   /* ==================== BANDEAU SUPÉRIEUR OIF ==================== */
   header.top {
     background: linear-gradient(135deg, #FFFFFF 0%, #FBEFE9 100%);
-    color: var(--ink);
+    color: #1E293B;
     padding: 0;
     position: relative;
     box-shadow: 0 4px 16px rgba(30, 41, 59, 0.10);
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid rgba(30, 41, 59, 0.12);
   }
   .oif-ribbon {
     height: 6px;
@@ -140,6 +140,24 @@
     padding: 26px 18px 24px;
     max-width: 940px;
     margin: 0 auto;
+  }
+  .header-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .btn.home {
+    background: #FFFFFF;
+    border: 1.5px solid rgba(30, 41, 59, 0.18);
+    color: #1E293B;
+    flex-shrink: 0;
+    text-decoration: none;
+  }
+  .btn.home:hover {
+    background: #F8FAFC;
+    border-color: rgba(30, 41, 59, 0.3);
   }
   .eyebrow {
     font-size: 0.75rem;
@@ -157,7 +175,7 @@
     font-weight: 800;
     margin: 0 0 8px;
     line-height: 1.15;
-    color: var(--ink);
+    color: #1E293B;
   }
   header.top p.sub {
     margin: 0;
@@ -165,7 +183,7 @@
     opacity: 0.95;
     max-width: 68ch;
     line-height: 1.5;
-    color: var(--ink-soft);
+    color: #475569;
   }
   .header-decor-bar {
     display: flex;
@@ -181,8 +199,8 @@
     border-radius: 999px;
     letter-spacing: 0.04em;
   }
-  .header-tag.pc { background: var(--pc-bg); color: var(--pc-strong); border: 1px solid var(--pc-border); }
-  .header-tag.imp { background: var(--imp-bg); color: var(--imp-strong); border: 1px solid var(--imp-border); }
+  .header-tag.pc { background: #FEF2F2; color: #B91C1C; border: 1px solid #FCA5A5; }
+  .header-tag.imp { background: #FDF0E9; color: #6B3016; border: 1px solid #E8B49A; }
 
   /* ==================== ONGLETS (NAVIGATION) ==================== */
   nav.tabs {
@@ -871,9 +889,12 @@
     <div style="background:#96482F;"></div>
   </div>
   <div class="header-content">
-    <p class="eyebrow">
-      <span>●</span> FLE Niveau A2 · Espace Francophone
-    </p>
+    <div class="header-top-row">
+      <p class="eyebrow">
+        <span>●</span> FLE Niveau A2 · Espace Francophone
+      </p>
+      <a href="index.html" class="btn home sm">← Sommaire</a>
+    </div>
     <h1>Passé composé ou imparfait ?</h1>
     <p class="sub">Deux temps, deux fonctions : la photo (l'action ponctuelle qui fait avancer l'histoire) et le film (le décor en arrière-plan). Repérez les expressions temporelles pour choisir le temps adapté.</p>
     <div class="header-decor-bar">
