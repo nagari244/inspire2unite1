@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Réviser le passé composé – Jeu de l'oie</title>
+
+  <!-- Confettis à l'arrivée -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --pawn: #e11d48;          /* remplacée au chargement (couleur aléatoire) */
+      --red: #dc2626;
+      --red-dark: #b91c1c;
+      --red-soft: #fef2f2;
+      --red-border: #fecaca;
+      --blue: #005fa3;
+      --blue-soft: #eff6ff;
+      --blue-border: #bfdbfe;
+      --violet: #682d86;
+      --amber: #f59e0b;
+      --amber-dark: #b45309;
+      --amber-soft: #fef3c7;
+      --emerald: #047857;
+      --emerald-border: #6ee7b7;
+      --text: #1e293b;
+      --muted: #64748b;
+      --line: #e2e8f0;
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #fff;
+      color: var(--text);
+      line-height: 1.5;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .font-game { font-family: 'Fredoka', 'Inter', sans-serif; }
+    button { font-family: inherit; cursor: pointer; }
+
+    /* ---------- En-tête ---------- */
+    header {
+      border-bottom: 3px solid var(--red);
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    .header-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .header-left { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .back-link {
+      flex-shrink: 0;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+    }
+    .back-link:hover { color: var(--red); border-color: var(--red); }
+    h1 {
+      margin: 0;
+      font-size: 22px;
+      color: var(--red);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .sound-btn {
+      flex-shrink: 0;
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 10px;
+      padding: 8px 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    main { max-width: 1120px; margin: 0 auto; padding: 16px; }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+
+    /* ---------- Consigne + bouton Lancer ---------- */
+    .intro { margin-bottom: 16px; border-color: var(--red-border); }
+    .intro p { margin: 0 0 12px; font-size: 15px; }
+    .intro strong { color: var(--red-dark); }
+    .intro-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+    .btn-roll {
+      border: none;
+      background: var(--red);
+      color: #fff;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      padding: 12px 34px;
+      border-radius: 12px;
+      min-height: 50px;
+      touch-action: manipulation;
+    }
+    .btn-roll:hover { background: var(--red-dark); }
+    .btn-roll:disabled { opacity: .6; cursor: wait; }
+    .btn-ghost {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px 14px;
+      border-radius: 10px;
+      min-height: 44px;
+    }
+    .btn-ghost:hover { border-color: var(--red); color: var(--red); }
+    .move-info { font-size: 14px; color: var(--muted); font-weight: 600; }
+
+    /* ---------- Mise en page : mobile d'abord ---------- */
+    .layout {
+      display: grid;
+      gap: 16px;
+      grid-template-areas: "mission" "board" "list";
+    }
+    .area-mission { grid-area: mission; }
+    .area-board { grid-area: board; }
+    .area-list { grid-area: list; }
+
+    @media (min-width: 920px) {
+      .layout {
+        grid-template-columns: 1.1fr 1fr;
+        grid-template-areas: "board mission" "board list";
+        align-items: start;
+      }
+    }
+
+    h2 { margin: 0 0 12px; font-size: 20px; color: var(--text); }
+
+    /* ---------- Plateau ---------- */
+    .board-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .board-head h2 { margin: 0; }
+    .pawn-legend { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); font-weight: 600; }
+
+    .board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+    @media (min-width: 560px) { .board { grid-template-columns: repeat(6, 1fr); gap: 8px; } }
+
+    .tile {
+      position: relative;
+      min-height: 66px;
+      border: 2px solid var(--blue-border);
+      border-radius: 10px;
+      background: #fff;
+      padding: 4px 4px 6px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+      transition: border-color .15s, transform .15s;
+      touch-action: manipulation;
+    }
+    .tile:hover { border-color: #fca5a5; }
+    .tile-num {
+      align-self: flex-start;
+      font-size: 10px;
+      font-weight: 700;
+      color: #fff;
+      background: var(--red);
+      border-radius: 999px;
+      min-width: 18px;
+      height: 18px;
+      line-height: 18px;
+      padding: 0 4px;
+    }
+    .tile-verb {
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 600;
+      font-size: 11px;
+      color: #1e3a8a;
+      overflow-wrap: anywhere;
+    }
+    .tile-group { font-size: 10px; font-weight: 600; }
+    .g1 { color: var(--blue); }
+    .g2 { color: var(--violet); }
+    .g3 { color: var(--red-dark); }
+    .tile.start { background: var(--red-soft); border-color: var(--red-border); }
+    .tile.start .tile-verb { color: var(--red); }
+    .tile.finish { background: var(--amber-soft); border-color: var(--amber); }
+    .tile.finish .tile-verb { color: #92400e; }
+    .tile .tile-icon { font-size: 18px; line-height: 1; align-self: flex-start; }
+    .tile.active { border-color: var(--red); transform: scale(1.04); z-index: 2; }
+
+    .group-legend {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 4px 14px;
+      font-size: 12px;
+      margin-top: 10px;
+      color: var(--muted);
+    }
+    .group-legend b { font-weight: 700; }
+
+    .pawn {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--pawn);
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 2px var(--pawn), 0 2px 6px rgba(0,0,0,.25);
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    .tile .pawn { position: absolute; right: 4px; top: 4px; animation: hop .22s ease-out; }
+    @keyframes hop {
+      0% { transform: translateY(0) scale(1); }
+      45% { transform: translateY(-8px) scale(1.12); }
+      100% { transform: translateY(0) scale(1); }
+    }
+
+    /* Expressions temporelles */
+    .expressions { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); }
+    .expressions h3 {
+      margin: 0 0 8px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: var(--blue);
+      text-align: center;
+    }
+    .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+    .chip-exp {
+      border: 1px solid var(--blue-border);
+      background: #fff;
+      color: #0c3d66;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 7px 10px;
+      border-radius: 9px;
+      min-height: 36px;
+    }
+    .chip-exp:hover { border-color: var(--blue); }
+    .chip-exp.selected { background: var(--blue); border-color: var(--blue); color: #fff; }
+
+    /* ---------- Mission ---------- */
+    .mission-block {
+      border: 1px solid var(--line);
+      border-left-width: 4px;
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+    }
+    .block-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .block-label {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .step {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #f1f5f9;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .btn-change {
+      border: none;
+      background: none;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: underline;
+      padding: 6px 4px;
+      min-height: 32px;
+      flex-shrink: 0;
+    }
+    .btn-change:hover { color: var(--red); }
+    .btn-change:disabled { opacity: .35; cursor: default; text-decoration: none; }
+    .block-value { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 20px; margin-top: 2px; }
+    .block-sub { font-size: 12px; color: var(--muted); font-weight: 600; margin-top: 1px; }
+
+    .b-exp { border-left-color: var(--blue); }
+    .b-exp .block-label { color: var(--blue); }
+    .b-exp .block-value { font-size: 18px; }
+
+    .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+    .pair .mission-block { margin-bottom: 0; }
+    .pair .block-head { flex-wrap: wrap; }
+    .b-subj { border-left-color: var(--violet); }
+    .b-subj .block-label, .b-subj .block-value { color: var(--violet); }
+    .b-verb { border-left-color: var(--red); }
+    .b-verb .block-label { color: var(--red-dark); }
+    .b-verb .block-value { color: var(--red); text-transform: uppercase; }
+
+    .b-aux { border-left-color: var(--amber); }
+    .b-aux .block-label { color: var(--amber-dark); margin-bottom: 8px; }
+    .aux-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+    .aux-btn {
+      border: 1px solid #fcd34d;
+      background: #fff;
+      color: #78350f;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 9px;
+      min-height: 42px;
+      min-width: 96px;
+    }
+    .aux-btn:hover { border-color: var(--amber-dark); }
+    .aux-btn:disabled { opacity: .45; cursor: default; }
+    .aux-btn.right { border: 2px solid var(--emerald); color: var(--emerald); }
+    .aux-btn.right:disabled { opacity: 1; }
+    .aux-btn.wrong { border: 2px solid var(--red-border); color: var(--red-dark); }
+    .aux-fb { font-size: 13px; font-weight: 600; }
+    .aux-fb.ok { color: var(--emerald); }
+    .aux-fb.ko { color: var(--red-dark); }
+
+    .b-comp { border-left-color: var(--emerald); }
+    .b-comp .block-label { color: var(--emerald); margin-bottom: 8px; }
+    .comp-list { display: flex; flex-wrap: wrap; gap: 6px; }
+    .chip-comp {
+      border: 1px solid var(--emerald-border);
+      background: #fff;
+      color: #064e3b;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 11px;
+      border-radius: 9px;
+      min-height: 40px;
+      text-align: left;
+    }
+    .chip-comp:hover { border-color: var(--emerald); }
+    .chip-comp.selected { border: 2px solid var(--emerald); padding: 7px 10px; }
+    .chip-comp.selected::before { content: "✓ "; }
+    .placeholder { color: #94a3b8; font-size: 14px; font-style: italic; }
+
+    .b-write { border-left-color: var(--text); margin-bottom: 0; }
+    .b-write .block-label { color: var(--text); margin-bottom: 8px; }
+    .answer-row { display: flex; flex-direction: column; gap: 8px; }
+    @media (min-width: 520px) { .answer-row { flex-direction: row; } }
+    .answer-row input {
+      flex: 1;
+      min-width: 0;
+      font-family: inherit;
+      font-size: 16px;               /* évite le zoom automatique sur iOS */
+      padding: 12px;
+      border: 2px solid var(--line);
+      border-radius: 10px;
+      color: var(--text);
+    }
+    .answer-row input:focus { outline: none; border-color: var(--red); }
+    .btn-check {
+      border: none;
+      background: var(--text);
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 12px 22px;
+      border-radius: 10px;
+      min-height: 48px;
+    }
+    .btn-check:hover { background: #334155; }
+    .accents { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 8px; }
+    .accents span { font-size: 12px; color: var(--muted); font-weight: 600; }
+    .accent-btn {
+      min-width: 40px;
+      min-height: 40px;
+      border: 1px solid var(--line);
+      background: #f8fafc;
+      border-radius: 9px;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .accent-btn:hover { border-color: var(--red); }
+
+    /* Feedback */
+    .feedback { display: none; margin-top: 12px; border-radius: 10px; padding: 12px 14px; font-size: 14px; }
+    .feedback.show { display: block; }
+    .feedback.ok { background: #f8fafc; border: 2px solid var(--emerald); }
+    .feedback.ko { background: var(--red-soft); border: 2px solid var(--red-border); }
+    .feedback.warn { background: #fffbeb; border: 2px solid #fde68a; }
+    .feedback-title { font-weight: 700; margin-bottom: 6px; }
+    .feedback.ok .feedback-title { color: var(--emerald); }
+    .feedback.ko .feedback-title { color: #991b1b; }
+    .checklist { list-style: none; margin: 0; padding: 0; }
+    .checklist li { display: flex; gap: 8px; padding: 3px 0; }
+    .checklist .mark { flex-shrink: 0; font-weight: 700; width: 16px; }
+    .checklist .yes .mark { color: var(--emerald); }
+    .checklist .no .mark { color: var(--red); }
+    .checklist .no { color: #7f1d1d; }
+
+    details.reminder { margin-top: 14px; border-top: 1px solid var(--line); padding-top: 10px; font-size: 14px; }
+    details.reminder summary { cursor: pointer; font-weight: 700; color: var(--red); padding: 4px 0; }
+    .reminder h4 { margin: 12px 0 4px; font-size: 13px; color: var(--text); }
+    .reminder p { margin: 4px 0; }
+    .formula {
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-weight: 600;
+      text-align: center;
+      margin-top: 8px;
+    }
+    .aux-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px 12px;
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-family: ui-monospace, monospace;
+      font-size: 13px;
+    }
+    .aux-table .head { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--amber-dark); }
+    .reminder ul { margin: 4px 0; padding-left: 20px; }
+    .reminder li { margin: 2px 0; }
+
+    /* ---------- Liste des phrases validées ---------- */
+    .list-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+    .list-head h2 { margin: 0; }
+    .count {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--emerald);
+      border: 1px solid var(--emerald-border);
+      border-radius: 999px;
+      padding: 3px 10px;
+      white-space: nowrap;
+    }
+    .list-hint { font-size: 13px; color: var(--muted); margin: 0 0 10px; }
+    ol.sentences { margin: 0; padding-left: 26px; }
+    ol.sentences li { padding: 6px 0; border-bottom: 1px solid #f1f5f9; font-size: 15px; }
+    ol.sentences li:last-child { border-bottom: none; }
+    .tag { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .empty { font-size: 14px; color: #94a3b8; font-style: italic; margin: 0; }
+
+    footer {
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+      padding: 18px 16px 28px;
+      border-top: 1px solid var(--line);
+      margin-top: 8px;
+    }
+
+    /* ---------- Fenêtre d'arrivée ---------- */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, .45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 50;
+    }
+    .modal.show { display: flex; }
+    .modal-card {
+      background: #fff;
+      border-radius: 18px;
+      border: 3px solid var(--amber);
+      max-width: 420px;
+      width: 100%;
+      padding: 24px 20px;
+      text-align: center;
+    }
+    .modal-card .trophy { font-size: 56px; line-height: 1; }
+    .modal-card h2 { margin: 8px 0; font-size: 26px; color: var(--red); }
+    .modal-card .challenge {
+      background: var(--amber-soft);
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 14px;
+      text-align: left;
+      margin: 12px 0 16px;
+    }
+    .modal-actions { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+
+    @media (max-width: 420px) {
+      h1 { font-size: 18px; }
+      .back-link span.txt { display: none; }
+      .block-value { font-size: 18px; }
+      .pair { gap: 8px; }
+      .mission-block { padding: 9px 10px; }
+      .tile { padding: 4px 2px 6px; }
+      .tile-verb { font-size: 10px; }
+      .tile-group { font-size: 9px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tile .pawn { animation: none; }
+      .tile { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="header-left">
+        <a class="back-link" href="index.html" aria-label="Retour au sommaire">← <span class="txt">Sommaire</span></a>
+        <h1 class="font-game">Réviser le passé composé</h1>
+      </div>
+      <button id="soundBtn" class="sound-btn" type="button" aria-pressed="true">🔊 Son</button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- CONSIGNE -->
+    <section class="card intro">
+      <p>
+        <strong>Consigne :</strong> cliquez sur « Lancer » pour savoir quel sujet et quel verbe vous allez conjuguer au passé composé.
+        Choisissez le bon auxiliaire, puis utilisez l'expression temporelle recommandée et le complément suggéré.
+        Faire des phrases complètes aide à avoir un contexte plus clair.
+      </p>
+      <div class="intro-actions">
+        <button id="rollBtn" class="btn-roll" type="button">Lancer</button>
+        <button id="resetBtn" class="btn-ghost" type="button">Recommencer le parcours</button>
+        <span id="moveInfo" class="move-info" aria-live="polite"></span>
+      </div>
+    </section>
+
+    <div class="layout">
+
+      <!-- MISSION CONJUGAISON -->
+      <section class="card area-mission">
+        <h2 class="font-game">✍️ Mission conjugaison</h2>
+
+        <!-- 1. Expression temporelle -->
+        <div class="mission-block b-exp">
+          <div class="block-head">
+            <span class="block-label"><span class="step">1</span> Expression temporelle suggérée :</span>
+            <button id="changeExpBtn" class="btn-change" type="button">Changer ⟳</button>
+          </div>
+          <div id="expValue" class="block-value">—</div>
+        </div>
+
+        <!-- 2. Sujet + verbe -->
+        <div class="pair">
+          <div class="mission-block b-subj">
+            <div class="block-head">
+              <span class="block-label"><span class="step">2</span> Sujet imposé</span>
+              <button id="changeSubjBtn" class="btn-change" type="button" disabled>Changer ⟳</button>
+            </div>
+            <div id="subjValue" class="block-value">?</div>
+            <div id="subjSub" class="block-sub"></div>
+          </div>
+          <div class="mission-block b-verb">
+            <div class="block-head">
+              <span class="block-label">Verbe obtenu</span>
+              <button id="changeVerbBtn" class="btn-change" type="button" disabled>Changer ⟳</button>
+            </div>
+            <div id="verbValue" class="block-value">?</div>
+            <div id="verbSub" class="block-sub"></div>
+          </div>
+        </div>
+
+        <!-- 3. Auxiliaire -->
+        <div class="mission-block b-aux">
+          <div class="block-label"><span class="step">3</span> Quel auxiliaire faut-il ?</div>
+          <div class="aux-row">
+            <button type="button" class="aux-btn" data-aux="avoir" disabled>a) avoir</button>
+            <button type="button" class="aux-btn" data-aux="être" disabled>b) être</button>
+            <span id="auxFb" class="aux-fb" aria-live="polite"></span>
+          </div>
+        </div>
+
+        <!-- 4. Complément -->
+        <div class="mission-block b-comp">
+          <div class="block-label"><span class="step">4</span> Choisissez un complément pour votre phrase :</div>
+          <div id="compList" class="comp-list">
+            <span class="placeholder">Cliquez d'abord sur « Lancer ».</span>
+          </div>
+        </div>
+
+        <!-- 5. Phrase -->
+        <form id="answerForm" class="mission-block b-write" autocomplete="off">
+          <label for="answerInput" class="block-label"><span class="step">5</span> Formulez votre phrase complète à l'écrit, puis à l'oral :</label>
+          <div class="answer-row">
+            <input id="answerInput" type="text" placeholder="Écrivez votre phrase ici…" autocapitalize="sentences" spellcheck="false">
+            <button class="btn-check" type="submit">Vérifier</button>
+          </div>
+          <div class="accents">
+            <span>Accents :</span>
+            <button type="button" class="accent-btn">é</button>
+            <button type="button" class="accent-btn">è</button>
+            <button type="button" class="accent-btn">ê</button>
+            <button type="button" class="accent-btn">à</button>
+            <button type="button" class="accent-btn">ô</button>
+            <button type="button" class="accent-btn">ç</button>
+          </div>
+        </form>
+
+        <div id="feedback" class="feedback" aria-live="polite"></div>
+
+        <details class="reminder">
+          <summary>📖 Rappel : former le passé composé</summary>
+          <div class="formula">sujet + auxiliaire (avoir ou être au présent) + participe passé</div>
+
+          <h4>Les auxiliaires au présent</h4>
+          <div class="aux-table">
+            <div class="head">avoir</div><div class="head">être</div>
+            <div>j'ai</div><div>je suis</div>
+            <div>tu as</div><div>tu es</div>
+            <div>il/elle a</div><div>il/elle est</div>
+            <div>nous avons</div><div>nous sommes</div>
+            <div>vous avez</div><div>vous êtes</div>
+            <div>ils/elles ont</div><div>ils/elles sont</div>
+          </div>
+
+          <h4>Le participe passé</h4>
+          <ul>
+            <li><span class="g1"><b>1er groupe</b></span> (-er) ➔ <b>-é</b> : manger ➔ mangé</li>
+            <li><span class="g2"><b>2e groupe</b></span> (-ir, nous finissons) ➔ <b>-i</b> : finir ➔ fini</li>
+            <li><span class="g3"><b>3e groupe</b></span> ➔ irréguliers : prendre ➔ pris, faire ➔ fait, voir ➔ vu, boire ➔ bu, lire ➔ lu, écrire ➔ écrit, venir ➔ venu, partir ➔ parti, sortir ➔ sorti, aller ➔ allé</li>
+          </ul>
+
+          <h4>Avoir ou être ?</h4>
+          <p>La plupart des verbes se conjuguent avec <b>avoir</b>. Les verbes de la « maison d'être » (dans ce jeu : aller, venir, arriver, partir, sortir, rentrer, rester, tomber) se conjuguent avec <b>être</b>.</p>
+
+          <h4>L'accord</h4>
+          <p>Avec <b>être</b>, le participe passé s'accorde avec le sujet : <b>+e</b> (féminin), <b>+s</b> (pluriel), <b>+es</b> (féminin pluriel). <em>Elle est partie. Ils sont venus.</em></p>
+          <p>Avec <b>avoir</b>, pas d'accord avec le sujet : <em>Elles ont mangé.</em></p>
+        </details>
+      </section>
+
+      <!-- PLATEAU + EXPRESSIONS TEMPORELLES -->
+      <section class="card area-board">
+        <div class="board-head">
+          <h2 class="font-game">🎲 Le plateau</h2>
+          <span class="pawn-legend">Votre pion <span class="pawn" aria-hidden="true"></span></span>
+        </div>
+        <div id="board" class="board"></div>
+        <div class="group-legend">
+          <span class="g1"><b>1er gr.</b> -er</span>
+          <span class="g2"><b>2e gr.</b> -ir (-issons)</span>
+          <span class="g3"><b>3e gr.</b> irréguliers</span>
+        </div>
+
+        <div class="expressions">
+          <h3>⏳ Expressions temporelles (à utiliser obligatoirement)</h3>
+          <div id="expChips" class="chips"></div>
+        </div>
+      </section>
+
+      <!-- PHRASES VALIDÉES -->
+      <section class="card area-list">
+        <div class="list-head">
+          <h2 class="font-game">✅ Phrases validées</h2>
+          <span id="count" class="count">0</span>
+        </div>
+        <p class="list-hint">Chaque phrase correcte s'ajoute ici. Relisez-les à voix haute, puis faites une capture d'écran de cette liste pour la remettre sur Google Classroom.</p>
+        <ol id="sentences" class="sentences"></ol>
+        <p id="emptyMsg" class="empty">Aucune phrase validée pour l'instant.</p>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>Conception pédagogique : <strong>Nadia Aguilar Neri</strong></footer>
+
+  <!-- FENÊTRE D'ARRIVÉE -->
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <div class="trophy">🏆</div>
+      <h2 id="modalTitle" class="font-game">Arrivée !</h2>
+      <p>Bravo, vous avez parcouru tout le plateau.</p>
+      <div class="challenge">
+        <strong>🌟 Défi final :</strong> racontez à voix haute votre dernier week-end avec au moins trois verbes au passé composé, dont un verbe avec l'auxiliaire <em>être</em>.
+      </div>
+      <div class="modal-actions">
+        <button id="newTourBtn" class="btn-roll" type="button">Nouveau parcours</button>
+        <button id="closeModalBtn" class="btn-ghost" type="button">Fermer</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ------------------------------------------------------------
+    // 1. DONNÉES
+    // ------------------------------------------------------------
+    // g = groupe (1, 2, 3) ; aux = auxiliaire ; pp = participe passé (masculin singulier)
+    const VERBS = [
+      { id: 1,  verb: "manger",   g: 1, aux: "avoir", pp: "mangé",   complements: ["une pizza", "au restaurant", "chez mes grands-parents"] },
+      { id: 2,  verb: "aller",    g: 3, aux: "être",  pp: "allé",    complements: ["au cinéma", "à la plage", "chez le médecin"] },
+      { id: 3,  verb: "finir",    g: 2, aux: "avoir", pp: "fini",    complements: ["les devoirs", "le livre", "le travail à 18 heures"] },
+      { id: 4,  verb: "prendre",  g: 3, aux: "avoir", pp: "pris",    complements: ["le train", "un café", "des photos"] },
+      { id: 5,  verb: "arriver",  g: 1, aux: "être",  pp: "arrivé",  complements: ["en retard", "à la gare", "à Paris"] },
+      { id: 6,  verb: "faire",    g: 3, aux: "avoir", pp: "fait",    complements: ["du sport", "les courses", "une promenade"] },
+      { id: 7,  verb: "choisir",  g: 2, aux: "avoir", pp: "choisi",  complements: ["un cadeau", "une robe rouge", "un bon film"] },
+      { id: 8,  verb: "partir",   g: 3, aux: "être",  pp: "parti",   complements: ["en vacances", "au Canada", "très tôt"] },
+      { id: 9,  verb: "regarder", g: 1, aux: "avoir", pp: "regardé", complements: ["un film", "la télévision", "le match de football"] },
+      { id: 10, verb: "voir",     g: 3, aux: "avoir", pp: "vu",      complements: ["un concert", "la tour Eiffel", "un bon spectacle"] },
+      { id: 11, verb: "venir",    g: 3, aux: "être",  pp: "venu",    complements: ["à la fête", "en bus", "chez moi"] },
+      { id: 12, verb: "réussir",  g: 2, aux: "avoir", pp: "réussi",  complements: ["l'examen", "le test de français", "un gâteau au chocolat"] },
+      { id: 13, verb: "boire",    g: 3, aux: "avoir", pp: "bu",      complements: ["un jus d'orange", "du thé", "un chocolat chaud"] },
+      { id: 14, verb: "rester",   g: 1, aux: "être",  pp: "resté",   complements: ["à la maison", "deux jours à Lyon", "au lit"] },
+      { id: 15, verb: "écrire",   g: 3, aux: "avoir", pp: "écrit",   complements: ["un message", "une lettre", "un e-mail au professeur"] },
+      { id: 16, verb: "sortir",   g: 3, aux: "être",  pp: "sorti",   complements: ["avec des amis", "en ville", "du travail à 19 heures"] },
+      { id: 17, verb: "visiter",  g: 1, aux: "avoir", pp: "visité",  complements: ["un musée", "le Louvre", "la ville de Québec"] },
+      { id: 18, verb: "lire",     g: 3, aux: "avoir", pp: "lu",      complements: ["un roman", "le journal", "une bande dessinée"] },
+      { id: 19, verb: "rentrer",  g: 1, aux: "être",  pp: "rentré",  complements: ["à la maison", "très tard", "de vacances"] },
+      { id: 20, verb: "tomber",   g: 1, aux: "être",  pp: "tombé",   complements: ["dans la rue", "de vélo", "malade"] }
+    ];
+    const FINISH = 21;
+    const GROUP_LABEL = { 1: "1er groupe", 2: "2e groupe", 3: "3e groupe" };
+    const GROUP_SHORT = { 1: "1er gr.", 2: "2e gr.", 3: "3e gr." };
+
+    // Auxiliaires au présent (personne 1 à 6)
+    const AUX = {
+      "avoir": { 1: "ai", 2: "as", 3: "a", 4: "avons", 5: "avez", 6: "ont" },
+      "être":  { 1: "suis", 2: "es", 3: "est", 4: "sommes", 5: "êtes", 6: "sont" }
+    };
+    const PERSON_LABEL = { 1: "je", 2: "tu", 3: "il / elle", 4: "nous", 5: "vous", 6: "ils / elles" };
+
+    // Sujets : le genre et le nombre servent à l'accord avec être
+    const SUBJECTS = [
+      { pron: "je",    who: "Léa",           g: "f", n: "s", p: 1 },
+      { pron: "je",    who: "Hugo",          g: "m", n: "s", p: 1 },
+      { pron: "tu",    who: "Inès",          g: "f", n: "s", p: 2 },
+      { pron: "tu",    who: "Tom",           g: "m", n: "s", p: 2 },
+      { pron: "il",    who: "",              g: "m", n: "s", p: 3 },
+      { pron: "elle",  who: "",              g: "f", n: "s", p: 3 },
+      { pron: "nous",  who: "Léa et Inès",   g: "f", n: "p", p: 4 },
+      { pron: "nous",  who: "Hugo et Léa",   g: "m", n: "p", p: 4, mixed: true },
+      { pron: "vous",  who: "Tom et Hugo",   g: "m", n: "p", p: 5 },
+      { pron: "vous",  who: "Inès et Sarah", g: "f", n: "p", p: 5 },
+      { pron: "ils",   who: "",              g: "m", n: "p", p: 6 },
+      { pron: "elles", who: "",              g: "f", n: "p", p: 6 }
+    ];
+    const ALL_SUBJECTS = ["je", "j", "tu", "il", "elle", "on", "nous", "vous", "ils", "elles"];
+
+    // Expressions temporelles + formes acceptées lors de la vérification
+    const EXPRESSIONS = [
+      { label: "Hier",                 accept: ["hier"] },
+      { label: "Hier soir",            accept: ["hier soir"] },
+      { label: "Avant-hier",           accept: ["avant-hier", "avant hier"] },
+      { label: "Ce matin",             accept: ["ce matin"] },
+      { label: "Samedi dernier",       accept: ["samedi dernier"] },
+      { label: "Le week-end dernier",  accept: ["le week-end dernier", "le weekend dernier", "le week end dernier"] },
+      { label: "La semaine dernière",  accept: ["la semaine dernière"] },
+      { label: "Le mois dernier",      accept: ["le mois dernier"] },
+      { label: "L'année dernière",     accept: ["l'année dernière"] },
+      { label: "Il y a deux jours",    accept: ["il y a deux jours", "il y a 2 jours"] },
+      { label: "Il y a une semaine",   accept: ["il y a une semaine"] },
+      { label: "Pendant les vacances", accept: ["pendant les vacances"] }
+    ];
+
+    const PAWN_COLORS = ["#e11d48", "#ea580c", "#4f46e5", "#2563eb", "#9333ea", "#db2777", "#0891b2", "#b45309"];
+
+    // Petits mots qui ne suffisent pas à reconnaître un complément
+    const STOP = new Set(["les", "des", "une", "aux", "mes", "tes", "ses", "nos", "vos", "mon", "ton", "son", "leur", "leurs",
+                          "avec", "dans", "pour", "chez", "tres", "par", "sur", "bon"]);
+
+    // ------------------------------------------------------------
+    // 2. ÉTAT
+    // ------------------------------------------------------------
+    const state = {
+      pos: 0,            // 0 = Départ, 1-20 = verbes, 21 = Arrivée
+      verb: null,
+      subj: null,        // index dans SUBJECTS
+      expIndex: 0,
+      complement: null,
+      attempts: 0,
+      done: false,
+      busy: false,
+      sound: true
+    };
+
+    const $ = (id) => document.getElementById(id);
+    const rand = (n) => Math.floor(Math.random() * n);
+    const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+    function randomOtherIndex(len, current) {   // index 0..len-1 différent de current
+      let v;
+      do { v = rand(len); } while (v === current && len > 1);
+      return v;
+    }
+
+    // ------------------------------------------------------------
+    // 3. SONS (Web Audio, sans bibliothèque)
+    // ------------------------------------------------------------
+    let audioCtx = null;
+    function tone(freq, start, dur, type = "sine", vol = 0.12) {
+      if (!state.sound) return;
+      try {
+        audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === "suspended") audioCtx.resume();
+        const t = audioCtx.currentTime + start;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(vol, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + dur);
+        osc.connect(gain).connect(audioCtx.destination);
+        osc.start(t);
+        osc.stop(t + dur + 0.02);
+      } catch (e) { /* audio indisponible */ }
+    }
+    const sfx = {
+      hop: () => tone(520, 0, 0.08, "triangle", 0.08),
+      ok: () => { tone(523, 0, 0.18); tone(659, 0.1, 0.18); tone(784, 0.2, 0.3); },
+      ko: () => tone(180, 0, 0.25, "square", 0.05),
+      win: () => [523, 659, 784, 1047].forEach((f, i) => tone(f, i * 0.12, 0.35, "triangle"))
+    };
+
+    // ------------------------------------------------------------
+    // 4. OUTILS
+    // ------------------------------------------------------------
+    function norm(s) {
+      return s.toLowerCase().replace(/[’‘`´]/g, "'").replace(/\s+/g, " ").trim();
+    }
+    // Retire les accents caractère par caractère (même longueur de chaîne)
+    function deacc(s) {
+      return Array.from(s).map(c => c.normalize("NFD").replace(/[̀-ͯ]/g, "")).join("");
+    }
+    function tokens(s) {
+      return s.split(/[\s,.;:!?«»"()\/'\-]+/).filter(Boolean);
+    }
+    function escapeHtml(s) {
+      return s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+    }
+    function genderLabel(s) {
+      return (s.g === "f" ? "féminin" : "masculin") + " " + (s.n === "s" ? "singulier" : "pluriel") + (s.mixed ? " (groupe mixte)" : "");
+    }
+    function subjTokens(s) { return s.pron === "je" ? ["je", "j"] : [s.pron]; }
+    function expectedPP(v, s) {
+      if (v.aux !== "être") return v.pp;
+      return v.pp + (s.g === "f" ? "e" : "") + (s.n === "p" ? "s" : "");
+    }
+    function modelForm(v, s) {                    // ex. « j'ai mangé », « elle est partie »
+      const aux = AUX[v.aux][s.p];
+      const pron = (s.pron === "je" && v.aux === "avoir") ? "j'" : s.pron + " ";
+      return `${pron}${aux} ${expectedPP(v, s)}`;
+    }
+    function agreementRule(s) {
+      if (s.g === "m" && s.n === "s") return "masculin singulier : pas de terminaison ajoutée";
+      if (s.g === "f" && s.n === "s") return "féminin singulier : + e";
+      if (s.g === "m") return "masculin pluriel : + s";
+      return "féminin pluriel : + es";
+    }
+
+    // ------------------------------------------------------------
+    // 5. AFFICHAGE
+    // ------------------------------------------------------------
+    const pawnEl = document.createElement("span");
+    pawnEl.className = "pawn";
+    pawnEl.setAttribute("aria-label", "Votre pion");
+
+    function renderBoard() {
+      const board = $("board");
+      [{ id: 0 }, ...VERBS, { id: FINISH }].forEach(t => {
+        const div = document.createElement("div");
+        div.className = "tile";
+        div.id = "tile-" + t.id;
+        if (t.id === 0) {
+          div.classList.add("start");
+          div.innerHTML = `<span class="tile-icon">🏁</span><span class="tile-verb">DÉPART</span><span></span>`;
+        } else if (t.id === FINISH) {
+          div.classList.add("finish");
+          div.innerHTML = `<span class="tile-icon">🏆</span><span class="tile-verb">ARRIVÉE</span><span></span>`;
+        } else {
+          div.innerHTML = `<span class="tile-num">${t.id}</span><span class="tile-verb">${t.verb.toUpperCase()}</span><span class="tile-group g${t.g}">${GROUP_SHORT[t.g]}</span>`;
+          div.addEventListener("click", () => {     // toucher une case = choisir ce verbe
+            if (state.busy) return;
+            placePawn(t.id);
+            setVerb(t);
+          });
+        }
+        board.appendChild(div);
+      });
+    }
+
+    function placePawn(pos) {
+      const old = document.querySelector(".tile.active");
+      if (old) old.classList.remove("active");
+      state.pos = pos;
+      const tile = $("tile-" + pos);
+      tile.classList.add("active");
+      pawnEl.style.animation = "none";
+      void pawnEl.offsetWidth;
+      pawnEl.style.animation = "";
+      tile.appendChild(pawnEl);
+    }
+
+    function renderExpChips() {
+      const box = $("expChips");
+      box.innerHTML = "";
+      EXPRESSIONS.forEach((e, i) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "chip-exp" + (i === state.expIndex ? " selected" : "");
+        b.textContent = e.label;
+        b.addEventListener("click", () => setExpression(i));
+        box.appendChild(b);
+      });
+    }
+
+    function setExpression(i) {
+      state.expIndex = i;
+      $("expValue").textContent = EXPRESSIONS[i].label + "…";
+      renderExpChips();
+      resetAttempt();
+    }
+
+    function setSubject(i) {
+      state.subj = i;
+      const s = SUBJECTS[i];
+      $("subjValue").textContent = s.pron;
+      $("subjSub").textContent = (s.who ? s.who + " · " : "") + genderLabel(s);
+      resetAttempt();
+    }
+
+    function setVerb(v) {
+      state.verb = v;
+      if (state.subj === null) setSubject(rand(SUBJECTS.length));
+      state.complement = null;
+      $("verbValue").textContent = v.verb;
+      $("verbSub").innerHTML = `<span class="g${v.g}">verbe du ${GROUP_LABEL[v.g]}</span>`;
+      $("changeVerbBtn").disabled = false;
+      $("changeSubjBtn").disabled = false;
+      resetAux(true);
+      renderComplements();
+      resetAttempt();
+    }
+
+    function resetAux(enabled) {
+      document.querySelectorAll(".aux-btn").forEach(b => {
+        b.classList.remove("right", "wrong");
+        b.disabled = !enabled;
+      });
+      $("auxFb").textContent = "";
+      $("auxFb").className = "aux-fb";
+    }
+
+    function chooseAux(btn) {
+      if (!state.verb) return;
+      const choice = btn.dataset.aux;
+      const fb = $("auxFb");
+      if (choice === state.verb.aux) {
+        btn.classList.add("right");
+        document.querySelectorAll(".aux-btn").forEach(b => b.disabled = true);
+        fb.className = "aux-fb ok";
+        fb.textContent = `✓ Oui : « ${state.verb.verb} » se conjugue avec ${state.verb.aux}.`;
+      } else {
+        btn.classList.add("wrong");
+        btn.disabled = true;
+        fb.className = "aux-fb ko";
+        fb.textContent = "✗ Non, essayez l'autre auxiliaire.";
+        sfx.ko();
+      }
+    }
+
+    function renderComplements() {
+      const box = $("compList");
+      box.innerHTML = "";
+      if (!state.verb) {
+        box.innerHTML = `<span class="placeholder">Cliquez d'abord sur « Lancer ».</span>`;
+        return;
+      }
+      state.verb.complements.forEach(c => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "chip-comp" + (c === state.complement ? " selected" : "");
+        b.textContent = c;
+        b.addEventListener("click", () => {
+          state.complement = c;
+          renderComplements();
+          $("answerInput").focus({ preventScroll: true });
+        });
+        box.appendChild(b);
+      });
+    }
+
+    function clearMission(message) {
+      state.verb = null;
+      state.complement = null;
+      $("verbValue").textContent = "?";
+      $("verbSub").textContent = "";
+      $("changeVerbBtn").disabled = true;
+      $("changeSubjBtn").disabled = true;
+      resetAux(false);
+      renderComplements();
+      if (message) $("compList").innerHTML = `<span class="placeholder">${message}</span>`;
+      resetAttempt();
+    }
+
+    function resetAttempt() {
+      state.attempts = 0;
+      state.done = false;
+      hideFeedback();
+    }
+
+    function showFeedback(type, html) {
+      const box = $("feedback");
+      box.className = "feedback show " + type;
+      box.innerHTML = html;
+    }
+    function hideFeedback() {
+      const box = $("feedback");
+      box.className = "feedback";
+      box.innerHTML = "";
+    }
+
+    // ------------------------------------------------------------
+    // 6. LANCER : avancer le pion + tirer sujet et expression
+    // ------------------------------------------------------------
+    async function roll() {
+      if (state.busy) return;
+      state.busy = true;
+      $("rollBtn").disabled = true;
+      $("resetBtn").disabled = true;
+      closeModal();
+
+      if (state.pos === FINISH) { placePawn(0); await sleep(250); }
+
+      const steps = rand(6) + 1;
+      $("moveInfo").textContent = "";
+      for (let i = 0; i < steps && state.pos < FINISH; i++) {
+        placePawn(state.pos + 1);
+        sfx.hop();
+        await sleep(230);
+      }
+      $("moveInfo").textContent = `Vous avancez de ${steps} case${steps > 1 ? "s" : ""}.`;
+
+      if (state.pos === FINISH) {
+        clearMission("Arrivée ! Cliquez sur « Lancer » pour un nouveau parcours.");
+        arrival();
+      } else {
+        setSubject(randomOtherIndex(SUBJECTS.length, state.subj));
+        setExpression(randomOtherIndex(EXPRESSIONS.length, state.expIndex));
+        setVerb(VERBS[state.pos - 1]);
+        $("answerInput").value = "";
+      }
+
+      state.busy = false;
+      $("rollBtn").disabled = false;
+      $("resetBtn").disabled = false;
+    }
+
+    function arrival() {
+      sfx.win();
+      if (typeof confetti === "function") {
+        confetti({ particleCount: 140, spread: 80, origin: { y: 0.7 } });
+        setTimeout(() => {
+          confetti({ particleCount: 50, angle: 60, spread: 55, origin: { x: 0 } });
+          confetti({ particleCount: 50, angle: 120, spread: 55, origin: { x: 1 } });
+        }, 300);
+      }
+      $("modal").classList.add("show");
+    }
+    function closeModal() { $("modal").classList.remove("show"); }
+
+    // ------------------------------------------------------------
+    // 7. VÉRIFIER la phrase
+    // ------------------------------------------------------------
+    function check(e) {
+      e.preventDefault();
+      const raw = $("answerInput").value.trim();
+
+      if (!state.verb) {
+        showFeedback("warn", "Cliquez d'abord sur « Lancer » pour obtenir un verbe et un sujet.");
+        return;
+      }
+      if (!raw) {
+        showFeedback("warn", "Écrivez votre phrase avant de vérifier.");
+        return;
+      }
+      if (state.done) {
+        showFeedback("ok", `<div class="feedback-title">Cette phrase est déjà validée.</div>Cliquez sur « Lancer » pour une nouvelle mission, ou changez le verbe, le sujet ou l'expression.`);
+        return;
+      }
+
+      const v = state.verb;
+      const s = SUBJECTS[state.subj];
+      const auxExp = AUX[v.aux][s.p];
+      const ppExp = expectedPP(v, s);
+      const suggested = EXPRESSIONS[state.expIndex];
+      const reveal = state.attempts >= 1;        // la forme attendue n'est donnée qu'à partir du 2e essai
+      let text = norm(raw);
+
+      // --- a) Expression temporelle : on cherche d'abord les plus longues (« avant-hier » avant « hier »)
+      let usedExp = null, expAccent = null;
+      const patterns = [];
+      EXPRESSIONS.forEach(exp => exp.accept.forEach(pat => patterns.push({ exp, pat })));
+      patterns.sort((a, b) => b.pat.length - a.pat.length);
+      patterns.forEach(({ exp, pat }) => {
+        const re = new RegExp("(^|[^a-z0-9])" + deacc(pat).replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "(?=$|[^a-z0-9])");
+        let m = re.exec(deacc(text));
+        while (m) {
+          const start = m.index + m[1].length;
+          if (!usedExp) {
+            usedExp = exp;
+            const written = text.slice(start, start + pat.length);
+            if (written !== pat) expAccent = { written, pat };
+          }
+          text = text.slice(0, start) + " " + text.slice(start + pat.length);
+          m = re.exec(deacc(text));
+        }
+      });
+
+      const toks = tokens(text);
+      const toksD = toks.map(deacc);
+
+      if (toks.length < 3) {
+        showFeedback("warn", "Écrivez une phrase complète : expression temporelle + sujet + auxiliaire + participe passé + complément.");
+        return;
+      }
+
+      const rows = [];
+
+      // Expression
+      if (expAccent) {
+        rows.push({ ok: false, txt: `Attention aux accents : écrivez « ${expAccent.pat} » (et non « ${expAccent.written} »).` });
+      } else if (usedExp === suggested) {
+        rows.push({ ok: true, txt: `Expression temporelle : « ${suggested.label} ».` });
+      } else if (usedExp) {
+        rows.push({ ok: true, txt: `Expression temporelle : « ${usedExp.label} » (autre expression de la liste, acceptée).` });
+      } else {
+        rows.push({ ok: false, txt: `Il manque l'expression temporelle. Utilisez « ${suggested.label} » ou une autre expression de la liste.` });
+      }
+
+      // --- b) Sujet (+ élision j'ai)
+      const elision = s.p === 1 && v.aux === "avoir" && /(^|[^a-z])je ai([^a-z]|$)/.test(text);
+      if (elision) {
+        rows.push({ ok: false, txt: "Devant une voyelle, « je » devient « j' » : écrivez « j'ai »." });
+      } else if (subjTokens(s).some(t => toks.includes(t))) {
+        rows.push({ ok: true, txt: `Sujet imposé : « ${s.pron} »${s.who ? " (" + s.who + ")" : ""}.` });
+      } else {
+        const other = toks.find(t => ALL_SUBJECTS.includes(t));
+        rows.push({ ok: false, txt: other
+          ? `Le sujet imposé est « ${s.pron} », mais vous avez écrit « ${other === "j" ? "j'" : other} ».`
+          : `Il manque le sujet imposé : « ${s.pron} ».` });
+      }
+
+      // --- c) Auxiliaire
+      const otherAux = v.aux === "avoir" ? "être" : "avoir";
+      if (toks.includes(auxExp)) {
+        rows.push({ ok: true, txt: `Auxiliaire ${v.aux} : « ${auxExp} ».` });
+      } else {
+        const accentSlip = toks.find(t => deacc(t) === deacc(auxExp));
+        const wrongAux = toks.find(t => Object.values(AUX[otherAux]).includes(t) && !(t === "a" && v.aux === "être" && toks.includes(auxExp)));
+        const wrongPerson = toks.find(t => Object.values(AUX[v.aux]).includes(t));
+        if (accentSlip) {
+          rows.push({ ok: false, txt: `Attention à l'accent : écrivez « ${auxExp} » (et non « ${accentSlip} »).` });
+        } else if (v.aux === "être" && s.p === 3 && toks.includes("et")) {
+          rows.push({ ok: false, txt: "« et » sert à relier deux mots. Le verbe être s'écrit « est » : il/elle est." });
+        } else if (wrongPerson) {
+          const owners = Object.keys(AUX[v.aux]).filter(k => AUX[v.aux][k] === wrongPerson).map(k => PERSON_LABEL[k]);
+          rows.push({ ok: false, txt: `« ${wrongPerson} » correspond à ${owners.join(" ou ")}, pas à « ${s.pron} ». ${reveal ? "Avec « " + s.pron + " », il faut « " + auxExp + " »." : "Revoyez la conjugaison de " + v.aux + " au présent (rappel)."}` });
+        } else if (wrongAux) {
+          rows.push({ ok: false, txt: `« ${v.verb} » se conjugue avec l'auxiliaire ${v.aux}, pas ${otherAux}.${reveal ? " Avec « " + s.pron + " » : « " + auxExp + " »." : ""}` });
+        } else {
+          rows.push({ ok: false, txt: `Il manque l'auxiliaire ${reveal ? "« " + auxExp + " »" : "(avoir ou être au présent)"}.` });
+        }
+      }
+
+      // --- d) Participe passé (avec accord si nécessaire)
+      const groupHint = v.g === 1 ? "Verbe du 1er groupe : participe passé en -é."
+                      : v.g === 2 ? "Verbe du 2e groupe : participe passé en -i."
+                      : "Verbe du 3e groupe : participe passé irrégulier (voir le rappel).";
+      const agreeHint = v.aux === "être" ? ` Avec être, accord avec le sujet (${agreementRule(s)}).` : "";
+      const ppReveal = `La forme attendue est « ${modelForm(v, s)} ».`;
+      if (toks.includes(ppExp)) {
+        rows.push({ ok: true, txt: `Participe passé : « ${ppExp} »${v.aux === "être" && ppExp !== v.pp ? " (accordé avec le sujet)" : ""}.` });
+      } else {
+        const variants = [v.pp, v.pp + "e", v.pp + "s", v.pp + "es"];
+        const accentSlip = toks.find(t => deacc(t) === deacc(ppExp));
+        const variant = toks.find(t => variants.includes(t));
+        const variantD = toks.find((t, i) => variants.map(deacc).includes(toksD[i]));
+        const infinitive = toks.find((t, i) => toksD[i] === deacc(v.verb));
+        const stem = deacc(v.verb).slice(0, 3);
+        const auxForms = [...Object.values(AUX.avoir), ...Object.values(AUX["être"])];
+        const stemLike = toks.find((t, i) => toksD[i].startsWith(stem) && toksD[i] !== deacc(v.verb)
+          && !auxForms.includes(t) && /(e|es|ee|ees|i|is|it|u|us|ue|ues|t|ts)$/.test(toksD[i]));
+
+        if (accentSlip) {
+          rows.push({ ok: false, txt: `Attention à l'accent : écrivez « ${ppExp} » (et non « ${accentSlip} »).` });
+        } else if (variant && v.aux === "être") {
+          rows.push({ ok: false, txt: `Accord : avec l'auxiliaire être, le participe passé s'accorde avec le sujet « ${s.pron} »${s.who ? " (" + s.who + ")" : ""} — ${agreementRule(s)}.${reveal ? " " + ppReveal : ""}` });
+        } else if (variant && v.aux === "avoir") {
+          rows.push({ ok: false, txt: `Avec l'auxiliaire avoir, le participe passé ne s'accorde pas avec le sujet : écrivez « ${v.pp} ».` });
+        } else if (variantD) {
+          rows.push({ ok: false, txt: `Attention aux accents et à l'accord du participe « ${variantD} ».${agreeHint}${reveal ? " " + ppReveal : ""}` });
+        } else if (infinitive) {
+          rows.push({ ok: false, txt: `« ${infinitive} » est l'infinitif : il faut le participe passé. ${reveal ? ppReveal : groupHint + agreeHint}` });
+        } else if (stemLike) {
+          rows.push({ ok: false, txt: `« ${stemLike} » n'est pas le bon participe passé. ${reveal ? ppReveal : groupHint + agreeHint}` });
+        } else {
+          rows.push({ ok: false, txt: `Il manque le participe passé du verbe ${v.verb.toUpperCase()}. ${reveal ? ppReveal : groupHint + agreeHint}` });
+        }
+      }
+
+      // --- e) Complément (on accepte qu'il soit adapté : mes → nos, etc.)
+      const keywords = (c) => tokens(norm(c)).filter(w => w.length >= 3 && !STOP.has(deacc(w)));
+      const compUsed = v.complements.find(c => keywords(c).some(w => toks.includes(w)));
+      let compAccent = null;
+      if (!compUsed) {
+        v.complements.forEach(c => keywords(c).forEach(w => {
+          const i = toksD.indexOf(deacc(w));
+          if (i >= 0 && !compAccent) compAccent = { written: toks[i], pat: w };
+        }));
+      }
+      if (compAccent) {
+        rows.push({ ok: false, txt: `Attention aux accents dans le complément : écrivez « ${compAccent.pat} » (et non « ${compAccent.written} »).` });
+      } else if (compUsed) {
+        rows.push({ ok: true, txt: `Complément : « ${compUsed} ».` });
+      } else {
+        const ex = state.complement || v.complements[0];
+        rows.push({ ok: false, txt: `Il manque un des compléments proposés (par exemple : « ${ex} »).` });
+      }
+
+      const allOk = rows.every(r => r.ok);
+      const nbErr = rows.filter(r => !r.ok).length;
+      const list = `<ul class="checklist">${rows.map(r =>
+        `<li class="${r.ok ? "yes" : "no"}"><span class="mark">${r.ok ? "✓" : "✗"}</span><span>${escapeHtml(r.txt)}</span></li>`).join("")}</ul>`;
+
+      if (allOk) {
+        state.done = true;
+        sfx.ok();
+        showFeedback("ok", `<div class="feedback-title">Phrase correcte ! Lisez-la maintenant à voix haute.</div>${list}`);
+        addSentence(raw, v, s);
+      } else {
+        state.attempts++;
+        sfx.ko();
+        showFeedback("ko", `<div class="feedback-title">${nbErr > 1 ? "Quelques points à corriger" : "Un point à corriger"} :</div>${list}`);
+      }
+    }
+
+    // ------------------------------------------------------------
+    // 8. LISTE DES PHRASES VALIDÉES
+    // ------------------------------------------------------------
+    function addSentence(raw, v, s) {
+      let txt = raw.replace(/\s+/g, " ").trim();
+      txt = txt.charAt(0).toUpperCase() + txt.slice(1);
+      if (!/[.!?…]$/.test(txt)) txt += ".";
+      const li = document.createElement("li");
+      li.textContent = txt;
+      const tag = document.createElement("span");
+      tag.className = "tag";
+      tag.textContent = `${v.verb.toUpperCase()} · ${v.aux} · ${s.pron}${s.who ? " (" + s.who + ")" : ""}`;
+      li.appendChild(tag);
+      $("sentences").appendChild(li);
+      $("count").textContent = $("sentences").children.length;
+      $("emptyMsg").style.display = "none";
+    }
+
+    // ------------------------------------------------------------
+    // 9. INITIALISATION
+    // ------------------------------------------------------------
+    document.addEventListener("DOMContentLoaded", () => {
+      // Couleur du pion différente à chaque ouverture
+      document.documentElement.style.setProperty("--pawn", PAWN_COLORS[rand(PAWN_COLORS.length)]);
+
+      renderBoard();
+      placePawn(0);
+      setExpression(rand(EXPRESSIONS.length));
+      clearMission();
+
+      $("rollBtn").addEventListener("click", roll);
+      $("newTourBtn").addEventListener("click", roll);
+      $("closeModalBtn").addEventListener("click", closeModal);
+      $("modal").addEventListener("click", (e) => { if (e.target === $("modal")) closeModal(); });
+
+      $("resetBtn").addEventListener("click", () => {
+        if (state.busy) return;
+        placePawn(0);
+        clearMission();
+        $("answerInput").value = "";
+        $("moveInfo").textContent = "Le pion est revenu au départ.";
+      });
+
+      $("changeExpBtn").addEventListener("click", () => setExpression(randomOtherIndex(EXPRESSIONS.length, state.expIndex)));
+      $("changeVerbBtn").addEventListener("click", () => {
+        if (!state.verb || state.busy) return;
+        const idx = randomOtherIndex(VERBS.length, state.verb.id - 1);
+        placePawn(idx + 1);
+        setVerb(VERBS[idx]);
+      });
+      $("changeSubjBtn").addEventListener("click", () => {
+        if (!state.verb) return;
+        setSubject(randomOtherIndex(SUBJECTS.length, state.subj));
+      });
+
+      document.querySelectorAll(".aux-btn").forEach(btn => btn.addEventListener("click", () => chooseAux(btn)));
+
+      $("answerForm").addEventListener("submit", check);
+
+      // Accents insérés à la position du curseur
+      document.querySelectorAll(".accent-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const input = $("answerInput");
+          const start = input.selectionStart ?? input.value.length;
+          const end = input.selectionEnd ?? input.value.length;
+          input.setRangeText(btn.textContent, start, end, "end");
+          input.focus();
+        });
+      });
+
+      $("soundBtn").addEventListener("click", () => {
+        state.sound = !state.sound;
+        $("soundBtn").textContent = state.sound ? "🔊 Son" : "🔇 Son";
+        $("soundBtn").setAttribute("aria-pressed", String(state.sound));
+      });
+    });
+  </script>
+</body>
+</html>
