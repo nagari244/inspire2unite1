@@ -86,17 +86,20 @@
             
             <!-- Sélecteur d'onglets pour mobile et desktop -->
             <div class="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0 hide-scrollbar">
-                <button onclick="switchTab('tab1')" id="btn-tab1" class="tab-btn active px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 whitespace-nowrap transition-all touch-btn">
+                <button onclick="switchTab('tab1')" id="btn-tab1" class="tab-btn active px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 whitespace-nowrap transition-all touch-btn flex-shrink-0">
                     1. Formation
                 </button>
-                <button onclick="switchTab('tab2')" id="btn-tab2" class="tab-btn bg-white hover:bg-slate-100 text-slate-700 px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 whitespace-nowrap transition-all touch-btn">
+                <button onclick="switchTab('tab2')" id="btn-tab2" class="tab-btn bg-white hover:bg-slate-100 text-slate-700 px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 whitespace-nowrap transition-all touch-btn flex-shrink-0">
                     2. Réflexion FR/ES
                 </button>
-                <button onclick="switchTab('tab3')" id="btn-tab3" class="tab-btn bg-white hover:bg-slate-100 text-slate-700 px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 whitespace-nowrap transition-all touch-btn">
+                <button onclick="switchTab('tab3')" id="btn-tab3" class="tab-btn bg-white hover:bg-slate-100 text-slate-700 px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 whitespace-nowrap transition-all touch-btn flex-shrink-0">
                     3. Exercices
                 </button>
-                <button onclick="switchTab('tab4')" id="btn-tab4" class="tab-btn bg-white hover:bg-slate-100 text-slate-700 px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 whitespace-nowrap transition-all touch-btn">
-                    4. Immigration et Récit
+                <button onclick="switchTab('tab4')" id="btn-tab4" class="tab-btn bg-white hover:bg-slate-100 text-slate-700 px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 whitespace-nowrap transition-all touch-btn flex-shrink-0">
+                    4. Compréhension
+                </button>
+                <button onclick="switchTab('tab5')" id="btn-tab5" class="tab-btn bg-white hover:bg-slate-100 text-slate-700 px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 whitespace-nowrap transition-all touch-btn flex-shrink-0">
+                    5. Immigration et Récit
                 </button>
             </div>
         </div>
@@ -661,9 +664,73 @@
         </section>
 
         <!-- =================================================================== -->
-        <!-- ONGLET 4 : IMMIGRATION ET RÉCIT                                    -->
+        <!-- ONGLET 4 : COMPRÉHENSION ORALE — « IL ÉTAIT UNE FOIS FRIDA KAHLO » -->
         <!-- =================================================================== -->
         <section id="tab4" class="hidden space-y-6">
+
+            <div class="bg-white border-2 border-inspireGreen rounded-2xl p-5 sm:p-7 shadow-sm space-y-5">
+                <div class="flex items-center justify-between flex-wrap gap-3 border-b border-slate-200 pb-4">
+                    <div>
+                        <span class="px-2.5 py-0.5 bg-blue-100 text-blue-800 text-xs rounded-md font-bold">Compréhension orale • Vidéo</span>
+                        <h2 class="text-lg sm:text-2xl font-bold text-slate-900 mt-1">Il était une fois… Frida Kahlo</h2>
+                    </div>
+                    <span id="fridaScore" class="text-sm sm:text-base font-bold text-slate-600">Score : -/10</span>
+                </div>
+
+                <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+                    Regardez la vidéo autant de fois que nécessaire, puis choisissez la bonne réponse pour chaque question : <strong>a)</strong>, <strong>b)</strong> ou <strong>c)</strong>.
+                </p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                    <!-- Vidéo (format vertical) -->
+                    <div class="lg:col-span-4 lg:sticky lg:top-32">
+                        <div class="mx-auto max-w-[240px] sm:max-w-[290px] rounded-2xl overflow-hidden border border-slate-200 bg-slate-900 shadow-sm">
+                            <video id="fridaVideo" class="block w-full h-auto" controls playsinline preload="metadata" src="il_etait_une_fois_frida.mp4">
+                                Votre navigateur ne peut pas lire cette vidéo.
+                            </video>
+                        </div>
+                        <p class="text-[11px] text-slate-500 text-center mt-2 leading-snug">
+                            Vidéo : « Le petit conte du mercredi sur Frida Kahlo » © Les petits Bouillons
+                        </p>
+                    </div>
+
+                    <!-- 10 questions -->
+                    <div class="lg:col-span-8 space-y-4">
+                        <div id="fridaList" class="space-y-3">
+                            <!-- Généré par JS : 10 questions -->
+                        </div>
+
+                        <div class="flex items-center gap-3 flex-wrap pt-1">
+                            <button onclick="checkFrida()" class="touch-btn px-6 py-2.5 bg-inspireGreen hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-all shadow-sm">
+                                Vérifier
+                            </button>
+                            <span id="fridaMsg" class="text-xs sm:text-sm font-bold"></span>
+                        </div>
+
+                        <!-- Transcription : disponible après la vérification -->
+                        <div id="fridaTranscriptBtnBox" class="hidden">
+                            <button type="button" onclick="toggleFridaTranscript()" class="touch-btn px-4 py-2 bg-white hover:bg-slate-100 border border-slate-300 text-slate-800 font-semibold rounded-xl text-xs sm:text-sm transition-all shadow-sm">
+                                📄 Afficher / masquer la transcription
+                            </button>
+                        </div>
+                        <div id="fridaTranscript" class="hidden p-4 sm:p-5 bg-slate-50 border border-slate-200 rounded-xl text-sm sm:text-base text-slate-800 leading-relaxed space-y-2">
+                            <p>Il <strong>était</strong> une fois Frida Kahlo. Elle <strong>habitait</strong> au Mexique, dans une grande maison toute bleue. Frida <strong>vivait</strong> avec des singes farceurs, des perroquets bavards et un tout petit chien tout rond. Il <strong>faisait</strong> partie de sa famille et l'<strong>aidait</strong> à ne jamais se sentir seule.</p>
+                            <p>Quand elle <strong>était</strong> petite, Frida <strong>adorait</strong> observer les couleurs : le vert des plantes, le rose des fleurs, le jaune du soleil. Elle <strong>disait</strong> : « Les fleurs rendent la vie plus joyeuse. »</p>
+                            <p>Un jour, Frida a eu un gros accident. Elle a dû rester longtemps allongée dans son lit. Alors, elle a accroché un miroir au-dessus d'elle et elle s'est mise à se peindre elle-même. Frida <strong>disait</strong> : « Je peins ce que je ressens. »</p>
+                            <p>Quand elle <strong>était</strong> triste, elle <strong>peignait</strong> des nuages tout gris. Quand elle <strong>était</strong> heureuse, elle <strong>peignait</strong> des fleurs multicolores. Frida <strong>adorait</strong> se coiffer avec des fleurs fraîches dans les cheveux. Elles la <strong>rendaient</strong> belle et forte.</p>
+                            <p>Regarde bien ces tableaux : il y a toujours un singe, un oiseau ou un papillon. Ils <strong>étaient</strong> ses amis et ses gardiens.</p>
+                            <p>Frida voulut briller encore plus fort et décida de planter une graine et dit : « Quand tu crées, une fleur pousse dans ton cœur. »</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- =================================================================== -->
+        <!-- ONGLET 5 : IMMIGRATION ET RÉCIT                                    -->
+        <!-- =================================================================== -->
+        <section id="tab5" class="hidden space-y-6">
 
             <!-- Document 1 : Témoignage de Lucilia Campos (Inspire 2, Unité 2) -->
             <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-7 shadow-sm">
@@ -1158,7 +1225,7 @@
         // 1. GESTION DE LA NAVIGATION PAR ONGLETS
         // ===================================================================
         function switchTab(tabId) {
-            const tabs = ['tab1', 'tab2', 'tab3', 'tab4'];
+            const tabs = ['tab1', 'tab2', 'tab3', 'tab4', 'tab5'];
             tabs.forEach(t => {
                 const el = document.getElementById(t);
                 const btn = document.getElementById('btn-' + t);
@@ -1773,7 +1840,111 @@
         }
 
         // ===================================================================
-        // 7. LECTEUR AUDIO MP3 ET COMPRÉHENSION (ONGLET 4)
+        // 6 bis. COMPRÉHENSION ORALE : « IL ÉTAIT UNE FOIS FRIDA KAHLO » (ONGLET 4)
+        // ===================================================================
+        const FRIDA_QUESTIONS = [
+            { q: "Où habitait Frida ?", options: [
+                "Elle habitait au Mexique, dans une petite maison jaune.",
+                "Elle habitait au Mexique, dans une grande maison bleue.",
+                "Elle habitait en Espagne, dans une grande maison bleue." ], ans: 1 },
+            { q: "Avec quels animaux vivait-elle ?", options: [
+                "Elle vivait avec des singes, des perroquets et un petit chien.",
+                "Elle vivait avec des singes, des papillons et un petit chat.",
+                "Elle vivait avec des oiseaux, des perroquets et un grand chien." ], ans: 0 },
+            { q: "Comment était le petit chien, et que faisait-il pour Frida ?", options: [
+                "Il était tout noir et il l'aidait à ne jamais avoir peur.",
+                "Il était tout rond et il la suivait partout dans la maison.",
+                "Il était tout rond et il l'aidait à ne jamais se sentir seule." ], ans: 2 },
+            { q: "Quand elle était petite, qu'est-ce que Frida adorait faire ?", options: [
+                "Elle adorait dessiner les animaux qui vivaient chez elle.",
+                "Elle adorait observer les couleurs qui l'entouraient.",
+                "Elle adorait cueillir les fleurs qui poussaient au jardin." ], ans: 1 },
+            { q: "Quelles couleurs observait-elle ?", options: [
+                "Elle observait le vert des plantes, le rose des fleurs et le jaune du soleil.",
+                "Elle observait le vert des arbres, le rouge des fleurs et le bleu du ciel.",
+                "Elle observait le vert des plantes, le bleu de sa maison et le jaune du soleil." ], ans: 0 },
+            { q: "Que disait Frida à propos des fleurs ?", options: [
+                "Elle disait que les fleurs rendaient les gens plus forts.",
+                "Elle disait que les fleurs rendaient sa maison plus belle.",
+                "Elle disait que les fleurs rendaient la vie plus joyeuse." ], ans: 2 },
+            { q: "Que faisait Frida pendant qu'elle restait allongée dans son lit ?", options: [
+                "Elle peignait les animaux qui dormaient près d'elle.",
+                "Elle se peignait elle-même grâce à un miroir.",
+                "Elle regardait le ciel par la fenêtre de sa chambre." ], ans: 1 },
+            { q: "Que peignait-elle quand elle était triste, et quand elle était heureuse ?", options: [
+                "Triste, elle peignait des nuages gris ; heureuse, des fleurs multicolores.",
+                "Triste, elle peignait des nuages gris ; heureuse, un grand soleil jaune.",
+                "Triste, elle peignait une nuit noire ; heureuse, des fleurs multicolores." ], ans: 0 },
+            { q: "Pourquoi Frida se coiffait-elle avec des fleurs fraîches ?", options: [
+                "Les fleurs la rendaient joyeuse et calme.",
+                "Les fleurs lui rappelaient sa maison bleue.",
+                "Les fleurs la rendaient belle et forte." ], ans: 2 },
+            { q: "Quels animaux apparaissaient toujours dans ses tableaux, et qui étaient-ils pour elle ?", options: [
+                "Un singe, un chien ou un perroquet : c'étaient ses amis et ses gardiens.",
+                "Un singe, un oiseau ou un papillon : c'étaient ses amis et ses gardiens.",
+                "Un singe, un oiseau ou un papillon : c'étaient ses enfants et ses modèles." ], ans: 1 }
+        ];
+        const LETTERS = ['a)', 'b)', 'c)'];
+
+        function renderFrida() {
+            const container = document.getElementById('fridaList');
+            if (!container) return;
+            container.innerHTML = FRIDA_QUESTIONS.map((item, idx) => `
+                <div id="frida_q_${idx}" class="p-3.5 bg-slate-50 border border-slate-200 rounded-xl space-y-2 text-sm sm:text-base">
+                    <p class="font-semibold text-slate-900">${idx + 1}. ${item.q}</p>
+                    <div class="grid grid-cols-1 gap-2">
+                        ${item.options.map((opt, optIdx) => `
+                            <label id="frida_l_${idx}_${optIdx}" class="flex items-start gap-2.5 p-2.5 bg-white rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100 min-h-[44px]">
+                                <input type="radio" name="frida_${idx}" value="${optIdx}" class="mt-1 text-inspireGreen flex-shrink-0">
+                                <span><strong class="text-slate-500">${LETTERS[optIdx]}</strong> ${opt}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div id="frida_fb_${idx}" class="text-xs sm:text-sm font-bold"></div>
+                </div>
+            `).join('');
+        }
+
+        function checkFrida() {
+            const msg = document.getElementById('fridaMsg');
+            const unanswered = FRIDA_QUESTIONS.filter((_, idx) => !document.querySelector(`input[name="frida_${idx}"]:checked`)).length;
+            if (unanswered > 0) {
+                msg.className = 'text-xs sm:text-sm font-bold text-amber-600';
+                msg.innerText = `Répondez aux 10 questions (il en reste ${unanswered}).`;
+                return;
+            }
+            msg.innerText = '';
+
+            let correct = 0;
+            FRIDA_QUESTIONS.forEach((item, idx) => {
+                const value = parseInt(document.querySelector(`input[name="frida_${idx}"]:checked`).value, 10);
+                const fb = document.getElementById(`frida_fb_${idx}`);
+                item.options.forEach((_, optIdx) => {
+                    const label = document.getElementById(`frida_l_${idx}_${optIdx}`);
+                    label.classList.remove('border-emerald-500', 'border-red-400', 'border-2');
+                    if (optIdx === item.ans) label.classList.add('border-emerald-500', 'border-2');
+                    else if (optIdx === value) label.classList.add('border-red-400', 'border-2');
+                });
+                if (value === item.ans) {
+                    correct++;
+                    fb.innerHTML = '<span class="text-emerald-600">✓ Bonne réponse</span>';
+                } else {
+                    fb.innerHTML = `<span class="text-red-600">✗ La bonne réponse était ${LETTERS[item.ans]}</span>`;
+                }
+            });
+
+            const scoreEl = document.getElementById('fridaScore');
+            scoreEl.innerText = `Score : ${correct}/10`;
+            scoreEl.className = correct >= 8 ? 'text-sm sm:text-base font-bold text-emerald-600' : 'text-sm sm:text-base font-bold text-slate-700';
+            document.getElementById('fridaTranscriptBtnBox').classList.remove('hidden');
+        }
+
+        function toggleFridaTranscript() {
+            document.getElementById('fridaTranscript').classList.toggle('hidden');
+        }
+
+        // ===================================================================
+        // 7. LECTEUR AUDIO MP3 ET COMPRÉHENSION (ONGLET 5)
         // ===================================================================
         let isPlayingAudio = false;
 
@@ -1979,6 +2150,7 @@
             renderFillBlanks();
             renderDictation();
             renderChildhoodQuestions();
+            renderFrida();
         });
     </script>
 </body>
